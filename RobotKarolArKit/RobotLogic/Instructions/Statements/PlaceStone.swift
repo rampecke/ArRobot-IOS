@@ -1,0 +1,14 @@
+//
+//  PlaceStone.swift
+//  RobotKarolArKit
+//
+//  Created by Ramona Eckert on 07.06.24.
+//
+
+import Foundation
+
+class PlaceStone: Visitable {
+    func accept(visitor: Visitor) {
+        visitor.visit(placeStone: self)
+    }
+}
