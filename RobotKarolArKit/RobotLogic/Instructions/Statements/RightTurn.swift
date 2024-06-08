@@ -11,5 +11,4 @@ class RightTurn: Visitable {
     func accept(visitor: Visitor) {
         visitor.visit(rightTurn: self)
     }
-    
 }

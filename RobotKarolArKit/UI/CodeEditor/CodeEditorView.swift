@@ -9,7 +9,20 @@ import SwiftUI
 
 struct CodeEditorView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            CodeLine(nameOfInstruction: "step")
+            CodeLine(nameOfInstruction: "step")
+                            .environment(\.locale, .init(identifier: "en"))
+            CodeLine(nameOfInstruction: "turnRight")
+            CodeLine(nameOfInstruction: "turnRight")
+                            .environment(\.locale, .init(identifier: "en"))
+            CodeLine(nameOfInstruction: "turnLeft")
+            CodeLine(nameOfInstruction: "turnLeft")
+                            .environment(\.locale, .init(identifier: "en"))
+            CodeLine(nameOfInstruction: "lift")
+            CodeLine(nameOfInstruction: "lift")
+                            .environment(\.locale, .init(identifier: "en"))
+        }
     }
 }
 
