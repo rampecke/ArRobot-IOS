@@ -19,6 +19,7 @@
 		A02B6AA22C14BA0F00CAFF82 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = A02B6AA12C14BA0F00CAFF82 /* Localizable.xcstrings */; };
 		A02B6AA52C14BD3300CAFF82 /* NameVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02B6AA42C14BD3300CAFF82 /* NameVisitor.swift */; };
 		A02B6AA72C159EED00CAFF82 /* InstructionAddTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02B6AA62C159EED00CAFF82 /* InstructionAddTile.swift */; };
+		A02B6AAA2C1658AA00CAFF82 /* SplitView in Frameworks */ = {isa = PBXBuildFile; productRef = A02B6AA92C1658AA00CAFF82 /* SplitView */; };
 		A06BD7C32BAE9F4E00863CA5 /* RobotKarolArKitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06BD7C22BAE9F4E00863CA5 /* RobotKarolArKitApp.swift */; };
 		A06BD7C72BAE9F4F00863CA5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A06BD7C62BAE9F4F00863CA5 /* Assets.xcassets */; };
 		A06BD7CB2BAE9F4F00863CA5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A06BD7CA2BAE9F4F00863CA5 /* Preview Assets.xcassets */; };
@@ -63,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A02B6AAA2C1658AA00CAFF82 /* SplitView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -203,6 +205,9 @@
 			dependencies = (
 			);
 			name = RobotKarolArKit;
+			packageProductDependencies = (
+				A02B6AA92C1658AA00CAFF82 /* SplitView */,
+			);
 			productName = RobotKarolArKit;
 			productReference = A06BD7BF2BAE9F4E00863CA5 /* RobotKarolArKit.app */;
 			productType = "com.apple.product-type.application";
@@ -232,6 +237,9 @@
 				de,
 			);
 			mainGroup = A06BD7B62BAE9F4E00863CA5;
+			packageReferences = (
+				A02B6AA82C1658AA00CAFF82 /* XCRemoteSwiftPackageReference "SplitView" */,
+			);
 			productRefGroup = A06BD7C02BAE9F4E00863CA5 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -421,7 +429,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.3;
@@ -459,7 +467,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.3;
@@ -496,6 +504,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A02B6AA82C1658AA00CAFF82 /* XCRemoteSwiftPackageReference "SplitView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/stevengharris/SplitView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.5.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A02B6AA92C1658AA00CAFF82 /* SplitView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A02B6AA82C1658AA00CAFF82 /* XCRemoteSwiftPackageReference "SplitView" */;
+			productName = SplitView;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = A06BD7B72BAE9F4E00863CA5 /* Project object */;
 }

@@ -23,7 +23,7 @@ struct InstructionAddTile: View {
     }
     
     var body: some View {
-        HStack(alignment: .top) {
+        HStack(alignment: .center) {
             Image(nameOfInstruction)
                 .resizable()
                 .scaledToFit()
@@ -32,19 +32,24 @@ struct InstructionAddTile: View {
                 HStack {
                     Group {
                         Text(LocalizedStringKey(nameOfInstruction + "_description"))
-                            .padding(5)
+                            .padding(3)
                             .foregroundColor(getColor(nameOfInstruction, .onPrimary))
+                            .font(.system(size: 10, weight: .semibold, design: .rounded))
                     }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                         .background(Color.white.opacity(0.5))
-                        .padding(5)
+                        .cornerRadius(3)
+                        .padding(3)
                 }.frame(maxWidth: .infinity, maxHeight: .infinity)
                     .background(getColor(nameOfInstruction, .primary))
                     .cornerRadius(5)
-                    .padding([.top], 3)
             }
-        }.padding(10)
+        }.padding(5)
         .background(Color("card_background"))
-        .border(Color("card_border"), width: 2)
+        .cornerRadius(5)
+        .overlay(
+            RoundedRectangle(cornerRadius: 5)
+            .stroke(Color("card_border"), lineWidth: 1)
+        )
     }
 }
 

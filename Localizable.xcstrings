@@ -58,7 +58,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Plaziere einen Grasblock"
+            "value" : "Plaziere Grasblock"
           }
         },
         "en" : {
@@ -92,7 +92,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Platziere einen Steinblock"
+            "value" : "Platziere Steinblock"
           }
         },
         "en" : {
@@ -126,7 +126,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Platziere einen Wasserblock"
+            "value" : "Platziere Wasserblock"
           }
         },
         "en" : {
@@ -194,7 +194,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Drehe nach links"
+            "value" : "Drehe links"
           }
         },
         "en" : {
@@ -228,7 +228,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Drehe nach rechts"
+            "value" : "Drehe rechts"
           }
         },
         "en" : {

@@ -6,23 +6,42 @@
 //
 
 import SwiftUI
+import SplitView
 
 struct CodeEditorView: View {
+    let columns = [
+            GridItem(.flexible()),
+            GridItem(.flexible())
+        ]
+
+    
     var body: some View {
-        VStack {
-            CodeLine(nameOfInstruction: "step")
-            CodeLine(nameOfInstruction: "step")
-                            .environment(\.locale, .init(identifier: "en"))
-            CodeLine(nameOfInstruction: "turnRight")
-            CodeLine(nameOfInstruction: "turnRight")
-                            .environment(\.locale, .init(identifier: "en"))
-            CodeLine(nameOfInstruction: "turnLeft")
-            CodeLine(nameOfInstruction: "turnLeft")
-                            .environment(\.locale, .init(identifier: "en"))
-            CodeLine(nameOfInstruction: "lift")
-            CodeLine(nameOfInstruction: "lift")
-                            .environment(\.locale, .init(identifier: "en"))
-        }
+       HSplit(left: {
+           VSplit(top: {
+               ScrollView {
+                   ForEach(INSTRUCTIONS.allCases, id: \.rawValue) { instruction in
+                       CodeLine(nameOfInstruction: instruction.rawValue)
+                       CodeLine(nameOfInstruction: instruction.rawValue)
+                       CodeLine(nameOfInstruction: instruction.rawValue)
+                       CodeLine(nameOfInstruction: instruction.rawValue)
+                       CodeLine(nameOfInstruction: instruction.rawValue)
+                   }
+               }.padding(10)
+           }, bottom: {
+               ScrollView {
+                   LazyVGrid(columns: columns, spacing: 10) {
+                       ForEach(INSTRUCTIONS.allCases, id: \.rawValue) { instruction in
+                           InstructionAddTile(nameOfInstruction: instruction.rawValue).frame(height: 100)
+                       }
+                   }.padding()
+               }
+           }).fraction(0.66)
+               .constraints(minPFraction: 0.4, minSFraction: 0.2, dragToHideS: true)
+               .styling(color: Color("card_border"))
+       }, right: {
+           Color.green
+       }).constraints(minPFraction: 0.4, minSFraction: 0.4, dragToHideP: true)
+            .styling(color: Color("card_border"))
     }
 }
 

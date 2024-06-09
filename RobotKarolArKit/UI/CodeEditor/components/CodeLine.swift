@@ -10,12 +10,6 @@ import SwiftUI
 struct CodeLine: View {
     var nameOfInstruction: String
     
-    init(nameOfInstruction: String) {
-        self.nameOfInstruction = nameOfInstruction
-        
-        print(Color("\(nameOfInstruction)_color_onPrimary"))
-    }
-    
     func getColor(_ nameOfInstruction: String, _ ending: ColorEnding) -> Color {
         if let uiColor = UIColor(named: "\(nameOfInstruction)\(ending.rawValue)") {
             return Color(uiColor)
@@ -32,6 +26,7 @@ struct CodeLine: View {
         HStack {
             Text(LocalizedStringKey(nameOfInstruction))
                 .foregroundColor(getColor(nameOfInstruction, .onPrimary))
+                .font(.system(size: 12, weight: .semibold, design: .rounded))
             Spacer()
         }.frame(maxWidth: .infinity)
         .padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
