@@ -20,19 +20,19 @@ struct CodeEditorView: View {
     var body: some View {
        HSplit(left: {
            VSplit(top: {
-               ScrollView {
+               List{
                    ForEach($viewModel.codeBlock.codeBlock, id: \.id) { $instruction in
-                       CodeLine(instruction: instruction)
-                   }
-               }.padding(10)
+                       CodeLine(instruction: instruction) .listRowSeparator(.hidden)
+                   }.onDelete(perform: { indexSet in
+                       viewModel.deleteInstruction(at: indexSet)
+                   })
+               }.listStyle(.plain)
            }, bottom: {
                ScrollView {
                    LazyVGrid(columns: columns, spacing: 10) {
                        ForEach($viewModel.allStatements, id: \.id) { $instruction in
                            InstructionAddTile(instruction: instruction).frame(height: 100).onTapGesture(perform: {
-                               let newInstructionVisitor = NewInstructionVisitor()
-                               instruction.accept(visitor: newInstructionVisitor)
-                               viewModel.addInstruction(instruction: newInstructionVisitor.get())
+                               viewModel.createNewInstruction(instruction: instruction)
                            })
                        }
                    }.padding()
