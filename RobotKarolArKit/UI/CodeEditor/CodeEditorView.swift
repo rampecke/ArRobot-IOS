@@ -13,6 +13,8 @@ struct CodeEditorView: View {
             GridItem(.flexible()),
             GridItem(.flexible())
         ]
+    let fraction = FractionHolder.usingUserDefaults(0.66, key: "myFraction")
+    let fraction2 = FractionHolder.usingUserDefaults(0.5, key: "myFraction2")
     
     @State var viewModel: CodeEditorViewModel = CodeEditorViewModel()
 
@@ -22,11 +24,16 @@ struct CodeEditorView: View {
            VSplit(top: {
                List{
                    ForEach($viewModel.codeBlock.codeBlock, id: \.id) { $instruction in
-                       CodeLine(instruction: instruction) .listRowSeparator(.hidden)
+                       CodeLine(instruction: instruction, CodeLineType.CodeLine)
+                           .listRowSeparator(.hidden)
+                           .listRowInsets(EdgeInsets(top:0, leading: 0, bottom: 0, trailing: 0))
                    }.onDelete(perform: { indexSet in
                        viewModel.deleteInstruction(at: indexSet)
                    })
-               }.listStyle(.plain)
+                   .onMove(perform: { indices, newOffset in
+                       viewModel.moveInstruction(from: indices, to: newOffset)
+                   })
+               }.listRowSpacing(10).scrollContentBackground(.hidden)
            }, bottom: {
                ScrollView {
                    LazyVGrid(columns: columns, spacing: 10) {
@@ -37,13 +44,15 @@ struct CodeEditorView: View {
                        }
                    }.padding()
                }
-           }).fraction(0.66)
-               .constraints(minPFraction: 0.4, minSFraction: 0.2, dragToHideS: true)
+           }).fraction(fraction)
+               .constraints(minPFraction: 0.4, minSFraction: 0.15)
                .styling(color: Color("card_border"))
        }, right: {
-           Color.green
-       }).constraints(minPFraction: 0.4, minSFraction: 0.4, dragToHideP: true)
+           Color("card_background")
+       }).fraction(fraction2)
+            .constraints(minPFraction: 0.4, minSFraction: 0.4, dragToHideP: true)
             .styling(color: Color("card_border"))
+            .edgesIgnoringSafeArea(.bottom)
     }
 }
 

@@ -36,7 +36,7 @@ struct InstructionAddTile: View {
                 .resizable()
                 .scaledToFit()
             VStack(alignment: .leading) {
-                CodeLine(instruction: self.instruction)
+                CodeLine(instruction: self.instruction, CodeLineType.PreviewCodeLine)
                 HStack {
                     Group {
                         Text(LocalizedStringKey(nameOfInstruction + "_description"))
@@ -44,7 +44,7 @@ struct InstructionAddTile: View {
                             .foregroundColor(getColor(nameOfInstruction, .onPrimary))
                             .font(.system(size: 10, weight: .semibold, design: .rounded))
                     }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                        .background(Color.white.opacity(0.5))
+                        .background(Color("contrast_color").opacity(0.5))
                         .cornerRadius(3)
                         .padding(3)
                 }.frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -63,7 +63,7 @@ struct InstructionAddTile: View {
 
 #Preview {
     ScrollView {
-        InstructionAddTile(instruction: Step()).frame(height:100)
-        InstructionAddTile(instruction: Step()).environment(\.locale, .init(identifier: "en")).frame(height:100)
+        InstructionAddTile(instruction: Step()).frame(height: 100)
+        InstructionAddTile(instruction: Step()).frame(height: 100).environment(\.locale, .init(identifier: "en")).frame(height:100)
     }
 }

@@ -3,6 +3,16 @@
     {
       "filename" : "PlaceGrassRobot.svg",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "PlaceGrassRobotDark.svg",
+      "idiom" : "universal"
     }
   ],
   "info" : {

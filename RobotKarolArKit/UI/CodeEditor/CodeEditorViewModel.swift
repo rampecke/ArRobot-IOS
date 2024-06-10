@@ -30,4 +30,8 @@ class CodeEditorViewModel {
     func deleteInstruction(at offsets: IndexSet) {
         codeBlock.codeBlock.remove(atOffsets: offsets)
     }
+    
+    func moveInstruction(from source: IndexSet, to destination: Int) {
+        codeBlock.codeBlock.move(fromOffsets: source, toOffset: destination)
+    }
 }

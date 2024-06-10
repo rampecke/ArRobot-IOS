@@ -3,6 +3,16 @@
     {
       "filename" : "RightTurnRobot.svg",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "RightTurnRobotDark.svg",
+      "idiom" : "universal"
     }
   ],
   "info" : {

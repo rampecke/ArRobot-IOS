@@ -3,6 +3,16 @@
     {
       "filename" : "LiftRobot.svg",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "LiftRobotDark.svg",
+      "idiom" : "universal"
     }
   ],
   "info" : {

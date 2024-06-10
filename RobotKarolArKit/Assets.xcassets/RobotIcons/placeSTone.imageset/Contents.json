@@ -3,6 +3,16 @@
     {
       "filename" : "PlaceStoneRobot.svg",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "PlaceStoneRobotDark.svg",
+      "idiom" : "universal"
     }
   ],
   "info" : {
