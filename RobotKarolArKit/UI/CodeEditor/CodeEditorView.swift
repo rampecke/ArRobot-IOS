@@ -13,25 +13,27 @@ struct CodeEditorView: View {
             GridItem(.flexible()),
             GridItem(.flexible())
         ]
+    
+    @State var viewModel: CodeEditorViewModel = CodeEditorViewModel()
 
     
     var body: some View {
        HSplit(left: {
            VSplit(top: {
                ScrollView {
-                   ForEach(INSTRUCTIONS.allCases, id: \.rawValue) { instruction in
-                       CodeLine(nameOfInstruction: instruction.rawValue)
-                       CodeLine(nameOfInstruction: instruction.rawValue)
-                       CodeLine(nameOfInstruction: instruction.rawValue)
-                       CodeLine(nameOfInstruction: instruction.rawValue)
-                       CodeLine(nameOfInstruction: instruction.rawValue)
+                   ForEach($viewModel.codeBlock.codeBlock, id: \.id) { $instruction in
+                       CodeLine(instruction: instruction)
                    }
                }.padding(10)
            }, bottom: {
                ScrollView {
                    LazyVGrid(columns: columns, spacing: 10) {
-                       ForEach(INSTRUCTIONS.allCases, id: \.rawValue) { instruction in
-                           InstructionAddTile(nameOfInstruction: instruction.rawValue).frame(height: 100)
+                       ForEach($viewModel.allStatements, id: \.id) { $instruction in
+                           InstructionAddTile(instruction: instruction).frame(height: 100).onTapGesture(perform: {
+                               let newInstructionVisitor = NewInstructionVisitor()
+                               instruction.accept(visitor: newInstructionVisitor)
+                               viewModel.addInstruction(instruction: newInstructionVisitor.get())
+                           })
                        }
                    }.padding()
                }

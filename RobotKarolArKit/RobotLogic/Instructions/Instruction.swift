@@ -7,6 +7,8 @@
 
 import Foundation
 
-protocol Visitable {
+protocol Instruction: Identifiable {
+    var id: UUID {get}
+    
     func accept(visitor: Visitor)
 }

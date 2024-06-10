@@ -8,6 +8,7 @@
 import Foundation
 
 class NameVisitor: Visitor {
+    
     private var name: String = "";
     
     func get() -> String {
@@ -16,11 +17,11 @@ class NameVisitor: Visitor {
     
     //Statements
     func visit(leftTurn: LeftTurn) {
-        self.name = "leftTurn"
+        self.name = "turnLeft"
     }
     
     func visit(rightTurn: RightTurn) {
-        self.name = "rightTurn"
+        self.name = "turnRight"
     }
     
     func visit(lift: Lift) {
@@ -43,4 +44,7 @@ class NameVisitor: Visitor {
         self.name = "placeWater"
     }
     
+    func visit(codeBlock: CodeBlock) {
+        self.name = ""
+    }
 }

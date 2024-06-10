@@ -9,6 +9,14 @@ import SwiftUI
 
 struct InstructionAddTile: View {
     var nameOfInstruction: String
+    var instruction: any Instruction
+    
+    init(instruction: any Instruction) {
+        let nameVisitor = NameVisitor()
+        instruction.accept(visitor: nameVisitor)
+        self.nameOfInstruction = nameVisitor.get()
+        self.instruction = instruction
+    }
     
     func getColor(_ nameOfInstruction: String, _ ending: ColorEnding) -> Color {
         if let uiColor = UIColor(named: "\(nameOfInstruction)\(ending.rawValue)") {
@@ -28,7 +36,7 @@ struct InstructionAddTile: View {
                 .resizable()
                 .scaledToFit()
             VStack(alignment: .leading) {
-                CodeLine(nameOfInstruction: nameOfInstruction)
+                CodeLine(instruction: self.instruction)
                 HStack {
                     Group {
                         Text(LocalizedStringKey(nameOfInstruction + "_description"))
@@ -55,9 +63,7 @@ struct InstructionAddTile: View {
 
 #Preview {
     ScrollView {
-        ForEach(INSTRUCTIONS.allCases, id:\.rawValue) { item in
-            InstructionAddTile(nameOfInstruction: item.rawValue).frame(height:100)
-            InstructionAddTile(nameOfInstruction: item.rawValue).environment(\.locale, .init(identifier: "en")).frame(height:100)
-        }
+        InstructionAddTile(instruction: Step()).frame(height:100)
+        InstructionAddTile(instruction: Step()).environment(\.locale, .init(identifier: "en")).frame(height:100)
     }
 }

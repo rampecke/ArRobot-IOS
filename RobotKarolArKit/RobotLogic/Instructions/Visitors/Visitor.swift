@@ -16,4 +16,7 @@ protocol Visitor {
     func visit(placeGrass: PlaceGrass)
     func visit(placeStone: PlaceStone)
     func visit(placeWater: PlaceWater)
+    
+    //ControllFlow
+    func visit(codeBlock: CodeBlock)
 }

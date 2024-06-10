@@ -7,7 +7,9 @@
 
 import Foundation
 
-class PlaceWater: Visitable {
+class PlaceWater: Instruction {
+    var id: UUID = UUID()
+    
     func accept(visitor: Visitor) {
         visitor.visit(placeWater: self)
     }

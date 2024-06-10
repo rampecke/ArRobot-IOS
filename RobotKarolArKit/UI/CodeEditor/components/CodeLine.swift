@@ -10,6 +10,12 @@ import SwiftUI
 struct CodeLine: View {
     var nameOfInstruction: String
     
+    init(instruction: any Instruction) {
+        let nameVisitor = NameVisitor()
+        instruction.accept(visitor: nameVisitor)
+        self.nameOfInstruction = nameVisitor.get()
+    }
+    
     func getColor(_ nameOfInstruction: String, _ ending: ColorEnding) -> Color {
         if let uiColor = UIColor(named: "\(nameOfInstruction)\(ending.rawValue)") {
             return Color(uiColor)
@@ -37,25 +43,13 @@ struct CodeLine: View {
 
 #Preview {
     ScrollView {
-        ForEach(INSTRUCTIONS.allCases, id:\.rawValue) { item in
-            CodeLine(nameOfInstruction: item.rawValue)
-            CodeLine(nameOfInstruction: item.rawValue)
-                            .environment(\.locale, .init(identifier: "en"))
-        }
+        CodeLine(instruction: Step())
+        CodeLine(instruction: Step())
+                        .environment(\.locale, .init(identifier: "en"))
     }
 }
 
 enum ColorEnding: String {
     case onPrimary = "_color_onPrimary"
     case primary = "_color_primary"
-}
-
-enum INSTRUCTIONS: String, CaseIterable {
-    case STEP = "step"
-    case LIFT = "lift"
-    case TURNRIGHT = "turnRight"
-    case TURNLEFT = "turnLeft"
-    case PLACESTONE = "placeStone"
-    case PLACEGRASS = "placeGrass"
-    case PLACEWATER = "placeWater"
 }

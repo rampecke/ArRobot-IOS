@@ -7,7 +7,9 @@
 
 import Foundation
 
-class Step: Visitable {
+class Step: Instruction {
+    var id: UUID = UUID()
+    
     func accept(visitor: Visitor) {
         visitor.visit(step: self)
     }

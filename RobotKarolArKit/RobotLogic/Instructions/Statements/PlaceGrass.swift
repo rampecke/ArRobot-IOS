@@ -7,7 +7,9 @@
 
 import Foundation
 
-class PlaceGrass: Visitable {
+class PlaceGrass: Instruction {
+    var id: UUID = UUID()
+    
     func accept(visitor: Visitor) {
         visitor.visit(placeGrass: self)
     }
