@@ -39,17 +39,25 @@ class CodeEditorViewModel {
         codeBlock.codeBlock.move(fromOffsets: source, toOffset: destination)
     }
     
-    func next() -> (any Instruction)? {
+    func next() {
         if executionVisitor.endExecution || finishedExecution {
-            return nil
+            return
         } else {
             guard let instruction = codeBlock.next() else {
                 finishedExecution = true
-                return nil
+                return
             }
             
             instruction.accept(visitor: executionVisitor)
-            return instruction
+            if(!codeBlock.hasNext()) {
+                finishedExecution = true
+            }
+        }
+    }
+    
+    func executeAll() {
+        while(!executionVisitor.endExecution && !finishedExecution) {
+            next()
         }
     }
     

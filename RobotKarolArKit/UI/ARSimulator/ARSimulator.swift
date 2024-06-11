@@ -19,6 +19,10 @@ struct ARSimulator: View {
                     viewModel.next()
                 }
                 Spacer()
+                Button("executeAll") {
+                    viewModel.executeAll()
+                }
+                Spacer()
                 Button("Reset") {
                     viewModel.reset()
                 }
@@ -32,7 +36,8 @@ struct ARViewContainer: UIViewRepresentable {
     
     func makeUIView(context: Context) -> ARView {
         let arView = ARView(frame: .zero)
-        let anchor = AnchorEntity(plane: .horizontal, classification: .table)
+        //let anchor = AnchorEntity(plane: .horizontal, classification: .table)
+        let anchor = AnchorEntity(plane: .horizontal)
         world.anchorWorld(arView: arView, anchor: anchor)
         return arView
     }

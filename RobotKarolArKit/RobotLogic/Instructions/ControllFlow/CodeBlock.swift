@@ -30,8 +30,12 @@ class CodeBlock: ControllFlow {
         visitor.visit(codeBlock: self)
     }
     
+    func hasNext() -> Bool {
+        return codeBlock.count > executionIndex
+    }
+    
     func next() -> (any Instruction)? {
-        if (codeBlock.count > executionIndex) {
+        if (hasNext()) {
             let instruction = codeBlock[executionIndex]
             executionIndex = executionIndex + 1
             return instruction
