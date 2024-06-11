@@ -20,6 +20,10 @@ class World {
     var worldEntity: Entity = Entity()
     
     init(width: Int, length: Int) {
+        self.width = width
+        self.length = length
+        self.robot = Robot(facingDirection: Direction.SOUTH, position: (0,0))
+        
         var createTiles : [[Tile]]  = []
         for _ in 0..<length {
             var tilesRow: [Tile] = []
@@ -29,15 +33,26 @@ class World {
             createTiles.append(tilesRow)
         }
         self.tiles = createTiles
-        self.width = width
-        self.length = length
-        self.robot = Robot(facingDirection: Direction.SOUTH, position: (0,0))
+    }
+    
+    private func createTiles() -> [[Tile]] {
+        var createTiles : [[Tile]]  = []
+        for _ in 0..<length {
+            var tilesRow: [Tile] = []
+            for _ in 0..<width {
+                tilesRow.append(Tile())
+            }
+            createTiles.append(tilesRow)
+        }
+        
+        return createTiles
     }
     
     func step() -> Bool {
         if(nextTileExists()) {
             let positionInFront = robot.positionInFront()
             let tile = tiles[positionInFront.0][positionInFront.1]
+            print(tile.getBlocks())
             robot.step(tileWidth: tileWidth, tileHight: tileHeight, tilesInFront: tile.getBlocks().count)
             return true
         } else {
@@ -102,7 +117,7 @@ class World {
         
         //Reset Robot and Field
         self.robot = Robot(facingDirection: Direction.SOUTH, position: (0,0))
-        self.tiles = Array(repeating: Array(repeating: Tile() , count: width), count: length)
+        self.tiles = createTiles()
         
         //Reset ArWorld
         anchor?.removeChild(worldEntity)

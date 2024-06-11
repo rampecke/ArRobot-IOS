@@ -15,36 +15,12 @@ struct ARSimulator: View {
         VStack{
             ARViewContainer(world: viewModel.world).edgesIgnoringSafeArea(.all)
             HStack{
-                Button("PlaceWater") {
-                    viewModel.world.place(block: BlockTyp.WATER)
-                }
-                Spacer()
-                Button("PlaceGrass") {
-                    viewModel.world.place(block: BlockTyp.GRAS)
-                }
-                Spacer()
-                Button("PlaceStone") {
-                    viewModel.world.place(block: BlockTyp.STONE)
-                }
-                Spacer()
-                Button("Lift") {
-                    viewModel.world.lift()
-                }
-                Spacer()
-                Button("Step") {
-                    viewModel.world.step()
-                }
-                Spacer()
-                Button("TurnRight") {
-                    viewModel.world.turnRight()
-                }
-                Spacer()
-                Button("TurnLeft") {
-                    viewModel.world.turnLeft()
+                Button("nextMove") {
+                    viewModel.next()
                 }
                 Spacer()
                 Button("Reset") {
-                    viewModel.world.resetWorld()
+                    viewModel.reset()
                 }
             }
         }
