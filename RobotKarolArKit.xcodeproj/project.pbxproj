@@ -24,6 +24,10 @@
 		A02B6AAF2C166A7F00CAFF82 /* ControllFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02B6AAE2C166A7F00CAFF82 /* ControllFlow.swift */; };
 		A02B6AB12C16704900CAFF82 /* CodeEditorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02B6AB02C16704900CAFF82 /* CodeEditorViewModel.swift */; };
 		A02B6AB32C16789D00CAFF82 /* NewInstructionVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02B6AB22C16789D00CAFF82 /* NewInstructionVisitor.swift */; };
+		A02B6AB72C17341A00CAFF82 /* ARKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A02B6AB62C17341A00CAFF82 /* ARKit.framework */; platformFilter = ios; };
+		A02B6AB92C17342500CAFF82 /* RealityKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A02B6AB82C17342500CAFF82 /* RealityKit.framework */; };
+		A02B6AD82C17382E00CAFF82 /* ARSimulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02B6AD72C17382E00CAFF82 /* ARSimulator.swift */; };
+		A02B6ADC2C1750AD00CAFF82 /* NonArView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02B6ADB2C1750AD00CAFF82 /* NonArView.swift */; };
 		A06BD7C32BAE9F4E00863CA5 /* RobotKarolArKitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06BD7C22BAE9F4E00863CA5 /* RobotKarolArKitApp.swift */; };
 		A06BD7C72BAE9F4F00863CA5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A06BD7C62BAE9F4F00863CA5 /* Assets.xcassets */; };
 		A06BD7CB2BAE9F4F00863CA5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A06BD7CA2BAE9F4F00863CA5 /* Preview Assets.xcassets */; };
@@ -53,6 +57,10 @@
 		A02B6AAE2C166A7F00CAFF82 /* ControllFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllFlow.swift; sourceTree = "<group>"; };
 		A02B6AB02C16704900CAFF82 /* CodeEditorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeEditorViewModel.swift; sourceTree = "<group>"; };
 		A02B6AB22C16789D00CAFF82 /* NewInstructionVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewInstructionVisitor.swift; sourceTree = "<group>"; };
+		A02B6AB62C17341A00CAFF82 /* ARKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ARKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS17.4.sdk/System/Library/Frameworks/ARKit.framework; sourceTree = DEVELOPER_DIR; };
+		A02B6AB82C17342500CAFF82 /* RealityKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealityKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS17.4.sdk/System/Library/Frameworks/RealityKit.framework; sourceTree = DEVELOPER_DIR; };
+		A02B6AD72C17382E00CAFF82 /* ARSimulator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSimulator.swift; sourceTree = "<group>"; };
+		A02B6ADB2C1750AD00CAFF82 /* NonArView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonArView.swift; sourceTree = "<group>"; };
 		A06BD7BF2BAE9F4E00863CA5 /* RobotKarolArKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RobotKarolArKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A06BD7C22BAE9F4E00863CA5 /* RobotKarolArKitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RobotKarolArKitApp.swift; sourceTree = "<group>"; };
 		A06BD7C62BAE9F4F00863CA5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -72,6 +80,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A02B6AB92C17342500CAFF82 /* RealityKit.framework in Frameworks */,
+				A02B6AB72C17341A00CAFF82 /* ARKit.framework in Frameworks */,
 				A02B6AAA2C1658AA00CAFF82 /* SplitView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -96,6 +106,7 @@
 		A02B6A992C13A64600CAFF82 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				A02B6ABA2C17357C00CAFF82 /* ARSimulator */,
 				A02B6A9A2C13A65C00CAFF82 /* CodeEditor */,
 			);
 			path = UI;
@@ -139,12 +150,31 @@
 			path = ControllFlow;
 			sourceTree = "<group>";
 		};
+		A02B6AB52C17341A00CAFF82 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A02B6AB82C17342500CAFF82 /* RealityKit.framework */,
+				A02B6AB62C17341A00CAFF82 /* ARKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A02B6ABA2C17357C00CAFF82 /* ARSimulator */ = {
+			isa = PBXGroup;
+			children = (
+				A02B6AD72C17382E00CAFF82 /* ARSimulator.swift */,
+				A02B6ADB2C1750AD00CAFF82 /* NonArView.swift */,
+			);
+			path = ARSimulator;
+			sourceTree = "<group>";
+		};
 		A06BD7B62BAE9F4E00863CA5 = {
 			isa = PBXGroup;
 			children = (
 				A02B6AA12C14BA0F00CAFF82 /* Localizable.xcstrings */,
 				A06BD7C12BAE9F4E00863CA5 /* RobotKarolArKit */,
 				A06BD7C02BAE9F4E00863CA5 /* Products */,
+				A02B6AB52C17341A00CAFF82 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -290,10 +320,12 @@
 				A02B6A9F2C14AFF800CAFF82 /* CodeLine.swift in Sources */,
 				A02B6A902C13A16200CAFF82 /* Lift.swift in Sources */,
 				A02B6AB32C16789D00CAFF82 /* NewInstructionVisitor.swift in Sources */,
+				A02B6ADC2C1750AD00CAFF82 /* NonArView.swift in Sources */,
 				A02B6A962C13A26400CAFF82 /* PlaceStone.swift in Sources */,
 				A06BD7DD2BAF36F600863CA5 /* Direction.swift in Sources */,
 				A02B6A982C13A2DE00CAFF82 /* PlaceWater.swift in Sources */,
 				A02B6A8C2C13A05500CAFF82 /* LeftTurn.swift in Sources */,
+				A02B6AD82C17382E00CAFF82 /* ARSimulator.swift in Sources */,
 				A06BD7D42BAEA3ED00863CA5 /* World.swift in Sources */,
 				A02B6A9C2C13A6AF00CAFF82 /* CodeEditorView.swift in Sources */,
 				A02B6AA72C159EED00CAFF82 /* InstructionAddTile.swift in Sources */,
@@ -443,6 +475,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "I need this!";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -461,7 +494,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ramonaeckert.RobotKarolArKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -481,6 +514,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "I need this!";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -499,7 +533,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ramonaeckert.RobotKarolArKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
