@@ -1,6 +1,12 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "executeAll" : {
+
+    },
+    "faster" : {
+
+    },
     "Hello, World!" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -51,6 +57,9 @@
           }
         }
       }
+    },
+    "nextMove" : {
+
     },
     "placeGrass" : {
       "extractionState" : "manual",
@@ -154,6 +163,15 @@
         }
       }
     },
+    "Reset" : {
+
+    },
+    "resetCode" : {
+
+    },
+    "slower" : {
+
+    },
     "step" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -187,6 +205,9 @@
           }
         }
       }
+    },
+    "switchAr" : {
+
     },
     "turnLeft" : {
       "extractionState" : "manual",

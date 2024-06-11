@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RealityKit
 
 class Tile {
     private var blocks: [Block] = []
@@ -14,11 +15,19 @@ class Tile {
         return self.blocks
     }
     
-    func addBlock(_ block: Block) {
-        blocks.append(block)
+    func addBlock(_ block: BlockTyp, tileWidth: Float, tileHight: Float, worldEntity: Entity, tilePosition: (Int, Int)) {
+        print(blocks)
+        let newBlock = Block(blockTyp: block, blockNumber: self.blocks.count)
+        newBlock.createArBlock(position: tilePosition, tileWidth: tileWidth, tileHight: tileHight, worldEntity: worldEntity)
+        blocks.append(newBlock)
     }
     
-    func removeBlock() -> Block? {
-        blocks.popLast()
+    func removeBlock(worldEntity: Entity) -> Block? {
+        guard let block = blocks.popLast() else {
+            return nil
+        }
+        
+        worldEntity.removeChild(block.blockEntity)
+        return block
     }
 }
