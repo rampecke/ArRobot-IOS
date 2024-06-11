@@ -7,10 +7,10 @@
 
 import Foundation
 
-class LeftTurn: Visitable {
+class LeftTurn: Instruction {
+    var id: UUID = UUID()
+    
     func accept(visitor: Visitor) {
         visitor.visit(leftTurn: self)
     }
-    
-    
 }

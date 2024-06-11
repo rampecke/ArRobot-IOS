@@ -15,6 +15,19 @@
 		A02B6A962C13A26400CAFF82 /* PlaceStone.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02B6A952C13A26400CAFF82 /* PlaceStone.swift */; };
 		A02B6A982C13A2DE00CAFF82 /* PlaceWater.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02B6A972C13A2DE00CAFF82 /* PlaceWater.swift */; };
 		A02B6A9C2C13A6AF00CAFF82 /* CodeEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02B6A9B2C13A6AF00CAFF82 /* CodeEditorView.swift */; };
+		A02B6A9F2C14AFF800CAFF82 /* CodeLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02B6A9E2C14AFF800CAFF82 /* CodeLine.swift */; };
+		A02B6AA22C14BA0F00CAFF82 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = A02B6AA12C14BA0F00CAFF82 /* Localizable.xcstrings */; };
+		A02B6AA52C14BD3300CAFF82 /* NameVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02B6AA42C14BD3300CAFF82 /* NameVisitor.swift */; };
+		A02B6AA72C159EED00CAFF82 /* InstructionAddTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02B6AA62C159EED00CAFF82 /* InstructionAddTile.swift */; };
+		A02B6AAA2C1658AA00CAFF82 /* SplitView in Frameworks */ = {isa = PBXBuildFile; productRef = A02B6AA92C1658AA00CAFF82 /* SplitView */; };
+		A02B6AAD2C166A0100CAFF82 /* CodeBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02B6AAC2C166A0100CAFF82 /* CodeBlock.swift */; };
+		A02B6AAF2C166A7F00CAFF82 /* ControllFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02B6AAE2C166A7F00CAFF82 /* ControllFlow.swift */; };
+		A02B6AB12C16704900CAFF82 /* CodeEditorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02B6AB02C16704900CAFF82 /* CodeEditorViewModel.swift */; };
+		A02B6AB32C16789D00CAFF82 /* NewInstructionVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02B6AB22C16789D00CAFF82 /* NewInstructionVisitor.swift */; };
+		A02B6AB72C17341A00CAFF82 /* ARKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A02B6AB62C17341A00CAFF82 /* ARKit.framework */; platformFilter = ios; };
+		A02B6AB92C17342500CAFF82 /* RealityKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A02B6AB82C17342500CAFF82 /* RealityKit.framework */; };
+		A02B6AD82C17382E00CAFF82 /* ARSimulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02B6AD72C17382E00CAFF82 /* ARSimulator.swift */; };
+		A02B6ADC2C1750AD00CAFF82 /* NonArView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02B6ADB2C1750AD00CAFF82 /* NonArView.swift */; };
 		A06BD7C32BAE9F4E00863CA5 /* RobotKarolArKitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06BD7C22BAE9F4E00863CA5 /* RobotKarolArKitApp.swift */; };
 		A06BD7C72BAE9F4F00863CA5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A06BD7C62BAE9F4F00863CA5 /* Assets.xcassets */; };
 		A06BD7CB2BAE9F4F00863CA5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A06BD7CA2BAE9F4F00863CA5 /* Preview Assets.xcassets */; };
@@ -23,7 +36,7 @@
 		A06BD7D82BAEA5E700863CA5 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06BD7D72BAEA5E700863CA5 /* Block.swift */; };
 		A06BD7DB2BAF2C0A00863CA5 /* Robot.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06BD7DA2BAF2C0A00863CA5 /* Robot.swift */; };
 		A06BD7DD2BAF36F600863CA5 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06BD7DC2BAF36F600863CA5 /* Direction.swift */; };
-		A06BD7E02BB472F000863CA5 /* Visitable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06BD7DF2BB472F000863CA5 /* Visitable.swift */; };
+		A06BD7E02BB472F000863CA5 /* Instruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06BD7DF2BB472F000863CA5 /* Instruction.swift */; };
 		A06BD7E22BB4735E00863CA5 /* Visitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06BD7E12BB4735E00863CA5 /* Visitor.swift */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +49,18 @@
 		A02B6A952C13A26400CAFF82 /* PlaceStone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceStone.swift; sourceTree = "<group>"; };
 		A02B6A972C13A2DE00CAFF82 /* PlaceWater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceWater.swift; sourceTree = "<group>"; };
 		A02B6A9B2C13A6AF00CAFF82 /* CodeEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeEditorView.swift; sourceTree = "<group>"; };
+		A02B6A9E2C14AFF800CAFF82 /* CodeLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeLine.swift; sourceTree = "<group>"; };
+		A02B6AA12C14BA0F00CAFF82 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		A02B6AA42C14BD3300CAFF82 /* NameVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameVisitor.swift; sourceTree = "<group>"; };
+		A02B6AA62C159EED00CAFF82 /* InstructionAddTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionAddTile.swift; sourceTree = "<group>"; };
+		A02B6AAC2C166A0100CAFF82 /* CodeBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeBlock.swift; sourceTree = "<group>"; };
+		A02B6AAE2C166A7F00CAFF82 /* ControllFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllFlow.swift; sourceTree = "<group>"; };
+		A02B6AB02C16704900CAFF82 /* CodeEditorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeEditorViewModel.swift; sourceTree = "<group>"; };
+		A02B6AB22C16789D00CAFF82 /* NewInstructionVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewInstructionVisitor.swift; sourceTree = "<group>"; };
+		A02B6AB62C17341A00CAFF82 /* ARKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ARKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS17.4.sdk/System/Library/Frameworks/ARKit.framework; sourceTree = DEVELOPER_DIR; };
+		A02B6AB82C17342500CAFF82 /* RealityKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealityKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS17.4.sdk/System/Library/Frameworks/RealityKit.framework; sourceTree = DEVELOPER_DIR; };
+		A02B6AD72C17382E00CAFF82 /* ARSimulator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSimulator.swift; sourceTree = "<group>"; };
+		A02B6ADB2C1750AD00CAFF82 /* NonArView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonArView.swift; sourceTree = "<group>"; };
 		A06BD7BF2BAE9F4E00863CA5 /* RobotKarolArKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RobotKarolArKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A06BD7C22BAE9F4E00863CA5 /* RobotKarolArKitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RobotKarolArKitApp.swift; sourceTree = "<group>"; };
 		A06BD7C62BAE9F4F00863CA5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -46,7 +71,7 @@
 		A06BD7D72BAEA5E700863CA5 /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		A06BD7DA2BAF2C0A00863CA5 /* Robot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Robot.swift; sourceTree = "<group>"; };
 		A06BD7DC2BAF36F600863CA5 /* Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
-		A06BD7DF2BB472F000863CA5 /* Visitable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Visitable.swift; sourceTree = "<group>"; };
+		A06BD7DF2BB472F000863CA5 /* Instruction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Instruction.swift; sourceTree = "<group>"; };
 		A06BD7E12BB4735E00863CA5 /* Visitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Visitor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -55,6 +80,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A02B6AB92C17342500CAFF82 /* RealityKit.framework in Frameworks */,
+				A02B6AB72C17341A00CAFF82 /* ARKit.framework in Frameworks */,
+				A02B6AAA2C1658AA00CAFF82 /* SplitView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +106,7 @@
 		A02B6A992C13A64600CAFF82 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				A02B6ABA2C17357C00CAFF82 /* ARSimulator */,
 				A02B6A9A2C13A65C00CAFF82 /* CodeEditor */,
 			);
 			path = UI;
@@ -86,16 +115,66 @@
 		A02B6A9A2C13A65C00CAFF82 /* CodeEditor */ = {
 			isa = PBXGroup;
 			children = (
+				A02B6A9D2C14AFD700CAFF82 /* components */,
 				A02B6A9B2C13A6AF00CAFF82 /* CodeEditorView.swift */,
+				A02B6AB02C16704900CAFF82 /* CodeEditorViewModel.swift */,
 			);
 			path = CodeEditor;
+			sourceTree = "<group>";
+		};
+		A02B6A9D2C14AFD700CAFF82 /* components */ = {
+			isa = PBXGroup;
+			children = (
+				A02B6A9E2C14AFF800CAFF82 /* CodeLine.swift */,
+				A02B6AA62C159EED00CAFF82 /* InstructionAddTile.swift */,
+			);
+			path = components;
+			sourceTree = "<group>";
+		};
+		A02B6AA32C14BCE900CAFF82 /* Visitors */ = {
+			isa = PBXGroup;
+			children = (
+				A06BD7E12BB4735E00863CA5 /* Visitor.swift */,
+				A02B6AA42C14BD3300CAFF82 /* NameVisitor.swift */,
+				A02B6AB22C16789D00CAFF82 /* NewInstructionVisitor.swift */,
+			);
+			path = Visitors;
+			sourceTree = "<group>";
+		};
+		A02B6AAB2C1669E300CAFF82 /* ControllFlow */ = {
+			isa = PBXGroup;
+			children = (
+				A02B6AAC2C166A0100CAFF82 /* CodeBlock.swift */,
+				A02B6AAE2C166A7F00CAFF82 /* ControllFlow.swift */,
+			);
+			path = ControllFlow;
+			sourceTree = "<group>";
+		};
+		A02B6AB52C17341A00CAFF82 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A02B6AB82C17342500CAFF82 /* RealityKit.framework */,
+				A02B6AB62C17341A00CAFF82 /* ARKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A02B6ABA2C17357C00CAFF82 /* ARSimulator */ = {
+			isa = PBXGroup;
+			children = (
+				A02B6AD72C17382E00CAFF82 /* ARSimulator.swift */,
+				A02B6ADB2C1750AD00CAFF82 /* NonArView.swift */,
+			);
+			path = ARSimulator;
 			sourceTree = "<group>";
 		};
 		A06BD7B62BAE9F4E00863CA5 = {
 			isa = PBXGroup;
 			children = (
+				A02B6AA12C14BA0F00CAFF82 /* Localizable.xcstrings */,
 				A06BD7C12BAE9F4E00863CA5 /* RobotKarolArKit */,
 				A06BD7C02BAE9F4E00863CA5 /* Products */,
+				A02B6AB52C17341A00CAFF82 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -152,9 +231,10 @@
 		A06BD7DE2BB471A500863CA5 /* Instructions */ = {
 			isa = PBXGroup;
 			children = (
+				A06BD7DF2BB472F000863CA5 /* Instruction.swift */,
+				A02B6AAB2C1669E300CAFF82 /* ControllFlow */,
+				A02B6AA32C14BCE900CAFF82 /* Visitors */,
 				A02B6A892C139FE600CAFF82 /* Statements */,
-				A06BD7DF2BB472F000863CA5 /* Visitable.swift */,
-				A06BD7E12BB4735E00863CA5 /* Visitor.swift */,
 			);
 			path = Instructions;
 			sourceTree = "<group>";
@@ -175,6 +255,9 @@
 			dependencies = (
 			);
 			name = RobotKarolArKit;
+			packageProductDependencies = (
+				A02B6AA92C1658AA00CAFF82 /* SplitView */,
+			);
 			productName = RobotKarolArKit;
 			productReference = A06BD7BF2BAE9F4E00863CA5 /* RobotKarolArKit.app */;
 			productType = "com.apple.product-type.application";
@@ -201,8 +284,12 @@
 			knownRegions = (
 				en,
 				Base,
+				de,
 			);
 			mainGroup = A06BD7B62BAE9F4E00863CA5;
+			packageReferences = (
+				A02B6AA82C1658AA00CAFF82 /* XCRemoteSwiftPackageReference "SplitView" */,
+			);
 			productRefGroup = A06BD7C02BAE9F4E00863CA5 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -219,6 +306,7 @@
 			files = (
 				A06BD7CB2BAE9F4F00863CA5 /* Preview Assets.xcassets in Resources */,
 				A06BD7C72BAE9F4F00863CA5 /* Assets.xcassets in Resources */,
+				A02B6AA22C14BA0F00CAFF82 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -229,22 +317,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A02B6A9F2C14AFF800CAFF82 /* CodeLine.swift in Sources */,
 				A02B6A902C13A16200CAFF82 /* Lift.swift in Sources */,
+				A02B6AB32C16789D00CAFF82 /* NewInstructionVisitor.swift in Sources */,
+				A02B6ADC2C1750AD00CAFF82 /* NonArView.swift in Sources */,
 				A02B6A962C13A26400CAFF82 /* PlaceStone.swift in Sources */,
 				A06BD7DD2BAF36F600863CA5 /* Direction.swift in Sources */,
 				A02B6A982C13A2DE00CAFF82 /* PlaceWater.swift in Sources */,
 				A02B6A8C2C13A05500CAFF82 /* LeftTurn.swift in Sources */,
+				A02B6AD82C17382E00CAFF82 /* ARSimulator.swift in Sources */,
 				A06BD7D42BAEA3ED00863CA5 /* World.swift in Sources */,
 				A02B6A9C2C13A6AF00CAFF82 /* CodeEditorView.swift in Sources */,
+				A02B6AA72C159EED00CAFF82 /* InstructionAddTile.swift in Sources */,
 				A06BD7D82BAEA5E700863CA5 /* Block.swift in Sources */,
 				A06BD7C32BAE9F4E00863CA5 /* RobotKarolArKitApp.swift in Sources */,
-				A06BD7E02BB472F000863CA5 /* Visitable.swift in Sources */,
+				A06BD7E02BB472F000863CA5 /* Instruction.swift in Sources */,
+				A02B6AAD2C166A0100CAFF82 /* CodeBlock.swift in Sources */,
 				A02B6A942C13A22000CAFF82 /* PlaceGrass.swift in Sources */,
 				A06BD7DB2BAF2C0A00863CA5 /* Robot.swift in Sources */,
+				A02B6AAF2C166A7F00CAFF82 /* ControllFlow.swift in Sources */,
 				A02B6A8E2C13A0CC00CAFF82 /* RightTurn.swift in Sources */,
 				A06BD7E22BB4735E00863CA5 /* Visitor.swift in Sources */,
 				A02B6A922C13A1C600CAFF82 /* Step.swift in Sources */,
 				A06BD7D62BAEA4B400863CA5 /* Tile.swift in Sources */,
+				A02B6AB12C16704900CAFF82 /* CodeEditorViewModel.swift in Sources */,
+				A02B6AA52C14BD3300CAFF82 /* NameVisitor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -378,6 +475,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "I need this!";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -388,7 +486,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.3;
@@ -396,7 +494,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ramonaeckert.RobotKarolArKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -416,6 +514,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "I need this!";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -426,7 +525,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.3;
@@ -434,7 +533,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ramonaeckert.RobotKarolArKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -463,6 +562,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A02B6AA82C1658AA00CAFF82 /* XCRemoteSwiftPackageReference "SplitView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/stevengharris/SplitView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.5.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A02B6AA92C1658AA00CAFF82 /* SplitView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A02B6AA82C1658AA00CAFF82 /* XCRemoteSwiftPackageReference "SplitView" */;
+			productName = SplitView;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = A06BD7B72BAE9F4E00863CA5 /* Project object */;
 }

@@ -7,7 +7,9 @@
 
 import Foundation
 
-class Lift: Visitable {
+class Lift: Instruction {
+    var id: UUID = UUID()
+    
     func accept(visitor: Visitor) {
         visitor.visit(lift: self)
     }
