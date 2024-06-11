@@ -11,13 +11,16 @@ import Foundation
 class CodeEditorViewModel {
     var codeBlock: CodeBlock = CodeBlock()
     var allStatements: [any Instruction] = [Step(), Lift(), RightTurn(), LeftTurn(), PlaceGrass(), PlaceStone(), PlaceWater()]
+    var world = World(width: 6, length: 6)
+    var executionPointer: UUID
     
-    init() {
-        codeBlock.addInstruction(instruction: Step())
-        codeBlock.addInstruction(instruction: Lift())
+    init(codeBlock: CodeBlock = CodeBlock(), world: World = World(width: 6, length: 6)) {
+        self.codeBlock = codeBlock
+        self.world = world
+        self.executionPointer = codeBlock.id
     }
     
-    func addInstruction(instruction: any Instruction) {
+    private func addInstruction(instruction: any Instruction) {
         codeBlock.addInstruction(instruction: instruction)
     }
     

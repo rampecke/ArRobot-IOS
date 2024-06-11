@@ -48,7 +48,7 @@ struct CodeEditorView: View {
                .constraints(minPFraction: 0.4, minSFraction: 0.15)
                .styling(color: Color("card_border"))
        }, right: {
-           ARSimulator()
+           ARSimulator(viewModel: viewModel)
        }).fraction(fraction2)
             .constraints(minPFraction: 0.4, minSFraction: 0.4, dragToHideP: true)
             .styling(color: Color("card_border"))
