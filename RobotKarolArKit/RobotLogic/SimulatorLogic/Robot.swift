@@ -37,33 +37,41 @@ class Robot {
     }
     
     func turnLeft() {
+        var rotationAngle: Float = 0
         switch facingDirection {
         case .NORTH:
             facingDirection = Direction.WEST
+            rotationAngle = 3 * Float.pi / 2
         case .EAST:
             facingDirection = Direction.NORTH
+            rotationAngle = Float.pi
         case .SOUTH:
             facingDirection = Direction.EAST
+            rotationAngle = Float.pi / 2
         case .WEST:
             facingDirection = Direction.SOUTH
         }
         
-        //TODO: TURN ENTITY
+        robotEntity.transform.rotation = simd_quatf(angle: rotationAngle, axis: SIMD3<Float>(0, 1, 0))
     }
     
     func turnRight() {
+        var rotationAngle: Float = 0
         switch facingDirection {
         case .NORTH:
             facingDirection = Direction.EAST
+            rotationAngle = Float.pi / 2
         case .EAST:
             facingDirection = Direction.SOUTH
         case .SOUTH:
             facingDirection = Direction.WEST
+            rotationAngle = 3 * Float.pi / 2
         case .WEST:
             facingDirection = Direction.NORTH
+            rotationAngle = Float.pi
         }
         
-        //TODO: TURN ENTITY
+        robotEntity.transform.rotation = simd_quatf(angle: rotationAngle, axis: SIMD3<Float>(0, 1, 0))
     }
     
     func positionInFront() -> (Int, Int) {
@@ -85,7 +93,14 @@ class Robot {
         let robotMaterial = SimpleMaterial(color: .blue, isMetallic: false)
         robotEntity = ModelEntity(mesh: robotMesh, materials: [robotMaterial])
         
+        //Face
+        let robotFaceMesh = MeshResource.generateBox(width: robotWidth, height: robotHeight/2, depth: 0.001)
+        let robotFaceMaterial = SimpleMaterial(color: .yellow, isMetallic: false)
+        let robotFaceEntity = ModelEntity(mesh: robotFaceMesh, materials: [robotFaceMaterial])
+        
         robotEntity.position = [tileWidth*Float(position.0),robotHeight/2 + tileHeight,tileWidth*Float(position.1)]
+        robotFaceEntity.position = [tileWidth*Float(position.0),(robotHeight/2)/2 + tileHeight ,tileWidth*Float(position.1) + robotWidth/2]
+        robotEntity.addChild(robotFaceEntity)
         
         worldEntity.addChild(robotEntity)
     }

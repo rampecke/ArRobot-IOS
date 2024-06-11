@@ -4,6 +4,9 @@
     "executeAll" : {
 
     },
+    "faster" : {
+
+    },
     "Hello, World!" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -163,6 +166,12 @@
     "Reset" : {
 
     },
+    "resetCode" : {
+
+    },
+    "slower" : {
+
+    },
     "step" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -196,6 +205,9 @@
           }
         }
       }
+    },
+    "switchAr" : {
+
     },
     "turnLeft" : {
       "extractionState" : "manual",

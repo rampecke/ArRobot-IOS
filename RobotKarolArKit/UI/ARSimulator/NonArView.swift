@@ -14,19 +14,7 @@ struct NonArView: View {
     var body: some View {
         VStack{
             NonARViewContainer(world: viewModel.world).edgesIgnoringSafeArea(.all)
-            HStack{
-                Button("nextMove") {
-                    viewModel.next()
-                }
-                Spacer()
-                Button("executeAll") {
-                    viewModel.executeAll()
-                }
-                Spacer()
-                Button("Reset") {
-                    viewModel.reset()
-                }
-            }
+            ArViewControlBar(viewModel: viewModel)
         }
     }
 }
@@ -40,7 +28,7 @@ struct NonARViewContainer: UIViewRepresentable {
         //Create Lighting
         let pointLight = PointLight()
         pointLight.light.intensity = 10000
-        let lightAnchor = AnchorEntity(world: [0,0,0])
+        let lightAnchor = AnchorEntity(world: [0,1,0])
         lightAnchor.addChild(pointLight)
         arView.scene.addAnchor(lightAnchor)
         
@@ -51,7 +39,7 @@ struct NonARViewContainer: UIViewRepresentable {
         
         //Camera
         let camera = PerspectiveCamera()
-        let cameraAnchor = AnchorEntity(world: [0,0.2,0.7])
+        let cameraAnchor = AnchorEntity(world: [0,0.2,world.tileWidth*Float(world.getLength()) + 0.4])
         cameraAnchor.addChild(camera)
         arView.scene.addAnchor(cameraAnchor)
         
@@ -61,8 +49,4 @@ struct NonARViewContainer: UIViewRepresentable {
     func updateUIView(_ uiView: ARView, context: Context) {
     }
     
-}
-
-#Preview {
-    NonArView(viewModel: CodeEditorViewModel())
 }

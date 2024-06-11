@@ -35,6 +35,10 @@ class World {
         self.tiles = createTiles
     }
     
+    func getLength() -> Int {
+        self.length
+    }
+    
     private func createTiles() -> [[Tile]] {
         var createTiles : [[Tile]]  = []
         for _ in 0..<length {
@@ -127,7 +131,7 @@ class World {
         anchor?.addChild(worldEntity)
     }
     
-    private func createArWorld() {
+    func createArWorld() {
         //Grid
         let floorTileMesh = MeshResource.generateBox(width: tileWidth-lineWidth, height: tileHeight, depth: tileWidth-lineWidth)
         let floorTileMaterial = SimpleMaterial(color: .white, roughness: 0.5, isMetallic: true)

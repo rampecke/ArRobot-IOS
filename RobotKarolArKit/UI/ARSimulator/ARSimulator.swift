@@ -14,19 +14,7 @@ struct ARSimulator: View {
     var body: some View {
         VStack{
             ARViewContainer(world: viewModel.world).edgesIgnoringSafeArea(.all)
-            HStack{
-                Button("nextMove") {
-                    viewModel.next()
-                }
-                Spacer()
-                Button("executeAll") {
-                    viewModel.executeAll()
-                }
-                Spacer()
-                Button("Reset") {
-                    viewModel.reset()
-                }
-            }
+            ArViewControlBar(viewModel: viewModel)
         }
     }
 }
@@ -45,8 +33,4 @@ struct ARViewContainer: UIViewRepresentable {
     func updateUIView(_ uiView: ARView, context: Context) {
     }
     
-}
-
-#Preview {
-    ARSimulator(viewModel: CodeEditorViewModel())
 }
