@@ -34,13 +34,14 @@ struct CodeEditorView: View {
                        viewModel.moveInstruction(from: indices, to: newOffset)
                    })
                }.listRowSpacing(10).scrollContentBackground(.hidden)
+                   
            }, bottom: {
                ScrollView {
                    LazyVGrid(columns: columns, spacing: 10) {
                        ForEach($viewModel.allStatements, id: \.id) { $instruction in
                            InstructionAddTile(instruction: instruction).frame(height: 100).onTapGesture(perform: {
                                viewModel.createNewInstruction(instruction: instruction)
-                           })
+                           }).onDrag({ NSItemProvider(object: instruction.id.uuidString as NSString) })
                        }
                    }.padding()
                }
@@ -60,8 +61,4 @@ struct CodeEditorView: View {
             .styling(color: Color("card_border"))
             .edgesIgnoringSafeArea(.bottom)
     }
-}
-
-#Preview {
-    CodeEditorView()
 }

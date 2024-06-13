@@ -26,6 +26,10 @@ class CodeBlock: ControllFlow {
         codeBlock.append(instruction)
     }
     
+    func addInstructionAtPosition(instruction: any Instruction, position: Int) {
+        codeBlock.insert(instruction, at: position)
+    }
+    
     func accept(visitor: Visitor) {
         visitor.visit(codeBlock: self)
     }

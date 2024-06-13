@@ -41,6 +41,12 @@ class CodeEditorViewModel {
         codeBlock.codeBlock.move(fromOffsets: source, toOffset: destination)
     }
     
+    func addInstructionToPosition(instruction: any Instruction, position: Int) {
+        let newInstructionVisitor = NewInstructionVisitor()
+        instruction.accept(visitor: newInstructionVisitor)
+        codeBlock.addInstructionAtPosition(instruction: newInstructionVisitor.get(), position: position)
+    }
+    
     func next() {
         if executionVisitor.endExecution || finishedExecution {
             return
@@ -96,6 +102,8 @@ class CodeEditorViewModel {
         case .NonAR:
             arType = .AR
         }
+        
+        reset()
     }
 }
 

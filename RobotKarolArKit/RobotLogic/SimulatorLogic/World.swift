@@ -18,6 +18,7 @@ class World {
     let tileWidth: Float =  0.05
     let lineWidth: Float = 0.002
     var worldEntity: Entity = Entity()
+    var arWorldWasCreated: Bool = false
     
     init(width: Int, length: Int) {
         self.width = width
@@ -168,7 +169,10 @@ class World {
     }
     
     func anchorWorld(arView: ARView, anchor: AnchorEntity) {
-        createArWorld()
+        if(!arWorldWasCreated) {
+            createArWorld()
+            arWorldWasCreated = true
+        }
         //Reposition because of Offset
         worldEntity.position = [-(tileWidth * Float(width)/2), 0, -(tileWidth * Float(length)/2)]
         anchor.addChild(self.worldEntity)
