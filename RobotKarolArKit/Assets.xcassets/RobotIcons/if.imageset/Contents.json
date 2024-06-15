@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "LeftTurnRobot.svg",
+      "filename" : "If.svg",
       "idiom" : "universal"
     },
     {
@@ -11,7 +11,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "LeftTurnRobotDarkWhite.svg",
+      "filename" : "If DarkWhite.svg",
       "idiom" : "universal"
     }
   ],

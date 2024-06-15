@@ -51,10 +51,18 @@ struct CodeLine: View {
 }
 
 #Preview {
-    ScrollView {
-        CodeLine(instruction: Step(), CodeLineType.CodeLine)
-        CodeLine(instruction: Step(), CodeLineType.CodeLine)
-                        .environment(\.locale, .init(identifier: "en"))
+    @State var viewModel: CodeEditorViewModel = CodeEditorViewModel()
+    return ScrollView {
+        ForEach($viewModel.allStatements, id: \.id) { $instruction in
+            CodeLine(instruction: instruction, CodeLineType.CodeLine)
+            CodeLine(instruction: instruction, CodeLineType.CodeLine)
+                            .environment(\.locale, .init(identifier: "en"))
+        }
+        ForEach($viewModel.allControllFlow, id: \.id) { $instruction in
+            CodeLine(instruction: instruction, CodeLineType.CodeLine)
+            CodeLine(instruction: instruction, CodeLineType.CodeLine)
+                            .environment(\.locale, .init(identifier: "en"))
+        }
     }.padding()
 }
 

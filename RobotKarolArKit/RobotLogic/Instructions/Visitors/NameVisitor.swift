@@ -8,7 +8,6 @@
 import Foundation
 
 class NameVisitor: Visitor {
-    
     private var name: String = "";
     
     func get() -> String {
@@ -45,6 +44,14 @@ class NameVisitor: Visitor {
     }
     
     func visit(codeBlock: CodeBlock) {
-        self.name = ""
+        self.name = "codeBlock"
+    }
+    
+    func visit(if: If) {
+        self.name = "if"
+    }
+    
+    func visit(while: While) {
+        self.name = "while"
     }
 }

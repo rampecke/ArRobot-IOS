@@ -7,6 +7,11 @@
 
 import Foundation
 
-protocol ControllFlow: Instruction {
-    var codeBlock: [any Instruction] { get set }
+@Observable
+class ControllFlow: Instruction {
+    var id: UUID = UUID()
+    var codeBlock: CodeBlock = CodeBlock()
+    
+    func accept(visitor: any Visitor) {
+    }
 }

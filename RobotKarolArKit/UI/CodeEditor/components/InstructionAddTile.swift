@@ -62,8 +62,15 @@ struct InstructionAddTile: View {
 }
 
 #Preview {
-    ScrollView {
-        InstructionAddTile(instruction: Step()).frame(height: 100)
-        InstructionAddTile(instruction: Step()).frame(height: 100).environment(\.locale, .init(identifier: "en")).frame(height:100)
+    @State var viewModel: CodeEditorViewModel = CodeEditorViewModel()
+    return ScrollView {
+        ForEach($viewModel.allStatements, id: \.id) { $instruction in
+            InstructionAddTile(instruction: instruction).frame(height: 100)
+            InstructionAddTile(instruction: instruction).frame(height: 100).environment(\.locale, .init(identifier: "en"))
+        }
+        ForEach($viewModel.allControllFlow, id: \.id) { $instruction in
+            InstructionAddTile(instruction: instruction).frame(height: 100)
+            InstructionAddTile(instruction: instruction).frame(height: 100).environment(\.locale, .init(identifier: "en"))
+        }
     }
 }

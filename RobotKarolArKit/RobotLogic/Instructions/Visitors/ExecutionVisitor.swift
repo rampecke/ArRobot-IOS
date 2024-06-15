@@ -45,4 +45,10 @@ class ExecutionVisitor: Visitor {
     
     func visit(codeBlock: CodeBlock) {
     }
+    
+    func visit(if: If) {
+    }
+    
+    func visit(while: While) {
+    }
 }

@@ -2,13 +2,16 @@
   "sourceLanguage" : "en",
   "strings" : {
     "executeAll" : {
-
-    },
-    "faster" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alle ausführen"
+          }
+        }
+      }
     },
     "Hello, World!" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -20,6 +23,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hello, World!"
+          }
+        }
+      }
+    },
+    "if" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wenn"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "If"
+          }
+        }
+      }
+    },
+    "if_description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Der Roboter führt den Code nur aus, sofern die Bedingung erfüllt ist"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The robot will only execute the code, if a condition is fullfield"
           }
         }
       }
@@ -59,7 +96,14 @@
       }
     },
     "nextMove" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nächster Schritt"
+          }
+        }
+      }
     },
     "placeGrass" : {
       "extractionState" : "manual",
@@ -164,13 +208,24 @@
       }
     },
     "Reset" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zurücksetzen"
+          }
+        }
+      }
     },
     "resetCode" : {
-
-    },
-    "slower" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Code zurücksetzen"
+          }
+        }
+      }
     },
     "step" : {
       "extractionState" : "manual",
@@ -207,7 +262,14 @@
       }
     },
     "switchAr" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "switchAr"
+          }
+        }
+      }
     },
     "turnLeft" : {
       "extractionState" : "manual",
@@ -273,6 +335,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Instructs the robot to rotate 90 degrees to the left"
+          }
+        }
+      }
+    },
+    "while" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Solange"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "While"
+          }
+        }
+      }
+    },
+    "while_description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wiederholt den Code solange die Bedingung noch zutrifft"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Repeats the code as long as the condition is still met"
           }
         }
       }

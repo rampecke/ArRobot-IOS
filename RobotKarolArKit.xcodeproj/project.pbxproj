@@ -40,6 +40,10 @@
 		A06BD7DD2BAF36F600863CA5 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06BD7DC2BAF36F600863CA5 /* Direction.swift */; };
 		A06BD7E02BB472F000863CA5 /* Instruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06BD7DF2BB472F000863CA5 /* Instruction.swift */; };
 		A06BD7E22BB4735E00863CA5 /* Visitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06BD7E12BB4735E00863CA5 /* Visitor.swift */; };
+		A09390ED2C1DB9A4009DF760 /* If.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09390EC2C1DB9A4009DF760 /* If.swift */; };
+		A09390EF2C1DBFBD009DF760 /* While.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09390EE2C1DBFBD009DF760 /* While.swift */; };
+		A09390F12C1DCA38009DF760 /* CodeLineControllFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09390F02C1DCA38009DF760 /* CodeLineControllFlow.swift */; };
+		A09390F52C1DCD30009DF760 /* CodeBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09390F42C1DCD30009DF760 /* CodeBlockView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,6 +81,10 @@
 		A06BD7DC2BAF36F600863CA5 /* Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
 		A06BD7DF2BB472F000863CA5 /* Instruction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Instruction.swift; sourceTree = "<group>"; };
 		A06BD7E12BB4735E00863CA5 /* Visitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Visitor.swift; sourceTree = "<group>"; };
+		A09390EC2C1DB9A4009DF760 /* If.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = If.swift; sourceTree = "<group>"; };
+		A09390EE2C1DBFBD009DF760 /* While.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = While.swift; sourceTree = "<group>"; };
+		A09390F02C1DCA38009DF760 /* CodeLineControllFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeLineControllFlow.swift; sourceTree = "<group>"; };
+		A09390F42C1DCD30009DF760 /* CodeBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeBlockView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +139,8 @@
 			children = (
 				A02B6A9E2C14AFF800CAFF82 /* CodeLine.swift */,
 				A02B6AA62C159EED00CAFF82 /* InstructionAddTile.swift */,
+				A09390F02C1DCA38009DF760 /* CodeLineControllFlow.swift */,
+				A09390F42C1DCD30009DF760 /* CodeBlockView.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -151,6 +161,8 @@
 			children = (
 				A02B6AAC2C166A0100CAFF82 /* CodeBlock.swift */,
 				A02B6AAE2C166A7F00CAFF82 /* ControllFlow.swift */,
+				A09390EC2C1DB9A4009DF760 /* If.swift */,
+				A09390EE2C1DBFBD009DF760 /* While.swift */,
 			);
 			path = ControllFlow;
 			sourceTree = "<group>";
@@ -333,6 +345,7 @@
 			files = (
 				A02B6A9F2C14AFF800CAFF82 /* CodeLine.swift in Sources */,
 				A02B6A902C13A16200CAFF82 /* Lift.swift in Sources */,
+				A09390ED2C1DB9A4009DF760 /* If.swift in Sources */,
 				A02B6AB32C16789D00CAFF82 /* NewInstructionVisitor.swift in Sources */,
 				A02B6AE22C18AC4800CAFF82 /* ExecutionVisitor.swift in Sources */,
 				A02B6ADC2C1750AD00CAFF82 /* NonArView.swift in Sources */,
@@ -341,11 +354,14 @@
 				A02B6A982C13A2DE00CAFF82 /* PlaceWater.swift in Sources */,
 				A02B6A8C2C13A05500CAFF82 /* LeftTurn.swift in Sources */,
 				A02B6AD82C17382E00CAFF82 /* ARSimulator.swift in Sources */,
+				A09390F52C1DCD30009DF760 /* CodeBlockView.swift in Sources */,
+				A09390EF2C1DBFBD009DF760 /* While.swift in Sources */,
 				A06BD7D42BAEA3ED00863CA5 /* World.swift in Sources */,
 				A02B6A9C2C13A6AF00CAFF82 /* CodeEditorView.swift in Sources */,
 				A02B6AA72C159EED00CAFF82 /* InstructionAddTile.swift in Sources */,
 				A06BD7D82BAEA5E700863CA5 /* Block.swift in Sources */,
 				A06BD7C32BAE9F4E00863CA5 /* RobotKarolArKitApp.swift in Sources */,
+				A09390F12C1DCA38009DF760 /* CodeLineControllFlow.swift in Sources */,
 				A06BD7E02BB472F000863CA5 /* Instruction.swift in Sources */,
 				A02B6AE52C19130200CAFF82 /* ArViewControlBar.swift in Sources */,
 				A02B6AAD2C166A0100CAFF82 /* CodeBlock.swift in Sources */,

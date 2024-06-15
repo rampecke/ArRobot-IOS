@@ -47,4 +47,12 @@ class NewInstructionVisitor: Visitor {
     func visit(codeBlock: CodeBlock) {
         self.instruction = CodeBlock()
     }
+    
+    func visit(if: If) {
+        self.instruction = If()
+    }
+    
+    func visit(while: While) {
+        self.instruction = While()
+    }
 }

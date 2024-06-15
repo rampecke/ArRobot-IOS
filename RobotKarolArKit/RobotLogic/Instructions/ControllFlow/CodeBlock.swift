@@ -8,7 +8,7 @@
 import Foundation
 
 @Observable
-class CodeBlock: ControllFlow {
+class CodeBlock: Instruction {
     var id: UUID = UUID()
     var codeBlock: [any Instruction]
     

@@ -22,23 +22,16 @@ struct CodeEditorView: View {
     var body: some View {
        HSplit(left: {
            VSplit(top: {
-               List{
-                   ForEach($viewModel.codeBlock.codeBlock, id: \.id) { $instruction in
-                       CodeLine(instruction: instruction, CodeLineType.CodeLine)
-                           .listRowSeparator(.hidden)
-                           .listRowInsets(EdgeInsets(top:0, leading: 0, bottom: 0, trailing: 0))
-                   }.onDelete(perform: { indexSet in
-                       viewModel.deleteInstruction(at: indexSet)
-                   })
-                   .onMove(perform: { indices, newOffset in
-                       viewModel.moveInstruction(from: indices, to: newOffset)
-                   })
-               }.listRowSpacing(10).scrollContentBackground(.hidden)
-                   
+               CodeBlockView(viewModel: viewModel)
            }, bottom: {
                ScrollView {
                    LazyVGrid(columns: columns, spacing: 10) {
                        ForEach($viewModel.allStatements, id: \.id) { $instruction in
+                           InstructionAddTile(instruction: instruction).frame(height: 100).onTapGesture(perform: {
+                               viewModel.createNewInstruction(instruction: instruction)
+                           })
+                       }
+                       ForEach($viewModel.allControllFlow, id: \.id) { $instruction in
                            InstructionAddTile(instruction: instruction).frame(height: 100).onTapGesture(perform: {
                                viewModel.createNewInstruction(instruction: instruction)
                            }).onDrag({ NSItemProvider(object: instruction.id.uuidString as NSString) })
@@ -61,4 +54,8 @@ struct CodeEditorView: View {
             .styling(color: Color("card_border"))
             .edgesIgnoringSafeArea(.bottom)
     }
+}
+
+#Preview {
+    return CodeEditorView()
 }
