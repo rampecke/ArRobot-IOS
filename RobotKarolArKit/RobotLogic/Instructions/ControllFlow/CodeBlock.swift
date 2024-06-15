@@ -22,6 +22,14 @@ class CodeBlock: Instruction {
         self.codeBlock = []
     }
     
+    func deleteInstruction(at offsets: IndexSet) {
+        codeBlock.remove(atOffsets: offsets)
+    }
+
+    func moveInstruction(from source: IndexSet, to destination: Int) {
+        codeBlock.move(fromOffsets: source, toOffset: destination)
+    }
+    
     func addInstruction(instruction: any Instruction) {
         codeBlock.append(instruction)
     }

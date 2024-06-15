@@ -34,14 +34,6 @@ class CodeEditorViewModel {
         addInstruction(instruction: newInstructionVisitor.get())
     }
     
-    func deleteInstruction(at offsets: IndexSet) {
-        codeBlock.codeBlock.remove(atOffsets: offsets)
-    }
-    
-    func moveInstruction(from source: IndexSet, to destination: Int) {
-        codeBlock.codeBlock.move(fromOffsets: source, toOffset: destination)
-    }
-    
     func addInstructionToPosition(instruction: any Instruction, position: Int) {
         let newInstructionVisitor = NewInstructionVisitor()
         instruction.accept(visitor: newInstructionVisitor)
