@@ -8,8 +8,8 @@
 import Foundation
 
 @Observable
-class While: ControllFlow {
+class While: CodeBlock {
     override func accept(visitor: any Visitor) {
-        visitor.visit(while: self)
+        visitor.visit(whileInstruction: self)
     }
 }

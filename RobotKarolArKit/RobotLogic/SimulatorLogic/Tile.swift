@@ -16,7 +16,6 @@ class Tile {
     }
     
     func addBlock(_ block: BlockTyp, tileWidth: Float, tileHight: Float, worldEntity: Entity, tilePosition: (Int, Int)) {
-        print(blocks)
         let newBlock = Block(blockTyp: block, blockNumber: self.blocks.count)
         newBlock.createArBlock(position: tilePosition, tileWidth: tileWidth, tileHight: tileHight, worldEntity: worldEntity)
         blocks.append(newBlock)

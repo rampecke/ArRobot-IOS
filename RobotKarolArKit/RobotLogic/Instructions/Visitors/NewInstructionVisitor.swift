@@ -48,11 +48,11 @@ class NewInstructionVisitor: Visitor {
         self.instruction = CodeBlock()
     }
     
-    func visit(if: If) {
-        self.instruction = If()
+    func visit(ifInstruction: If) {
+        self.instruction = If([Step()])
     }
     
-    func visit(while: While) {
+    func visit(whileInstruction: While) {
         self.instruction = While()
     }
 }

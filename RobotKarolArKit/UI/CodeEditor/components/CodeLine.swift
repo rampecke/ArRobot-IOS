@@ -43,8 +43,8 @@ struct CodeLine: View {
          .rect(
              topLeadingRadius: 5,
              bottomLeadingRadius: 5,
-             bottomTrailingRadius: codeLineType == CodeLineType.PreviewCodeLine ? 5 : 0,
-             topTrailingRadius: codeLineType == CodeLineType.PreviewCodeLine ? 5 : 0
+             bottomTrailingRadius: 5,
+             topTrailingRadius: 5
          )
         )
     }

@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "Delete" : {
+
+    },
     "executeAll" : {
       "localizations" : {
         "de" : {
@@ -11,7 +14,11 @@
         }
       }
     },
+    "Hello World" : {
+
+    },
     "Hello, World!" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {

@@ -22,7 +22,9 @@ struct CodeEditorView: View {
     var body: some View {
        HSplit(left: {
            VSplit(top: {
-               CodeBlockView(codeBlock: viewModel.codeBlock)
+               List{
+                   CodeBlockView(codeBlock: viewModel.codeBlock)
+               }.listRowSpacing(10).scrollContentBackground(.hidden).padding(10)
            }, bottom: {
                ScrollView {
                    LazyVGrid(columns: columns, spacing: 10) {

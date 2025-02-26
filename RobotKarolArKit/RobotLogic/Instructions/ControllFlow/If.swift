@@ -8,8 +8,8 @@
 import Foundation
 
 @Observable
-class If: ControllFlow {
+class If: CodeBlock {
     override func accept(visitor: any Visitor) {
-        visitor.visit(if: self)
+        visitor.visit(ifInstruction: self)
     }
 }

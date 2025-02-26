@@ -57,7 +57,6 @@ class World {
         if(nextTileExists()) {
             let positionInFront = robot.positionInFront()
             let tile = tiles[positionInFront.0][positionInFront.1]
-            print(tile.getBlocks())
             robot.step(tileWidth: tileWidth, tileHight: tileHeight, tilesInFront: tile.getBlocks().count)
             return true
         } else {

@@ -11,7 +11,7 @@ import Foundation
 class CodeEditorViewModel {
     var codeBlock: CodeBlock = CodeBlock()
     var allStatements: [any Instruction] = [Step(), Lift(), RightTurn(), LeftTurn(), PlaceGrass(), PlaceStone(), PlaceWater()]
-    var allControllFlow: [any Instruction] = [If(), While()]
+    var allControllFlow: [CodeBlock] = [If(), While()]
     var world = World(width: 6, length: 6)
     var finishedExecution = false
     var executionVisitor: ExecutionVisitor

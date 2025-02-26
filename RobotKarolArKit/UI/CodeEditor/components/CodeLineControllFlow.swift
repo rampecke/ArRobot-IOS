@@ -8,6 +8,14 @@
 import SwiftUI
 
 struct CodeLineControllFlow: View {
+    @Bindable var instruction: CodeBlock
+    
+    func getNameOfInstruction() -> String {
+        let nameVisitor = NameVisitor()
+        instruction.accept(visitor: nameVisitor)
+        return nameVisitor.get()
+    }
+    
     func getColor(_ nameOfInstruction: String, _ ending: ColorEnding) -> Color {
         if let uiColor = UIColor(named: "\(nameOfInstruction)\(ending.rawValue)") {
             return Color(uiColor)
@@ -21,10 +29,71 @@ struct CodeLineControllFlow: View {
     }
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Section {
+            HStack {
+                Text(LocalizedStringKey(getNameOfInstruction()))
+                    .foregroundColor(getColor(getNameOfInstruction(), .onPrimary))
+                    .font(.system(size: 20, weight: .semibold, design: .rounded))
+                HStack {
+                    Text("Hello World")
+                        .foregroundColor(getColor(getNameOfInstruction(), .onPrimary))
+                        .font(.system(size: 20, weight: .semibold, design: .rounded))
+                }.frame(maxWidth: .infinity, alignment: .topLeading)
+                    .padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
+                    .background(Color("contrast_color").opacity(0.5))
+                    .clipShape(
+                        .rect(
+                            topLeadingRadius: 5,
+                            bottomLeadingRadius: 5,
+                            bottomTrailingRadius: 5,
+                            topTrailingRadius: 5
+                        )
+                    )
+            }.swipeActions(edge: .trailing) {
+                Button(role: .destructive) {
+                    print("Test")
+                } label: {
+                    Label("Delete", systemImage: "trash")
+                }
+            }
+            
+            CodeBlockView(codeBlock: instruction)
+                .frame(maxWidth: .infinity)
+                .padding(10)
+                .background(Color("contrast_color").opacity(0.5))
+                .clipShape(
+                    .rect(
+                        topLeadingRadius: 5,
+                        bottomLeadingRadius: 5,
+                        bottomTrailingRadius: 5,
+                        topTrailingRadius: 5
+                    )
+                )
+            }
+            .padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
+            .background(getColor(getNameOfInstruction(), .primary))
+            .clipShape(
+                .rect(
+                    topLeadingRadius: 5,
+                    bottomLeadingRadius: 5,
+                    bottomTrailingRadius: 0,
+                    topTrailingRadius: 0
+                )
+            )
     }
 }
 
 #Preview {
-    CodeLineControllFlow()
+    @State var viewModel: CodeEditorViewModel = CodeEditorViewModel()
+    
+    viewModel.allControllFlow.first?.addInstruction(instruction: Step())
+    viewModel.allControllFlow.first?.addInstruction(instruction: Step())
+    viewModel.allControllFlow.first?.addInstruction(instruction: Step())
+    return ScrollView {
+        ForEach($viewModel.allControllFlow, id: \.id) { $instruction in
+            CodeLineControllFlow(instruction: instruction)
+            CodeLineControllFlow(instruction: instruction)
+                            .environment(\.locale, .init(identifier: "en"))
+        }
+    }.padding()
 }

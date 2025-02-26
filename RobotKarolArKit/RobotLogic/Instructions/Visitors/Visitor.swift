@@ -19,6 +19,6 @@ protocol Visitor {
     
     //ControllFlow
     func visit(codeBlock: CodeBlock)
-    func visit(if: If)
-    func visit(while: While)
+    func visit(ifInstruction: If)
+    func visit(whileInstruction: While)
 }

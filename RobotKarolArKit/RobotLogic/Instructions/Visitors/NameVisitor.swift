@@ -47,11 +47,11 @@ class NameVisitor: Visitor {
         self.name = "codeBlock"
     }
     
-    func visit(if: If) {
+    func visit(ifInstruction: If) {
         self.name = "if"
     }
     
-    func visit(while: While) {
+    func visit(whileInstruction: While) {
         self.name = "while"
     }
 }

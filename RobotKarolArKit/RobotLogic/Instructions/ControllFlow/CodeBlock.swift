@@ -25,6 +25,10 @@ class CodeBlock: Instruction {
     func deleteInstruction(at offsets: IndexSet) {
         codeBlock.remove(atOffsets: offsets)
     }
+    
+    func deleteInstruction(id: UUID) {
+        codeBlock.removeAll(where: {$0.id == id})
+    }
 
     func moveInstruction(from source: IndexSet, to destination: Int) {
         codeBlock.move(fromOffsets: source, toOffset: destination)
