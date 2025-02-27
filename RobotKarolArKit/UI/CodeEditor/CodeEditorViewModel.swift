@@ -12,6 +12,7 @@ class CodeEditorViewModel {
     var codeBlock: CodeBlock = CodeBlock()
     var allStatements: [any Instruction] = [Step(), Lift(), RightTurn(), LeftTurn(), PlaceGrass(), PlaceStone(), PlaceWater()]
     var allControllFlow: [CodeBlock] = [If(), While()]
+    var allExpressions: [any Expression] = [IsEast(), IsWest(), IsNorth(), IsSouth(), IsBlock(), IsBorder(), And(), Or(), Not()]
     var world = World(width: 6, length: 6)
     var finishedExecution = false
     var executionVisitor: ExecutionVisitor
@@ -99,12 +100,14 @@ class CodeEditorViewModel {
         reset()
     }
     
+    //TODO: HANDLE DIFFRENCE BETWEEN EXPRESSIONS AND STATEMENTS
     //Handle Drag and Drop: Get an ID of an Element and a targetWhere to place it
     func handleDrop(providers: [NSItemProvider], targetInstructionID: UUID?, codeBlock: CodeBlock?) -> Bool {
         for provider in providers {
             provider.loadObject(ofClass: NSString.self) { object, _ in
                 if let idString = object as? String, let draggedID = UUID(uuidString: idString) {
                     DispatchQueue.main.async {
+                        //Make sure the itemposition is not the same
                         if draggedID == targetInstructionID {
                             return
                         }
@@ -148,6 +151,10 @@ class CodeEditorViewModel {
         }
         if let controlFlow = allControllFlow.first(where: { $0.id == draggedID }) {
             return controlFlow
+        }
+        
+        if let expression = allExpressions.first(where: { $0.id == draggedID }) {
+            return expression
         }
         
         // Return nil if the draggedID is not found in either collection

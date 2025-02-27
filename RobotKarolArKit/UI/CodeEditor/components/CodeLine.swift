@@ -23,9 +23,17 @@ struct CodeLine: View {
             return Color(uiColor)
         } else {
             if ending == .onPrimary {
-                return Color.black
+                if let uiColor = UIColor(named: "expression\(ending.rawValue)") {
+                    return Color(uiColor)
+                } else {
+                    return Color.black
+                }
             } else {
-                return Color.gray
+                if let uiColor = UIColor(named: "expression\(ending.rawValue)") {
+                    return Color(uiColor)
+                } else {
+                    return Color.gray
+                }
             }
         }
     }
@@ -59,6 +67,11 @@ struct CodeLine: View {
                             .environment(\.locale, .init(identifier: "en"))
         }
         ForEach($viewModel.allControllFlow, id: \.id) { $instruction in
+            CodeLine(instruction: instruction, CodeLineType.CodeLine)
+            CodeLine(instruction: instruction, CodeLineType.CodeLine)
+                            .environment(\.locale, .init(identifier: "en"))
+        }
+        ForEach($viewModel.allExpressions, id: \.id) { $instruction in
             CodeLine(instruction: instruction, CodeLineType.CodeLine)
             CodeLine(instruction: instruction, CodeLineType.CodeLine)
                             .environment(\.locale, .init(identifier: "en"))

@@ -44,6 +44,7 @@ class NewInstructionVisitor: Visitor {
         self.instruction = PlaceWater()
     }
     
+    //ControllFlow
     func visit(codeBlock: CodeBlock) {
         self.instruction = CodeBlock()
     }
@@ -54,5 +55,46 @@ class NewInstructionVisitor: Visitor {
     
     func visit(whileInstruction: While) {
         self.instruction = While()
+    }
+    
+    //Expressions
+    func visit(isEast: IsEast) {
+        self.instruction = IsEast()
+    }
+    
+    func visit(isNorth: IsNorth) {
+        self.instruction = IsNorth()
+    }
+    
+    func visit(isSouth: IsSouth) {
+        self.instruction = IsSouth()
+    }
+    
+    func visit(isWest: IsWest) {
+        self.instruction = IsWest()
+    }
+    
+    func visit(isBorder: IsBorder) {
+        self.instruction = IsBorder()
+    }
+    
+    func visit(isBlock: IsBlock) {
+        self.instruction = IsBlock()
+    }
+    
+    func visit(emptyExpression: EmptyExpression) {
+        self.instruction = EmptyExpression()
+    }
+    
+    func visit(and: And) {
+        self.instruction = And()
+    }
+    
+    func visit(or: Or) {
+        self.instruction = And()
+    }
+    
+    func visit(not: Not) {
+        self.instruction = Not()
     }
 }

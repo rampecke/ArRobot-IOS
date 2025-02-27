@@ -72,4 +72,25 @@ class DeleteInstructionVisitor: Visitor {
             }
         }
     }
+    
+    //Expressions
+    func visit(isEast: IsEast) {}
+    
+    func visit(isNorth: IsNorth) {}
+    
+    func visit(isSouth: IsSouth) {}
+    
+    func visit(isWest: IsWest) {}
+    
+    func visit(isBorder: IsBorder) {}
+    
+    func visit(isBlock: IsBlock) {}
+    
+    func visit(emptyExpression: EmptyExpression) {}
+    
+    func visit(and: And) {}
+    
+    func visit(or: Or) {}
+    
+    func visit(not: Not) {}
 }

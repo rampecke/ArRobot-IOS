@@ -50,7 +50,9 @@ struct CodeLineControllFlow: View {
                             topTrailingRadius: 5
                         )
                     )
-            }
+            }.onDrop(of: [.text], isTargeted: nil) { providers in
+                viewModel.handleDrop(providers: providers, targetInstructionID: instruction.id, codeBlock: nil)
+           }
             
             CodeBlockView(codeBlock: instruction, viewModel: viewModel)
                 .frame(maxWidth: .infinity)
@@ -71,10 +73,13 @@ struct CodeLineControllFlow: View {
                 .rect(
                     topLeadingRadius: 5,
                     bottomLeadingRadius: 5,
-                    bottomTrailingRadius: 0,
-                    topTrailingRadius: 0
+                    bottomTrailingRadius: 5,
+                    topTrailingRadius: 5
                 )
             )
+            .onDrag {
+                NSItemProvider(object: instruction.id.uuidString as NSString)
+            }
     }
 }
 

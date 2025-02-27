@@ -23,9 +23,17 @@ struct InstructionAddTile: View {
             return Color(uiColor)
         } else {
             if ending == .onPrimary {
-                return Color.black
+                if let uiColor = UIColor(named: "expression\(ending.rawValue)") {
+                    return Color(uiColor)
+                } else {
+                    return Color.black
+                }
             } else {
-                return Color.gray
+                if let uiColor = UIColor(named: "expression\(ending.rawValue)") {
+                    return Color(uiColor)
+                } else {
+                    return Color.gray
+                }
             }
         }
     }
@@ -69,6 +77,10 @@ struct InstructionAddTile: View {
             InstructionAddTile(instruction: instruction).frame(height: 100).environment(\.locale, .init(identifier: "en"))
         }
         ForEach($viewModel.allControllFlow, id: \.id) { $instruction in
+            InstructionAddTile(instruction: instruction).frame(height: 100)
+            InstructionAddTile(instruction: instruction).frame(height: 100).environment(\.locale, .init(identifier: "en"))
+        }
+        ForEach($viewModel.allExpressions, id: \.id) { $instruction in
             InstructionAddTile(instruction: instruction).frame(height: 100)
             InstructionAddTile(instruction: instruction).frame(height: 100).environment(\.locale, .init(identifier: "en"))
         }

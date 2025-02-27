@@ -21,4 +21,16 @@ protocol Visitor {
     func visit(codeBlock: CodeBlock)
     func visit(ifInstruction: If)
     func visit(whileInstruction: While)
+    
+    //Expression
+    func visit(isEast: IsEast)
+    func visit(isNorth: IsNorth)
+    func visit(isSouth: IsSouth)
+    func visit(isWest: IsWest)
+    func visit(isBorder: IsBorder)
+    func visit(isBlock: IsBlock)
+    func visit(emptyExpression: EmptyExpression)
+    func visit(and: And)
+    func visit(or: Or)
+    func visit(not: Not)
 }

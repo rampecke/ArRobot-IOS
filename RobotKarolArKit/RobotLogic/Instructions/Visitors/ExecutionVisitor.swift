@@ -15,6 +15,7 @@ class ExecutionVisitor: Visitor {
         self.world = world
     }
     
+    //Statements
     func visit(leftTurn: LeftTurn) {
         endExecution = !world.turnLeft()
     }
@@ -43,6 +44,7 @@ class ExecutionVisitor: Visitor {
         endExecution = !world.place(block: BlockTyp.WATER)
     }
     
+    //ControllFlow
     func visit(codeBlock: CodeBlock) {
     }
     
@@ -50,5 +52,46 @@ class ExecutionVisitor: Visitor {
     }
     
     func visit(whileInstruction: While) {
+    }
+    
+    //Expressions
+    func visit(isEast: IsEast) {
+        endExecution = true
+    }
+    
+    func visit(isNorth: IsNorth) {
+        endExecution = true
+    }
+    
+    func visit(isSouth: IsSouth) {
+        endExecution = true
+    }
+    
+    func visit(isWest: IsWest) {
+        endExecution = true
+    }
+    
+    func visit(isBorder: IsBorder) {
+        endExecution = true
+    }
+    
+    func visit(isBlock: IsBlock) {
+        endExecution = true
+    }
+    
+    func visit(emptyExpression: EmptyExpression) {
+        endExecution = true
+    }
+    
+    func visit(and: And) {
+        endExecution = true
+    }
+    
+    func visit(or: Or) {
+        endExecution = true
+    }
+    
+    func visit(not: Not) {
+        endExecution = true
     }
 }

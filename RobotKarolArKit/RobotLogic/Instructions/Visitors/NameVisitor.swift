@@ -43,6 +43,7 @@ class NameVisitor: Visitor {
         self.name = "placeWater"
     }
     
+    //ControllFlow
     func visit(codeBlock: CodeBlock) {
         self.name = "codeBlock"
     }
@@ -53,5 +54,46 @@ class NameVisitor: Visitor {
     
     func visit(whileInstruction: While) {
         self.name = "while"
+    }
+    
+    //Expressions
+    func visit(isEast: IsEast) {
+        self.name = "isEast"
+    }
+    
+    func visit(isNorth: IsNorth) {
+        self.name = "isNorth"
+    }
+    
+    func visit(isSouth: IsSouth) {
+        self.name = "isSouth"
+    }
+    
+    func visit(isWest: IsWest) {
+        self.name = "isWest"
+    }
+    
+    func visit(isBorder: IsBorder) {
+        self.name = "isBorder"
+    }
+    
+    func visit(isBlock: IsBlock) {
+        self.name = "isBlock"
+    }
+    
+    func visit(emptyExpression: EmptyExpression) {
+        self.name = "emptyExpression"
+    }
+    
+    func visit(and: And) {
+        self.name = "and"
+    }
+    
+    func visit(or: Or) {
+        self.name = "or"
+    }
+    
+    func visit(not: Not) {
+        self.name = "not"
     }
 }

@@ -53,6 +53,11 @@ struct CodeEditorView: View {
                         viewModel.createNewInstruction(instruction: instruction)
                     }).onDrag({ NSItemProvider(object: instruction.id.uuidString as NSString) })
                 }
+                ForEach($viewModel.allExpressions, id: \.id) { $instruction in
+                    InstructionAddTile(instruction: instruction).frame(height: 80).onTapGesture(perform: {
+                        viewModel.createNewInstruction(instruction: instruction)
+                    }).onDrag({ NSItemProvider(object: instruction.id.uuidString as NSString) })
+                }
             }.padding(.horizontal, 10)
         }.frame(height: 170)
     }
