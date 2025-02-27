@@ -9,30 +9,32 @@ import SwiftUI
 
 struct CodeBlockView: View {
     @Bindable var codeBlock: CodeBlock
+    @Bindable var viewModel: CodeEditorViewModel
     
     var body: some View {
         VStack(spacing: 10) {
             ForEach($codeBlock.codeBlock, id: \.id) { $instruction in
                 if let controlFlow = instruction as? CodeBlock {
-                    CodeLineControllFlow(instruction: controlFlow)
+                    CodeLineControllFlow(instruction: controlFlow, viewModel: viewModel)
                 } else {
                     CodeLine(instruction: instruction, CodeLineType.CodeLine)
-                        .listRowSeparator(.hidden)
-                        .listRowInsets(EdgeInsets(top:0, leading: 0, bottom: 0, trailing: 0))
-                        .swipeActions(edge: .trailing) {
-                            Button(role: .destructive) {
-                                codeBlock.deleteInstruction(id: instruction.id)
-                            } label: {
-                                Label("Delete", systemImage: "trash")
-                            }
+                        .onDrag {
+                            NSItemProvider(object: instruction.id.uuidString as NSString)
                         }
+                        .onDrop(of: [.text], isTargeted: nil) { providers in
+                            viewModel.handleDrop(providers: providers, targetInstructionID: instruction.id, codeBlock: nil)
+                       }
                 }
             }
-            .onMove(perform: { indices, newOffset in
-                codeBlock.moveInstruction(from: indices, to: newOffset)
-            })
+            
+            Rectangle()
+                .fill(Color.clear)
+                .frame(height: 20) // Make this large enough to detect drops
         }.padding(10)
-        
+        .background(Color.clear.contentShape(Rectangle())) // Ensure drop area is recognized
+        .onDrop(of: [.text], isTargeted: nil) { providers in
+            viewModel.handleDrop(providers: providers, targetInstructionID: nil, codeBlock: codeBlock)
+        }
     }
 }
 
@@ -44,5 +46,6 @@ struct CodeBlockView: View {
     viewModel.allControllFlow.forEach{
         viewModel.createNewInstruction(instruction: $0)
     }
-    return List {CodeBlockView(codeBlock: viewModel.codeBlock)}.listRowSpacing(10).scrollContentBackground(.hidden).padding(10)
+    
+    return CodeBlockView(codeBlock: viewModel.codeBlock, viewModel: viewModel).padding(10)
 }

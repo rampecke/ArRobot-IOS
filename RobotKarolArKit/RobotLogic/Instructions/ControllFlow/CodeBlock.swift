@@ -29,10 +29,6 @@ class CodeBlock: Instruction {
     func deleteInstruction(id: UUID) {
         codeBlock.removeAll(where: {$0.id == id})
     }
-
-    func moveInstruction(from source: IndexSet, to destination: Int) {
-        codeBlock.move(fromOffsets: source, toOffset: destination)
-    }
     
     func addInstruction(instruction: any Instruction) {
         codeBlock.append(instruction)
@@ -40,6 +36,22 @@ class CodeBlock: Instruction {
     
     func addInstructionAtPosition(instruction: any Instruction, position: Int) {
         codeBlock.insert(instruction, at: position)
+    }
+    
+    func containsInstruction(id: UUID) -> Bool {
+        return codeBlock.contains { $0.id == id }
+    }
+    
+    func getFirstInstructionWithID(uuid: UUID) -> (any Instruction)? {
+        return codeBlock.first { $0.id == uuid }
+    }
+    
+    func addInstructionAbove(uuid: UUID, instruction: any Instruction) {
+        guard let position = codeBlock.firstIndex(where: { $0.id == uuid }) else {
+            return
+        }
+        
+        addInstructionAtPosition(instruction: instruction, position: position)
     }
     
     func accept(visitor: Visitor) {

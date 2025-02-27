@@ -62,8 +62,8 @@ struct InstructionAddTile: View {
 }
 
 #Preview {
-    @State var viewModel: CodeEditorViewModel = CodeEditorViewModel()
-    return ScrollView {
+    @Previewable @State var viewModel: CodeEditorViewModel = CodeEditorViewModel()
+    ScrollView {
         ForEach($viewModel.allStatements, id: \.id) { $instruction in
             InstructionAddTile(instruction: instruction).frame(height: 100)
             InstructionAddTile(instruction: instruction).frame(height: 100).environment(\.locale, .init(identifier: "en"))

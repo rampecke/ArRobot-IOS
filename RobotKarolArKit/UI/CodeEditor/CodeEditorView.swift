@@ -24,7 +24,7 @@ struct CodeEditorView: View {
         VStack{
             HSplit(left: {
                 ScrollView {
-                    CodeBlockView(codeBlock: viewModel.codeBlock)
+                    CodeBlockView(codeBlock: viewModel.codeBlock, viewModel: viewModel)
                 }
             }, right: {
                 Group {

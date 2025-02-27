@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CodeLineControllFlow: View {
     @Bindable var instruction: CodeBlock
+    @Bindable var viewModel: CodeEditorViewModel
     
     func getNameOfInstruction() -> String {
         let nameVisitor = NameVisitor()
@@ -51,7 +52,7 @@ struct CodeLineControllFlow: View {
                     )
             }
             
-            CodeBlockView(codeBlock: instruction)
+            CodeBlockView(codeBlock: instruction, viewModel: viewModel)
                 .frame(maxWidth: .infinity)
                 .padding(2)
                 .background(Color("contrast_color").opacity(0.5))
@@ -85,8 +86,8 @@ struct CodeLineControllFlow: View {
     viewModel.allControllFlow.first?.addInstruction(instruction: Step())
     return ScrollView {
         ForEach($viewModel.allControllFlow, id: \.id) { $instruction in
-            CodeLineControllFlow(instruction: instruction)
-            CodeLineControllFlow(instruction: instruction)
+            CodeLineControllFlow(instruction: instruction, viewModel: viewModel)
+            CodeLineControllFlow(instruction: instruction, viewModel: viewModel)
                             .environment(\.locale, .init(identifier: "en"))
         }
     }.padding()

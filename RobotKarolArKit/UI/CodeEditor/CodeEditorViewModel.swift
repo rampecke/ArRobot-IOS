@@ -98,6 +98,61 @@ class CodeEditorViewModel {
         
         reset()
     }
+    
+    //Handle Drag and Drop: Get an ID of an Element and a targetWhere to place it
+    func handleDrop(providers: [NSItemProvider], targetInstructionID: UUID?, codeBlock: CodeBlock?) -> Bool {
+        for provider in providers {
+            provider.loadObject(ofClass: NSString.self) { object, _ in
+                if let idString = object as? String, let draggedID = UUID(uuidString: idString) {
+                    DispatchQueue.main.async {
+                        if draggedID == targetInstructionID {
+                            return
+                        }
+                        //If it exists then remove it from old position and add it at new position
+                        //If it didn't exist create a new one
+                        let deleteInstructionVisitor = DeleteInstructionVisitor(deleteId: draggedID)
+                        self.codeBlock.accept(visitor: deleteInstructionVisitor)
+                        
+                        if !deleteInstructionVisitor.getWasDeleted() {
+                            let newInstructionVisitor = NewInstructionVisitor()
+                            
+                            guard let newInstruction = self.findInstructionByID(draggedID: draggedID) else {
+                                return
+                            }
+                            newInstruction.accept(visitor: newInstructionVisitor)
+                            deleteInstructionVisitor.setDeletedInstruction(instruction: newInstructionVisitor.get())
+                        }
+                        
+                        guard let existingTargetInstructionID = targetInstructionID else {
+                            guard let existingCodeBlock = codeBlock else {
+                                self.codeBlock.addInstruction(instruction: deleteInstructionVisitor.getDeletedInstruction())
+                                return
+                            }
+                            existingCodeBlock.addInstruction(instruction: deleteInstructionVisitor.getDeletedInstruction())
+                            return
+                        }
+                        
+                        let addInstructionVisitor = AddInstructionVisitor(targetId: existingTargetInstructionID, instruction: deleteInstructionVisitor.getDeletedInstruction())
+                        self.codeBlock.accept(visitor: addInstructionVisitor)
+                    }
+                }
+            }
+        }
+        return true
+    }
+    
+    private func findInstructionByID(draggedID: UUID) -> (any Instruction)? {
+        // Check if the draggedID exists in allStatements or allControllFlow
+        if let statement = allStatements.first(where: { $0.id == draggedID }) {
+            return statement
+        }
+        if let controlFlow = allControllFlow.first(where: { $0.id == draggedID }) {
+            return controlFlow
+        }
+        
+        // Return nil if the draggedID is not found in either collection
+        return nil
+    }
 }
 
 enum ARType {

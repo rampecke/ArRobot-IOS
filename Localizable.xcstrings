@@ -2,6 +2,7 @@
   "sourceLanguage" : "en",
   "strings" : {
     "Delete" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -22,6 +23,7 @@
       }
     },
     "Hello World" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -98,6 +100,9 @@
           }
         }
       }
+    },
+    "Missing" : {
+
     },
     "nextMove" : {
       "localizations" : {
