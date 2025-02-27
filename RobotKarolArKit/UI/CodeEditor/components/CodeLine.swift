@@ -51,7 +51,7 @@ struct CodeLine: View {
 }
 
 #Preview {
-    @State var viewModel: CodeEditorViewModel = CodeEditorViewModel()
+    @Previewable @State var viewModel: CodeEditorViewModel = CodeEditorViewModel()
     return ScrollView {
         ForEach($viewModel.allStatements, id: \.id) { $instruction in
             CodeLine(instruction: instruction, CodeLineType.CodeLine)

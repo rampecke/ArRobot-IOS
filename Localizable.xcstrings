@@ -2,7 +2,14 @@
   "sourceLanguage" : "en",
   "strings" : {
     "Delete" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Löschen"
+          }
+        }
+      }
     },
     "executeAll" : {
       "localizations" : {
@@ -15,21 +22,11 @@
       }
     },
     "Hello World" : {
-
-    },
-    "Hello, World!" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hallo, Welt!"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hello, World!"
+            "value" : "Hallo Welt"
           }
         }
       }

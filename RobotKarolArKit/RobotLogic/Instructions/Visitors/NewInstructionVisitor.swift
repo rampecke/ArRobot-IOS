@@ -49,7 +49,7 @@ class NewInstructionVisitor: Visitor {
     }
     
     func visit(ifInstruction: If) {
-        self.instruction = If([Step()])
+        self.instruction = If()
     }
     
     func visit(whileInstruction: While) {

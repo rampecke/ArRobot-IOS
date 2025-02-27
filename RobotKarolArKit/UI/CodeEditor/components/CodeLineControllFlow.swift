@@ -29,13 +29,13 @@ struct CodeLineControllFlow: View {
     }
     
     var body: some View {
-        Section {
+        VStack {
             HStack {
                 Text(LocalizedStringKey(getNameOfInstruction()))
                     .foregroundColor(getColor(getNameOfInstruction(), .onPrimary))
                     .font(.system(size: 20, weight: .semibold, design: .rounded))
                 HStack {
-                    Text("Hello World")
+                    Text("Missing")
                         .foregroundColor(getColor(getNameOfInstruction(), .onPrimary))
                         .font(.system(size: 20, weight: .semibold, design: .rounded))
                 }.frame(maxWidth: .infinity, alignment: .topLeading)
@@ -49,17 +49,11 @@ struct CodeLineControllFlow: View {
                             topTrailingRadius: 5
                         )
                     )
-            }.swipeActions(edge: .trailing) {
-                Button(role: .destructive) {
-                    print("Test")
-                } label: {
-                    Label("Delete", systemImage: "trash")
-                }
             }
             
             CodeBlockView(codeBlock: instruction)
                 .frame(maxWidth: .infinity)
-                .padding(10)
+                .padding(2)
                 .background(Color("contrast_color").opacity(0.5))
                 .clipShape(
                     .rect(
@@ -84,7 +78,7 @@ struct CodeLineControllFlow: View {
 }
 
 #Preview {
-    @State var viewModel: CodeEditorViewModel = CodeEditorViewModel()
+    @Previewable @State var viewModel: CodeEditorViewModel = CodeEditorViewModel()
     
     viewModel.allControllFlow.first?.addInstruction(instruction: Step())
     viewModel.allControllFlow.first?.addInstruction(instruction: Step())
