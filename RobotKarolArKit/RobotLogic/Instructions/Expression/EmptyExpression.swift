@@ -2,15 +2,13 @@
 //  EmptyExpression.swift
 //  RobotKarolArKit
 //
-//  Created by Ramona Eckert on 27.02.25.
+//  Created by Ramona Eckert on 28.02.25.
 //
 
 import Foundation
-
 class EmptyExpression: Expression {
-    var id: UUID = UUID()
-    
-    func accept(visitor: Visitor) {
+    override func accept(visitor: any Visitor) {
         visitor.visit(emptyExpression: self)
     }
+    
 }

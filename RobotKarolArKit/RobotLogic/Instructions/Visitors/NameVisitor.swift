@@ -81,6 +81,10 @@ class NameVisitor: Visitor {
         self.name = "isBlock"
     }
     
+    func visit(expression: Expression) {
+        self.name = "expression"
+    }
+    
     func visit(emptyExpression: EmptyExpression) {
         self.name = "emptyExpression"
     }

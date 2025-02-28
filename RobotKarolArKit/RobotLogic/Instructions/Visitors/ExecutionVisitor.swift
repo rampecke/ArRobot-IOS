@@ -79,6 +79,10 @@ class ExecutionVisitor: Visitor {
         endExecution = true
     }
     
+    func visit(expression: Expression) {
+        endExecution = true
+    }
+    
     func visit(emptyExpression: EmptyExpression) {
         endExecution = true
     }

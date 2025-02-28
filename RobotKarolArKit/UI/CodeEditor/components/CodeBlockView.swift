@@ -19,7 +19,7 @@ struct CodeBlockView: View {
                 } else {
                     CodeLine(instruction: instruction, CodeLineType.CodeLine)
                         .onDrag {
-                            NSItemProvider(object: instruction.id.uuidString as NSString)
+                            viewModel.dragItem(for: instruction, suggestedName: DragItemType.instruction.rawValue)
                         }
                         .onDrop(of: [.text], isTargeted: nil) { providers in
                             viewModel.handleDrop(providers: providers, targetInstructionID: instruction.id, codeBlock: nil)

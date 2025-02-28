@@ -10,32 +10,13 @@ import SwiftUI
 struct InstructionAddTile: View {
     var nameOfInstruction: String
     var instruction: any Instruction
+    let instructionColorHelper: InstructionColorNameHelper = InstructionColorNameHelper()
     
     init(instruction: any Instruction) {
         let nameVisitor = NameVisitor()
         instruction.accept(visitor: nameVisitor)
         self.nameOfInstruction = nameVisitor.get()
         self.instruction = instruction
-    }
-    
-    func getColor(_ nameOfInstruction: String, _ ending: ColorEnding) -> Color {
-        if let uiColor = UIColor(named: "\(nameOfInstruction)\(ending.rawValue)") {
-            return Color(uiColor)
-        } else {
-            if ending == .onPrimary {
-                if let uiColor = UIColor(named: "expression\(ending.rawValue)") {
-                    return Color(uiColor)
-                } else {
-                    return Color.black
-                }
-            } else {
-                if let uiColor = UIColor(named: "expression\(ending.rawValue)") {
-                    return Color(uiColor)
-                } else {
-                    return Color.gray
-                }
-            }
-        }
     }
     
     var body: some View {
@@ -49,14 +30,14 @@ struct InstructionAddTile: View {
                     Group {
                         Text(LocalizedStringKey(nameOfInstruction + "_description"))
                             .padding(3)
-                            .foregroundColor(getColor(nameOfInstruction, .onPrimary))
+                            .foregroundColor(instructionColorHelper.getColor(nameOfInstruction, .onPrimary))
                             .font(.system(size: 10, weight: .semibold, design: .rounded))
                     }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                         .background(Color("contrast_color").opacity(0.5))
                         .cornerRadius(3)
                         .padding(3)
                 }.frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(getColor(nameOfInstruction, .primary))
+                    .background(instructionColorHelper.getColor(nameOfInstruction, .primary))
                     .cornerRadius(5)
             }
         }.padding(5)

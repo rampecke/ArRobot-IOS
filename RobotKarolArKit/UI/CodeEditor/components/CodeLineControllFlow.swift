@@ -10,49 +10,25 @@ import SwiftUI
 struct CodeLineControllFlow: View {
     @Bindable var instruction: CodeBlock
     @Bindable var viewModel: CodeEditorViewModel
-    
-    func getNameOfInstruction() -> String {
-        let nameVisitor = NameVisitor()
-        instruction.accept(visitor: nameVisitor)
-        return nameVisitor.get()
-    }
-    
-    func getColor(_ nameOfInstruction: String, _ ending: ColorEnding) -> Color {
-        if let uiColor = UIColor(named: "\(nameOfInstruction)\(ending.rawValue)") {
-            return Color(uiColor)
-        } else {
-            if ending == .onPrimary {
-                return Color.black
-            } else {
-                return Color.gray
-            }
-        }
-    }
+    let instructionColorHelper: InstructionColorNameHelper = InstructionColorNameHelper()
     
     var body: some View {
         VStack {
             HStack {
-                Text(LocalizedStringKey(getNameOfInstruction()))
-                    .foregroundColor(getColor(getNameOfInstruction(), .onPrimary))
+                Text(LocalizedStringKey(instructionColorHelper.getNameOfInstruction(instruction: instruction)))
+                    .foregroundColor(instructionColorHelper.getColor(instructionColorHelper.getNameOfInstruction(instruction: instruction), .onPrimary))
                     .font(.system(size: 20, weight: .semibold, design: .rounded))
-                HStack {
-                    Text("Missing")
-                        .foregroundColor(getColor(getNameOfInstruction(), .onPrimary))
-                        .font(.system(size: 20, weight: .semibold, design: .rounded))
-                }.frame(maxWidth: .infinity, alignment: .topLeading)
-                    .padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
-                    .background(Color("contrast_color").opacity(0.5))
-                    .clipShape(
-                        .rect(
-                            topLeadingRadius: 5,
-                            bottomLeadingRadius: 5,
-                            bottomTrailingRadius: 5,
-                            topTrailingRadius: 5
-                        )
-                    )
-            }.onDrop(of: [.text], isTargeted: nil) { providers in
-                viewModel.handleDrop(providers: providers, targetInstructionID: instruction.id, codeBlock: nil)
-           }
+                    .onDrop(of: [.text], isTargeted: nil) { providers in
+                        viewModel.handleDrop(providers: providers, targetInstructionID: instruction.id, codeBlock: nil)
+                   }
+                
+                //Only show this if instruction is If or While
+                if let ifInstruction = instruction as? If {
+                    ExpressionLine(expression: ifInstruction.expression, viewModel: viewModel)
+                } else if let whileInstruction = instruction as? While {
+                    ExpressionLine(expression: whileInstruction.expression, viewModel: viewModel)
+                }
+            }
             
             CodeBlockView(codeBlock: instruction, viewModel: viewModel)
                 .frame(maxWidth: .infinity)
@@ -68,7 +44,7 @@ struct CodeLineControllFlow: View {
                 )
             }
             .padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
-            .background(getColor(getNameOfInstruction(), .primary))
+            .background(instructionColorHelper.getColor(instructionColorHelper.getNameOfInstruction(instruction: instruction), .primary))
             .clipShape(
                 .rect(
                     topLeadingRadius: 5,
@@ -78,7 +54,7 @@ struct CodeLineControllFlow: View {
                 )
             )
             .onDrag {
-                NSItemProvider(object: instruction.id.uuidString as NSString)
+                viewModel.dragItem(for: instruction, suggestedName: DragItemType.instruction.rawValue)
             }
     }
 }

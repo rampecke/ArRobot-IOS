@@ -8,14 +8,13 @@
 import Foundation
 
 class Not: Expression {
-    var id: UUID = UUID()
-    var content: any Expression
+    var content: Expression
     
-    init() {
+    override init() {
         self.content = EmptyExpression()
     }
     
-    func accept(visitor: Visitor) {
+    override func accept(visitor: Visitor) {
         visitor.visit(not: self)
     }
 }

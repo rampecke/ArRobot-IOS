@@ -10,6 +10,7 @@ import SwiftUI
 struct CodeLine: View {
     var nameOfInstruction: String
     var codeLineType: CodeLineType
+    let instructionColorHelper: InstructionColorNameHelper = InstructionColorNameHelper()
     
     init(instruction: any Instruction, _ codeLineType: CodeLineType?) {
         let nameVisitor = NameVisitor()
@@ -18,35 +19,15 @@ struct CodeLine: View {
         self.codeLineType = codeLineType ?? CodeLineType.CodeLine
     }
     
-    func getColor(_ nameOfInstruction: String, _ ending: ColorEnding) -> Color {
-        if let uiColor = UIColor(named: "\(nameOfInstruction)\(ending.rawValue)") {
-            return Color(uiColor)
-        } else {
-            if ending == .onPrimary {
-                if let uiColor = UIColor(named: "expression\(ending.rawValue)") {
-                    return Color(uiColor)
-                } else {
-                    return Color.black
-                }
-            } else {
-                if let uiColor = UIColor(named: "expression\(ending.rawValue)") {
-                    return Color(uiColor)
-                } else {
-                    return Color.gray
-                }
-            }
-        }
-    }
-    
     var body: some View {
         HStack {
             Text(LocalizedStringKey(nameOfInstruction))
-                .foregroundColor(getColor(nameOfInstruction, .onPrimary))
+                .foregroundColor(instructionColorHelper.getColor(nameOfInstruction, .onPrimary))
                 .font(.system(size: codeLineType == CodeLineType.PreviewCodeLine ? 16 : 20, weight: .semibold, design: .rounded))
             Spacer()
         }.frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
-        .background(getColor(nameOfInstruction, .primary))
+        .background(instructionColorHelper.getColor(nameOfInstruction, .primary))
         .clipShape(
          .rect(
              topLeadingRadius: 5,

@@ -8,16 +8,15 @@
 import Foundation
 
 class Or: Expression {
-    var id: UUID = UUID()
-    var left: any Expression
-    var right: any Expression
+    var left: Expression
+    var right: Expression
     
-    init() {
+    override init() {
         self.left = EmptyExpression()
         self.right = EmptyExpression()
     }
     
-    func accept(visitor: Visitor) {
+    override func accept(visitor: Visitor) {
         visitor.visit(or: self)
     }
 }

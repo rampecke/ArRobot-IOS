@@ -35,6 +35,23 @@
         }
       }
     },
+    "emptyExpression" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "<Bedingung>"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "<Condition>"
+          }
+        }
+      }
+    },
     "executeAll" : {
       "localizations" : {
         "de" : {
@@ -198,7 +215,7 @@
         }
       }
     },
-    "isNorth__description" : {
+    "isNorth_description" : {
       "extractionState" : "manual",
       "localizations" : {
         "de" : {
@@ -313,16 +330,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Instructs the robot to lift the stone in front of him"
-          }
-        }
-      }
-    },
-    "Missing" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "FehltNoch"
           }
         }
       }

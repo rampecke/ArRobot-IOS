@@ -82,6 +82,10 @@ class NewInstructionVisitor: Visitor {
         self.instruction = IsBlock()
     }
     
+    func visit(expression: Expression) {
+        self.instruction = Expression()
+    }
+    
     func visit(emptyExpression: EmptyExpression) {
         self.instruction = EmptyExpression()
     }

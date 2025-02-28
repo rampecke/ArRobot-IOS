@@ -46,17 +46,24 @@ struct CodeEditorView: View {
                 ForEach($viewModel.allStatements, id: \.id) { $instruction in
                     InstructionAddTile(instruction: instruction).frame(height: 80).onTapGesture(perform: {
                         viewModel.createNewInstruction(instruction: instruction)
-                    }).onDrag({ NSItemProvider(object: instruction.id.uuidString as NSString) })
+                    }).onDrag({
+                        viewModel.dragItem(for: instruction, suggestedName: DragItemType.newInstruction.rawValue)
+                    })
                 }
                 ForEach($viewModel.allControllFlow, id: \.id) { $instruction in
                     InstructionAddTile(instruction: instruction).frame(height: 80).onTapGesture(perform: {
                         viewModel.createNewInstruction(instruction: instruction)
-                    }).onDrag({ NSItemProvider(object: instruction.id.uuidString as NSString) })
+                    }).onDrag({
+                        viewModel.dragItem(for: instruction, suggestedName: DragItemType.newInstruction.rawValue)
+                    })
                 }
                 ForEach($viewModel.allExpressions, id: \.id) { $instruction in
                     InstructionAddTile(instruction: instruction).frame(height: 80).onTapGesture(perform: {
-                        viewModel.createNewInstruction(instruction: instruction)
-                    }).onDrag({ NSItemProvider(object: instruction.id.uuidString as NSString) })
+                        //TODO: ADD A FUNCTION/VISITOR THAT ADDS THE EXPRESSION INTO THE NEXT EMPTYEXPRESSION if there is one
+                        //viewModel.createNewInstruction(instruction: instruction)
+                    }).onDrag({
+                        viewModel.dragItem(for: instruction, suggestedName: DragItemType.newExpression.rawValue)
+                    })
                 }
             }.padding(.horizontal, 10)
         }.frame(height: 170)

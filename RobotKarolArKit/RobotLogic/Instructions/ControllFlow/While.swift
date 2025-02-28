@@ -9,6 +9,8 @@ import Foundation
 
 @Observable
 class While: CodeBlock {
+    var expression: Expression = EmptyExpression()
+    
     override func accept(visitor: any Visitor) {
         visitor.visit(whileInstruction: self)
     }

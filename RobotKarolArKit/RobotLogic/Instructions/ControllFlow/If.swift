@@ -9,6 +9,8 @@ import Foundation
 
 @Observable
 class If: CodeBlock {
+    var expression: Expression = EmptyExpression()
+    
     override func accept(visitor: any Visitor) {
         visitor.visit(ifInstruction: self)
     }
