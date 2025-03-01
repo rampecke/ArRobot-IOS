@@ -26,7 +26,8 @@ struct CodeBlockView: View {
                         }
                         .if(viewModel.draggingInstruction) { view in
                                 view.onDrop(of: [.text], isTargeted: nil) { providers in
-                                    viewModel.handleDrop(providers: providers, targetInstructionID: instruction.id, codeBlock: nil)
+                                    viewModel.resetDraggingStates()
+                                    return viewModel.handleDrop(providers: providers, targetInstructionID: instruction.id, codeBlock: nil)
                                 }
                             }
                 }
@@ -39,7 +40,8 @@ struct CodeBlockView: View {
         .background(Color.clear.contentShape(Rectangle())) // Ensure drop area is recognized
         .if(viewModel.draggingInstruction) { view in
                 view.onDrop(of: [.text], isTargeted: nil) { providers in
-                    viewModel.handleDrop(providers: providers, targetInstructionID: nil, codeBlock: codeBlock)
+                    viewModel.resetDraggingStates()
+                    return viewModel.handleDrop(providers: providers, targetInstructionID: nil, codeBlock: codeBlock)
                 }
             }
     }

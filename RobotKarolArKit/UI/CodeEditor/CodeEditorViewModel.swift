@@ -28,6 +28,11 @@ class CodeEditorViewModel {
         self.executionVisitor = ExecutionVisitor(world: world)
     }
     
+    func resetDraggingStates() {
+        draggingExpression = false
+        draggingInstruction = false
+    }
+    
     private func addInstruction(instruction: any Instruction) {
         codeBlock.addInstruction(instruction: instruction)
     }
@@ -226,6 +231,20 @@ class CodeEditorViewModel {
         
         // Return nil if the draggedID is not found in either collection
         return nil
+    }
+    
+    func handleDropDelete(providers: [NSItemProvider]) -> Bool {
+        for provider in providers {
+            provider.loadObject(ofClass: NSString.self) { object, _ in
+                if let idString = object as? String, let draggedID = UUID(uuidString: idString) {
+                    DispatchQueue.main.async {
+                        let deleteInstructionVisitor = DeleteInstructionVisitor(deleteId: draggedID)
+                        self.codeBlock.accept(visitor: deleteInstructionVisitor)
+                    }
+                }
+            }
+        }
+        return true
     }
 }
 

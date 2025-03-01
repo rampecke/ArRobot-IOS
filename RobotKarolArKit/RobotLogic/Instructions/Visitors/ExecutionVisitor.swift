@@ -76,13 +76,15 @@ class ExecutionVisitor: Visitor {
     
     //ControllFlow
     func visit(codeBlock: CodeBlock) {
-        
+        //Only perform the next Statement
     }
     
     func visit(ifInstruction: If) {
+        //Only perform the next Statement
     }
     
     func visit(whileInstruction: While) {
+        //Only perform the next Statement
     }
     
     //Expressions

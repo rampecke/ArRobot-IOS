@@ -26,7 +26,8 @@ struct ExpressionPiece: View {
                 expressionText(expression: expression, isEmpty: false)
                     .if(viewModel.draggingExpression) { view in
                             view.onDrop(of: [.text], isTargeted: nil) { providers in
-                                viewModel.handleDrop(providers: providers, targetInstructionID: andExpression.id, codeBlock: nil)
+                                viewModel.resetDraggingStates()
+                                return viewModel.handleDrop(providers: providers, targetInstructionID: andExpression.id, codeBlock: nil)
                             }
                         }
                 ExpressionPiece(expression: andExpression.right, viewModel: viewModel)
@@ -41,8 +42,8 @@ struct ExpressionPiece: View {
              )
             )
             .onDrag({
-                viewModel.draggingInstruction = false
                 viewModel.draggingExpression = true
+                viewModel.draggingInstruction = false
                 
                 return viewModel.dragItem(for: andExpression, suggestedName: DragItemType.expression.rawValue)
             })
@@ -52,7 +53,8 @@ struct ExpressionPiece: View {
                 expressionText(expression: expression, isEmpty: false)
                     .if(viewModel.draggingExpression) { view in
                             view.onDrop(of: [.text], isTargeted: nil) { providers in
-                                viewModel.handleDrop(providers: providers, targetInstructionID: orExpression.id, codeBlock: nil)
+                                viewModel.resetDraggingStates()
+                                return viewModel.handleDrop(providers: providers, targetInstructionID: orExpression.id, codeBlock: nil)
                             }
                         }
                 ExpressionPiece(expression: orExpression.right, viewModel: viewModel)
@@ -67,8 +69,8 @@ struct ExpressionPiece: View {
              )
             )
             .onDrag({
-                viewModel.draggingInstruction = false
                 viewModel.draggingExpression = true
+                viewModel.draggingInstruction = false
                 
                 return viewModel.dragItem(for: orExpression, suggestedName: DragItemType.expression.rawValue)
             })
@@ -77,7 +79,8 @@ struct ExpressionPiece: View {
                 expressionText(expression: expression, isEmpty: false)
                     .if(viewModel.draggingExpression) { view in
                             view.onDrop(of: [.text], isTargeted: nil) { providers in
-                                viewModel.handleDrop(providers: providers, targetInstructionID: notExpression.id, codeBlock: nil)
+                                viewModel.resetDraggingStates()
+                                return viewModel.handleDrop(providers: providers, targetInstructionID: notExpression.id, codeBlock: nil)
                             }
                         }
                 ExpressionPiece(expression: notExpression.content, viewModel: viewModel)
@@ -92,8 +95,8 @@ struct ExpressionPiece: View {
                  )
                 )
                 .onDrag({
-                    viewModel.draggingInstruction = false
                     viewModel.draggingExpression = true
+                    viewModel.draggingInstruction = false
                     
                     return viewModel.dragItem(for: notExpression, suggestedName: DragItemType.expression.rawValue)
                 })
@@ -112,7 +115,8 @@ struct ExpressionPiece: View {
                 )
                 .if(viewModel.draggingExpression) { view in
                     view.onDrop(of: [.text], isTargeted: nil) { providers in
-                        viewModel.handleDrop(providers: providers, targetInstructionID: emptyExpression.id, codeBlock: nil)
+                        viewModel.resetDraggingStates()
+                        return viewModel.handleDrop(providers: providers, targetInstructionID: emptyExpression.id, codeBlock: nil)
                     }
                 }
             //emptyExpression is not draggable
@@ -131,12 +135,13 @@ struct ExpressionPiece: View {
                 )
                 .if(viewModel.draggingExpression) { view in
                         view.onDrop(of: [.text], isTargeted: nil) { providers in
-                            viewModel.handleDrop(providers: providers, targetInstructionID: expression.id, codeBlock: nil)
+                            viewModel.resetDraggingStates()
+                            return viewModel.handleDrop(providers: providers, targetInstructionID: expression.id, codeBlock: nil)
                         }
                     }
                 .onDrag({
-                    viewModel.draggingInstruction = false
                     viewModel.draggingExpression = true
+                    viewModel.draggingInstruction = false
                     
                     return viewModel.dragItem(for: expression, suggestedName: DragItemType.expression.rawValue)
                 })

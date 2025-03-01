@@ -20,7 +20,8 @@ struct CodeLineControllFlow: View {
                     .font(.system(size: 20, weight: .semibold, design: .rounded))
                     .if(viewModel.draggingInstruction) { view in
                             view.onDrop(of: [.text], isTargeted: nil) { providers in
-                                viewModel.handleDrop(providers: providers, targetInstructionID: instruction.id, codeBlock: nil)
+                                viewModel.resetDraggingStates()
+                                return viewModel.handleDrop(providers: providers, targetInstructionID: instruction.id, codeBlock: nil)
                             }
                         }
                 
