@@ -44,6 +44,7 @@ class CodeEditorViewModel {
         codeBlock.addInstructionAtPosition(instruction: newInstructionVisitor.get(), position: position)
     }
     
+    //TODO: USE ACCEPT OF CODEBLOCK
     func next() {
         if executionVisitor.endExecution || finishedExecution {
             return
@@ -104,6 +105,7 @@ class CodeEditorViewModel {
     }
     
     //TODO: Maybe HANDLE DIFFRENCE BETWEEN EXPRESSIONS AND STATEMENTS -> Don't allow Expressions Anywhere else
+    //TODO: INSERT EXPRESSION VERY SLOW
     //Handle Drag and Drop: Get an ID of an Element and a targetWhere to place it
     func handleDrop(providers: [NSItemProvider], targetInstructionID: UUID?, codeBlock: CodeBlock?) -> Bool {
         for provider in providers {

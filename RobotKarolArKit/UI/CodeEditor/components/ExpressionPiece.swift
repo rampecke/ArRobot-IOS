@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+//TODO: LONG EXPRESSIONS GET SQUISHED -> FIND SOLUTION FOR BETTER REPRESENTATION
 struct ExpressionPiece: View {
     @Bindable var expression: Expression
     let instructionColorHelper: InstructionColorNameHelper = InstructionColorNameHelper()
