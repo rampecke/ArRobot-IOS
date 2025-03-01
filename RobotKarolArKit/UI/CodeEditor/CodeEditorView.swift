@@ -47,14 +47,20 @@ struct CodeEditorView: View {
                     InstructionAddTile(instruction: instruction).frame(height: 80).onTapGesture(perform: {
                         viewModel.createNewInstruction(instruction: instruction)
                     }).onDrag({
-                        viewModel.dragItem(for: instruction, suggestedName: DragItemType.newInstruction.rawValue)
+                        viewModel.draggingInstruction = true
+                        viewModel.draggingExpression = false
+                        
+                        return viewModel.dragItem(for: instruction, suggestedName: DragItemType.newInstruction.rawValue)
                     })
                 }
                 ForEach($viewModel.allControllFlow, id: \.id) { $instruction in
                     InstructionAddTile(instruction: instruction).frame(height: 80).onTapGesture(perform: {
                         viewModel.createNewInstruction(instruction: instruction)
                     }).onDrag({
-                        viewModel.dragItem(for: instruction, suggestedName: DragItemType.newInstruction.rawValue)
+                        viewModel.draggingInstruction = true
+                        viewModel.draggingExpression = false
+                        
+                        return viewModel.dragItem(for: instruction, suggestedName: DragItemType.newInstruction.rawValue)
                     })
                 }
                 ForEach($viewModel.allExpressions, id: \.id) { $instruction in
@@ -62,7 +68,10 @@ struct CodeEditorView: View {
                         //TODO: ADD A FUNCTION/VISITOR THAT ADDS THE EXPRESSION INTO THE NEXT EMPTYEXPRESSION if there is one
                         //viewModel.createNewInstruction(instruction: instruction)
                     }).onDrag({
-                        viewModel.dragItem(for: instruction, suggestedName: DragItemType.newExpression.rawValue)
+                        viewModel.draggingInstruction = false
+                        viewModel.draggingExpression = true
+                        
+                        return viewModel.dragItem(for: instruction, suggestedName: DragItemType.newExpression.rawValue)
                     })
                 }
             }.padding(.horizontal, 10)

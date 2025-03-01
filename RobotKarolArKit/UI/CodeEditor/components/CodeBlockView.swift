@@ -19,11 +19,16 @@ struct CodeBlockView: View {
                 } else {
                     CodeLine(instruction: instruction, CodeLineType.CodeLine)
                         .onDrag {
-                            viewModel.dragItem(for: instruction, suggestedName: DragItemType.instruction.rawValue)
+                            viewModel.draggingInstruction = true
+                            viewModel.draggingExpression = false
+                            
+                            return viewModel.dragItem(for: instruction, suggestedName: DragItemType.instruction.rawValue)
                         }
-                        .onDrop(of: [.text], isTargeted: nil) { providers in
-                            viewModel.handleDrop(providers: providers, targetInstructionID: instruction.id, codeBlock: nil)
-                       }
+                        .if(viewModel.draggingInstruction) { view in
+                                view.onDrop(of: [.text], isTargeted: nil) { providers in
+                                    viewModel.handleDrop(providers: providers, targetInstructionID: instruction.id, codeBlock: nil)
+                                }
+                            }
                 }
             }
             
@@ -32,9 +37,11 @@ struct CodeBlockView: View {
                 .frame(height: 20) // Make this large enough to detect drops
         }.padding(10)
         .background(Color.clear.contentShape(Rectangle())) // Ensure drop area is recognized
-        .onDrop(of: [.text], isTargeted: nil) { providers in
-            viewModel.handleDrop(providers: providers, targetInstructionID: nil, codeBlock: codeBlock)
-        }
+        .if(viewModel.draggingInstruction) { view in
+                view.onDrop(of: [.text], isTargeted: nil) { providers in
+                    viewModel.handleDrop(providers: providers, targetInstructionID: nil, codeBlock: codeBlock)
+                }
+            }
     }
 }
 

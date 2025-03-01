@@ -59,6 +59,7 @@
 		A09390F52C1DCD30009DF760 /* CodeBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09390F42C1DCD30009DF760 /* CodeBlockView.swift */; };
 		A0B40CA42D71B7E800AEFD40 /* DeleteExpressionVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B40CA32D71B7E800AEFD40 /* DeleteExpressionVisitor.swift */; };
 		A0B40CA62D71BD0400AEFD40 /* AddExpressionVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B40CA52D71BD0400AEFD40 /* AddExpressionVisitor.swift */; };
+		A0B40CA82D730CD700AEFD40 /* ConditionalModifierExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B40CA72D730CD700AEFD40 /* ConditionalModifierExtension.swift */; };
 		A0B5A12F2D714CE800A02BA9 /* ExpressionPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5A12E2D714CE800A02BA9 /* ExpressionPiece.swift */; };
 		A0B5A1312D714EBA00A02BA9 /* EmptyExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5A1302D714EBA00A02BA9 /* EmptyExpression.swift */; };
 /* End PBXBuildFile section */
@@ -117,6 +118,7 @@
 		A09390F42C1DCD30009DF760 /* CodeBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeBlockView.swift; sourceTree = "<group>"; };
 		A0B40CA32D71B7E800AEFD40 /* DeleteExpressionVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteExpressionVisitor.swift; sourceTree = "<group>"; };
 		A0B40CA52D71BD0400AEFD40 /* AddExpressionVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpressionVisitor.swift; sourceTree = "<group>"; };
+		A0B40CA72D730CD700AEFD40 /* ConditionalModifierExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionalModifierExtension.swift; sourceTree = "<group>"; };
 		A0B5A12E2D714CE800A02BA9 /* ExpressionPiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionPiece.swift; sourceTree = "<group>"; };
 		A0B5A1302D714EBA00A02BA9 /* EmptyExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyExpression.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -196,6 +198,7 @@
 				A09390F42C1DCD30009DF760 /* CodeBlockView.swift */,
 				A01483082D7138B000AACE8D /* ExpressionLine.swift */,
 				A0B5A12E2D714CE800A02BA9 /* ExpressionPiece.swift */,
+				A0B40CA72D730CD700AEFD40 /* ConditionalModifierExtension.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -416,6 +419,7 @@
 				A02B6A962C13A26400CAFF82 /* PlaceStone.swift in Sources */,
 				A06BD7DD2BAF36F600863CA5 /* Direction.swift in Sources */,
 				A0B5A1312D714EBA00A02BA9 /* EmptyExpression.swift in Sources */,
+				A0B40CA82D730CD700AEFD40 /* ConditionalModifierExtension.swift in Sources */,
 				A0B40CA62D71BD0400AEFD40 /* AddExpressionVisitor.swift in Sources */,
 				A02B6A982C13A2DE00CAFF82 /* PlaceWater.swift in Sources */,
 				A02B6A8C2C13A05500CAFF82 /* LeftTurn.swift in Sources */,
