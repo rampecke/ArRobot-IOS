@@ -10,9 +10,9 @@ import Foundation
 class AddInstructionVisitor: Visitor {
     private var wasAdded: Bool = false
     var targetId: UUID
-    var instruction: any Instruction
+    var instruction: Instruction
     
-    init(targetId: UUID, instruction: any Instruction) {
+    init(targetId: UUID, instruction: Instruction) {
         self.targetId = targetId
         self.instruction = instruction
     }

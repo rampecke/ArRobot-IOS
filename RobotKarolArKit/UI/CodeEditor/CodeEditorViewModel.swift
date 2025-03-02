@@ -10,9 +10,9 @@ import Foundation
 @Observable
 class CodeEditorViewModel {
     var codeBlock: CodeBlock = CodeBlock()
-    var allStatements: [any Instruction] = [Step(), Lift(), RightTurn(), LeftTurn(), PlaceGrass(), PlaceStone(), PlaceWater()]
+    var allStatements: [Instruction] = [Step(), Lift(), RightTurn(), LeftTurn(), PlaceGrass(), PlaceStone(), PlaceWater()]
     var allControllFlow: [CodeBlock] = [If(), While()]
-    var allExpressions: [ Expression] = [IsEast(), IsWest(), IsNorth(), IsSouth(), IsBlock(), IsBorder(), And(), Or(), Not()]
+    var allExpressions: [Expression] = [IsEast(), IsWest(), IsNorth(), IsSouth(), IsBlock(), IsBorder(), And(), Or(), Not()]
     var world = World(width: 6, length: 6)
     var finishedExecution = false
     var executionVisitor: ExecutionVisitor
@@ -33,17 +33,17 @@ class CodeEditorViewModel {
         draggingInstruction = false
     }
     
-    private func addInstruction(instruction: any Instruction) {
+    private func addInstruction(instruction: Instruction) {
         codeBlock.addInstruction(instruction: instruction)
     }
     
-    func createNewInstruction(instruction: any Instruction) {
+    func createNewInstruction(instruction: Instruction) {
         let newInstructionVisitor = NewInstructionVisitor()
         instruction.accept(visitor: newInstructionVisitor)
         addInstruction(instruction: newInstructionVisitor.get())
     }
     
-    func addInstructionToPosition(instruction: any Instruction, position: Int) {
+    func addInstructionToPosition(instruction: Instruction, position: Int) {
         let newInstructionVisitor = NewInstructionVisitor()
         instruction.accept(visitor: newInstructionVisitor)
         codeBlock.addInstructionAtPosition(instruction: newInstructionVisitor.get(), position: position)
@@ -109,142 +109,57 @@ class CodeEditorViewModel {
         reset()
     }
     
-    //TODO: Maybe HANDLE DIFFRENCE BETWEEN EXPRESSIONS AND STATEMENTS -> Don't allow Expressions Anywhere else
-    //TODO: INSERT EXPRESSION VERY SLOW
-    //Handle Drag and Drop: Get an ID of an Element and a targetWhere to place it
-    func handleDrop(providers: [NSItemProvider], targetInstructionID: UUID?, codeBlock: CodeBlock?) -> Bool {
-        for provider in providers {
-            provider.loadObject(ofClass: NSString.self) { object, _ in
-                if let idString = object as? String, let draggedID = UUID(uuidString: idString) {
-                    DispatchQueue.main.async {
-                        //Make sure the itemposition is not the same
-                        if draggedID == targetInstructionID {
-                            return
-                        }
-                        
-                        //If it exists then remove it from old position and add it at new position
-                        //If it didn't exist create a new one
-                        let deleteInstructionVisitor = DeleteInstructionVisitor(deleteId: draggedID)
-                        let deleteExpressionVisitor = DeleteExpressionVisitor(deleteId: draggedID)
-                        
-                        if let type = DragItemType(rawValue: provider.suggestedName ?? "") {
-                            switch type {
-                            case .instruction:
-                                self.codeBlock.accept(visitor: deleteInstructionVisitor)
-                                self.processDraggedInstruction(draggedID: draggedID, targetInstructionID: targetInstructionID, codeBlock: codeBlock, deleteInstructionVisitor: deleteInstructionVisitor)
-                            case .newInstruction:
-                                //on an new instruction we don't need to perform the delete visit -> performance
-                                self.processDraggedInstruction(draggedID: draggedID, targetInstructionID: targetInstructionID, codeBlock: codeBlock, deleteInstructionVisitor: deleteInstructionVisitor)
-                            case .expression:
-                                self.codeBlock.accept(visitor: deleteExpressionVisitor)
-                                self.processDraggedExpression(draggedID: draggedID, targetInstructionID: targetInstructionID, codeBlock: codeBlock, deleteExpressionVisitor: deleteExpressionVisitor)
-                            case .newExpression:
-                                //on an new expression we don't need to perform the delete visit -> performance
-                                self.processDraggedExpression(draggedID: draggedID, targetInstructionID: targetInstructionID, codeBlock: codeBlock, deleteExpressionVisitor: deleteExpressionVisitor)
-                            }
-                        }
-                    }
+    //New Drag and Drop functions
+    //TODO: HANDLE targetInstruction nil
+    func handleInstructionDrop (instruction: Instruction, targetInstruction: Instruction, addToEndOfTarget: Bool? = nil) {
+        if let instructionAsExpression = instruction as? Expression {
+            if let targetInstructionAsExpression = targetInstruction as? Expression {
+                let deleteExpressionVisitor = DeleteExpressionVisitor(deleteId: instructionAsExpression.id)
+                
+                if allExpressions.contains(where: { $0.id == instructionAsExpression.id }) {
+                    let newInstructionVisitor = NewInstructionVisitor()
+                    instructionAsExpression.accept(visitor: newInstructionVisitor)
+                    
+                    guard let newExpression = newInstructionVisitor.get() as? Expression else { return }
+                    deleteExpressionVisitor.setDeletedExpression(expression: newExpression)
+                } else {
+                   //If it is not a new expression delete the old one
+                    self.codeBlock.accept(visitor: deleteExpressionVisitor)
+                }
+                
+                let addExpressionVisitor = AddExpressionVisitor(targetId: targetInstructionAsExpression.id, expression: deleteExpressionVisitor.getDeletedExpression())
+                //TODO: Maybe add the codeblock the expression was dropped to the call -> Performance
+                self.codeBlock.accept(visitor: addExpressionVisitor)
+            } else {
+                return
+            }
+        } else {
+            if targetInstruction is Expression {
+                return
+            } else {
+                let deleteInstructionVisitor = DeleteInstructionVisitor(deleteId: instruction.id)
+
+                let allInstructions = allStatements + allControllFlow
+                if let instructionType = allInstructions.first(where: { $0.id == instruction.id }) {
+                    let newInstructionVisitor = NewInstructionVisitor()
+                    instructionType.accept(visitor: newInstructionVisitor)
+                    
+                    deleteInstructionVisitor.setDeletedInstruction(instruction: newInstructionVisitor.get())
+                } else {
+                    self.codeBlock.accept(visitor: deleteInstructionVisitor)
+                }
+                
+                if addToEndOfTarget ?? false {
+                    guard let targetCodeBlock = targetInstruction as? CodeBlock else { return }
+                    
+                    targetCodeBlock.addInstruction(instruction: deleteInstructionVisitor.getDeletedInstruction())
+                } else {
+                    let addInstructionVisitor = AddInstructionVisitor(targetId: targetInstruction.id, instruction: deleteInstructionVisitor.getDeletedInstruction())
+                    //TODO: Maybe add the codeblock the expression was dropped to the call -> Performance
+                    self.codeBlock.accept(visitor: addInstructionVisitor)
                 }
             }
         }
-        return true
-    }
-    
-    func dragItem(for instruction: any Instruction, suggestedName: String) -> NSItemProvider {
-        let idString = instruction.id.uuidString
-        let provider = NSItemProvider(object: idString as NSString)
-    
-        provider.suggestedName = suggestedName
-        
-        return provider
-    }
-    
-    private func processDraggedExpression(
-        draggedID: UUID,
-        targetInstructionID: UUID?,
-        codeBlock: CodeBlock?,
-        deleteExpressionVisitor: DeleteExpressionVisitor
-    ) {
-        if !deleteExpressionVisitor.getWasDeleted() {
-            let newInstructionVisitor = NewInstructionVisitor()
-            
-            guard let newInstruction = self.findInstructionByID(draggedID: draggedID) else {
-                return
-            }
-            newInstruction.accept(visitor: newInstructionVisitor)
-            
-            if let newExpression = newInstructionVisitor.get() as? Expression {
-                deleteExpressionVisitor.setDeletedExpression(expression: newExpression)
-            }
-        }
-        
-        guard let existingTargetInstructionID = targetInstructionID else {
-            return
-        }
-        
-        let addExpressionVisitor = AddExpressionVisitor(targetId: existingTargetInstructionID, expression: deleteExpressionVisitor.getDeletedExpression())
-        self.codeBlock.accept(visitor: addExpressionVisitor)
-    }
-    
-    private func processDraggedInstruction(
-        draggedID: UUID,
-        targetInstructionID: UUID?,
-        codeBlock: CodeBlock?,
-        deleteInstructionVisitor: DeleteInstructionVisitor
-    ) {
-        if !deleteInstructionVisitor.getWasDeleted() {
-            let newInstructionVisitor = NewInstructionVisitor()
-            
-            guard let newInstruction = self.findInstructionByID(draggedID: draggedID) else {
-                return
-            }
-            newInstruction.accept(visitor: newInstructionVisitor)
-            deleteInstructionVisitor.setDeletedInstruction(instruction: newInstructionVisitor.get())
-        }
-        
-        //If we want to add it to the end of the List
-        guard let existingTargetInstructionID = targetInstructionID else {
-            guard let existingCodeBlock = codeBlock else {
-                self.codeBlock.addInstruction(instruction: deleteInstructionVisitor.getDeletedInstruction())
-                return
-            }
-            existingCodeBlock.addInstruction(instruction: deleteInstructionVisitor.getDeletedInstruction())
-            return
-        }
-        
-        let addInstructionVisitor = AddInstructionVisitor(targetId: existingTargetInstructionID, instruction: deleteInstructionVisitor.getDeletedInstruction())
-        self.codeBlock.accept(visitor: addInstructionVisitor)
-    }
-    
-    private func findInstructionByID(draggedID: UUID) -> (any Instruction)? {
-        // Check if the draggedID exists in allStatements or allControllFlow
-        if let statement = allStatements.first(where: { $0.id == draggedID }) {
-            return statement
-        }
-        if let controlFlow = allControllFlow.first(where: { $0.id == draggedID }) {
-            return controlFlow
-        }
-        
-        if let expression = allExpressions.first(where: { $0.id == draggedID }) {
-            return expression
-        }
-        
-        // Return nil if the draggedID is not found in either collection
-        return nil
-    }
-    
-    func handleDropDelete(providers: [NSItemProvider]) -> Bool {
-        for provider in providers {
-            provider.loadObject(ofClass: NSString.self) { object, _ in
-                if let idString = object as? String, let draggedID = UUID(uuidString: idString) {
-                    DispatchQueue.main.async {
-                        let deleteInstructionVisitor = DeleteInstructionVisitor(deleteId: draggedID)
-                        self.codeBlock.accept(visitor: deleteInstructionVisitor)
-                    }
-                }
-            }
-        }
-        return true
     }
 }
 

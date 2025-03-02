@@ -9,17 +9,36 @@ import Foundation
 
 @Observable
 class CodeBlock: Instruction {
-    var id: UUID = UUID()
-    var codeBlock: [any Instruction]
+    var codeBlock: [Instruction]
     
     var executionIndex = 0
     
-    init(_ codeBlock: [any Instruction]?) {
+    init(_ codeBlock: [Instruction]?) {
         self.codeBlock = codeBlock ?? []
+        super.init()
     }
     
-    init() {
+    override init() {
         self.codeBlock = []
+        super.init()
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.codeBlock = try container.decode([Instruction].self, forKey: .codeBlock)
+        self.executionIndex = try container.decode(Int.self, forKey: .executionIndex)
+        try super.init(from: decoder) // Ensure superclass is decoded
+    }
+
+    override func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(codeBlock, forKey: .codeBlock)
+        try container.encode(executionIndex, forKey: .executionIndex)
+        try super.encode(to: encoder) // Ensure superclass is encoded
+    }
+
+    private enum CodingKeys: String, CodingKey {
+        case codeBlock, executionIndex
     }
     
     func deleteInstruction(at offsets: IndexSet) {
@@ -30,11 +49,11 @@ class CodeBlock: Instruction {
         codeBlock.removeAll(where: {$0.id == id})
     }
     
-    func addInstruction(instruction: any Instruction) {
+    func addInstruction(instruction: Instruction) {
         codeBlock.append(instruction)
     }
     
-    func addInstructionAtPosition(instruction: any Instruction, position: Int) {
+    func addInstructionAtPosition(instruction: Instruction, position: Int) {
         codeBlock.insert(instruction, at: position)
     }
     
@@ -42,11 +61,11 @@ class CodeBlock: Instruction {
         return codeBlock.contains { $0.id == id }
     }
     
-    func getFirstInstructionWithID(uuid: UUID) -> (any Instruction)? {
+    func getFirstInstructionWithID(uuid: UUID) -> (Instruction)? {
         return codeBlock.first { $0.id == uuid }
     }
     
-    func addInstructionAbove(uuid: UUID, instruction: any Instruction) {
+    func addInstructionAbove(uuid: UUID, instruction: Instruction) {
         guard let position = codeBlock.firstIndex(where: { $0.id == uuid }) else {
             return
         }
@@ -54,7 +73,7 @@ class CodeBlock: Instruction {
         addInstructionAtPosition(instruction: instruction, position: position)
     }
     
-    func accept(visitor: Visitor) {
+    override func accept(visitor: Visitor) {
         visitor.visit(codeBlock: self)
     }
     
@@ -62,7 +81,7 @@ class CodeBlock: Instruction {
         return codeBlock.count > executionIndex
     }
     
-    func next() -> (any Instruction)? {
+    func next() -> (Instruction)? {
         if (hasNext()) {
             let instruction = codeBlock[executionIndex]
             executionIndex = executionIndex + 1

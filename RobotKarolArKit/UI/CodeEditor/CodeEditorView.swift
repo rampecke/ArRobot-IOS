@@ -45,33 +45,18 @@ struct CodeEditorView: View {
                     ForEach($viewModel.allStatements, id: \.id) { $instruction in
                         InstructionAddTile(instruction: instruction).frame(height: 80).onTapGesture(perform: {
                             viewModel.createNewInstruction(instruction: instruction)
-                        }).onDrag({
-                            viewModel.draggingInstruction = true
-                            viewModel.draggingExpression = false
-                            
-                            return viewModel.dragItem(for: instruction, suggestedName: DragItemType.newInstruction.rawValue)
-                        })
+                        }).draggable(instruction)
                     }
                     ForEach($viewModel.allControllFlow, id: \.id) { $instruction in
                         InstructionAddTile(instruction: instruction).frame(height: 80).onTapGesture(perform: {
                             viewModel.createNewInstruction(instruction: instruction)
-                        }).onDrag({
-                            viewModel.draggingInstruction = true
-                            viewModel.draggingExpression = false
-                            
-                            return viewModel.dragItem(for: instruction, suggestedName: DragItemType.newInstruction.rawValue)
-                        })
+                        }).draggable(instruction)
                     }
                     ForEach($viewModel.allExpressions, id: \.id) { $instruction in
                         InstructionAddTile(instruction: instruction).frame(height: 80).onTapGesture(perform: {
                             //TODO: ADD A FUNCTION/VISITOR THAT ADDS THE EXPRESSION INTO THE NEXT EMPTYEXPRESSION if there is one
                             //viewModel.createNewInstruction(instruction: instruction)
-                        }).onDrag({
-                            viewModel.draggingExpression = true
-                            viewModel.draggingInstruction = false
-                            
-                            return viewModel.dragItem(for: instruction, suggestedName: DragItemType.newExpression.rawValue)
-                        })
+                        }).draggable(instruction)
                     }
                 }.padding(.horizontal, 10)
             }.frame(height: 170)

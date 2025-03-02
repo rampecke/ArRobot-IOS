@@ -11,7 +11,7 @@ import UIKit
 
 struct InstructionColorNameHelper {
     //Color and Name of Instructions
-    func getNameOfInstruction(instruction: any Instruction) -> String {
+    func getNameOfInstruction(instruction: Instruction) -> String {
         let nameVisitor = NameVisitor()
         instruction.accept(visitor: nameVisitor)
         return nameVisitor.get()

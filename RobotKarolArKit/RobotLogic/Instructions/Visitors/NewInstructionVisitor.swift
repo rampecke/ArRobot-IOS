@@ -9,9 +9,9 @@ import Foundation
 
 class NewInstructionVisitor: Visitor {
     
-    private var instruction: any Instruction = Step();
+    private var instruction: Instruction = Step();
     
-    func get() -> any Instruction {
+    func get() -> Instruction {
         return instruction;
     }
     

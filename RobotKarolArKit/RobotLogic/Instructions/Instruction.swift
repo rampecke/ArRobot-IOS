@@ -6,9 +6,17 @@
 //
 
 import Foundation
+import CoreTransferable
 
-protocol Instruction: Identifiable {
-    var id: UUID {get}
-    
-    func accept(visitor: Visitor)
+class Instruction: Identifiable, Transferable, Codable {
+    var id: UUID = UUID()
+
+    func accept(visitor: Visitor) {
+        // Base method (subclasses override this)
+    }
+
+    static var transferRepresentation: some TransferRepresentation {
+        CodableRepresentation(for: Instruction.self, contentType: .plainText)
+    }
 }
+

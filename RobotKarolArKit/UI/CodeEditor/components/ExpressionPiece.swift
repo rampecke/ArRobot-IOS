@@ -24,12 +24,10 @@ struct ExpressionPiece: View {
             HStack {
                 ExpressionPiece(expression: andExpression.left, viewModel: viewModel)
                 expressionText(expression: expression, isEmpty: false)
-                    .if(viewModel.draggingExpression) { view in
-                            view.onDrop(of: [.text], isTargeted: nil) { providers in
-                                viewModel.resetDraggingStates()
-                                return viewModel.handleDrop(providers: providers, targetInstructionID: andExpression.id, codeBlock: nil)
-                            }
-                        }
+                    .dropDestination(for: Instruction.self) { items, _ in
+                        viewModel.handleInstructionDrop(instruction: items.first ?? Step(), targetInstruction: andExpression)
+                        return true
+                    }
                 ExpressionPiece(expression: andExpression.right, viewModel: viewModel)
             }.padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
             .background(instructionColorHelper.getColor(instructionColorHelper.getNameOfInstruction(instruction: expression), .primary))
@@ -41,22 +39,15 @@ struct ExpressionPiece: View {
                  topTrailingRadius: 5
              )
             )
-            .onDrag({
-                viewModel.draggingExpression = true
-                viewModel.draggingInstruction = false
-                
-                return viewModel.dragItem(for: andExpression, suggestedName: DragItemType.expression.rawValue)
-            })
+            .draggable(andExpression)
         } else if let orExpression = expression as? Or {
             HStack {
                 ExpressionPiece(expression: orExpression.left, viewModel: viewModel)
                 expressionText(expression: expression, isEmpty: false)
-                    .if(viewModel.draggingExpression) { view in
-                            view.onDrop(of: [.text], isTargeted: nil) { providers in
-                                viewModel.resetDraggingStates()
-                                return viewModel.handleDrop(providers: providers, targetInstructionID: orExpression.id, codeBlock: nil)
-                            }
-                        }
+                    .dropDestination(for: Instruction.self) { items, _ in
+                        viewModel.handleInstructionDrop(instruction: items.first ?? Step(), targetInstruction: orExpression)
+                        return true
+                    }
                 ExpressionPiece(expression: orExpression.right, viewModel: viewModel)
             }.padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
             .background(instructionColorHelper.getColor(instructionColorHelper.getNameOfInstruction(instruction: expression), .primary))
@@ -68,21 +59,14 @@ struct ExpressionPiece: View {
                  topTrailingRadius: 5
              )
             )
-            .onDrag({
-                viewModel.draggingExpression = true
-                viewModel.draggingInstruction = false
-                
-                return viewModel.dragItem(for: orExpression, suggestedName: DragItemType.expression.rawValue)
-            })
+            .draggable(orExpression)
         } else if let notExpression = expression as? Not {
             HStack {
                 expressionText(expression: expression, isEmpty: false)
-                    .if(viewModel.draggingExpression) { view in
-                            view.onDrop(of: [.text], isTargeted: nil) { providers in
-                                viewModel.resetDraggingStates()
-                                return viewModel.handleDrop(providers: providers, targetInstructionID: notExpression.id, codeBlock: nil)
-                            }
-                        }
+                    .dropDestination(for: Instruction.self) { items, _ in
+                        viewModel.handleInstructionDrop(instruction: items.first ?? Step(), targetInstruction: notExpression)
+                        return true
+                    }
                 ExpressionPiece(expression: notExpression.content, viewModel: viewModel)
             }.padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
                 .background(instructionColorHelper.getColor(instructionColorHelper.getNameOfInstruction(instruction: expression), .primary))
@@ -94,12 +78,7 @@ struct ExpressionPiece: View {
                      topTrailingRadius: 5
                  )
                 )
-                .onDrag({
-                    viewModel.draggingExpression = true
-                    viewModel.draggingInstruction = false
-                    
-                    return viewModel.dragItem(for: notExpression, suggestedName: DragItemType.expression.rawValue)
-                })
+                .draggable(notExpression)
         } else if let emptyExpression = expression as? EmptyExpression {
             HStack {
                 expressionText(expression: emptyExpression, isEmpty: true)
@@ -113,11 +92,9 @@ struct ExpressionPiece: View {
                      topTrailingRadius: 5
                  )
                 )
-                .if(viewModel.draggingExpression) { view in
-                    view.onDrop(of: [.text], isTargeted: nil) { providers in
-                        viewModel.resetDraggingStates()
-                        return viewModel.handleDrop(providers: providers, targetInstructionID: emptyExpression.id, codeBlock: nil)
-                    }
+                .dropDestination(for: Instruction.self) { items, _ in
+                    viewModel.handleInstructionDrop(instruction: items.first ?? Step(), targetInstruction: emptyExpression)
+                    return true
                 }
             //emptyExpression is not draggable
         } else {
@@ -133,18 +110,12 @@ struct ExpressionPiece: View {
                      topTrailingRadius: 5
                  )
                 )
-                .if(viewModel.draggingExpression) { view in
-                        view.onDrop(of: [.text], isTargeted: nil) { providers in
-                            viewModel.resetDraggingStates()
-                            return viewModel.handleDrop(providers: providers, targetInstructionID: expression.id, codeBlock: nil)
-                        }
-                    }
-                .onDrag({
-                    viewModel.draggingExpression = true
-                    viewModel.draggingInstruction = false
-                    
-                    return viewModel.dragItem(for: expression, suggestedName: DragItemType.expression.rawValue)
-                })
+                .dropDestination(for: Instruction.self) { items, _ in
+                    viewModel.handleInstructionDrop(instruction: items.first ?? Step(), targetInstruction: expression)
+                    return true
+                }
+                .draggable(expression)
+
         }
     }
 }

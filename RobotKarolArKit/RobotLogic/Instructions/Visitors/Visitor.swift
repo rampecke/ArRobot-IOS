@@ -8,6 +8,7 @@
 import Foundation
 
 protocol Visitor {
+    
     //Visitor classes for Instructions
     func visit(leftTurn: LeftTurn)
     func visit(rightTurn: RightTurn)

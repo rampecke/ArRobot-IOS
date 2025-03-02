@@ -8,7 +8,6 @@
 import Foundation
 
 class IsEast: Expression {
-    
     override func accept(visitor: Visitor) {
         visitor.visit(isEast: self)
     }

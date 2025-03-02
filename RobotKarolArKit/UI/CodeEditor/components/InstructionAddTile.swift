@@ -9,10 +9,10 @@ import SwiftUI
 
 struct InstructionAddTile: View {
     var nameOfInstruction: String
-    var instruction: any Instruction
+    var instruction: Instruction
     let instructionColorHelper: InstructionColorNameHelper = InstructionColorNameHelper()
     
-    init(instruction: any Instruction) {
+    init(instruction: Instruction) {
         let nameVisitor = NameVisitor()
         instruction.accept(visitor: nameVisitor)
         self.nameOfInstruction = nameVisitor.get()

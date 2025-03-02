@@ -9,9 +9,7 @@ import Foundation
 
 @Observable
 class Expression: Instruction {
-    var id: UUID = UUID()
-    
-    func accept(visitor: any Visitor) {
+    override func accept(visitor: any Visitor) {
         visitor.visit(expression: self)
     }
     

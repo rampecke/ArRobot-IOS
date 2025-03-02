@@ -18,12 +18,10 @@ struct CodeLineControllFlow: View {
                 Text(LocalizedStringKey(instructionColorHelper.getNameOfInstruction(instruction: instruction)))
                     .foregroundColor(instructionColorHelper.getColor(instructionColorHelper.getNameOfInstruction(instruction: instruction), .onPrimary))
                     .font(.system(size: 20, weight: .semibold, design: .rounded))
-                    .if(viewModel.draggingInstruction) { view in
-                            view.onDrop(of: [.text], isTargeted: nil) { providers in
-                                viewModel.resetDraggingStates()
-                                return viewModel.handleDrop(providers: providers, targetInstructionID: instruction.id, codeBlock: nil)
-                            }
-                        }
+                    .dropDestination(for: Instruction.self) { items, _ in
+                        viewModel.handleInstructionDrop(instruction: items.first ?? Step(), targetInstruction: instruction)
+                        return true
+                    }
                 
                 //Only show this if instruction is If or While
                 if let ifInstruction = instruction as? If {
@@ -56,12 +54,7 @@ struct CodeLineControllFlow: View {
                     topTrailingRadius: 5
                 )
             )
-            .onDrag {
-                viewModel.draggingInstruction = true
-                viewModel.draggingExpression = false
-                
-                return viewModel.dragItem(for: instruction, suggestedName: DragItemType.instruction.rawValue)
-            }
+            .draggable(instruction)
     }
 }
 

@@ -9,7 +9,7 @@ import Foundation
 
 class DeleteInstructionVisitor: Visitor {
     private var wasDeleted: Bool = false
-    private var deletedInstruction: any Instruction = Step()
+    private var deletedInstruction: Instruction = Step()
     
     var deleteId: UUID
     
@@ -21,11 +21,11 @@ class DeleteInstructionVisitor: Visitor {
         return wasDeleted;
     }
     
-    func getDeletedInstruction() -> any Instruction {
+    func getDeletedInstruction() -> Instruction {
         return deletedInstruction;
     }
     
-    func setDeletedInstruction(instruction: any Instruction) {
+    func setDeletedInstruction(instruction: Instruction) {
         deletedInstruction = instruction
     }
     

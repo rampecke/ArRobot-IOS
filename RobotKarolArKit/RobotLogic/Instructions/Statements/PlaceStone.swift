@@ -8,9 +8,7 @@
 import Foundation
 
 class PlaceStone: Instruction {
-    var id: UUID = UUID()
-    
-    func accept(visitor: Visitor) {
+    override func accept(visitor: Visitor) {
         visitor.visit(placeStone: self)
     }
 }

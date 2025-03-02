@@ -8,9 +8,7 @@
 import Foundation
 
 class PlaceGrass: Instruction {
-    var id: UUID = UUID()
-    
-    func accept(visitor: Visitor) {
+    override func accept(visitor: Visitor) {
         visitor.visit(placeGrass: self)
     }
 }
