@@ -54,6 +54,7 @@ struct CodeLineControllFlow: View {
                     topTrailingRadius: 5
                 )
             )
+            .contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
             .draggable(instruction)
     }
 }

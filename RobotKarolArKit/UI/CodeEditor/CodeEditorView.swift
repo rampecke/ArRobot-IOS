@@ -45,17 +45,26 @@ struct CodeEditorView: View {
                     ForEach($viewModel.allStatements, id: \.id) { $instruction in
                         InstructionAddTile(instruction: instruction).frame(height: 80).onTapGesture(perform: {
                             viewModel.createNewStatement(statement: instruction)
-                        }).draggable(instruction)
+                        }).contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
+                            .draggable(instruction){
+                            CodeLine(instruction: instruction, CodeLineType.CodeLine).contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
+                        }
                     }
                     ForEach($viewModel.allControllFlow, id: \.id) { $instruction in
                         InstructionAddTile(instruction: instruction).frame(height: 80).onTapGesture(perform: {
                             viewModel.createNewStatement(statement: instruction)
-                        }).draggable(instruction)
+                        }).contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
+                            .draggable(instruction){
+                            CodeLineControllFlow(instruction: instruction, viewModel: viewModel).contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
+                        }
                     }
                     ForEach($viewModel.allExpressions, id: \.id) { $instruction in
                         InstructionAddTile(instruction: instruction).frame(height: 80).onTapGesture(perform: {
                             //TODO: ADD A FUNCTION/VISITOR THAT ADDS THE EXPRESSION INTO THE NEXT EMPTYEXPRESSION if there is one
-                        }).draggable(instruction)
+                        }).contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
+                            .draggable(instruction){
+                            ExpressionPiece(expression: instruction, viewModel: viewModel).contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
+                        }
                     }
                 }.padding(.horizontal, 10)
             }.frame(height: 170)

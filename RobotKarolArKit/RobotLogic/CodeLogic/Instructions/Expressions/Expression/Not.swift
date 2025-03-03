@@ -7,6 +7,7 @@
 
 import Foundation
 
+@Observable
 class Not: Expression {
     var content: Expression
     

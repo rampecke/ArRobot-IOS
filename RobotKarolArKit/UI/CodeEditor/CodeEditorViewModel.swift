@@ -121,6 +121,8 @@ class CodeEditorViewModel {
     
     //New Drag and Drop functions
     func handleStatementDrop (statement: Statement, targetStatement: Statement, addToEndOfTarget: Bool? = nil) {
+        if statement.id == targetStatement.id { return }
+        
         let deleteStatementVisitor = DeleteStatementVisitor(deleteId: statement.id)
         
         let allInstructions = allStatements + allControllFlow
@@ -147,6 +149,8 @@ class CodeEditorViewModel {
     }
     
     func handleExpressionDrop (expression: Expression, targetExpression: Expression) {
+        if expression.id == targetExpression.id { return }
+        
         let deleteExpressionVisitor = DeleteExpressionVisitor(deleteId: expression.id)
         
         if let expressionType = allExpressions.first(where: { $0.id == expression.id }) {

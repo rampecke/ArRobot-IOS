@@ -19,6 +19,7 @@ struct CodeBlockView: View {
                     CodeLineControllFlow(instruction: controlFlow, viewModel: viewModel)
                 } else {
                     CodeLine(instruction: instruction, CodeLineType.CodeLine)
+                        .contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
                         .draggable(instruction)
                         .dropDestination(for: Statement.self) { items, _ in
                             viewModel.handleStatementDrop(statement: items.first ?? Step(), targetStatement: instruction)

@@ -8,6 +8,7 @@
 import Foundation
 import CoreTransferable
 
+@Observable
 class Statement: Instruction {
     var id: UUID = UUID()
 

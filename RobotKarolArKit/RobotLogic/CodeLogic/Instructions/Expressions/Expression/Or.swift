@@ -7,6 +7,7 @@
 
 import Foundation
 
+@Observable
 class Or: Expression {
     var left: Expression
     var right: Expression
