@@ -21,18 +21,12 @@ class CodeEditorViewModel {
     var executionSpeed = 1.0
     var arType: ARType = ARType.AR
     
-    var draggingExpression = false
-    var draggingInstruction = false
+    var dragActive = false
     
     init(codeBlock: CodeBlock = CodeBlock(), world: World = World(width: 6, length: 6)) {
         self.codeBlock = codeBlock
         self.world = world
         self.executionVisitor = ExecutionVisitor(world: world)
-    }
-    
-    func resetDraggingStates() {
-        draggingExpression = false
-        draggingInstruction = false
     }
     
     private func addStatement(statement: Statement) {

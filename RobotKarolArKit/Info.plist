@@ -32,6 +32,20 @@
 			<key>UTTypeTagSpecification</key>
 			<dict/>
 		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>com.public.data</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>NoDropArea</string>
+			<key>UTTypeIcons</key>
+			<dict/>
+			<key>UTTypeIdentifier</key>
+			<string>com.ramonaeckert.RobotKarolArKit.noDropArea</string>
+			<key>UTTypeTagSpecification</key>
+			<dict/>
+		</dict>
 	</array>
 </dict>
 </plist>

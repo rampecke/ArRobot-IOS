@@ -16,7 +16,6 @@ class Statement: Instruction {
         // Base method (subclasses override this)
     }
 
-    //TODO: CHANGE CONTENT TYPE .statement
     static var transferRepresentation: some TransferRepresentation {
         CodableRepresentation(for: Statement.self, contentType: .statement)
     }

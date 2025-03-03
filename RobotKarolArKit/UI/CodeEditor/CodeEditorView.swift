@@ -47,7 +47,8 @@ struct CodeEditorView: View {
                             viewModel.createNewStatement(statement: instruction)
                         }).contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
                             .draggable(instruction){
-                            CodeLine(instruction: instruction, CodeLineType.CodeLine).contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
+                            CodeLine(instruction: instruction, CodeLineType.CodeLine)
+                                    .contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
                         }
                     }
                     ForEach($viewModel.allControllFlow, id: \.id) { $instruction in
@@ -55,7 +56,8 @@ struct CodeEditorView: View {
                             viewModel.createNewStatement(statement: instruction)
                         }).contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
                             .draggable(instruction){
-                            CodeLineControllFlow(instruction: instruction, viewModel: viewModel).contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
+                            CodeLineControllFlow(instruction: instruction, viewModel: viewModel)
+                                    .contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
                         }
                     }
                     ForEach($viewModel.allExpressions, id: \.id) { $instruction in
@@ -63,11 +65,15 @@ struct CodeEditorView: View {
                             //TODO: ADD A FUNCTION/VISITOR THAT ADDS THE EXPRESSION INTO THE NEXT EMPTYEXPRESSION if there is one
                         }).contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
                             .draggable(instruction){
-                            ExpressionPiece(expression: instruction, viewModel: viewModel).contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
+                            ExpressionPiece(expression: instruction, viewModel: viewModel)
+                                    .contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
                         }
                     }
                 }.padding(.horizontal, 10)
             }.frame(height: 170)
+        }.dropDestination(for: NoDropArea.self) {items,location in
+            viewModel.dragActive = false
+            return false
         }
     }
 }

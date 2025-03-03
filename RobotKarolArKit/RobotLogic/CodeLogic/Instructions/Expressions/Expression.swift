@@ -16,7 +16,6 @@ class Expression: Instruction {
         // Base method (subclasses override this)
     }
 
-    //TODO: CHANGE CONTENT TYPE .expression
     static var transferRepresentation: some TransferRepresentation {
         CodableRepresentation(for: Expression.self, contentType: .expression)
     }

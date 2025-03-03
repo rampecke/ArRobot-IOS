@@ -91,7 +91,7 @@ class NewInstructionVisitor: Visitor {
     }
     
     func visit(or: Or) {
-        self.instruction = And()
+        self.instruction = Or()
     }
     
     func visit(not: Not) {
