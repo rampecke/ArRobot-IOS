@@ -7,7 +7,7 @@
 
 import Foundation
 
-class PlaceWater: Instruction {
+class PlaceWater: Statement {
     override func accept(visitor: Visitor) {
         visitor.visit(placeWater: self)
     }

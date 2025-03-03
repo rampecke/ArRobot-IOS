@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A01482EC2D70D74300AACE8D /* DeleteInstructionVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01482EB2D70D74300AACE8D /* DeleteInstructionVisitor.swift */; };
-		A01482EE2D70DE6C00AACE8D /* AddInstructionVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01482ED2D70DE6C00AACE8D /* AddInstructionVisitor.swift */; };
+		A01482EC2D70D74300AACE8D /* DeleteStatementVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01482EB2D70D74300AACE8D /* DeleteStatementVisitor.swift */; };
+		A01482EE2D70DE6C00AACE8D /* AddStatementVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01482ED2D70DE6C00AACE8D /* AddStatementVisitor.swift */; };
 		A01482F12D71145100AACE8D /* Expression.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01482F02D71145100AACE8D /* Expression.swift */; };
 		A01482F52D7114AE00AACE8D /* IsEast.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01482F42D7114AE00AACE8D /* IsEast.swift */; };
 		A01482F72D71155100AACE8D /* IsNorth.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01482F62D71155100AACE8D /* IsNorth.swift */; };
@@ -43,6 +43,7 @@
 		A02B6ADC2C1750AD00CAFF82 /* NonArView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02B6ADB2C1750AD00CAFF82 /* NonArView.swift */; };
 		A02B6AE22C18AC4800CAFF82 /* ExecutionVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02B6AE12C18AC4800CAFF82 /* ExecutionVisitor.swift */; };
 		A02B6AE52C19130200CAFF82 /* ArViewControlBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02B6AE42C19130200CAFF82 /* ArViewControlBar.swift */; };
+		A02CAC122D759BA300E751DF /* Statement.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02CAC112D759BA300E751DF /* Statement.swift */; };
 		A06BD7C32BAE9F4E00863CA5 /* RobotKarolArKitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06BD7C22BAE9F4E00863CA5 /* RobotKarolArKitApp.swift */; };
 		A06BD7C72BAE9F4F00863CA5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A06BD7C62BAE9F4F00863CA5 /* Assets.xcassets */; };
 		A06BD7CB2BAE9F4F00863CA5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A06BD7CA2BAE9F4F00863CA5 /* Preview Assets.xcassets */; };
@@ -65,8 +66,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A01482EB2D70D74300AACE8D /* DeleteInstructionVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteInstructionVisitor.swift; sourceTree = "<group>"; };
-		A01482ED2D70DE6C00AACE8D /* AddInstructionVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddInstructionVisitor.swift; sourceTree = "<group>"; };
+		A01482EB2D70D74300AACE8D /* DeleteStatementVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteStatementVisitor.swift; sourceTree = "<group>"; };
+		A01482ED2D70DE6C00AACE8D /* AddStatementVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStatementVisitor.swift; sourceTree = "<group>"; };
 		A01482F02D71145100AACE8D /* Expression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expression.swift; sourceTree = "<group>"; };
 		A01482F42D7114AE00AACE8D /* IsEast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsEast.swift; sourceTree = "<group>"; };
 		A01482F62D71155100AACE8D /* IsNorth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsNorth.swift; sourceTree = "<group>"; };
@@ -100,6 +101,8 @@
 		A02B6ADB2C1750AD00CAFF82 /* NonArView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonArView.swift; sourceTree = "<group>"; };
 		A02B6AE12C18AC4800CAFF82 /* ExecutionVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExecutionVisitor.swift; sourceTree = "<group>"; };
 		A02B6AE42C19130200CAFF82 /* ArViewControlBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArViewControlBar.swift; sourceTree = "<group>"; };
+		A02CAC112D759BA300E751DF /* Statement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Statement.swift; sourceTree = "<group>"; };
+		A02CAC162D75AF7100E751DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		A06BD7BF2BAE9F4E00863CA5 /* RobotKarolArKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RobotKarolArKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A06BD7C22BAE9F4E00863CA5 /* RobotKarolArKitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RobotKarolArKitApp.swift; sourceTree = "<group>"; };
 		A06BD7C62BAE9F4F00863CA5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -137,34 +140,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A01482EF2D7112E900AACE8D /* Expression */ = {
+		A01482EF2D7112E900AACE8D /* Expressions */ = {
 			isa = PBXGroup;
 			children = (
 				A01482F02D71145100AACE8D /* Expression.swift */,
-				A01482F42D7114AE00AACE8D /* IsEast.swift */,
-				A01482F62D71155100AACE8D /* IsNorth.swift */,
-				A01482F82D7115A800AACE8D /* IsSouth.swift */,
-				A01482FA2D71161300AACE8D /* IsWest.swift */,
-				A01482FC2D71165D00AACE8D /* IsBorder.swift */,
-				A01483062D71188D00AACE8D /* IsBlock.swift */,
-				A01483002D7116CD00AACE8D /* And.swift */,
-				A01483022D71172A00AACE8D /* Or.swift */,
-				A01483042D71175F00AACE8D /* Not.swift */,
-				A0B5A1302D714EBA00A02BA9 /* EmptyExpression.swift */,
+				A02CAC132D759DED00E751DF /* Expression */,
 			);
-			path = Expression;
+			path = Expressions;
 			sourceTree = "<group>";
 		};
 		A02B6A892C139FE600CAFF82 /* Statements */ = {
 			isa = PBXGroup;
 			children = (
-				A02B6A8B2C13A05500CAFF82 /* LeftTurn.swift */,
-				A02B6A8D2C13A0CC00CAFF82 /* RightTurn.swift */,
-				A02B6A8F2C13A16200CAFF82 /* Lift.swift */,
-				A02B6A912C13A1C600CAFF82 /* Step.swift */,
-				A02B6A932C13A22000CAFF82 /* PlaceGrass.swift */,
-				A02B6A952C13A26400CAFF82 /* PlaceStone.swift */,
-				A02B6A972C13A2DE00CAFF82 /* PlaceWater.swift */,
+				A02CAC112D759BA300E751DF /* Statement.swift */,
+				A02CAC142D759E2A00E751DF /* Statement */,
+				A02B6AAB2C1669E300CAFF82 /* ControllFlow */,
 			);
 			path = Statements;
 			sourceTree = "<group>";
@@ -210,8 +200,8 @@
 				A02B6AA42C14BD3300CAFF82 /* NameVisitor.swift */,
 				A02B6AB22C16789D00CAFF82 /* NewInstructionVisitor.swift */,
 				A02B6AE12C18AC4800CAFF82 /* ExecutionVisitor.swift */,
-				A01482EB2D70D74300AACE8D /* DeleteInstructionVisitor.swift */,
-				A01482ED2D70DE6C00AACE8D /* AddInstructionVisitor.swift */,
+				A01482EB2D70D74300AACE8D /* DeleteStatementVisitor.swift */,
+				A01482ED2D70DE6C00AACE8D /* AddStatementVisitor.swift */,
 				A0B40CA32D71B7E800AEFD40 /* DeleteExpressionVisitor.swift */,
 				A0B40CA52D71BD0400AEFD40 /* AddExpressionVisitor.swift */,
 			);
@@ -255,6 +245,46 @@
 			path = components;
 			sourceTree = "<group>";
 		};
+		A02CAC132D759DED00E751DF /* Expression */ = {
+			isa = PBXGroup;
+			children = (
+				A01482F42D7114AE00AACE8D /* IsEast.swift */,
+				A01482F62D71155100AACE8D /* IsNorth.swift */,
+				A01482F82D7115A800AACE8D /* IsSouth.swift */,
+				A01482FA2D71161300AACE8D /* IsWest.swift */,
+				A01482FC2D71165D00AACE8D /* IsBorder.swift */,
+				A01483062D71188D00AACE8D /* IsBlock.swift */,
+				A01483002D7116CD00AACE8D /* And.swift */,
+				A01483022D71172A00AACE8D /* Or.swift */,
+				A01483042D71175F00AACE8D /* Not.swift */,
+				A0B5A1302D714EBA00A02BA9 /* EmptyExpression.swift */,
+			);
+			path = Expression;
+			sourceTree = "<group>";
+		};
+		A02CAC142D759E2A00E751DF /* Statement */ = {
+			isa = PBXGroup;
+			children = (
+				A02B6A8B2C13A05500CAFF82 /* LeftTurn.swift */,
+				A02B6A8D2C13A0CC00CAFF82 /* RightTurn.swift */,
+				A02B6A8F2C13A16200CAFF82 /* Lift.swift */,
+				A02B6A912C13A1C600CAFF82 /* Step.swift */,
+				A02B6A932C13A22000CAFF82 /* PlaceGrass.swift */,
+				A02B6A952C13A26400CAFF82 /* PlaceStone.swift */,
+				A02B6A972C13A2DE00CAFF82 /* PlaceWater.swift */,
+			);
+			path = Statement;
+			sourceTree = "<group>";
+		};
+		A02CAC152D75A15A00E751DF /* CodeLogic */ = {
+			isa = PBXGroup;
+			children = (
+				A06BD7DE2BB471A500863CA5 /* Instructions */,
+				A02B6AA32C14BCE900CAFF82 /* Visitors */,
+			);
+			path = CodeLogic;
+			sourceTree = "<group>";
+		};
 		A06BD7B62BAE9F4E00863CA5 = {
 			isa = PBXGroup;
 			children = (
@@ -276,6 +306,7 @@
 		A06BD7C12BAE9F4E00863CA5 /* RobotKarolArKit */ = {
 			isa = PBXGroup;
 			children = (
+				A02CAC162D75AF7100E751DF /* Info.plist */,
 				A02B6A992C13A64600CAFF82 /* UI */,
 				A06BD7D12BAEA3AD00863CA5 /* RobotLogic */,
 				A06BD7C22BAE9F4E00863CA5 /* RobotKarolArKitApp.swift */,
@@ -297,7 +328,7 @@
 		A06BD7D12BAEA3AD00863CA5 /* RobotLogic */ = {
 			isa = PBXGroup;
 			children = (
-				A06BD7DE2BB471A500863CA5 /* Instructions */,
+				A02CAC152D75A15A00E751DF /* CodeLogic */,
 				A06BD7D22BAEA3C200863CA5 /* SimulatorLogic */,
 			);
 			path = RobotLogic;
@@ -319,10 +350,8 @@
 			isa = PBXGroup;
 			children = (
 				A06BD7DF2BB472F000863CA5 /* Instruction.swift */,
-				A01482EF2D7112E900AACE8D /* Expression */,
+				A01482EF2D7112E900AACE8D /* Expressions */,
 				A02B6A892C139FE600CAFF82 /* Statements */,
-				A02B6AAB2C1669E300CAFF82 /* ControllFlow */,
-				A02B6AA32C14BCE900CAFF82 /* Visitors */,
 			);
 			path = Instructions;
 			sourceTree = "<group>";
@@ -427,7 +456,7 @@
 				A01483092D7138B000AACE8D /* ExpressionLine.swift in Sources */,
 				A01483072D71188D00AACE8D /* IsBlock.swift in Sources */,
 				A09390F52C1DCD30009DF760 /* CodeBlockView.swift in Sources */,
-				A01482EE2D70DE6C00AACE8D /* AddInstructionVisitor.swift in Sources */,
+				A01482EE2D70DE6C00AACE8D /* AddStatementVisitor.swift in Sources */,
 				A09390EF2C1DBFBD009DF760 /* While.swift in Sources */,
 				A06BD7D42BAEA3ED00863CA5 /* World.swift in Sources */,
 				A01483052D71175F00AACE8D /* Not.swift in Sources */,
@@ -444,6 +473,7 @@
 				A02B6AE52C19130200CAFF82 /* ArViewControlBar.swift in Sources */,
 				A02B6AAD2C166A0100CAFF82 /* CodeBlock.swift in Sources */,
 				A02B6A942C13A22000CAFF82 /* PlaceGrass.swift in Sources */,
+				A02CAC122D759BA300E751DF /* Statement.swift in Sources */,
 				A01482F52D7114AE00AACE8D /* IsEast.swift in Sources */,
 				A06BD7DB2BAF2C0A00863CA5 /* Robot.swift in Sources */,
 				A02B6A8E2C13A0CC00CAFF82 /* RightTurn.swift in Sources */,
@@ -451,7 +481,7 @@
 				A02B6A922C13A1C600CAFF82 /* Step.swift in Sources */,
 				A06BD7D62BAEA4B400863CA5 /* Tile.swift in Sources */,
 				A02B6AB12C16704900CAFF82 /* CodeEditorViewModel.swift in Sources */,
-				A01482EC2D70D74300AACE8D /* DeleteInstructionVisitor.swift in Sources */,
+				A01482EC2D70D74300AACE8D /* DeleteStatementVisitor.swift in Sources */,
 				A02B6AA52C14BD3300CAFF82 /* NameVisitor.swift in Sources */,
 				A01482FD2D71165D00AACE8D /* IsBorder.swift in Sources */,
 			);
@@ -587,6 +617,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RobotKarolArKit/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "I need this!";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -626,6 +657,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RobotKarolArKit/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "I need this!";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;

@@ -12,7 +12,7 @@ struct CodeLine: View {
     var codeLineType: CodeLineType
     let instructionColorHelper: InstructionColorNameHelper = InstructionColorNameHelper()
     
-    init(instruction: Instruction, _ codeLineType: CodeLineType?) {
+    init(instruction: any Instruction, _ codeLineType: CodeLineType?) {
         let nameVisitor = NameVisitor()
         instruction.accept(visitor: nameVisitor)
         self.nameOfInstruction = nameVisitor.get()

@@ -7,14 +7,14 @@
 
 import Foundation
 
-class AddInstructionVisitor: Visitor {
+class AddStatementVisitor: Visitor {
     private var wasAdded: Bool = false
     var targetId: UUID
-    var instruction: Instruction
+    var statement: Statement
     
-    init(targetId: UUID, instruction: Instruction) {
+    init(targetId: UUID, statement: Statement) {
         self.targetId = targetId
-        self.instruction = instruction
+        self.statement = statement
     }
     
     func getWasAdded() -> Bool {
@@ -50,12 +50,12 @@ class AddInstructionVisitor: Visitor {
     }
     
     private func addToCodeBlock(codeBlock: CodeBlock) {
-        if codeBlock.containsInstruction(id: targetId) {
-            codeBlock.addInstructionAbove(uuid: targetId, instruction: self.instruction)
+        if codeBlock.containsStatement(id: targetId) {
+            codeBlock.addStatementAbove(uuid: targetId, statement: self.statement)
             wasAdded = true
         } else {
-            for instruction in codeBlock.codeBlock {
-                instruction.accept(visitor: self)
+            for statement in codeBlock.codeBlock {
+                statement.accept(visitor: self)
                 if wasAdded { break }
             }
         }
@@ -73,8 +73,6 @@ class AddInstructionVisitor: Visitor {
     func visit(isBorder: IsBorder) {}
     
     func visit(isBlock: IsBlock) {}
-    
-    func visit(expression: Expression) {}
     
     func visit(emptyExpression: EmptyExpression) {}
     

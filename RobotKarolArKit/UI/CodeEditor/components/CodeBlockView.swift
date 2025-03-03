@@ -11,6 +11,7 @@ struct CodeBlockView: View {
     @Bindable var codeBlock: CodeBlock
     @Bindable var viewModel: CodeEditorViewModel
     
+    //TODO: WHEN DRAGGING THE  ADD A RECTANGLE ON DROP ELSE DON'T
     var body: some View {
         VStack(spacing: 10) {
             ForEach($codeBlock.codeBlock, id: \.id) { $instruction in
@@ -19,8 +20,8 @@ struct CodeBlockView: View {
                 } else {
                     CodeLine(instruction: instruction, CodeLineType.CodeLine)
                         .draggable(instruction)
-                        .dropDestination(for: Instruction.self) { items, _ in
-                            viewModel.handleInstructionDrop(instruction: items.first ?? Step(), targetInstruction: instruction)
+                        .dropDestination(for: Statement.self) { items, _ in
+                            viewModel.handleStatementDrop(statement: items.first ?? Step(), targetStatement: instruction)
                             return true
                         }
                 }
@@ -31,8 +32,8 @@ struct CodeBlockView: View {
                 .frame(height: 20) // Make this large enough to detect drops
         }.padding(10)
         .background(Color.clear.contentShape(Rectangle())) // Ensure drop area is recognized
-        .dropDestination(for: Instruction.self) { items, _ in
-            viewModel.handleInstructionDrop(instruction: items.first ?? Step(), targetInstruction: codeBlock, addToEndOfTarget: true)
+        .dropDestination(for: Statement.self) { items, _ in
+            viewModel.handleStatementDrop(statement: items.first ?? Step(), targetStatement: codeBlock, addToEndOfTarget: true)
             return true
         }
     }
@@ -41,10 +42,10 @@ struct CodeBlockView: View {
 #Preview {
     @Previewable @State var viewModel: CodeEditorViewModel = CodeEditorViewModel()
     viewModel.allStatements.forEach{
-        viewModel.createNewInstruction(instruction: $0)
+        viewModel.createNewStatement(statement: $0)
     }
     viewModel.allControllFlow.forEach{
-        viewModel.createNewInstruction(instruction: $0)
+        viewModel.createNewStatement(statement: $0)
     }
     
     return CodeBlockView(codeBlock: viewModel.codeBlock, viewModel: viewModel).padding(10)

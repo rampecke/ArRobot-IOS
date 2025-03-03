@@ -10,9 +10,11 @@ import Foundation
 @Observable
 class CodeEditorViewModel {
     var codeBlock: CodeBlock = CodeBlock()
-    var allStatements: [Instruction] = [Step(), Lift(), RightTurn(), LeftTurn(), PlaceGrass(), PlaceStone(), PlaceWater()]
+    var allStatements: [Statement] = [Step(), Lift(), RightTurn(), LeftTurn(), PlaceGrass(), PlaceStone(), PlaceWater()]
     var allControllFlow: [CodeBlock] = [If(), While()]
     var allExpressions: [Expression] = [IsEast(), IsWest(), IsNorth(), IsSouth(), IsBlock(), IsBorder(), And(), Or(), Not()]
+    
+    
     var world = World(width: 6, length: 6)
     var finishedExecution = false
     var executionVisitor: ExecutionVisitor
@@ -33,20 +35,28 @@ class CodeEditorViewModel {
         draggingInstruction = false
     }
     
-    private func addInstruction(instruction: Instruction) {
-        codeBlock.addInstruction(instruction: instruction)
+    private func addStatement(statement: Statement) {
+        codeBlock.addStatement(statement: statement)
     }
     
-    func createNewInstruction(instruction: Instruction) {
+    func createNewStatement(statement: Statement) {
         let newInstructionVisitor = NewInstructionVisitor()
-        instruction.accept(visitor: newInstructionVisitor)
-        addInstruction(instruction: newInstructionVisitor.get())
+        statement.accept(visitor: newInstructionVisitor)
+        
+        guard let newStatement = newInstructionVisitor.get() as? Statement else {
+            return
+        }
+        addStatement(statement: newStatement)
     }
     
-    func addInstructionToPosition(instruction: Instruction, position: Int) {
+    func addStatementToPosition(statement: Statement, position: Int) {
         let newInstructionVisitor = NewInstructionVisitor()
-        instruction.accept(visitor: newInstructionVisitor)
-        codeBlock.addInstructionAtPosition(instruction: newInstructionVisitor.get(), position: position)
+        statement.accept(visitor: newInstructionVisitor)
+        
+        guard let newStatement = newInstructionVisitor.get() as? Statement else {
+            return
+        }
+        codeBlock.addStatementAtPosition(statement: newStatement, position: position)
     }
     
     //TODO: USE ACCEPT OF CODEBLOCK
@@ -110,56 +120,49 @@ class CodeEditorViewModel {
     }
     
     //New Drag and Drop functions
-    //TODO: HANDLE targetInstruction nil
-    func handleInstructionDrop (instruction: Instruction, targetInstruction: Instruction, addToEndOfTarget: Bool? = nil) {
-        if let instructionAsExpression = instruction as? Expression {
-            if let targetInstructionAsExpression = targetInstruction as? Expression {
-                let deleteExpressionVisitor = DeleteExpressionVisitor(deleteId: instructionAsExpression.id)
-                
-                if allExpressions.contains(where: { $0.id == instructionAsExpression.id }) {
-                    let newInstructionVisitor = NewInstructionVisitor()
-                    instructionAsExpression.accept(visitor: newInstructionVisitor)
-                    
-                    guard let newExpression = newInstructionVisitor.get() as? Expression else { return }
-                    deleteExpressionVisitor.setDeletedExpression(expression: newExpression)
-                } else {
-                   //If it is not a new expression delete the old one
-                    self.codeBlock.accept(visitor: deleteExpressionVisitor)
-                }
-                
-                let addExpressionVisitor = AddExpressionVisitor(targetId: targetInstructionAsExpression.id, expression: deleteExpressionVisitor.getDeletedExpression())
-                //TODO: Maybe add the codeblock the expression was dropped to the call -> Performance
-                self.codeBlock.accept(visitor: addExpressionVisitor)
-            } else {
-                return
-            }
+    func handleStatementDrop (statement: Statement, targetStatement: Statement, addToEndOfTarget: Bool? = nil) {
+        let deleteStatementVisitor = DeleteStatementVisitor(deleteId: statement.id)
+        
+        let allInstructions = allStatements + allControllFlow
+        if let statementType = allInstructions.first(where: { $0.id == statement.id }) {
+            let newInstructionVisitor = NewInstructionVisitor()
+            statementType.accept(visitor: newInstructionVisitor)
+            
+            guard let newStatement = newInstructionVisitor.get() as? Statement else { return }
+            deleteStatementVisitor.setDeletedStatement(statement: newStatement)
         } else {
-            if targetInstruction is Expression {
-                return
-            } else {
-                let deleteInstructionVisitor = DeleteInstructionVisitor(deleteId: instruction.id)
-
-                let allInstructions = allStatements + allControllFlow
-                if let instructionType = allInstructions.first(where: { $0.id == instruction.id }) {
-                    let newInstructionVisitor = NewInstructionVisitor()
-                    instructionType.accept(visitor: newInstructionVisitor)
-                    
-                    deleteInstructionVisitor.setDeletedInstruction(instruction: newInstructionVisitor.get())
-                } else {
-                    self.codeBlock.accept(visitor: deleteInstructionVisitor)
-                }
-                
-                if addToEndOfTarget ?? false {
-                    guard let targetCodeBlock = targetInstruction as? CodeBlock else { return }
-                    
-                    targetCodeBlock.addInstruction(instruction: deleteInstructionVisitor.getDeletedInstruction())
-                } else {
-                    let addInstructionVisitor = AddInstructionVisitor(targetId: targetInstruction.id, instruction: deleteInstructionVisitor.getDeletedInstruction())
-                    //TODO: Maybe add the codeblock the expression was dropped to the call -> Performance
-                    self.codeBlock.accept(visitor: addInstructionVisitor)
-                }
-            }
+            self.codeBlock.accept(visitor: deleteStatementVisitor)
         }
+        
+        if addToEndOfTarget ?? false {
+            guard let targetCodeBlock = targetStatement as? CodeBlock else { return }
+            
+            targetCodeBlock.addStatement(statement: deleteStatementVisitor.getDeletedStatement())
+        } else {
+            
+            let addInstructionVisitor = AddStatementVisitor(targetId: targetStatement.id, statement: deleteStatementVisitor.getDeletedStatement())
+            //TODO: Maybe add the codeblock the expression was dropped to the call -> Performance
+            self.codeBlock.accept(visitor: addInstructionVisitor)
+        }
+    }
+    
+    func handleExpressionDrop (expression: Expression, targetExpression: Expression) {
+        let deleteExpressionVisitor = DeleteExpressionVisitor(deleteId: expression.id)
+        
+        if let expressionType = allExpressions.first(where: { $0.id == expression.id }) {
+            let newInstructionVisitor = NewInstructionVisitor()
+            expressionType.accept(visitor: newInstructionVisitor)
+            
+            guard let newExpression = newInstructionVisitor.get() as? Expression else { return }
+            deleteExpressionVisitor.setDeletedExpression(expression: newExpression)
+        } else {
+           //If it is not a new expression delete the old one
+            self.codeBlock.accept(visitor: deleteExpressionVisitor)
+        }
+        
+        let addExpressionVisitor = AddExpressionVisitor(targetId: targetExpression.id, expression: deleteExpressionVisitor.getDeletedExpression())
+        //TODO: Maybe add the codeblock the expression was dropped to the call -> Performance
+        self.codeBlock.accept(visitor: addExpressionVisitor)
     }
 }
 

@@ -7,9 +7,9 @@
 
 import Foundation
 
-class DeleteInstructionVisitor: Visitor {
+class DeleteStatementVisitor: Visitor {
     private var wasDeleted: Bool = false
-    private var deletedInstruction: Instruction = Step()
+    private var deletedStatement: Statement = Step()
     
     var deleteId: UUID
     
@@ -21,12 +21,12 @@ class DeleteInstructionVisitor: Visitor {
         return wasDeleted;
     }
     
-    func getDeletedInstruction() -> Instruction {
-        return deletedInstruction;
+    func getDeletedStatement() -> Statement {
+        return deletedStatement;
     }
     
-    func setDeletedInstruction(instruction: Instruction) {
-        deletedInstruction = instruction
+    func setDeletedStatement(statement: Statement) {
+        deletedStatement = statement
     }
     
     //Statements
@@ -58,16 +58,16 @@ class DeleteInstructionVisitor: Visitor {
     }
     
     private func checkCodeBlock(codeBlock: CodeBlock) {
-        if codeBlock.containsInstruction(id: deleteId) {
-            guard let instruction = codeBlock.getFirstInstructionWithID(uuid: deleteId) else {
+        if codeBlock.containsStatement(id: deleteId) {
+            guard let statement = codeBlock.getFirstStatementWithID(uuid: deleteId) else {
                 return
             }
-            deletedInstruction = instruction
-            codeBlock.deleteInstruction(id: deleteId)
+            deletedStatement = statement
+            codeBlock.deleteStatement(id: deleteId)
             wasDeleted = true
         } else {
-            for instruction in codeBlock.codeBlock {
-                instruction.accept(visitor: self)
+            for statement in codeBlock.codeBlock {
+                statement.accept(visitor: self)
                 if wasDeleted { break }
             }
         }
@@ -85,8 +85,6 @@ class DeleteInstructionVisitor: Visitor {
     func visit(isBorder: IsBorder) {}
     
     func visit(isBlock: IsBlock) {}
-    
-    func visit(expression: Expression) {}
     
     func visit(emptyExpression: EmptyExpression) {}
     

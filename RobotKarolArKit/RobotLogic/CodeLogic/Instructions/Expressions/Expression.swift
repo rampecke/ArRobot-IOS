@@ -1,22 +1,23 @@
 //
-//  Visitable.swift
+//  Expression.swift
 //  RobotKarolArKit
 //
-//  Created by Ramona Eckert on 27.03.24.
+//  Created by Ramona Eckert on 27.02.25.
 //
 
 import Foundation
 import CoreTransferable
 
-class Instruction: Identifiable, Transferable, Codable {
+@Observable
+class Expression: Instruction {
     var id: UUID = UUID()
 
     func accept(visitor: Visitor) {
         // Base method (subclasses override this)
     }
 
+    //TODO: CHANGE CONTENT TYPE .expression
     static var transferRepresentation: some TransferRepresentation {
-        CodableRepresentation(for: Instruction.self, contentType: .plainText)
+        CodableRepresentation(for: Expression.self, contentType: .expression)
     }
 }
-

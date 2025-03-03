@@ -18,8 +18,8 @@ struct CodeLineControllFlow: View {
                 Text(LocalizedStringKey(instructionColorHelper.getNameOfInstruction(instruction: instruction)))
                     .foregroundColor(instructionColorHelper.getColor(instructionColorHelper.getNameOfInstruction(instruction: instruction), .onPrimary))
                     .font(.system(size: 20, weight: .semibold, design: .rounded))
-                    .dropDestination(for: Instruction.self) { items, _ in
-                        viewModel.handleInstructionDrop(instruction: items.first ?? Step(), targetInstruction: instruction)
+                    .dropDestination(for: Statement.self) { items, _ in
+                        viewModel.handleStatementDrop(statement: items.first ?? Step(), targetStatement: instruction)
                         return true
                     }
                 
@@ -61,9 +61,9 @@ struct CodeLineControllFlow: View {
 #Preview {
     @Previewable @State var viewModel: CodeEditorViewModel = CodeEditorViewModel()
     
-    viewModel.allControllFlow.first?.addInstruction(instruction: Step())
-    viewModel.allControllFlow.first?.addInstruction(instruction: Step())
-    viewModel.allControllFlow.first?.addInstruction(instruction: Step())
+    viewModel.allControllFlow.first?.addStatement(statement: Step())
+    viewModel.allControllFlow.first?.addStatement(statement: Step())
+    viewModel.allControllFlow.first?.addStatement(statement: Step())
     return ScrollView {
         ForEach($viewModel.allControllFlow, id: \.id) { $instruction in
             CodeLineControllFlow(instruction: instruction, viewModel: viewModel)

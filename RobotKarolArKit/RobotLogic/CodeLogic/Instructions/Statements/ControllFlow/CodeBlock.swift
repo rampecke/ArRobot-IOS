@@ -8,12 +8,11 @@
 import Foundation
 
 @Observable
-class CodeBlock: Instruction {
-    var codeBlock: [Instruction]
-    
+class CodeBlock: Statement {
+    var codeBlock: [Statement]
     var executionIndex = 0
     
-    init(_ codeBlock: [Instruction]?) {
+    init(_ codeBlock: [Statement]?) {
         self.codeBlock = codeBlock ?? []
         super.init()
     }
@@ -25,7 +24,7 @@ class CodeBlock: Instruction {
     
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.codeBlock = try container.decode([Instruction].self, forKey: .codeBlock)
+        self.codeBlock = try container.decode([Statement].self, forKey: .codeBlock)
         self.executionIndex = try container.decode(Int.self, forKey: .executionIndex)
         try super.init(from: decoder) // Ensure superclass is decoded
     }
@@ -41,47 +40,48 @@ class CodeBlock: Instruction {
         case codeBlock, executionIndex
     }
     
-    func deleteInstruction(at offsets: IndexSet) {
+    override func accept(visitor: Visitor) {
+        visitor.visit(codeBlock: self)
+    }
+    
+    func deleteStatement(at offsets: IndexSet) {
         codeBlock.remove(atOffsets: offsets)
     }
     
-    func deleteInstruction(id: UUID) {
+    func deleteStatement(id: UUID) {
         codeBlock.removeAll(where: {$0.id == id})
     }
     
-    func addInstruction(instruction: Instruction) {
-        codeBlock.append(instruction)
+    func addStatement(statement: Statement) {
+        codeBlock.append(statement)
     }
     
-    func addInstructionAtPosition(instruction: Instruction, position: Int) {
-        codeBlock.insert(instruction, at: position)
+    func addStatementAtPosition(statement: Statement, position: Int) {
+        codeBlock.insert(statement, at: position)
     }
     
-    func containsInstruction(id: UUID) -> Bool {
+    func containsStatement(id: UUID) -> Bool {
         return codeBlock.contains { $0.id == id }
     }
     
-    func getFirstInstructionWithID(uuid: UUID) -> (Instruction)? {
+    func getFirstStatementWithID(uuid: UUID) -> Statement? {
         return codeBlock.first { $0.id == uuid }
     }
     
-    func addInstructionAbove(uuid: UUID, instruction: Instruction) {
+    func addStatementAbove(uuid: UUID, statement: Statement) {
         guard let position = codeBlock.firstIndex(where: { $0.id == uuid }) else {
             return
         }
         
-        addInstructionAtPosition(instruction: instruction, position: position)
-    }
-    
-    override func accept(visitor: Visitor) {
-        visitor.visit(codeBlock: self)
+        addStatementAtPosition(statement: statement, position: position)
     }
     
     func hasNext() -> Bool {
         return codeBlock.count > executionIndex
     }
     
-    func next() -> (Instruction)? {
+    //TODO: CHECK IF EXECUTE ANOTHER CODEBLOCK
+    func next() -> (Statement)? {
         if (hasNext()) {
             let instruction = codeBlock[executionIndex]
             executionIndex = executionIndex + 1

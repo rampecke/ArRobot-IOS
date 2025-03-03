@@ -1,5 +1,5 @@
 //
-//  PlaceGrass.swift
+//  RightTurn.swift
 //  RobotKarolArKit
 //
 //  Created by Ramona Eckert on 07.06.24.
@@ -7,8 +7,8 @@
 
 import Foundation
 
-class PlaceGrass: Instruction {
+class RightTurn: Statement {
     override func accept(visitor: Visitor) {
-        visitor.visit(placeGrass: self)
+        visitor.visit(rightTurn: self)
     }
 }

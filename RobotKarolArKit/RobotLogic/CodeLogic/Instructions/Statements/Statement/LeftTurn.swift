@@ -7,7 +7,7 @@
 
 import Foundation
 
-class LeftTurn: Instruction {
+class LeftTurn: Statement {
     override func accept(visitor: Visitor) {
         visitor.visit(leftTurn: self)
     }

@@ -1,5 +1,5 @@
 //
-//  Step.swift
+//  Lift.swift
 //  RobotKarolArKit
 //
 //  Created by Ramona Eckert on 07.06.24.
@@ -7,8 +7,8 @@
 
 import Foundation
 
-class Step: Instruction {
+class Lift: Statement {
     override func accept(visitor: Visitor) {
-        visitor.visit(step: self)
+        visitor.visit(lift: self)
     }
 }

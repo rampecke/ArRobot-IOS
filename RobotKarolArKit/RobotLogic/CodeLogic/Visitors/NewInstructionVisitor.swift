@@ -1,103 +1,100 @@
 //
-//  NameVisitor.swift
+//  NewInstructionVisitor.swift
 //  RobotKarolArKit
 //
-//  Created by Ramona Eckert on 08.06.24.
+//  Created by Ramona Eckert on 10.06.24.
 //
 
 import Foundation
 
-class NameVisitor: Visitor {
-    private var name: String = "";
+class NewInstructionVisitor: Visitor {
     
-    func get() -> String {
-        return name;
+    private var instruction: any Instruction = Step();
+    
+    func get() -> any Instruction {
+        return instruction;
     }
     
     //Statements
     func visit(leftTurn: LeftTurn) {
-        self.name = "turnLeft"
+        self.instruction = LeftTurn()
     }
     
     func visit(rightTurn: RightTurn) {
-        self.name = "turnRight"
+        self.instruction = RightTurn()
     }
     
     func visit(lift: Lift) {
-        self.name = "lift"
+        self.instruction = Lift()
     }
     
     func visit(step: Step) {
-        self.name = "step"
+        self.instruction = Step()
     }
     
     func visit(placeGrass: PlaceGrass) {
-        self.name = "placeGrass"
+        self.instruction = PlaceGrass()
     }
     
     func visit(placeStone: PlaceStone) {
-        self.name = "placeStone"
+        self.instruction = PlaceStone()
     }
     
     func visit(placeWater: PlaceWater) {
-        self.name = "placeWater"
+        self.instruction = PlaceWater()
     }
     
     //ControllFlow
     func visit(codeBlock: CodeBlock) {
-        self.name = "codeBlock"
+        self.instruction = CodeBlock()
     }
     
     func visit(ifInstruction: If) {
-        self.name = "if"
+        self.instruction = If()
     }
     
     func visit(whileInstruction: While) {
-        self.name = "while"
+        self.instruction = While()
     }
     
     //Expressions
     func visit(isEast: IsEast) {
-        self.name = "isEast"
+        self.instruction = IsEast()
     }
     
     func visit(isNorth: IsNorth) {
-        self.name = "isNorth"
+        self.instruction = IsNorth()
     }
     
     func visit(isSouth: IsSouth) {
-        self.name = "isSouth"
+        self.instruction = IsSouth()
     }
     
     func visit(isWest: IsWest) {
-        self.name = "isWest"
+        self.instruction = IsWest()
     }
     
     func visit(isBorder: IsBorder) {
-        self.name = "isBorder"
+        self.instruction = IsBorder()
     }
     
     func visit(isBlock: IsBlock) {
-        self.name = "isBlock"
-    }
-    
-    func visit(expression: Expression) {
-        self.name = "expression"
+        self.instruction = IsBlock()
     }
     
     func visit(emptyExpression: EmptyExpression) {
-        self.name = "emptyExpression"
+        self.instruction = EmptyExpression()
     }
     
     func visit(and: And) {
-        self.name = "and"
+        self.instruction = And()
     }
     
     func visit(or: Or) {
-        self.name = "or"
+        self.instruction = And()
     }
     
     func visit(not: Not) {
-        self.name = "not"
+        self.instruction = Not()
     }
 }

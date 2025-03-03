@@ -44,18 +44,17 @@ struct CodeEditorView: View {
                 LazyVGrid(columns: columns, spacing: 10) {
                     ForEach($viewModel.allStatements, id: \.id) { $instruction in
                         InstructionAddTile(instruction: instruction).frame(height: 80).onTapGesture(perform: {
-                            viewModel.createNewInstruction(instruction: instruction)
+                            viewModel.createNewStatement(statement: instruction)
                         }).draggable(instruction)
                     }
                     ForEach($viewModel.allControllFlow, id: \.id) { $instruction in
                         InstructionAddTile(instruction: instruction).frame(height: 80).onTapGesture(perform: {
-                            viewModel.createNewInstruction(instruction: instruction)
+                            viewModel.createNewStatement(statement: instruction)
                         }).draggable(instruction)
                     }
                     ForEach($viewModel.allExpressions, id: \.id) { $instruction in
                         InstructionAddTile(instruction: instruction).frame(height: 80).onTapGesture(perform: {
                             //TODO: ADD A FUNCTION/VISITOR THAT ADDS THE EXPRESSION INTO THE NEXT EMPTYEXPRESSION if there is one
-                            //viewModel.createNewInstruction(instruction: instruction)
                         }).draggable(instruction)
                     }
                 }.padding(.horizontal, 10)

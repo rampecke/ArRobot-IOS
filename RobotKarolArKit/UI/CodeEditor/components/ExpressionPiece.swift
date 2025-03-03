@@ -24,8 +24,8 @@ struct ExpressionPiece: View {
             HStack {
                 ExpressionPiece(expression: andExpression.left, viewModel: viewModel)
                 expressionText(expression: expression, isEmpty: false)
-                    .dropDestination(for: Instruction.self) { items, _ in
-                        viewModel.handleInstructionDrop(instruction: items.first ?? Step(), targetInstruction: andExpression)
+                    .dropDestination(for: Expression.self) { items, _ in
+                        viewModel.handleExpressionDrop(expression: items.first ?? EmptyExpression(), targetExpression: andExpression)
                         return true
                     }
                 ExpressionPiece(expression: andExpression.right, viewModel: viewModel)
@@ -44,8 +44,8 @@ struct ExpressionPiece: View {
             HStack {
                 ExpressionPiece(expression: orExpression.left, viewModel: viewModel)
                 expressionText(expression: expression, isEmpty: false)
-                    .dropDestination(for: Instruction.self) { items, _ in
-                        viewModel.handleInstructionDrop(instruction: items.first ?? Step(), targetInstruction: orExpression)
+                    .dropDestination(for: Expression.self) { items, _ in
+                        viewModel.handleExpressionDrop(expression: items.first ?? EmptyExpression(), targetExpression: orExpression)
                         return true
                     }
                 ExpressionPiece(expression: orExpression.right, viewModel: viewModel)
@@ -63,8 +63,8 @@ struct ExpressionPiece: View {
         } else if let notExpression = expression as? Not {
             HStack {
                 expressionText(expression: expression, isEmpty: false)
-                    .dropDestination(for: Instruction.self) { items, _ in
-                        viewModel.handleInstructionDrop(instruction: items.first ?? Step(), targetInstruction: notExpression)
+                    .dropDestination(for: Expression.self) { items, _ in
+                        viewModel.handleExpressionDrop(expression: items.first ?? EmptyExpression(), targetExpression: notExpression)
                         return true
                     }
                 ExpressionPiece(expression: notExpression.content, viewModel: viewModel)
@@ -92,8 +92,9 @@ struct ExpressionPiece: View {
                      topTrailingRadius: 5
                  )
                 )
-                .dropDestination(for: Instruction.self) { items, _ in
-                    viewModel.handleInstructionDrop(instruction: items.first ?? Step(), targetInstruction: emptyExpression)
+                .dropDestination(for: Expression.self) { items, _ in
+                    viewModel.handleExpressionDrop(expression: items.first ?? EmptyExpression(), targetExpression: emptyExpression)
+                    //viewModel.handleInstructionDrop(instruction: items.first ?? Step(), targetInstruction: emptyExpression)
                     return true
                 }
             //emptyExpression is not draggable
@@ -110,8 +111,8 @@ struct ExpressionPiece: View {
                      topTrailingRadius: 5
                  )
                 )
-                .dropDestination(for: Instruction.self) { items, _ in
-                    viewModel.handleInstructionDrop(instruction: items.first ?? Step(), targetInstruction: expression)
+                .dropDestination(for: Expression.self) { items, _ in
+                    viewModel.handleExpressionDrop(expression: items.first ?? EmptyExpression(), targetExpression: expression)
                     return true
                 }
                 .draggable(expression)
