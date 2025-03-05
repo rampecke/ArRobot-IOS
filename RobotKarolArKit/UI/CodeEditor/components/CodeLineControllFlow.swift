@@ -26,8 +26,22 @@ struct CodeLineControllFlow: View {
                 //Only show this if instruction is If or While
                 if let ifInstruction = instruction as? If {
                     ExpressionLine(expression: ifInstruction.expression, viewModel: viewModel)
+                        .clipShape(
+                            RoundedRectangle(cornerRadius: 6)
+                        )
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 6)
+                                .stroke(viewModel.executionVisitor.lastExecuted.id == ifInstruction.expression.id ? InstructionColorNameHelper().getColor("warning_color") : .clear, lineWidth: 2)
+                        )
                 } else if let whileInstruction = instruction as? While {
                     ExpressionLine(expression: whileInstruction.expression, viewModel: viewModel)
+                        .clipShape(
+                            RoundedRectangle(cornerRadius: 6)
+                        )
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 6)
+                                .stroke(viewModel.executionVisitor.lastExecuted.id == whileInstruction.expression.id ? InstructionColorNameHelper().getColor("warning_color") : .clear, lineWidth: 2)
+                        )
                 }
             }
             

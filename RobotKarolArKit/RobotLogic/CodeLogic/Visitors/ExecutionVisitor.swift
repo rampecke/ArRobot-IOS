@@ -13,6 +13,7 @@ class ExecutionVisitor: Visitor {
     var endExecution: Bool = false
     var executionMessage: String? = nil
     var finishedExecution = false
+    var lastExecuted: (any Instruction) = Step()
     
     init(world: World) {
         self.world = world
@@ -25,6 +26,8 @@ class ExecutionVisitor: Visitor {
         if endExecution {
             executionMessage = "It was not possible to turn left - Execution failed"
         }
+        
+        lastExecuted = leftTurn
     }
     
     func visit(rightTurn: RightTurn) {
@@ -33,6 +36,8 @@ class ExecutionVisitor: Visitor {
         if endExecution {
             executionMessage = "It was not possible to turn left - Execution failed"
         }
+        
+        lastExecuted = rightTurn
     }
     
     func visit(lift: Lift) {
@@ -41,6 +46,8 @@ class ExecutionVisitor: Visitor {
         if endExecution {
             executionMessage = "It was not possible to pick up a block here - Execution failed"
         }
+        
+        lastExecuted = lift
     }
     
     func visit(step: Step) {
@@ -49,6 +56,8 @@ class ExecutionVisitor: Visitor {
         if endExecution {
             executionMessage = "It was not possible to make a step here - Execution failed"
         }
+        
+        lastExecuted = step
     }
     
     func visit(placeGrass: PlaceGrass) {
@@ -57,6 +66,8 @@ class ExecutionVisitor: Visitor {
         if endExecution {
             executionMessage = "It was not possible to place a gras block here - Execution failed"
         }
+        
+        lastExecuted = placeGrass
     }
     
     func visit(placeStone: PlaceStone) {
@@ -65,6 +76,8 @@ class ExecutionVisitor: Visitor {
         if endExecution {
             executionMessage = "It was not possible to place a stone block here - Execution failed"
         }
+        
+        lastExecuted = placeStone
     }
     
     func visit(placeWater: PlaceWater) {
@@ -73,6 +86,8 @@ class ExecutionVisitor: Visitor {
         if endExecution {
             executionMessage = "It was not possible to place a water block here - Execution failed"
         }
+        
+        lastExecuted = placeWater
     }
     
     func visit(codeBlock: CodeBlock) {
@@ -95,6 +110,7 @@ class ExecutionVisitor: Visitor {
             //if the executionIndex is -1 check the expression instead
             if ifInstruction.executionIndex == -1 {
                 ifInstruction.expression.accept(visitor: self)
+                lastExecuted = ifInstruction.expression
                 
                 //If the expression was true (finishedExecution is false then) we need to change the executionIndex
                 if self.endExecution || self.finishedExecution {
@@ -119,6 +135,7 @@ class ExecutionVisitor: Visitor {
             //if the executionIndex is -1 check the expression instead
             if whileInstruction.executionIndex == -1 {
                 whileInstruction.expression.accept(visitor: self)
+                lastExecuted = whileInstruction.expression
                 
                 //If the expression was true (finishedExecution is false then) we need to change the executionIndex
                 if self.endExecution || self.finishedExecution {

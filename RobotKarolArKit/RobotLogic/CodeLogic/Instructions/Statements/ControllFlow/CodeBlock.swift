@@ -95,6 +95,7 @@ class CodeBlock: Statement {
                 //Update the status of the execution to the caller visitor
                 updateExecutionVisitor.endExecution = executionVisitor.endExecution
                 updateExecutionVisitor.executionMessage = executionVisitor.executionMessage
+                updateExecutionVisitor.lastExecuted = executionVisitor.lastExecuted
                 
                 if updateExecutionVisitor.endExecution {
                     return

@@ -18,7 +18,15 @@ struct CodeBlockView: View {
                 if let controlFlow = instruction as? CodeBlock {
                     CodeLineControllFlow(instruction: controlFlow, viewModel: viewModel)
                 } else {
+                    // Create a Binding for isLastExecuted∆
                     CodeLine(instruction: instruction, CodeLineType.CodeLine)
+                        .clipShape(
+                            RoundedRectangle(cornerRadius: 6)
+                        )
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 6)
+                                .stroke(viewModel.executionVisitor.lastExecuted.id == instruction.id ? InstructionColorNameHelper().getColor("warning_color") : .clear, lineWidth: 2)
+                        )
                         .contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
                         .draggable(instruction)
                         .dropDestination(for: Statement.self) { items, _ in
