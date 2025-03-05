@@ -8,6 +8,7 @@
 import Foundation
 import RealityKit
 
+@Observable
 class Block {
     var blockTyp: BlockTyp
     var blockEntity: Entity = Entity()

@@ -14,9 +14,7 @@ class CodeEditorViewModel {
     var allControllFlow: [CodeBlock] = [If(), While()]
     var allExpressions: [Expression] = [IsEast(), IsWest(), IsNorth(), IsSouth(), IsBlock(), IsBorder(), And(), Or(), Not()]
     
-    
     var world = World(width: 6, length: 6)
-    var finishedExecution = false
     var executionVisitor: ExecutionVisitor
     var executionSpeed = 1.0
     var arType: ARType = ARType.AR
@@ -55,18 +53,10 @@ class CodeEditorViewModel {
     
     //TODO: USE ACCEPT OF CODEBLOCK
     func next() {
-        if executionVisitor.endExecution || finishedExecution {
+        if executionVisitor.endExecution || executionVisitor.finishedExecution {
             return
         } else {
-            guard let instruction = codeBlock.next() else {
-                finishedExecution = true
-                return
-            }
-            
-            instruction.accept(visitor: executionVisitor)
-            if(!codeBlock.hasNext()) {
-                finishedExecution = true
-            }
+            codeBlock.accept(visitor: executionVisitor)
         }
     }
     
@@ -75,8 +65,8 @@ class CodeEditorViewModel {
     }
 
     private func executeNextStep() {
-        // Check the stopping conditions
-        guard !executionVisitor.endExecution && !finishedExecution else {
+        // Check the stopping conditions -> Make sure we don't call the dispatcher again
+        guard !executionVisitor.endExecution && !executionVisitor.finishedExecution else {
             return
         }
         
@@ -95,7 +85,6 @@ class CodeEditorViewModel {
         codeBlock.executionIndex = 0
         world.resetWorld()
         self.executionVisitor = ExecutionVisitor(world: world)
-        self.finishedExecution = false
     }
     
     func resetCode() {

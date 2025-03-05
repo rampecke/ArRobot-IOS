@@ -8,6 +8,7 @@
 import Foundation
 import RealityKit
 
+@Observable
 class World {
     private var tiles: [[Tile]]
     private var width: Int

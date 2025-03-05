@@ -10,7 +10,8 @@ import Foundation
 class ExecutionVisitor: Visitor {
     var world: World
     var endExecution: Bool = false
-    var executionMessage: String = ""
+    var executionMessage: String? = nil
+    var finishedExecution = false
     
     init(world: World) {
         self.world = world
@@ -75,103 +76,65 @@ class ExecutionVisitor: Visitor {
     
     //ControllFlow //TODO: ADD CONTROLLFLOW
     func visit(codeBlock: CodeBlock) {
-        //Only perform the next Statement
+        if endExecution {
+            return
+        } else {
+            codeBlock.executeNext(updateExecutionVisitor: self, world: self.world)
+            
+            // if my codeblock has no next then and the execution has not ended
+            if !codeBlock.nextExists() && !endExecution {
+                self.finishedExecution = true
+            }
+        }
     }
     
+    //TODO: ADD check of Expressions
     func visit(ifInstruction: If) {
-        //Only perform the next Statement
+        if endExecution {
+            return
+        } else {
+            //TODO: if -1 execution index check the expression first
+            ifInstruction.executeNext(updateExecutionVisitor: self, world: self.world)
+            
+            // if my codeblock has no next then and the execution has not ended
+            //TODO: RESET to -1 first
+            if !ifInstruction.nextExists() && !endExecution {
+                self.finishedExecution = true
+            }
+        }
     }
     
+    //TODO: ADD check of Expressions
     func visit(whileInstruction: While) {
-        //Only perform the next Statement
-    }
-    
-    //Expressions
-    func visit(isEast: IsEast) {
-        endExecution = true
-        
         if endExecution {
-            executionMessage = "It is not allowed to have a condition here - Execution failed"
+            return
+        } else {
+            //TODO: if -1 execution index check the expression first
+            whileInstruction.executeNext(updateExecutionVisitor: self, world: self.world)
+            
+            // if my codeblock has no next then and the execution has not ended
+            //TODO: RESET to -1 first
+            if !whileInstruction.nextExists() && !endExecution {
+                self.finishedExecution = true
+            }
         }
     }
     
-    func visit(isNorth: IsNorth) {
-        endExecution = true
-        
-        if endExecution {
-            executionMessage = "It is not allowed to have a condition here - Execution failed"
-        }
-    }
+    // Expressions (Conditions)
+    func visit(isEast: IsEast) { handleInvalidCondition() }
+    func visit(isNorth: IsNorth) { handleInvalidCondition() }
+    func visit(isSouth: IsSouth) { handleInvalidCondition() }
+    func visit(isWest: IsWest) { handleInvalidCondition() }
+    func visit(isBorder: IsBorder) { handleInvalidCondition() }
+    func visit(isBlock: IsBlock) { handleInvalidCondition() }
+    func visit(expression: Expression) { handleInvalidCondition() }
+    func visit(emptyExpression: EmptyExpression) { handleInvalidCondition() }
+    func visit(and: And) { handleInvalidCondition() }
+    func visit(or: Or) { handleInvalidCondition() }
+    func visit(not: Not) { handleInvalidCondition() }
     
-    func visit(isSouth: IsSouth) {
+    private func handleInvalidCondition() {
         endExecution = true
-        
-        if endExecution {
-            executionMessage = "It is not allowed to have a condition here - Execution failed"
-        }
-    }
-    
-    func visit(isWest: IsWest) {
-        endExecution = true
-        
-        if endExecution {
-            executionMessage = "It is not allowed to have a condition here - Execution failed"
-        }
-    }
-    
-    func visit(isBorder: IsBorder) {
-        endExecution = true
-        
-        if endExecution {
-            executionMessage = "It is not allowed to have a condition here - Execution failed"
-        }
-    }
-    
-    func visit(isBlock: IsBlock) {
-        endExecution = true
-        
-        if endExecution {
-            executionMessage = "It is not allowed to have a condition here - Execution failed"
-        }
-    }
-    
-    func visit(expression: Expression) {
-        endExecution = true
-        
-        if endExecution {
-            executionMessage = "It is not allowed to have a condition here - Execution failed"
-        }
-    }
-    
-    func visit(emptyExpression: EmptyExpression) {
-        endExecution = true
-        
-        if endExecution {
-            executionMessage = "It is not allowed to have a condition here - Execution failed"
-        }
-    }
-    
-    func visit(and: And) {
-        endExecution = true
-        
-        if endExecution {
-            executionMessage = "It is not allowed to have a condition here - Execution failed"
-        }
-    }
-    
-    func visit(or: Or) {
-        endExecution = true
-        
-        if endExecution {
-            executionMessage = "It is not allowed to have a condition here - Execution failed"
-        }
-    }
-    
-    func visit(not: Not) {
-        endExecution = true
-        
-        if endExecution {
-            executionMessage = "It is not allowed to have a condition here - Execution failed"
-        }
+        executionMessage = "It is not allowed to have a condition here - Execution failed"
     }
 }

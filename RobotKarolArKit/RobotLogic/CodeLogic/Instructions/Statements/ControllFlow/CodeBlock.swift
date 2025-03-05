@@ -21,7 +21,7 @@ class CodeBlock: Statement {
         self.codeBlock = []
         super.init()
     }
-    
+
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.codeBlock = try container.decode([Statement].self, forKey: .codeBlock)
@@ -76,18 +76,35 @@ class CodeBlock: Statement {
         addStatementAtPosition(statement: statement, position: position)
     }
     
-    func hasNext() -> Bool {
-        return codeBlock.count > executionIndex
+    
+    //When the executionIndex is bigger than the list has elements or is smaller then 0
+    func nextExists() -> Bool {
+        return codeBlock.count > executionIndex && executionIndex >= 0
     }
     
-    //TODO: CHECK IF EXECUTE ANOTHER CODEBLOCK
-    func next() -> (Statement)? {
-        if (hasNext()) {
+    func executeNext(updateExecutionVisitor: ExecutionVisitor, world: World) {
+        //if my executionIndex is not out of range
+        if (nextExists()) {
             let instruction = codeBlock[executionIndex]
-            executionIndex = executionIndex + 1
-            return instruction
-        } else {
-            return nil
+            
+            if let codeBlockInstruction = instruction as? CodeBlock {
+                //Execute the next move on the CodeBlockInstruction on a new Visitor
+                let executionVisitor = ExecutionVisitor(world: world)
+                codeBlockInstruction.accept(visitor: executionVisitor)
+                
+                //Update the status of the execution to the caller visitor
+                updateExecutionVisitor.endExecution = executionVisitor.endExecution
+                updateExecutionVisitor.executionMessage = executionVisitor.executionMessage
+                
+                //If the execution was finished on the codeBlock  then go to next else stay at this codeBlock
+                if executionVisitor.finishedExecution {
+                    executionIndex = executionIndex + 1
+                }
+                
+            } else { //If it is a normal statement execute it and go to next
+                instruction.accept(visitor: updateExecutionVisitor)
+                executionIndex = executionIndex + 1
+            }
         }
     }
 }

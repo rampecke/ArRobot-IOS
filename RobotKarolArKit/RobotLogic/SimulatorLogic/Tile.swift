@@ -8,6 +8,7 @@
 import Foundation
 import RealityKit
 
+@Observable
 class Tile {
     private var blocks: [Block] = []
     
