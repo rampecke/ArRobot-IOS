@@ -51,7 +51,6 @@ class CodeEditorViewModel {
         codeBlock.addStatementAtPosition(statement: newStatement, position: position)
     }
     
-    //TODO: USE ACCEPT OF CODEBLOCK
     func next() {
         if executionVisitor.endExecution || executionVisitor.finishedExecution {
             return
@@ -81,8 +80,9 @@ class CodeEditorViewModel {
         }
     }
     func reset() {
-        //TODO: CLEAN ALL CODEBLOCKS
-        codeBlock.executionIndex = 0
+        let resetVisitor = ResetCodeBlockVisitor()
+        codeBlock.accept(visitor: resetVisitor)
+        
         world.resetWorld()
         self.executionVisitor = ExecutionVisitor(world: world)
     }

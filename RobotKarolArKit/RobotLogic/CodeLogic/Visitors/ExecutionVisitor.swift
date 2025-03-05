@@ -7,6 +7,7 @@
 
 import Foundation
 
+@Observable
 class ExecutionVisitor: Visitor {
     var world: World
     var endExecution: Bool = false
@@ -46,7 +47,7 @@ class ExecutionVisitor: Visitor {
         endExecution = !world.step()
         
         if endExecution {
-            executionMessage = "It was not to make a step here - Execution failed"
+            executionMessage = "It was not possible to make a step here - Execution failed"
         }
     }
     
@@ -74,7 +75,6 @@ class ExecutionVisitor: Visitor {
         }
     }
     
-    //ControllFlow //TODO: ADD CONTROLLFLOW
     func visit(codeBlock: CodeBlock) {
         if endExecution {
             return
@@ -88,53 +88,108 @@ class ExecutionVisitor: Visitor {
         }
     }
     
-    //TODO: ADD check of Expressions
     func visit(ifInstruction: If) {
         if endExecution {
             return
         } else {
-            //TODO: if -1 execution index check the expression first
-            ifInstruction.executeNext(updateExecutionVisitor: self, world: self.world)
-            
-            // if my codeblock has no next then and the execution has not ended
-            //TODO: RESET to -1 first
-            if !ifInstruction.nextExists() && !endExecution {
-                self.finishedExecution = true
+            //if the executionIndex is -1 check the expression instead
+            if ifInstruction.executionIndex == -1 {
+                ifInstruction.expression.accept(visitor: self)
+                
+                //If the expression was true (finishedExecution is false then) we need to change the executionIndex
+                if self.endExecution || self.finishedExecution {
+                    return
+                }
+                ifInstruction.executionIndex = 0
+            } else {
+                ifInstruction.executeNext(updateExecutionVisitor: self, world: self.world)
+                
+                // if my codeblock has no next then and the execution has not ended then finish this codeBlock visitor
+                if !ifInstruction.nextExists() && !endExecution {
+                    self.finishedExecution = true
+                }
             }
         }
     }
     
-    //TODO: ADD check of Expressions
     func visit(whileInstruction: While) {
         if endExecution {
             return
         } else {
-            //TODO: if -1 execution index check the expression first
-            whileInstruction.executeNext(updateExecutionVisitor: self, world: self.world)
-            
-            // if my codeblock has no next then and the execution has not ended
-            //TODO: RESET to -1 first
-            if !whileInstruction.nextExists() && !endExecution {
-                self.finishedExecution = true
+            //if the executionIndex is -1 check the expression instead
+            if whileInstruction.executionIndex == -1 {
+                whileInstruction.expression.accept(visitor: self)
+                
+                //If the expression was true (finishedExecution is false then) we need to change the executionIndex
+                if self.endExecution || self.finishedExecution {
+                    return
+                }
+                whileInstruction.executionIndex = 0
+            } else {
+                whileInstruction.executeNext(updateExecutionVisitor: self, world: self.world)
+                
+                // if my codeblock has no next then and the execution has not ended then check the expression again next
+                if !whileInstruction.nextExists() {
+                    whileInstruction.executionIndex = -1
+                }
             }
         }
     }
     
     // Expressions (Conditions)
-    func visit(isEast: IsEast) { handleInvalidCondition() }
-    func visit(isNorth: IsNorth) { handleInvalidCondition() }
-    func visit(isSouth: IsSouth) { handleInvalidCondition() }
-    func visit(isWest: IsWest) { handleInvalidCondition() }
-    func visit(isBorder: IsBorder) { handleInvalidCondition() }
-    func visit(isBlock: IsBlock) { handleInvalidCondition() }
-    func visit(expression: Expression) { handleInvalidCondition() }
-    func visit(emptyExpression: EmptyExpression) { handleInvalidCondition() }
-    func visit(and: And) { handleInvalidCondition() }
-    func visit(or: Or) { handleInvalidCondition() }
-    func visit(not: Not) { handleInvalidCondition() }
+    func visit(isEast: IsEast) {
+        finishedExecution = !world.checkRobotIsFacingDirection(direction: Direction.EAST)
+    }
     
-    private func handleInvalidCondition() {
+    func visit(isNorth: IsNorth) {
+        finishedExecution = !world.checkRobotIsFacingDirection(direction: Direction.NORTH)
+    }
+    
+    
+    func visit(isSouth: IsSouth) {
+        finishedExecution = !world.checkRobotIsFacingDirection(direction: Direction.SOUTH)
+    }
+    
+    func visit(isWest: IsWest) {
+        finishedExecution = !world.checkRobotIsFacingDirection(direction: Direction.WEST)
+    }
+    
+    func visit(isBorder: IsBorder) {
+        finishedExecution = world.nextTileExists()
+    }
+    
+    func visit(isBlock: IsBlock) {
+        finishedExecution = !world.nextTileHasBlock()
+    }
+    
+    func visit(emptyExpression: EmptyExpression) {
         endExecution = true
-        executionMessage = "It is not allowed to have a condition here - Execution failed"
+        executionMessage = "It is not allowed to have empty conditions here - Execution failed"
+    }
+    
+    func visit(and: And) {
+        let leftExpressionVisitor = ExecutionVisitor(world: self.world)
+        and.left.accept(visitor: leftExpressionVisitor)
+        
+        let rightExpressionVisitor = ExecutionVisitor(world: self.world)
+        and.right.accept(visitor: rightExpressionVisitor)
+        
+        finishedExecution = leftExpressionVisitor.finishedExecution && rightExpressionVisitor.finishedExecution
+    }
+    
+    func visit(or: Or) {
+        let leftExpressionVisitor = ExecutionVisitor(world: self.world)
+        or.left.accept(visitor: leftExpressionVisitor)
+        
+        let rightExpressionVisitor = ExecutionVisitor(world: self.world)
+        or.right.accept(visitor: rightExpressionVisitor)
+        
+        finishedExecution = leftExpressionVisitor.finishedExecution || rightExpressionVisitor.finishedExecution
+    }
+    func visit(not: Not) {
+        let contentExpressionVisitor = ExecutionVisitor(world: self.world)
+        not.content.accept(visitor: contentExpressionVisitor)
+        
+        finishedExecution = !contentExpressionVisitor.finishedExecution
     }
 }

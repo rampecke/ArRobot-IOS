@@ -96,6 +96,10 @@ class CodeBlock: Statement {
                 updateExecutionVisitor.endExecution = executionVisitor.endExecution
                 updateExecutionVisitor.executionMessage = executionVisitor.executionMessage
                 
+                if updateExecutionVisitor.endExecution {
+                    return
+                }
+                
                 //If the execution was finished on the codeBlock  then go to next else stay at this codeBlock
                 if executionVisitor.finishedExecution {
                     executionIndex = executionIndex + 1

@@ -87,8 +87,6 @@ class AddExpressionVisitor: Visitor {
     
     func visit(isBlock: IsBlock) {}
     
-    func visit(expression: Expression) {}
-    
     func visit(emptyExpression: EmptyExpression) {}
     
     func visit(and: And) {

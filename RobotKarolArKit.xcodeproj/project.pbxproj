@@ -45,6 +45,7 @@
 		A02B6AE52C19130200CAFF82 /* ArViewControlBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02B6AE42C19130200CAFF82 /* ArViewControlBar.swift */; };
 		A02CAC122D759BA300E751DF /* Statement.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02CAC112D759BA300E751DF /* Statement.swift */; };
 		A02CAC182D75D13A00E751DF /* NoDropArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02CAC172D75D13A00E751DF /* NoDropArea.swift */; };
+		A02CAC1C2D78AB5300E751DF /* ResetCodeBlockVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02CAC1B2D78AB5300E751DF /* ResetCodeBlockVisitor.swift */; };
 		A06BD7C32BAE9F4E00863CA5 /* RobotKarolArKitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06BD7C22BAE9F4E00863CA5 /* RobotKarolArKitApp.swift */; };
 		A06BD7C72BAE9F4F00863CA5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A06BD7C62BAE9F4F00863CA5 /* Assets.xcassets */; };
 		A06BD7CB2BAE9F4F00863CA5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A06BD7CA2BAE9F4F00863CA5 /* Preview Assets.xcassets */; };
@@ -104,6 +105,7 @@
 		A02CAC112D759BA300E751DF /* Statement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Statement.swift; sourceTree = "<group>"; };
 		A02CAC162D75AF7100E751DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		A02CAC172D75D13A00E751DF /* NoDropArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoDropArea.swift; sourceTree = "<group>"; };
+		A02CAC1B2D78AB5300E751DF /* ResetCodeBlockVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetCodeBlockVisitor.swift; sourceTree = "<group>"; };
 		A06BD7BF2BAE9F4E00863CA5 /* RobotKarolArKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RobotKarolArKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A06BD7C22BAE9F4E00863CA5 /* RobotKarolArKitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RobotKarolArKitApp.swift; sourceTree = "<group>"; };
 		A06BD7C62BAE9F4F00863CA5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 				A01482ED2D70DE6C00AACE8D /* AddStatementVisitor.swift */,
 				A0B40CA32D71B7E800AEFD40 /* DeleteExpressionVisitor.swift */,
 				A0B40CA52D71BD0400AEFD40 /* AddExpressionVisitor.swift */,
+				A02CAC1B2D78AB5300E751DF /* ResetCodeBlockVisitor.swift */,
 			);
 			path = Visitors;
 			sourceTree = "<group>";
@@ -475,6 +478,7 @@
 				A02B6A942C13A22000CAFF82 /* PlaceGrass.swift in Sources */,
 				A02CAC122D759BA300E751DF /* Statement.swift in Sources */,
 				A01482F52D7114AE00AACE8D /* IsEast.swift in Sources */,
+				A02CAC1C2D78AB5300E751DF /* ResetCodeBlockVisitor.swift in Sources */,
 				A06BD7DB2BAF2C0A00863CA5 /* Robot.swift in Sources */,
 				A02B6A8E2C13A0CC00CAFF82 /* RightTurn.swift in Sources */,
 				A06BD7E22BB4735E00863CA5 /* Visitor.swift in Sources */,

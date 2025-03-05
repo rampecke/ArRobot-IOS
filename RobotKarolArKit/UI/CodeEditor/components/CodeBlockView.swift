@@ -11,7 +11,7 @@ struct CodeBlockView: View {
     @Bindable var codeBlock: CodeBlock
     @Bindable var viewModel: CodeEditorViewModel
     
-    //TODO: WHEN DRAGGING THE  ADD A RECTANGLE ON DROP ELSE DON'T
+    //TODO: WHEN DRAGGING THE ADD A RECTANGLE ON DROP ELSE DON'T
     var body: some View {
         VStack(spacing: 10) {
             ForEach($codeBlock.codeBlock, id: \.id) { $instruction in

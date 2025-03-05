@@ -104,7 +104,11 @@ class World {
         return true
     }
     
-    private func nextTileExists() -> Bool {
+    func checkRobotIsFacingDirection(direction: Direction) -> Bool {
+        return robot.getFacingDirection() == direction
+    }
+    
+    func nextTileExists() -> Bool {
         switch robot.getFacingDirection() {
         case .NORTH:
             return robot.getPosition().1 - 1 >= 0
@@ -114,6 +118,16 @@ class World {
             return robot.getPosition().1 + 1 < length
         case .WEST:
             return robot.getPosition().0 - 1 >= 0
+        }
+    }
+    
+    func nextTileHasBlock() -> Bool {
+        if(nextTileExists()) {
+            let positionInFront = robot.positionInFront()
+            let tile = tiles[positionInFront.0][positionInFront.1]
+            return !tile.getBlocks().isEmpty
+        } else {
+            return false
         }
     }
     
