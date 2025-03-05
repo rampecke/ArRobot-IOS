@@ -8,6 +8,7 @@
 import Foundation
 import RealityKit
 
+@Observable
 class World {
     private var tiles: [[Tile]]
     private var width: Int
@@ -18,6 +19,7 @@ class World {
     let tileWidth: Float =  0.05
     let lineWidth: Float = 0.002
     var worldEntity: Entity = Entity()
+    var arWorldWasCreated: Bool = false
     
     init(width: Int, length: Int) {
         self.width = width
@@ -56,7 +58,6 @@ class World {
         if(nextTileExists()) {
             let positionInFront = robot.positionInFront()
             let tile = tiles[positionInFront.0][positionInFront.1]
-            print(tile.getBlocks())
             robot.step(tileWidth: tileWidth, tileHight: tileHeight, tilesInFront: tile.getBlocks().count)
             return true
         } else {
@@ -103,7 +104,11 @@ class World {
         return true
     }
     
-    private func nextTileExists() -> Bool {
+    func checkRobotIsFacingDirection(direction: Direction) -> Bool {
+        return robot.getFacingDirection() == direction
+    }
+    
+    func nextTileExists() -> Bool {
         switch robot.getFacingDirection() {
         case .NORTH:
             return robot.getPosition().1 - 1 >= 0
@@ -113,6 +118,16 @@ class World {
             return robot.getPosition().1 + 1 < length
         case .WEST:
             return robot.getPosition().0 - 1 >= 0
+        }
+    }
+    
+    func nextTileHasBlock() -> Bool {
+        if(nextTileExists()) {
+            let positionInFront = robot.positionInFront()
+            let tile = tiles[positionInFront.0][positionInFront.1]
+            return !tile.getBlocks().isEmpty
+        } else {
+            return false
         }
     }
     
@@ -168,7 +183,10 @@ class World {
     }
     
     func anchorWorld(arView: ARView, anchor: AnchorEntity) {
-        createArWorld()
+        if(!arWorldWasCreated) {
+            createArWorld()
+            arWorldWasCreated = true
+        }
         //Reposition because of Offset
         worldEntity.position = [-(tileWidth * Float(width)/2), 0, -(tileWidth * Float(length)/2)]
         anchor.addChild(self.worldEntity)

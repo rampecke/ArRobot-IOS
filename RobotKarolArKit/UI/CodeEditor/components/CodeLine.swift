@@ -10,6 +10,7 @@ import SwiftUI
 struct CodeLine: View {
     var nameOfInstruction: String
     var codeLineType: CodeLineType
+    let instructionColorHelper: InstructionColorNameHelper = InstructionColorNameHelper()
     
     init(instruction: any Instruction, _ codeLineType: CodeLineType?) {
         let nameVisitor = NameVisitor()
@@ -18,43 +19,44 @@ struct CodeLine: View {
         self.codeLineType = codeLineType ?? CodeLineType.CodeLine
     }
     
-    func getColor(_ nameOfInstruction: String, _ ending: ColorEnding) -> Color {
-        if let uiColor = UIColor(named: "\(nameOfInstruction)\(ending.rawValue)") {
-            return Color(uiColor)
-        } else {
-            if ending == .onPrimary {
-                return Color.black
-            } else {
-                return Color.gray
-            }
-        }
-    }
-    
     var body: some View {
         HStack {
             Text(LocalizedStringKey(nameOfInstruction))
-                .foregroundColor(getColor(nameOfInstruction, .onPrimary))
+                .foregroundColor(instructionColorHelper.getColor(nameOfInstruction, .onPrimary))
                 .font(.system(size: codeLineType == CodeLineType.PreviewCodeLine ? 16 : 20, weight: .semibold, design: .rounded))
             Spacer()
         }.frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
-        .background(getColor(nameOfInstruction, .primary))
+        .background(instructionColorHelper.getColor(nameOfInstruction, .primary))
         .clipShape(
          .rect(
              topLeadingRadius: 5,
              bottomLeadingRadius: 5,
-             bottomTrailingRadius: codeLineType == CodeLineType.PreviewCodeLine ? 5 : 0,
-             topTrailingRadius: codeLineType == CodeLineType.PreviewCodeLine ? 5 : 0
+             bottomTrailingRadius: 5,
+             topTrailingRadius: 5
          )
         )
     }
 }
 
 #Preview {
+    @Previewable @State var viewModel: CodeEditorViewModel = CodeEditorViewModel()
     ScrollView {
-        CodeLine(instruction: Step(), CodeLineType.CodeLine)
-        CodeLine(instruction: Step(), CodeLineType.CodeLine)
-                        .environment(\.locale, .init(identifier: "en"))
+        ForEach($viewModel.allStatements, id: \.id) { $instruction in
+            CodeLine(instruction: instruction, CodeLineType.CodeLine)
+            CodeLine(instruction: instruction, CodeLineType.CodeLine)
+                            .environment(\.locale, .init(identifier: "en"))
+        }
+        ForEach($viewModel.allControllFlow, id: \.id) { $instruction in
+            CodeLine(instruction: instruction, CodeLineType.CodeLine)
+            CodeLine(instruction: instruction, CodeLineType.CodeLine)
+                            .environment(\.locale, .init(identifier: "en"))
+        }
+        ForEach($viewModel.allExpressions, id: \.id) { $instruction in
+            CodeLine(instruction: instruction, CodeLineType.CodeLine)
+            CodeLine(instruction: instruction, CodeLineType.CodeLine)
+                            .environment(\.locale, .init(identifier: "en"))
+        }
     }.padding()
 }
 

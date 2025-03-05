@@ -8,6 +8,7 @@
 import Foundation
 import RealityKit
 
+@Observable
 class Robot {
     private var facingDirection: Direction
     private var position: (Int, Int)

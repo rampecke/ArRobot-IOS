@@ -10,12 +10,16 @@ import Foundation
 @Observable
 class CodeEditorViewModel {
     var codeBlock: CodeBlock = CodeBlock()
-    var allStatements: [any Instruction] = [Step(), Lift(), RightTurn(), LeftTurn(), PlaceGrass(), PlaceStone(), PlaceWater()]
+    var allStatements: [Statement] = [Step(), Lift(), RightTurn(), LeftTurn(), PlaceGrass(), PlaceStone(), PlaceWater()]
+    var allControllFlow: [CodeBlock] = [If(), While()]
+    var allExpressions: [Expression] = [IsEast(), IsWest(), IsNorth(), IsSouth(), IsBlock(), IsBorder(), And(), Or(), Not()]
+    
     var world = World(width: 6, length: 6)
-    var finishedExecution = false
     var executionVisitor: ExecutionVisitor
     var executionSpeed = 1.0
     var arType: ARType = ARType.AR
+    
+    var dragActive = false
     
     init(codeBlock: CodeBlock = CodeBlock(), world: World = World(width: 6, length: 6)) {
         self.codeBlock = codeBlock
@@ -23,37 +27,35 @@ class CodeEditorViewModel {
         self.executionVisitor = ExecutionVisitor(world: world)
     }
     
-    private func addInstruction(instruction: any Instruction) {
-        codeBlock.addInstruction(instruction: instruction)
+    private func addStatement(statement: Statement) {
+        codeBlock.addStatement(statement: statement)
     }
     
-    func createNewInstruction(instruction: any Instruction) {
+    func createNewStatement(statement: Statement) {
         let newInstructionVisitor = NewInstructionVisitor()
-        instruction.accept(visitor: newInstructionVisitor)
-        addInstruction(instruction: newInstructionVisitor.get())
+        statement.accept(visitor: newInstructionVisitor)
+        
+        guard let newStatement = newInstructionVisitor.get() as? Statement else {
+            return
+        }
+        addStatement(statement: newStatement)
     }
     
-    func deleteInstruction(at offsets: IndexSet) {
-        codeBlock.codeBlock.remove(atOffsets: offsets)
-    }
-    
-    func moveInstruction(from source: IndexSet, to destination: Int) {
-        codeBlock.codeBlock.move(fromOffsets: source, toOffset: destination)
+    func addStatementToPosition(statement: Statement, position: Int) {
+        let newInstructionVisitor = NewInstructionVisitor()
+        statement.accept(visitor: newInstructionVisitor)
+        
+        guard let newStatement = newInstructionVisitor.get() as? Statement else {
+            return
+        }
+        codeBlock.addStatementAtPosition(statement: newStatement, position: position)
     }
     
     func next() {
-        if executionVisitor.endExecution || finishedExecution {
+        if executionVisitor.endExecution || executionVisitor.finishedExecution {
             return
         } else {
-            guard let instruction = codeBlock.next() else {
-                finishedExecution = true
-                return
-            }
-            
-            instruction.accept(visitor: executionVisitor)
-            if(!codeBlock.hasNext()) {
-                finishedExecution = true
-            }
+            codeBlock.accept(visitor: executionVisitor)
         }
     }
     
@@ -62,8 +64,8 @@ class CodeEditorViewModel {
     }
 
     private func executeNextStep() {
-        // Check the stopping conditions
-        guard !executionVisitor.endExecution && !finishedExecution else {
+        // Check the stopping conditions -> Make sure we don't call the dispatcher again
+        guard !executionVisitor.endExecution && !executionVisitor.finishedExecution else {
             return
         }
         
@@ -78,11 +80,11 @@ class CodeEditorViewModel {
         }
     }
     func reset() {
-        //TODO: CLEAN ALL CODEBLOCKS
-        codeBlock.executionIndex = 0
+        let resetVisitor = ResetCodeBlockVisitor()
+        codeBlock.accept(visitor: resetVisitor)
+        
         world.resetWorld()
         self.executionVisitor = ExecutionVisitor(world: world)
-        self.finishedExecution = false
     }
     
     func resetCode() {
@@ -96,10 +98,69 @@ class CodeEditorViewModel {
         case .NonAR:
             arType = .AR
         }
+        
+        reset()
+    }
+    
+    //New Drag and Drop functions
+    func handleStatementDrop (statement: Statement, targetStatement: Statement, addToEndOfTarget: Bool? = nil) {
+        if statement.id == targetStatement.id { return }
+        
+        let deleteStatementVisitor = DeleteStatementVisitor(deleteId: statement.id)
+        
+        let allInstructions = allStatements + allControllFlow
+        if let statementType = allInstructions.first(where: { $0.id == statement.id }) {
+            let newInstructionVisitor = NewInstructionVisitor()
+            statementType.accept(visitor: newInstructionVisitor)
+            
+            guard let newStatement = newInstructionVisitor.get() as? Statement else { return }
+            deleteStatementVisitor.setDeletedStatement(statement: newStatement)
+        } else {
+            self.codeBlock.accept(visitor: deleteStatementVisitor)
+        }
+        
+        if addToEndOfTarget ?? false {
+            guard let targetCodeBlock = targetStatement as? CodeBlock else { return }
+            
+            targetCodeBlock.addStatement(statement: deleteStatementVisitor.getDeletedStatement())
+        } else {
+            
+            let addInstructionVisitor = AddStatementVisitor(targetId: targetStatement.id, statement: deleteStatementVisitor.getDeletedStatement())
+            //TODO: Maybe add the codeblock the expression was dropped to the call -> Performance
+            self.codeBlock.accept(visitor: addInstructionVisitor)
+        }
+    }
+    
+    func handleExpressionDrop (expression: Expression, targetExpression: Expression) {
+        if expression.id == targetExpression.id { return }
+        
+        let deleteExpressionVisitor = DeleteExpressionVisitor(deleteId: expression.id)
+        
+        if let expressionType = allExpressions.first(where: { $0.id == expression.id }) {
+            let newInstructionVisitor = NewInstructionVisitor()
+            expressionType.accept(visitor: newInstructionVisitor)
+            
+            guard let newExpression = newInstructionVisitor.get() as? Expression else { return }
+            deleteExpressionVisitor.setDeletedExpression(expression: newExpression)
+        } else {
+           //If it is not a new expression delete the old one
+            self.codeBlock.accept(visitor: deleteExpressionVisitor)
+        }
+        
+        let addExpressionVisitor = AddExpressionVisitor(targetId: targetExpression.id, expression: deleteExpressionVisitor.getDeletedExpression())
+        //TODO: Maybe add the codeblock the expression was dropped to the call -> Performance
+        self.codeBlock.accept(visitor: addExpressionVisitor)
     }
 }
 
 enum ARType {
     case AR
     case NonAR
+}
+
+enum DragItemType: String {
+    case instruction
+    case newInstruction
+    case expression
+    case newExpression
 }

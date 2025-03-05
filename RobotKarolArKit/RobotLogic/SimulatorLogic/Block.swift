@@ -8,6 +8,7 @@
 import Foundation
 import RealityKit
 
+@Observable
 class Block {
     var blockTyp: BlockTyp
     var blockEntity: Entity = Entity()
@@ -19,7 +20,7 @@ class Block {
     }
     
     func createArBlock(position: (Int, Int), tileWidth: Float, tileHight: Float, worldEntity: Entity) {
-        //Todo: Instead use a model
+        //TODO: USE REAL MODLES
         let blockMesh = MeshResource.generateBox(width: tileWidth, height: tileWidth, depth: tileWidth)
         let blockMaterial = switch blockTyp {
         case .WATER:

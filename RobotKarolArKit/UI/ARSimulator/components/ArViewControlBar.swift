@@ -26,12 +26,12 @@ struct ArViewControlBar: View {
                 Button("executeAll") {
                     viewModel.executeAll()
                 }
-                Button("faster") {
-                    viewModel.executionSpeed = viewModel.executionSpeed/2
-                }
-                Button("slower") {
-                    viewModel.executionSpeed = viewModel.executionSpeed + viewModel.executionSpeed
-                }
+                Button(action: {viewModel.executionSpeed = viewModel.executionSpeed/2}, label: {
+                    Image(systemName: "hare")
+                })
+                Button(action: {viewModel.executionSpeed = viewModel.executionSpeed + viewModel.executionSpeed}, label: {
+                    Image(systemName: "tortoise")
+                })
             }
             
             Spacer()

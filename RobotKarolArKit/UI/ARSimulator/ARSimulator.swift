@@ -25,7 +25,7 @@ struct ARViewContainer: UIViewRepresentable {
     func makeUIView(context: Context) -> ARView {
         let arView = ARView(frame: .zero)
         //let anchor = AnchorEntity(plane: .horizontal, classification: .table)
-        let anchor = AnchorEntity(plane: .horizontal)
+        let anchor = AnchorEntity(.plane(.horizontal, classification: .any, minimumBounds: SIMD2<Float>(0, 0)))
         world.anchorWorld(arView: arView, anchor: anchor)
         return arView
     }

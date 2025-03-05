@@ -11,57 +11,82 @@ import SplitView
 struct CodeEditorView: View {
     let columns = [
             GridItem(.flexible()),
+            GridItem(.flexible()),
             GridItem(.flexible())
         ]
-    let fraction = FractionHolder.usingUserDefaults(0.66, key: "myFraction")
-    let fraction2 = FractionHolder.usingUserDefaults(0.5, key: "myFraction2")
+    
+    let fraction = FractionHolder.usingUserDefaults(0.5, key: "myFraction")
     
     @State var viewModel: CodeEditorViewModel = CodeEditorViewModel()
 
     
     var body: some View {
-       HSplit(left: {
-           VSplit(top: {
-               List{
-                   ForEach($viewModel.codeBlock.codeBlock, id: \.id) { $instruction in
-                       CodeLine(instruction: instruction, CodeLineType.CodeLine)
-                           .listRowSeparator(.hidden)
-                           .listRowInsets(EdgeInsets(top:0, leading: 0, bottom: 0, trailing: 0))
-                   }.onDelete(perform: { indexSet in
-                       viewModel.deleteInstruction(at: indexSet)
-                   })
-                   .onMove(perform: { indices, newOffset in
-                       viewModel.moveInstruction(from: indices, to: newOffset)
-                   })
-               }.listRowSpacing(10).scrollContentBackground(.hidden)
-           }, bottom: {
-               ScrollView {
-                   LazyVGrid(columns: columns, spacing: 10) {
-                       ForEach($viewModel.allStatements, id: \.id) { $instruction in
-                           InstructionAddTile(instruction: instruction).frame(height: 100).onTapGesture(perform: {
-                               viewModel.createNewInstruction(instruction: instruction)
-                           })
-                       }
-                   }.padding()
-               }
-           }).fraction(fraction)
-               .constraints(minPFraction: 0.4, minSFraction: 0.15)
-               .styling(color: Color("card_border"))
-       }, right: {
-           Group {
-               if viewModel.arType == ARType.AR {
-                   ARSimulator(viewModel: viewModel)
-               } else {
-                   NonArView(viewModel: viewModel)
-               }
-           }
-       }).fraction(fraction2)
-            .constraints(minPFraction: 0.4, minSFraction: 0.4, dragToHideP: true)
-            .styling(color: Color("card_border"))
-            .edgesIgnoringSafeArea(.bottom)
+        VStack{
+            HSplit(left: {
+                ScrollView {
+                    CodeBlockView(codeBlock: viewModel.codeBlock, viewModel: viewModel)
+                }
+            }, right: {
+                Group {
+                    if viewModel.arType == ARType.AR {
+                        ARSimulator(viewModel: viewModel)
+                    } else {
+                        NonArView(viewModel: viewModel)
+                    }
+                }
+            }).fraction(fraction)
+                .constraints(minPFraction: 0.4, minSFraction: 0.4, dragToHideP: true)
+                .styling(color: Color("card_border"))
+            
+            Divider()
+            
+            VStack {
+                if viewModel.executionVisitor.executionMessage != nil {
+                    Text(viewModel.executionVisitor.executionMessage ?? "")
+                }
+                if viewModel.executionVisitor.finishedExecution {
+                    Text("Execution ended")
+                }
+                
+                ScrollView {
+                    LazyVGrid(columns: columns, spacing: 10) {
+                        ForEach($viewModel.allStatements, id: \.id) { $instruction in
+                            InstructionAddTile(instruction: instruction).frame(height: 80).onTapGesture(perform: {
+                                viewModel.createNewStatement(statement: instruction)
+                            }).contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
+                                .draggable(instruction){
+                                    CodeLine(instruction: instruction, CodeLineType.CodeLine)
+                                        .contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
+                                }
+                        }
+                        ForEach($viewModel.allControllFlow, id: \.id) { $instruction in
+                            InstructionAddTile(instruction: instruction).frame(height: 80).onTapGesture(perform: {
+                                viewModel.createNewStatement(statement: instruction)
+                            }).contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
+                                .draggable(instruction){
+                                    CodeLineControllFlow(instruction: instruction, viewModel: viewModel)
+                                        .contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
+                                }
+                        }
+                        ForEach($viewModel.allExpressions, id: \.id) { $instruction in
+                            InstructionAddTile(instruction: instruction).frame(height: 80).onTapGesture(perform: {
+                                //TODO: ADD A FUNCTION/VISITOR THAT ADDS THE EXPRESSION INTO THE NEXT EMPTYEXPRESSION if there is one
+                            }).contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
+                                .draggable(instruction){
+                                    ExpressionPiece(expression: instruction, viewModel: viewModel)
+                                        .contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
+                                }
+                        }
+                    }.padding(.horizontal, 10)
+                }.frame(height: 170)
+            }
+        }.dropDestination(for: NoDropArea.self) {items,location in
+            viewModel.dragActive = false
+            return false
+        }
     }
 }
 
 #Preview {
-    CodeEditorView()
+    return CodeEditorView()
 }
