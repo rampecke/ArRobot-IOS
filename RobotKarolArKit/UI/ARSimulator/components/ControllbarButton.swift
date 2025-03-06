@@ -11,6 +11,7 @@ struct ControllbarButton: View {
     var title: String
     var icon: String
     var action: () -> Void
+    var notInArView: Bool = false
     
     private func isSystemIcon() -> Bool {
         return UIImage(systemName: self.icon) != nil
@@ -19,7 +20,7 @@ struct ControllbarButton: View {
     var body: some View {
         Button(action: action) {
             HStack {
-                Text(title)
+                Text(LocalizedStringKey(title))
                     .font(.system(size: 14, weight: .semibold))
                     .foregroundColor(Color("onContrast_color"))
                     .padding(.leading, 8)
@@ -34,9 +35,10 @@ struct ControllbarButton: View {
                         .foregroundColor(Color("onContrast_color"))
                 }
             }
+            .frame(maxHeight: .infinity)
             .padding(4)
             .background(
-                Color("contrast_color").opacity(0.6)
+                notInArView ? Color("onContrast_color").opacity(0.3) : Color("contrast_color").opacity(0.6)
             )
             .cornerRadius(10)
         }
@@ -47,9 +49,11 @@ struct ControllbarButton: View {
 #Preview {
     VStack {
         ControllbarButton(title: "Reset code", icon: "arrow.triangle.2.circlepath.circle", action: {})
+            .frame(height: 50)
             .padding() // Adds some spacing
             .background(.primary) // Set preview background to black
         ControllbarButton(title: "Execute All", icon: PlaySpeed.superFast.iconName, action: {})
+            .frame(height: 50)
             .padding() // Adds some spacing
             .background(.primary) // Set preview background to black
     }

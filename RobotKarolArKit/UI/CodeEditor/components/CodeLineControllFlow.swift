@@ -69,7 +69,14 @@ struct CodeLineControllFlow: View {
                 )
             )
             .contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
-            .draggable(instruction)
+            .draggable(instruction) {
+                CodeLineControllFlow(instruction: instruction, viewModel: viewModel)
+                    .onAppear {
+                        viewModel.dragExpression = false
+                        viewModel.dragInstruction = true
+                    }
+                    .contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
+            }
     }
 }
 

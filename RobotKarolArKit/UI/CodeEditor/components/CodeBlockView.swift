@@ -28,7 +28,14 @@ struct CodeBlockView: View {
                                 .stroke(viewModel.executionVisitor.lastExecuted.id == instruction.id ? InstructionColorNameHelper().getColor("warning_color") : .clear, lineWidth: 2)
                         )
                         .contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
-                        .draggable(instruction)
+                        .draggable(instruction){
+                            CodeLine(instruction: instruction, CodeLineType.CodeLine)
+                                .onAppear {
+                                    viewModel.dragExpression = false
+                                    viewModel.dragInstruction = true
+                                }
+                                .contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
+                        }
                         .dropDestination(for: Statement.self) { items, _ in
                             viewModel.handleStatementDrop(statement: items.first ?? Step(), targetStatement: instruction)
                             return true

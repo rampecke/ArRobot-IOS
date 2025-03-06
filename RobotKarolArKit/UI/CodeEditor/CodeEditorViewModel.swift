@@ -21,7 +21,8 @@ class CodeEditorViewModel {
     
     var executionRunning = false
     
-    var dragActive = false
+    var dragInstruction = false
+    var dragExpression = false
     
     init(codeBlock: CodeBlock = CodeBlock(), world: World = World(width: 6, length: 6)) {
         self.codeBlock = codeBlock
@@ -113,6 +114,24 @@ class CodeEditorViewModel {
     
     func resetCode() {
         codeBlock.codeBlock = []
+    }
+    
+    func deleteInstruction(deleteId: UUID) {
+        if executionRunning {
+            reset()
+        }
+        
+        let deleteStatementVisitor = DeleteStatementVisitor(deleteId: deleteId)
+        self.codeBlock.accept(visitor: deleteStatementVisitor)
+    }
+    
+    func deleteExpression(deleteId: UUID) {
+        if executionRunning {
+            reset()
+        }
+        
+        let deleteExpressionVisitor = DeleteExpressionVisitor(deleteId: deleteId)
+        self.codeBlock.accept(visitor: deleteExpressionVisitor)
     }
     
     //New Drag and Drop functions
