@@ -65,6 +65,7 @@ struct ArViewControlBar: View {
             Spacer()
             
             HStack{
+                //TODO: Create custom menu with highlighting of selected
                 Menu {
                     ForEach(PlaySpeed.allCases, id: \.self) { speed in
                         Button( action: {
@@ -87,7 +88,7 @@ struct ArViewControlBar: View {
                         viewModel.next()
                     })
                     
-                    ControllbarButton(title: "Execute all", icon: "arrow.triangle.2.circlepath.circle", action: {
+                    ControllbarButton(title: "Execute all", icon: viewModel.executionSpeed.iconName, action: {
                         viewModel.executeAll()
                     })
                 }

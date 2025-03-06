@@ -12,6 +12,10 @@ struct ControllbarButton: View {
     var icon: String
     var action: () -> Void
     
+    private func isSystemIcon() -> Bool {
+        return UIImage(systemName: self.icon) != nil
+    }
+    
     var body: some View {
         Button(action: action) {
             HStack {
@@ -20,9 +24,15 @@ struct ControllbarButton: View {
                     .foregroundColor(Color("onContrast_color"))
                     .padding(.leading, 8)
                 
-                Image(systemName: icon)
-                    .frame(width: 20, height: 20)
-                    .foregroundColor(Color("onContrast_color"))
+                if isSystemIcon() {
+                    Image(systemName: icon)
+                        .frame(width: 35, height: 20)
+                        .foregroundColor(Color("onContrast_color"))
+                } else {
+                    Image(icon)
+                        .frame(width: 35, height: 20)
+                        .foregroundColor(Color("onContrast_color"))
+                }
             }
             .padding(4)
             .background(
@@ -35,7 +45,12 @@ struct ControllbarButton: View {
 }
 
 #Preview {
-    ControllbarButton(title: "Reset code", icon: "arrow.triangle.2.circlepath.circle", action: {})
-        .padding() // Adds some spacing
-        .background(.primary) // Set preview background to black
+    VStack {
+        ControllbarButton(title: "Reset code", icon: "arrow.triangle.2.circlepath.circle", action: {})
+            .padding() // Adds some spacing
+            .background(.primary) // Set preview background to black
+        ControllbarButton(title: "Execute All", icon: PlaySpeed.superFast.iconName, action: {})
+            .padding() // Adds some spacing
+            .background(.primary) // Set preview background to black
+    }
 }
