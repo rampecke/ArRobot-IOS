@@ -16,8 +16,10 @@ class CodeEditorViewModel {
     
     var world = World(width: 6, length: 6)
     var executionVisitor: ExecutionVisitor
-    var executionSpeed = 1.0
+    var executionSpeed: PlaySpeed = .normal
     var arType: ARType = ARType.AR
+    
+    var executionRunning = false
     
     var dragActive = false
     
@@ -28,6 +30,11 @@ class CodeEditorViewModel {
     }
     
     private func addStatement(statement: Statement) {
+        //Reset Execution when adding new code
+        if executionRunning {
+            reset()
+        }
+        
         codeBlock.addStatement(statement: statement)
     }
     
@@ -42,6 +49,11 @@ class CodeEditorViewModel {
     }
     
     func addStatementToPosition(statement: Statement, position: Int) {
+        //Reset Execution when adding new code
+        if executionRunning {
+            reset()
+        }
+        
         let newInstructionVisitor = NewInstructionVisitor()
         statement.accept(visitor: newInstructionVisitor)
         
@@ -52,6 +64,10 @@ class CodeEditorViewModel {
     }
     
     func next() {
+        if !executionRunning {
+            executionRunning = true
+        }
+        
         if executionVisitor.endExecution || executionVisitor.finishedExecution {
             return
         } else {
@@ -60,6 +76,10 @@ class CodeEditorViewModel {
     }
     
     func executeAll() {
+        if !executionRunning {
+            executionRunning = true
+        }
+        
         executeNextStep()
     }
 
@@ -69,17 +89,21 @@ class CodeEditorViewModel {
             return
         }
         
-        // Execute the next step
-        next()
-        
-        // dispatchTime 2 seconds from now:
-        let dispatchTime: DispatchTime = DispatchTime.now() + executionSpeed
-        // Schedule the next step after 1 second
-        DispatchQueue.main.asyncAfter(deadline: dispatchTime) {
-            self.executeNextStep()
+        if executionRunning { //make sure to only run when execution is still running
+            // Execute the next step
+            next()
+            
+            // dispatchTime 2 seconds from now:
+            let dispatchTime: DispatchTime = DispatchTime.now() + executionSpeed.timeInterval
+            // Schedule the next step after executionTime second
+            DispatchQueue.main.asyncAfter(deadline: dispatchTime) {
+                self.executeNextStep()
+            }
         }
     }
     func reset() {
+        executionRunning = false
+        
         let resetVisitor = ResetCodeBlockVisitor()
         codeBlock.accept(visitor: resetVisitor)
         
@@ -91,19 +115,13 @@ class CodeEditorViewModel {
         codeBlock.codeBlock = []
     }
     
-    func switchAr() {
-        switch arType {
-        case .AR:
-            arType = .NonAR
-        case .NonAR:
-            arType = .AR
-        }
-        
-        reset()
-    }
-    
     //New Drag and Drop functions
     func handleStatementDrop (statement: Statement, targetStatement: Statement, addToEndOfTarget: Bool? = nil) {
+        //Stop&Reset execution when adding new statement
+        if executionRunning {
+            reset()
+        }
+        
         if statement.id == targetStatement.id { return }
         
         let deleteStatementVisitor = DeleteStatementVisitor(deleteId: statement.id)
@@ -132,6 +150,11 @@ class CodeEditorViewModel {
     }
     
     func handleExpressionDrop (expression: Expression, targetExpression: Expression) {
+        //Stop&Reset execution when adding new expression
+        if executionRunning {
+            reset()
+        }
+        
         if expression.id == targetExpression.id { return }
         
         let deleteExpressionVisitor = DeleteExpressionVisitor(deleteId: expression.id)
@@ -153,9 +176,16 @@ class CodeEditorViewModel {
     }
 }
 
-enum ARType {
+enum ARType: CaseIterable {
     case AR
     case NonAR
+    
+    var displayName: String {
+        switch self {
+        case .AR: return "Real Life"
+        case .NonAR: return "Simulator"
+        }
+    }
 }
 
 enum DragItemType: String {
@@ -163,4 +193,43 @@ enum DragItemType: String {
     case newInstruction
     case expression
     case newExpression
+}
+
+enum PlaySpeed: CaseIterable {
+    case superSlow, slow, normal, fast, superFast
+    
+    var timeInterval: DispatchTimeInterval {
+        let seconds = self.value
+        return .milliseconds(Int(seconds * 1000))  // Convert Float seconds to milliseconds
+    }
+
+    var value: Float {
+        switch self {
+            case .superSlow: return 2.0
+            case .slow: return 1.0
+            case .normal: return 0.5
+            case .fast: return 0.25
+            case .superFast: return 0.125
+        }
+    }
+
+    var displayName: String {
+        switch self {
+            case .superSlow: return "Super Slow"
+            case .slow: return "Slow"
+            case .normal: return "Normal"
+            case .fast: return "Fast"
+            case .superFast: return "Super Fast"
+        }
+    }
+    
+    var iconName: String {
+        switch self {
+            case .superSlow: return "custom.slowest.fill"
+            case .slow: return "custom.slower.fill"
+            case .normal: return "play.fill"
+            case .fast: return "forward.fill"
+            case .superFast: return "custom.fastforward.fill"
+        }
+    }
 }

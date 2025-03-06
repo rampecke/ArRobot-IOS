@@ -19,13 +19,17 @@ class ExecutionVisitor: Visitor {
         self.world = world
     }
     
+    func setExecutionMessage(for type: String) {
+        if endExecution {
+            executionMessage = "\(type)_error_message"
+        }
+    }
+    
     //Statements
     func visit(leftTurn: LeftTurn) {
         endExecution = !world.turnLeft()
         
-        if endExecution {
-            executionMessage = "It was not possible to turn left - Execution failed"
-        }
+        setExecutionMessage(for: "turnLeft")
         
         lastExecuted = leftTurn
     }
@@ -33,9 +37,7 @@ class ExecutionVisitor: Visitor {
     func visit(rightTurn: RightTurn) {
         endExecution = !world.turnRight()
         
-        if endExecution {
-            executionMessage = "It was not possible to turn left - Execution failed"
-        }
+        setExecutionMessage(for: "turnRight")
         
         lastExecuted = rightTurn
     }
@@ -43,9 +45,7 @@ class ExecutionVisitor: Visitor {
     func visit(lift: Lift) {
         endExecution = !world.lift()
         
-        if endExecution {
-            executionMessage = "It was not possible to pick up a block here - Execution failed"
-        }
+        setExecutionMessage(for: "lift")
         
         lastExecuted = lift
     }
@@ -53,9 +53,7 @@ class ExecutionVisitor: Visitor {
     func visit(step: Step) {
         endExecution = !world.step()
         
-        if endExecution {
-            executionMessage = "It was not possible to make a step here - Execution failed"
-        }
+        setExecutionMessage(for: "step")
         
         lastExecuted = step
     }
@@ -63,9 +61,7 @@ class ExecutionVisitor: Visitor {
     func visit(placeGrass: PlaceGrass) {
         endExecution = !world.place(block: BlockTyp.GRAS)
         
-        if endExecution {
-            executionMessage = "It was not possible to place a gras block here - Execution failed"
-        }
+        setExecutionMessage(for: "placeGrass")
         
         lastExecuted = placeGrass
     }
@@ -73,9 +69,7 @@ class ExecutionVisitor: Visitor {
     func visit(placeStone: PlaceStone) {
         endExecution = !world.place(block: BlockTyp.STONE)
         
-        if endExecution {
-            executionMessage = "It was not possible to place a stone block here - Execution failed"
-        }
+        setExecutionMessage(for: "placeStone")
         
         lastExecuted = placeStone
     }
@@ -83,9 +77,7 @@ class ExecutionVisitor: Visitor {
     func visit(placeWater: PlaceWater) {
         endExecution = !world.place(block: BlockTyp.WATER)
         
-        if endExecution {
-            executionMessage = "It was not possible to place a water block here - Execution failed"
-        }
+        setExecutionMessage(for: "placeWater")
         
         lastExecuted = placeWater
     }
@@ -181,7 +173,8 @@ class ExecutionVisitor: Visitor {
     
     func visit(emptyExpression: EmptyExpression) {
         endExecution = true
-        executionMessage = "It is not allowed to have empty conditions here - Execution failed"
+        
+        setExecutionMessage(for: "emptyExpression")
     }
     
     func visit(and: And) {

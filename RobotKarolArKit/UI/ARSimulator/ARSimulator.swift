@@ -12,7 +12,7 @@ struct ARSimulator: View {
     @Bindable var viewModel: CodeEditorViewModel
     
     var body: some View {
-        VStack{
+        ZStack{
             ARViewContainer(world: viewModel.world).edgesIgnoringSafeArea(.all)
             ArViewControlBar(viewModel: viewModel)
         }
