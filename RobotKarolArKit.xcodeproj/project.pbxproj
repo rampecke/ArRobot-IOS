@@ -47,6 +47,8 @@
 		A02CAC182D75D13A00E751DF /* NoDropArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02CAC172D75D13A00E751DF /* NoDropArea.swift */; };
 		A02CAC1C2D78AB5300E751DF /* ResetCodeBlockVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02CAC1B2D78AB5300E751DF /* ResetCodeBlockVisitor.swift */; };
 		A02CAC1E2D78C77200E751DF /* ConditionalModifierExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02CAC1D2D78C77200E751DF /* ConditionalModifierExtension.swift */; };
+		A02CAC202D7916F800E751DF /* ControllbarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02CAC1F2D7916F800E751DF /* ControllbarButton.swift */; };
+		A02CAC222D79A13100E751DF /* ExecutionStatusLable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02CAC212D79A13100E751DF /* ExecutionStatusLable.swift */; };
 		A06BD7C32BAE9F4E00863CA5 /* RobotKarolArKitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06BD7C22BAE9F4E00863CA5 /* RobotKarolArKitApp.swift */; };
 		A06BD7C72BAE9F4F00863CA5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A06BD7C62BAE9F4F00863CA5 /* Assets.xcassets */; };
 		A06BD7CB2BAE9F4F00863CA5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A06BD7CA2BAE9F4F00863CA5 /* Preview Assets.xcassets */; };
@@ -108,6 +110,8 @@
 		A02CAC172D75D13A00E751DF /* NoDropArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoDropArea.swift; sourceTree = "<group>"; };
 		A02CAC1B2D78AB5300E751DF /* ResetCodeBlockVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetCodeBlockVisitor.swift; sourceTree = "<group>"; };
 		A02CAC1D2D78C77200E751DF /* ConditionalModifierExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionalModifierExtension.swift; sourceTree = "<group>"; };
+		A02CAC1F2D7916F800E751DF /* ControllbarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllbarButton.swift; sourceTree = "<group>"; };
+		A02CAC212D79A13100E751DF /* ExecutionStatusLable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExecutionStatusLable.swift; sourceTree = "<group>"; };
 		A06BD7BF2BAE9F4E00863CA5 /* RobotKarolArKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RobotKarolArKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A06BD7C22BAE9F4E00863CA5 /* RobotKarolArKitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RobotKarolArKitApp.swift; sourceTree = "<group>"; };
 		A06BD7C62BAE9F4F00863CA5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -247,6 +251,8 @@
 			isa = PBXGroup;
 			children = (
 				A02B6AE42C19130200CAFF82 /* ArViewControlBar.swift */,
+				A02CAC1F2D7916F800E751DF /* ControllbarButton.swift */,
+				A02CAC212D79A13100E751DF /* ExecutionStatusLable.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -451,6 +457,7 @@
 				A02B6AB32C16789D00CAFF82 /* NewInstructionVisitor.swift in Sources */,
 				A02B6AE22C18AC4800CAFF82 /* ExecutionVisitor.swift in Sources */,
 				A02B6ADC2C1750AD00CAFF82 /* NonArView.swift in Sources */,
+				A02CAC202D7916F800E751DF /* ControllbarButton.swift in Sources */,
 				A02B6A962C13A26400CAFF82 /* PlaceStone.swift in Sources */,
 				A06BD7DD2BAF36F600863CA5 /* Direction.swift in Sources */,
 				A0B5A1312D714EBA00A02BA9 /* EmptyExpression.swift in Sources */,
@@ -464,6 +471,7 @@
 				A02CAC1E2D78C77200E751DF /* ConditionalModifierExtension.swift in Sources */,
 				A01482EE2D70DE6C00AACE8D /* AddStatementVisitor.swift in Sources */,
 				A09390EF2C1DBFBD009DF760 /* While.swift in Sources */,
+				A02CAC222D79A13100E751DF /* ExecutionStatusLable.swift in Sources */,
 				A06BD7D42BAEA3ED00863CA5 /* World.swift in Sources */,
 				A01483052D71175F00AACE8D /* Not.swift in Sources */,
 				A01482FB2D71161300AACE8D /* IsWest.swift in Sources */,

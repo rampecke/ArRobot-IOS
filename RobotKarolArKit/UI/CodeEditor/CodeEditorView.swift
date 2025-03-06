@@ -23,8 +23,15 @@ struct CodeEditorView: View {
     var body: some View {
         VStack{
             HSplit(left: {
-                ScrollView {
-                    CodeBlockView(codeBlock: viewModel.codeBlock, viewModel: viewModel)
+                VStack{
+                    HStack {
+                        Button("resetCode") {
+                            viewModel.resetCode()
+                        }
+                    }
+                    ScrollView {
+                        CodeBlockView(codeBlock: viewModel.codeBlock, viewModel: viewModel)
+                    }
                 }
             }, right: {
                 Group {
@@ -41,13 +48,6 @@ struct CodeEditorView: View {
             Divider()
             
             VStack {
-                if viewModel.executionVisitor.executionMessage != nil {
-                    Text(viewModel.executionVisitor.executionMessage ?? "")
-                }
-                if viewModel.executionVisitor.finishedExecution {
-                    Text("Execution ended")
-                }
-                
                 ScrollView {
                     LazyVGrid(columns: columns, spacing: 10) {
                         ForEach($viewModel.allStatements, id: \.id) { $instruction in

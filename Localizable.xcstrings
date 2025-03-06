@@ -1,6 +1,16 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%@" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@"
+          }
+        }
+      }
+    },
     "and" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -35,35 +45,49 @@
         }
       }
     },
-    "emptyExpression" : {
-      "extractionState" : "stale",
+    "ArPicker" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "<Bedingung>"
+            "value" : "ArPicker"
+          }
+        }
+      }
+    },
+    "emptyExpression_error_message" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Es ist nicht erlaubt eine leere Bedingung zu haben- Ausführung fehlgeschlagen"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "<Condition>"
+            "value" : "It is not allowed to have empty conditions"
           }
         }
       }
     },
-    "executeAll" : {
+    "error_header" : {
+      "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Alle ausführen"
+            "value" : "Ausführung fehlgeschlagen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Execution failed"
           }
         }
       }
-    },
-    "Execution ended" : {
-
     },
     "if" : {
       "extractionState" : "manual",
@@ -337,12 +361,19 @@
         }
       }
     },
-    "nextMove" : {
+    "lift_error_message" : {
+      "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nächster Schritt"
+            "value" : "Es ist nicht möglich, hier einen Block anzuheben"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "It is not possible to pick up a block here"
           }
         }
       }
@@ -449,6 +480,23 @@
         }
       }
     },
+    "placeGrass_error_message" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Es ist nicht möglich, hier einen Grasblock zu platzieren"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "It is not possible to place a gras block here"
+          }
+        }
+      }
+    },
     "placeStone" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -479,6 +527,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Instructs the robot to place a stone block in front of him"
+          }
+        }
+      }
+    },
+    "placeStone_error_message" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Es ist nicht möglich, hier einen Steinblock zu platzieren"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "It is not possible to place a stone block here"
           }
         }
       }
@@ -517,12 +582,19 @@
         }
       }
     },
-    "Reset" : {
+    "placeWater_error_message" : {
+      "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zurücksetzen"
+            "value" : "Es ist nicht möglich, hier einen Wasserblock zu platzieren"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "It is not possible to place a water block here"
           }
         }
       }
@@ -571,12 +643,36 @@
         }
       }
     },
-    "switchAr" : {
+    "step_error_message" : {
+      "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "switchAr"
+            "value" : "Es ist nicht möglich, hier einen Schritt zu machen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "It is not possible to make a step here"
+          }
+        }
+      }
+    },
+    "successful_header" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ausführung erfolgreich"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Successful execution"
           }
         }
       }
@@ -615,6 +711,23 @@
         }
       }
     },
+    "turnLeft_error_message" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Es ist nicht möglich, sich hier nach links zu drehen - Ausführung fehlgeschlagen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "It is not possible to turn left - Execution failed"
+          }
+        }
+      }
+    },
     "turnRight" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -645,6 +758,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Instructs the robot to rotate 90 degrees to the left"
+          }
+        }
+      }
+    },
+    "turnRight_error_message" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Es ist nicht möglich, sich hier nach rechts zu drehen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "It is not possible to turn right"
           }
         }
       }
