@@ -14,6 +14,18 @@ class Not: Expression {
     override init() {
         self.content = EmptyExpression()
         super.init()
+        self.type = "not"
+    }
+    
+    init(content: Expression = EmptyExpression()) {
+        self.content = content
+        super.init()
+        self.type = "not"
+    }
+    
+    //Also persist expressions
+    override func asExpressionDTO() -> ExpressionDTO {
+        return ExpressionDTO(id: id, type: type, content: content.asExpressionDTO())
     }
     
     required init(from decoder: Decoder) throws {

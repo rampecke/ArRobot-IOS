@@ -16,6 +16,19 @@ class And: Expression {
         self.left = EmptyExpression()
         self.right = EmptyExpression()
         super.init()
+        self.type = "and"
+    }
+    
+    init(left: Expression = EmptyExpression(), right: Expression = EmptyExpression()) {
+        self.left = left
+        self.right = right
+        super.init()
+        self.type = "and"
+    }
+    
+    //Also persist expressions
+    override func asExpressionDTO() -> ExpressionDTO {
+        return ExpressionDTO(id: id, type: type, left: left.asExpressionDTO(), right: right.asExpressionDTO())
     }
     
     required init(from decoder: Decoder) throws {

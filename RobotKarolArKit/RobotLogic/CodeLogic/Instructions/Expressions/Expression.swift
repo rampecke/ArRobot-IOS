@@ -11,6 +11,7 @@ import CoreTransferable
 @Observable
 class Expression: Instruction {
     var id: UUID = UUID()
+    var type: String = "expression"
 
     func accept(visitor: Visitor) {
         // Base method (subclasses override this)
@@ -18,5 +19,9 @@ class Expression: Instruction {
 
     static var transferRepresentation: some TransferRepresentation {
         CodableRepresentation(for: Expression.self, contentType: .expression)
+    }
+    
+    func asExpressionDTO() -> ExpressionDTO{
+        return ExpressionDTO(id: id, type: type)
     }
 }

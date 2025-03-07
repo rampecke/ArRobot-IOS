@@ -8,6 +8,19 @@
 import Foundation
 
 class IsBorder: Expression {
+    override init() {
+        super.init()
+        self.type = "isBorder"
+    }
+    
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
+    
     override func accept(visitor: Visitor) {
         visitor.visit(isBorder: self)
     }

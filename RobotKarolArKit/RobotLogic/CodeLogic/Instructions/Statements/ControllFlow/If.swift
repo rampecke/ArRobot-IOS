@@ -16,6 +16,13 @@ class If: CodeBlock {
         self.executionIndex = -1  // Ensure execution starts at -1 for If statements
         self.type = "ifStatement"
     }
+    
+    init(_ codeBlock: [Statement]?, expression: Expression) {
+        super.init(codeBlock)
+        self.executionIndex = -1  // Ensure execution starts at -1 for If statements
+        self.type = "ifStatement"
+        self.expression = expression
+    }
 
     override init() {
         super.init()
@@ -38,6 +45,11 @@ class If: CodeBlock {
 
     private enum CodingKeys: String, CodingKey {
         case expression
+    }
+    
+    //Also persist codeBlock, expression and executionIndex
+    override func asStatementDTO() -> StatementDTO{
+        return StatementDTO(id: id, type: type, codeBlock: codeBlock.map{$0.asStatementDTO()}, executionIndex: executionIndex, expression: expression.asExpressionDTO())
     }
     
     override func accept(visitor: any Visitor) {

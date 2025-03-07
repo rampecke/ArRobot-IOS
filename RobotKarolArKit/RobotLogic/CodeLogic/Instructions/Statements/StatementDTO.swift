@@ -7,17 +7,20 @@
 
 import Foundation
 
+//I had to create this DTO because Apple has issues handling inheritance -> have to cast it myself
 class StatementDTO: Codable {
     var id: UUID
     var type: String
     var codeBlock: [StatementDTO]?
     var executionIndex: Int?
+    var expression: ExpressionDTO?
     
-    init(id: UUID, type: String, codeBlock: [StatementDTO]? = nil, executionIndex: Int? = nil) {
+    init(id: UUID, type: String, codeBlock: [StatementDTO]? = nil, executionIndex: Int? = nil, expression: ExpressionDTO? = nil) {
         self.id = id
         self.type = type
         self.codeBlock = codeBlock
         self.executionIndex = executionIndex
+        self.expression = expression
     }
     
     func returnStatement() -> Statement {
@@ -34,10 +37,12 @@ class StatementDTO: Codable {
             return CodeBlock(newCodeBlock)
         case "ifStatement":
             let newCodeBlock = (codeBlock ?? []).map{$0.returnStatement()}
-            return If(newCodeBlock)
+            let newExpression = (expression ?? ExpressionDTO(id: UUID(), type: "")).returnExpression()
+            return If(newCodeBlock, expression: newExpression)
         case "whileStatement":
             let newCodeBlock = (codeBlock ?? []).map{$0.returnStatement()}
-            return While(newCodeBlock)
+            let newExpression = (expression ?? ExpressionDTO(id: UUID(), type: "")).returnExpression()
+            return While(newCodeBlock, expression: newExpression)
         default:
             return Statement()
         }
