@@ -39,7 +39,13 @@ struct ExpressionPiece: View {
                  topTrailingRadius: 5
              )
             )
-            .draggable(andExpression)
+            .draggable(andExpression){
+                ExpressionPiece(expression: andExpression, viewModel: viewModel)
+                    .onAppear {
+                        viewModel.dragExistingExpression()
+                    }
+                    .contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
+            }
         } else if let orExpression = expression as? Or {
             HStack {
                 ExpressionPiece(expression: orExpression.left, viewModel: viewModel)
@@ -59,7 +65,13 @@ struct ExpressionPiece: View {
                  topTrailingRadius: 5
              )
             )
-            .draggable(orExpression)
+            .draggable(orExpression) {
+                ExpressionPiece(expression: orExpression, viewModel: viewModel)
+                    .onAppear {
+                        viewModel.dragExistingExpression()
+                    }
+                    .contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
+            }
         } else if let notExpression = expression as? Not {
             HStack {
                 expressionText(expression: expression, isEmpty: false)
@@ -78,7 +90,13 @@ struct ExpressionPiece: View {
                      topTrailingRadius: 5
                  )
                 )
-                .draggable(notExpression)
+                .draggable(notExpression) {
+                    ExpressionPiece(expression: notExpression, viewModel: viewModel)
+                        .onAppear {
+                            viewModel.dragExistingExpression()
+                        }
+                        .contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
+                }
         } else if let emptyExpression = expression as? EmptyExpression {
             HStack {
                 expressionText(expression: emptyExpression, isEmpty: true)
@@ -115,7 +133,13 @@ struct ExpressionPiece: View {
                     viewModel.handleExpressionDrop(expression: items.first ?? EmptyExpression(), targetExpression: expression)
                     return true
                 }
-                .draggable(expression)
+                .draggable(expression) {
+                    ExpressionPiece(expression: expression, viewModel: viewModel)
+                        .onAppear {
+                            viewModel.dragExistingExpression()
+                        }
+                        .contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
+                }
 
         }
     }

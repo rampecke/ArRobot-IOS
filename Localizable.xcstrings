@@ -55,13 +55,24 @@
         }
       }
     },
+    "Delete code" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Code löschen"
+          }
+        }
+      }
+    },
     "emptyExpression_error_message" : {
       "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Es ist nicht erlaubt eine leere Bedingung zu haben- Ausführung fehlgeschlagen"
+            "state" : "translated",
+            "value" : "Es ist nicht erlaubt eine leere Bedingung zu haben"
           }
         },
         "en" : {
@@ -85,6 +96,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Execution failed"
+          }
+        }
+      }
+    },
+    "Execute all" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alle ausführen"
           }
         }
       }
@@ -378,6 +400,17 @@
         }
       }
     },
+    "Next step" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nächster Schritt"
+          }
+        }
+      }
+    },
     "not" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -599,12 +632,35 @@
         }
       }
     },
+    "Reset game" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spiel zurücksetzen"
+          }
+        }
+      }
+    },
     "resetCode" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Code zurücksetzen"
+          }
+        }
+      }
+    },
+    "Speed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tempo"
           }
         }
       }

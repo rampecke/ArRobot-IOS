@@ -12,6 +12,8 @@ struct ArViewControlBar: View {
     @State var isSpeedMenuOpen: Bool = false
     @State var menuIndex: Int = 0
     
+    var buttonHeight: CGFloat? = 30
+    
     func getSpeedIcon(for speed: PlaySpeed) -> Image {
         switch speed {
             case .superSlow, .slow, .superFast:
@@ -51,7 +53,7 @@ struct ArViewControlBar: View {
                 
                 ControllbarButton(title: "Reset game", icon: "arrow.triangle.2.circlepath.circle", action: {
                     viewModel.reset()
-                })
+                }).frame(height: buttonHeight)
             }.padding(10)
             
             Spacer()
@@ -78,7 +80,7 @@ struct ArViewControlBar: View {
                         }
                     }
                 } label: {
-                    ControllbarButton(title: "Speed", icon: "timer", action: {})
+                    ControllbarButton(title: "Speed", icon: "timer", action: {}).frame(height: buttonHeight)
                 }
                 
                 Spacer()
@@ -86,11 +88,11 @@ struct ArViewControlBar: View {
                 HStack {
                     ControllbarButton(title: "Next step", icon: "forward.frame.fill", action: {
                         viewModel.next()
-                    })
+                    }).frame(height: buttonHeight)
                     
                     ControllbarButton(title: "Execute all", icon: viewModel.executionSpeed.iconName, action: {
                         viewModel.executeAll()
-                    })
+                    }).frame(height: buttonHeight)
                 }
             }.padding(10)
         }.padding()
