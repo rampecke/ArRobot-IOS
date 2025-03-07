@@ -18,10 +18,6 @@ struct CodeLineControllFlow: View {
                 Text(LocalizedStringKey(instructionColorHelper.getNameOfInstruction(instruction: instruction)))
                     .foregroundColor(instructionColorHelper.getColor(instructionColorHelper.getNameOfInstruction(instruction: instruction), .onPrimary))
                     .font(.system(size: 20, weight: .semibold, design: .rounded))
-                    /*.dropDestination(for: Statement.self) { items, _ in
-                        viewModel.handleStatementDrop(statement: items.first ?? Step(), targetStatement: instruction)
-                        return true
-                    }*/
                 
                 //Only show this if instruction is If or While
                 if let ifInstruction = instruction as? If {
@@ -43,7 +39,7 @@ struct CodeLineControllFlow: View {
                                 .stroke(viewModel.executionVisitor.lastExecuted.id == whileInstruction.expression.id ? InstructionColorNameHelper().getColor("warning_color") : .clear, lineWidth: 2)
                         )
                 }
-            }.if(viewModel.dragNewInstruction) { view in
+            }.if(viewModel.dragNewInstruction || viewModel.dragInstruction) { view in
                 view.dropDestination(for: Statement.self) { items, _ in
                     viewModel.handleStatementDrop(statement: items.first ?? Step(), targetStatement: instruction)
                     return true
