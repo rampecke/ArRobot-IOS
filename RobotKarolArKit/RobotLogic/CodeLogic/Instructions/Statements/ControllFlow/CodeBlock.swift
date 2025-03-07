@@ -15,24 +15,30 @@ class CodeBlock: Statement {
     init(_ codeBlock: [Statement]?) {
         self.codeBlock = codeBlock ?? []
         super.init()
+        self.type = "codeBlock"
     }
     
     override init() {
         self.codeBlock = []
         super.init()
+        self.type = "codeBlock"
     }
 
+    //Decode and Encode
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.codeBlock = try container.decode([Statement].self, forKey: .codeBlock)
+        let codeBlockDTO = try container.decode([StatementDTO].self, forKey: .codeBlock)
+        //Map as real Statements
+        self.codeBlock = codeBlockDTO.map{$0.returnStatement()}
         self.executionIndex = try container.decode(Int.self, forKey: .executionIndex)
         try super.init(from: decoder) // Ensure superclass is decoded
     }
 
     override func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(codeBlock, forKey: .codeBlock)
         try container.encode(executionIndex, forKey: .executionIndex)
+        //Encode as StatementDTO
+        try container.encode(codeBlock.map{$0.asStatementDTO()}, forKey: .codeBlock)
         try super.encode(to: encoder) // Ensure superclass is encoded
     }
 
@@ -40,10 +46,17 @@ class CodeBlock: Statement {
         case codeBlock, executionIndex
     }
     
+    //Also persist codeBlock and executionIndex
+    override func asStatementDTO() -> StatementDTO{
+        return StatementDTO(id: id, type: type, codeBlock: codeBlock.map{$0.asStatementDTO()}, executionIndex: executionIndex)
+    }
+    
+    //Visitor
     override func accept(visitor: Visitor) {
         visitor.visit(codeBlock: self)
     }
     
+    //CodeBlock-List Functions
     func deleteStatement(at offsets: IndexSet) {
         codeBlock.remove(atOffsets: offsets)
     }

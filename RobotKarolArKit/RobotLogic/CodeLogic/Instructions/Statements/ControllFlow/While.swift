@@ -14,11 +14,13 @@ class While: CodeBlock {
     override init(_ codeBlock: [Statement]?) {
         super.init(codeBlock)
         self.executionIndex = -1  // Ensure execution starts at -1 for If statements
+        self.type = "whileStatement"
     }
 
     override init() {
         super.init()
         self.executionIndex = -1
+        self.type = "whileStatement"
     }
     
     required init(from decoder: Decoder) throws {

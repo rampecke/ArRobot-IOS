@@ -63,6 +63,7 @@
 		A09390F12C1DCA38009DF760 /* CodeLineControllFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09390F02C1DCA38009DF760 /* CodeLineControllFlow.swift */; };
 		A09390F52C1DCD30009DF760 /* CodeBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09390F42C1DCD30009DF760 /* CodeBlockView.swift */; };
 		A0B36C662D7AE5AF005F33F0 /* AddExpressionIntoEmptyVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B36C652D7AE5AF005F33F0 /* AddExpressionIntoEmptyVisitor.swift */; };
+		A0B36C7F2D7B4423005F33F0 /* StatementDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B36C7E2D7B4423005F33F0 /* StatementDTO.swift */; };
 		A0B40CA42D71B7E800AEFD40 /* DeleteExpressionVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B40CA32D71B7E800AEFD40 /* DeleteExpressionVisitor.swift */; };
 		A0B40CA62D71BD0400AEFD40 /* AddExpressionVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B40CA52D71BD0400AEFD40 /* AddExpressionVisitor.swift */; };
 		A0B5A12F2D714CE800A02BA9 /* ExpressionPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5A12E2D714CE800A02BA9 /* ExpressionPiece.swift */; };
@@ -128,6 +129,7 @@
 		A09390F02C1DCA38009DF760 /* CodeLineControllFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeLineControllFlow.swift; sourceTree = "<group>"; };
 		A09390F42C1DCD30009DF760 /* CodeBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeBlockView.swift; sourceTree = "<group>"; };
 		A0B36C652D7AE5AF005F33F0 /* AddExpressionIntoEmptyVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpressionIntoEmptyVisitor.swift; sourceTree = "<group>"; };
+		A0B36C7E2D7B4423005F33F0 /* StatementDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatementDTO.swift; sourceTree = "<group>"; };
 		A0B40CA32D71B7E800AEFD40 /* DeleteExpressionVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteExpressionVisitor.swift; sourceTree = "<group>"; };
 		A0B40CA52D71BD0400AEFD40 /* AddExpressionVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpressionVisitor.swift; sourceTree = "<group>"; };
 		A0B5A12E2D714CE800A02BA9 /* ExpressionPiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionPiece.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				A02CAC112D759BA300E751DF /* Statement.swift */,
+				A0B36C7E2D7B4423005F33F0 /* StatementDTO.swift */,
 				A02CAC142D759E2A00E751DF /* Statement */,
 				A02B6AAB2C1669E300CAFF82 /* ControllFlow */,
 			);
@@ -483,6 +486,7 @@
 				A02CAC1E2D78C77200E751DF /* ConditionalModifierExtension.swift in Sources */,
 				A01482EE2D70DE6C00AACE8D /* AddStatementVisitor.swift in Sources */,
 				A09390EF2C1DBFBD009DF760 /* While.swift in Sources */,
+				A0B36C7F2D7B4423005F33F0 /* StatementDTO.swift in Sources */,
 				A02CAC222D79A13100E751DF /* ExecutionStatusLable.swift in Sources */,
 				A06BD7D42BAEA3ED00863CA5 /* World.swift in Sources */,
 				A01483052D71175F00AACE8D /* Not.swift in Sources */,

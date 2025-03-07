@@ -42,12 +42,16 @@ class Model {
     func loadProjects() {
         do {
             let data = try Data(contentsOf: fileURL)
+
+            if let rawString = String(data: data, encoding: .utf8) {
+                print("Raw file content: \n\(rawString)")
+            } else {
+                print("Unable to convert data to string.")
+            }
             projects = try JSONDecoder().decode([Project].self, from: data)
         } catch {
             print("Error loading projects: \(error.localizedDescription)")
             projects = [] // Initialize empty if decoding fails
         }
     }
-    
-    //TODO: ADD AUTOSAVE FOR CODEBLOCK CHANGES INSIDE MY CODEBLOCK
 }
