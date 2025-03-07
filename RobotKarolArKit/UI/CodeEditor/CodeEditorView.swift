@@ -17,9 +17,15 @@ struct CodeEditorView: View {
     
     let fraction = FractionHolder.usingUserDefaults(0.5, key: "myFraction")
     
-    @State var viewModel: CodeEditorViewModel = CodeEditorViewModel()
+    @State var viewModel: CodeEditorViewModel
     
     @State var bottomBarTargeted = false
+    
+    @Environment(Model.self) var model: Model
+    
+    init(viewModel: CodeEditorViewModel = CodeEditorViewModel()) {
+        self.viewModel = viewModel
+    }
 
     
     var body: some View {
@@ -125,10 +131,12 @@ struct CodeEditorView: View {
                     bottomBarTargeted = inDropZone
                 }
             }
+        }.onDisappear {
+            model.saveProjects()
         }
     }
 }
 
 #Preview {
-    return CodeEditorView()
+    return CodeEditorView().environment(MockModel() as Model)
 }

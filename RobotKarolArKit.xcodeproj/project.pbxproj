@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -134,6 +134,11 @@
 		A0B5A1302D714EBA00A02BA9 /* EmptyExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyExpression.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		A0B36C692D7AFDFE005F33F0 /* Model */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Model; sourceTree = "<group>"; };
+		A0B36C742D7B0381005F33F0 /* Project */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Project; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
 		A06BD7BC2BAE9F4E00863CA5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
@@ -170,6 +175,7 @@
 		A02B6A992C13A64600CAFF82 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				A0B36C742D7B0381005F33F0 /* Project */,
 				A02B6ABA2C17357C00CAFF82 /* ARSimulator */,
 				A02B6A9A2C13A65C00CAFF82 /* CodeEditor */,
 			);
@@ -321,6 +327,7 @@
 				A02CAC162D75AF7100E751DF /* Info.plist */,
 				A02B6A992C13A64600CAFF82 /* UI */,
 				A06BD7D12BAEA3AD00863CA5 /* RobotLogic */,
+				A0B36C692D7AFDFE005F33F0 /* Model */,
 				A06BD7C22BAE9F4E00863CA5 /* RobotKarolArKitApp.swift */,
 				A06BD7C62BAE9F4F00863CA5 /* Assets.xcassets */,
 				A06BD7C82BAE9F4F00863CA5 /* RobotKarolArKit.entitlements */,
@@ -382,6 +389,10 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				A0B36C692D7AFDFE005F33F0 /* Model */,
+				A0B36C742D7B0381005F33F0 /* Project */,
 			);
 			name = RobotKarolArKit;
 			packageProductDependencies = (
