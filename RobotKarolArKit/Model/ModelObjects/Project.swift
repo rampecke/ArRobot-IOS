@@ -10,10 +10,10 @@ import Foundation
 @Observable
 class Project: Identifiable, Codable {
     var id: UUID = UUID()
-    var codeBlock: CodeBlock
     var worldWidth: Int
     var worldLength: Int
     var name: String
+    var codeBlock: CodeBlock
     
     init(codeBlock: CodeBlock = CodeBlock(), worldWidth: Int = 6, worldLength: Int = 6, name: String = "Untitled Project") {
         self.codeBlock = codeBlock

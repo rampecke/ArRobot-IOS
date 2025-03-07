@@ -26,7 +26,7 @@ struct ProjectHomeScreen: View {
                     
                     ForEach(model.projects, id: \.id) { project in
                         NavigationLink {
-                            CodeEditorView(viewModel: CodeEditorViewModel(codeBlock: project.codeBlock, world: World(width: project.worldWidth, length: project.worldLength)))
+                            CodeEditorView(codeBlock: project.codeBlock, width: project.worldWidth, length: project.worldLength)
                         } label: {
                             ProjectElement(project: project).frame(height: 140).padding(.horizontal, 15)
                         }

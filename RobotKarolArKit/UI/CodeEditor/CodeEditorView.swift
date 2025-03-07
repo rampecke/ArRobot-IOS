@@ -23,8 +23,8 @@ struct CodeEditorView: View {
     
     @Environment(Model.self) var model: Model
     
-    init(viewModel: CodeEditorViewModel = CodeEditorViewModel()) {
-        self.viewModel = viewModel
+    init(codeBlock: CodeBlock = CodeBlock(), width: Int = 6, length: Int = 6) {
+        self.viewModel = CodeEditorViewModel(codeBlock: codeBlock, world: World(width: width, length: length))
     }
 
     
