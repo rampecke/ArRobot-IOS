@@ -62,6 +62,7 @@
 		A09390EF2C1DBFBD009DF760 /* While.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09390EE2C1DBFBD009DF760 /* While.swift */; };
 		A09390F12C1DCA38009DF760 /* CodeLineControllFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09390F02C1DCA38009DF760 /* CodeLineControllFlow.swift */; };
 		A09390F52C1DCD30009DF760 /* CodeBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09390F42C1DCD30009DF760 /* CodeBlockView.swift */; };
+		A0B36C662D7AE5AF005F33F0 /* AddExpressionIntoEmptyVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B36C652D7AE5AF005F33F0 /* AddExpressionIntoEmptyVisitor.swift */; };
 		A0B40CA42D71B7E800AEFD40 /* DeleteExpressionVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B40CA32D71B7E800AEFD40 /* DeleteExpressionVisitor.swift */; };
 		A0B40CA62D71BD0400AEFD40 /* AddExpressionVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B40CA52D71BD0400AEFD40 /* AddExpressionVisitor.swift */; };
 		A0B5A12F2D714CE800A02BA9 /* ExpressionPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5A12E2D714CE800A02BA9 /* ExpressionPiece.swift */; };
@@ -126,6 +127,7 @@
 		A09390EE2C1DBFBD009DF760 /* While.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = While.swift; sourceTree = "<group>"; };
 		A09390F02C1DCA38009DF760 /* CodeLineControllFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeLineControllFlow.swift; sourceTree = "<group>"; };
 		A09390F42C1DCD30009DF760 /* CodeBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeBlockView.swift; sourceTree = "<group>"; };
+		A0B36C652D7AE5AF005F33F0 /* AddExpressionIntoEmptyVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpressionIntoEmptyVisitor.swift; sourceTree = "<group>"; };
 		A0B40CA32D71B7E800AEFD40 /* DeleteExpressionVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteExpressionVisitor.swift; sourceTree = "<group>"; };
 		A0B40CA52D71BD0400AEFD40 /* AddExpressionVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpressionVisitor.swift; sourceTree = "<group>"; };
 		A0B5A12E2D714CE800A02BA9 /* ExpressionPiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionPiece.swift; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 				A0B40CA32D71B7E800AEFD40 /* DeleteExpressionVisitor.swift */,
 				A0B40CA52D71BD0400AEFD40 /* AddExpressionVisitor.swift */,
 				A02CAC1B2D78AB5300E751DF /* ResetCodeBlockVisitor.swift */,
+				A0B36C652D7AE5AF005F33F0 /* AddExpressionIntoEmptyVisitor.swift */,
 			);
 			path = Visitors;
 			sourceTree = "<group>";
@@ -461,6 +464,7 @@
 				A0B40CA62D71BD0400AEFD40 /* AddExpressionVisitor.swift in Sources */,
 				A02B6A982C13A2DE00CAFF82 /* PlaceWater.swift in Sources */,
 				A02B6A8C2C13A05500CAFF82 /* LeftTurn.swift in Sources */,
+				A0B36C662D7AE5AF005F33F0 /* AddExpressionIntoEmptyVisitor.swift in Sources */,
 				A02B6AD82C17382E00CAFF82 /* ARSimulator.swift in Sources */,
 				A01483092D7138B000AACE8D /* ExpressionLine.swift in Sources */,
 				A01483072D71188D00AACE8D /* IsBlock.swift in Sources */,

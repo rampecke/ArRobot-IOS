@@ -23,11 +23,37 @@ class CodeEditorViewModel {
     
     var dragInstruction = false
     var dragExpression = false
+    var dragNewInstruction = false
     
     init(codeBlock: CodeBlock = CodeBlock(), world: World = World(width: 6, length: 6)) {
         self.codeBlock = codeBlock
         self.world = world
         self.executionVisitor = ExecutionVisitor(world: world)
+    }
+    
+    //Whenever we start a drag we need to call one of these to make sure our dragging states are set correctly
+    func dragNewStatement() {
+        dragInstruction = false
+        dragExpression = false
+        dragNewInstruction = true
+    }
+    
+    func dragExistingInstruction() {
+        dragInstruction = true
+        dragExpression = false
+        dragNewInstruction = false
+    }
+    
+    func dragExistingExpression() {
+        dragInstruction = false
+        dragExpression = true
+        dragNewInstruction = false
+    }
+    
+    func dragNewExpression() {
+        dragInstruction = false
+        dragExpression = false
+        dragNewInstruction = false
     }
     
     private func addStatement(statement: Statement) {
@@ -62,6 +88,22 @@ class CodeEditorViewModel {
             return
         }
         codeBlock.addStatementAtPosition(statement: newStatement, position: position)
+    }
+    
+    func addNewExpressionAtNextEmptyPosition(expression: Expression) {
+        if executionRunning {
+            reset()
+        }
+        
+        let newInstructionVisitor = NewInstructionVisitor()
+        expression.accept(visitor: newInstructionVisitor)
+        
+        guard let newExpression = newInstructionVisitor.get() as? Expression else {
+            return
+        }
+        
+        let addExpressionToEmptyVisitor = AddExpressionIntoEmptyVisitor(expressionToAdd: newExpression)
+        codeBlock.accept(visitor: addExpressionToEmptyVisitor)
     }
     
     func next() {
@@ -114,6 +156,8 @@ class CodeEditorViewModel {
     
     func resetCode() {
         codeBlock.codeBlock = []
+        
+        reset()
     }
     
     func deleteInstruction(deleteId: UUID) {

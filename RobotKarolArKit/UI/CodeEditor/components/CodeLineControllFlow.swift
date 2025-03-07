@@ -18,10 +18,10 @@ struct CodeLineControllFlow: View {
                 Text(LocalizedStringKey(instructionColorHelper.getNameOfInstruction(instruction: instruction)))
                     .foregroundColor(instructionColorHelper.getColor(instructionColorHelper.getNameOfInstruction(instruction: instruction), .onPrimary))
                     .font(.system(size: 20, weight: .semibold, design: .rounded))
-                    .dropDestination(for: Statement.self) { items, _ in
+                    /*.dropDestination(for: Statement.self) { items, _ in
                         viewModel.handleStatementDrop(statement: items.first ?? Step(), targetStatement: instruction)
                         return true
-                    }
+                    }*/
                 
                 //Only show this if instruction is If or While
                 if let ifInstruction = instruction as? If {
@@ -42,6 +42,11 @@ struct CodeLineControllFlow: View {
                             RoundedRectangle(cornerRadius: 6)
                                 .stroke(viewModel.executionVisitor.lastExecuted.id == whileInstruction.expression.id ? InstructionColorNameHelper().getColor("warning_color") : .clear, lineWidth: 2)
                         )
+                }
+            }.if(viewModel.dragNewInstruction) { view in
+                view.dropDestination(for: Statement.self) { items, _ in
+                    viewModel.handleStatementDrop(statement: items.first ?? Step(), targetStatement: instruction)
+                    return true
                 }
             }
             
@@ -72,8 +77,7 @@ struct CodeLineControllFlow: View {
             .draggable(instruction) {
                 CodeLineControllFlow(instruction: instruction, viewModel: viewModel)
                     .onAppear {
-                        viewModel.dragExpression = false
-                        viewModel.dragInstruction = true
+                        viewModel.dragExistingInstruction()
                     }
                     .contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
             }

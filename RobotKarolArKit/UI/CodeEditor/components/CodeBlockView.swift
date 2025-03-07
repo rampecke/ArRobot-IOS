@@ -31,8 +31,7 @@ struct CodeBlockView: View {
                         .draggable(instruction){
                             CodeLine(instruction: instruction, CodeLineType.CodeLine)
                                 .onAppear {
-                                    viewModel.dragExpression = false
-                                    viewModel.dragInstruction = true
+                                    viewModel.dragExistingInstruction()
                                 }
                                 .contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
                         }

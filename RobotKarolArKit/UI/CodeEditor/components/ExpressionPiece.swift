@@ -42,8 +42,7 @@ struct ExpressionPiece: View {
             .draggable(andExpression){
                 ExpressionPiece(expression: andExpression, viewModel: viewModel)
                     .onAppear {
-                        viewModel.dragExpression = true
-                        viewModel.dragInstruction = false
+                        viewModel.dragExistingExpression()
                     }
                     .contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
             }
@@ -69,8 +68,7 @@ struct ExpressionPiece: View {
             .draggable(orExpression) {
                 ExpressionPiece(expression: orExpression, viewModel: viewModel)
                     .onAppear {
-                        viewModel.dragExpression = true
-                        viewModel.dragInstruction = false
+                        viewModel.dragExistingExpression()
                     }
                     .contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
             }
@@ -95,8 +93,7 @@ struct ExpressionPiece: View {
                 .draggable(notExpression) {
                     ExpressionPiece(expression: notExpression, viewModel: viewModel)
                         .onAppear {
-                            viewModel.dragExpression = true
-                            viewModel.dragInstruction = false
+                            viewModel.dragExistingExpression()
                         }
                         .contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
                 }
@@ -139,8 +136,7 @@ struct ExpressionPiece: View {
                 .draggable(expression) {
                     ExpressionPiece(expression: expression, viewModel: viewModel)
                         .onAppear {
-                            viewModel.dragExpression = true
-                            viewModel.dragInstruction = false
+                            viewModel.dragExistingExpression()
                         }
                         .contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
                 }

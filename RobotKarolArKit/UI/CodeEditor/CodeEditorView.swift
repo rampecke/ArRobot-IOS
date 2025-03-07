@@ -73,8 +73,7 @@ struct CodeEditorView: View {
                                     .draggable(instruction){
                                         CodeLine(instruction: instruction, CodeLineType.CodeLine)
                                             .onAppear {
-                                                viewModel.dragExpression = false
-                                                viewModel.dragInstruction = false
+                                                viewModel.dragNewStatement()
                                             }
                                             .contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
                                     }
@@ -86,21 +85,19 @@ struct CodeEditorView: View {
                                     .draggable(instruction){
                                         CodeLineControllFlow(instruction: instruction, viewModel: viewModel)
                                             .onAppear {
-                                                viewModel.dragExpression = false
-                                                viewModel.dragInstruction = false
+                                                viewModel.dragNewStatement()
                                             }
                                             .contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
                                     }
                             }
                             ForEach($viewModel.allExpressions, id: \.id) { $instruction in
                                 InstructionAddTile(instruction: instruction).frame(height: 90).onTapGesture(perform: {
-                                    //TODO: ADD A FUNCTION/VISITOR THAT ADDS THE EXPRESSION INTO THE NEXT EMPTYEXPRESSION if there is one
+                                    viewModel.addNewExpressionAtNextEmptyPosition(expression: instruction)
                                 }).contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
                                     .draggable(instruction){
                                         ExpressionPiece(expression: instruction, viewModel: viewModel)
                                             .onAppear {
-                                                viewModel.dragExpression = false
-                                                viewModel.dragInstruction = false
+                                                viewModel.dragNewExpression()
                                             }
                                             .contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
                                     }
