@@ -23,7 +23,7 @@ class Model {
     
     func deleteProject(project: Project) {
         projects.removeAll(){ $0.id == project.id }
-        deleteProject(project: project)
+        deleteProjectFile(project: project)
     }
 
     

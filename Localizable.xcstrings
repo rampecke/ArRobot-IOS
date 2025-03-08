@@ -12,6 +12,9 @@
         }
       }
     },
+    "%@ >" : {
+
+    },
     "and" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -66,6 +69,9 @@
           }
         }
       }
+    },
+    "Delete Project" : {
+
     },
     "emptyExpression_error_message" : {
       "extractionState" : "manual",
@@ -349,6 +355,9 @@
           }
         }
       }
+    },
+    "Length: %lld" : {
+
     },
     "lift" : {
       "extractionState" : "manual",
@@ -636,6 +645,9 @@
         }
       }
     },
+    "Project Name" : {
+
+    },
     "Reset game" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -861,6 +873,9 @@
           }
         }
       }
+    },
+    "Width: %lld" : {
+
     }
   },
   "version" : "1.0"

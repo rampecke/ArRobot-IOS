@@ -27,4 +27,8 @@ class MockModel: Model { //Used for Previews and not persisting
     override func loadProjects() {
         // Do nothing to prevent loading
     }
+    
+    override func deleteProjectFile(project: Project) {
+        // Do nothing to prevent loading
+    }
 }
