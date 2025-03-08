@@ -25,10 +25,20 @@ class CodeEditorViewModel {
     var dragExpression = false
     var dragNewInstruction = false
     
+    var project: Project?
+    
     init(codeBlock: CodeBlock = CodeBlock(), world: World = World(width: 6, length: 6)) {
         self.codeBlock = codeBlock
         self.world = world
         self.executionVisitor = ExecutionVisitor(world: world)
+    }
+    
+    init(project: Project) {
+        self.codeBlock = project.codeBlock
+        let newWorld = World(width: project.worldWidth, length: project.worldLength)
+        self.world = newWorld
+        self.executionVisitor = ExecutionVisitor(world: newWorld)
+        self.project = project
     }
     
     //Whenever we start a drag we need to call one of these to make sure our dragging states are set correctly

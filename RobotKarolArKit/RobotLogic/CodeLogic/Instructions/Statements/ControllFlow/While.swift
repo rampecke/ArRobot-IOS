@@ -11,20 +11,20 @@ import Foundation
 class While: CodeBlock {
     var expression: Expression = EmptyExpression()
     
-    override init(_ codeBlock: [Statement]?) {
-        super.init(codeBlock)
+    override init(id: UUID = UUID(), _ codeBlock: [Statement]?) {
+        super.init(id: id, codeBlock)
         self.executionIndex = -1  // Ensure execution starts at -1 for If statements
         self.type = "whileStatement"
     }
 
-    override init() {
-        super.init()
+    override init(id: UUID = UUID()) {
+        super.init(id: id)
         self.executionIndex = -1
         self.type = "whileStatement"
     }
     
-    init(_ codeBlock: [Statement]?, expression: Expression) {
-        super.init(codeBlock)
+    init(_ codeBlock: [Statement]?, expression: Expression, id: UUID = UUID()) {
+        super.init(id: id, codeBlock)
         self.executionIndex = -1  // Ensure execution starts at -1 for If statements
         self.type = "whileStatement"
         self.expression = expression

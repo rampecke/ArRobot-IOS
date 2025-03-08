@@ -11,21 +11,21 @@ import Foundation
 class If: CodeBlock {
     var expression: Expression = EmptyExpression()
     
-    override init(_ codeBlock: [Statement]?) {
-        super.init(codeBlock)
+    override init(id: UUID = UUID(), _ codeBlock: [Statement]?) {
+        super.init(id: id, codeBlock)
         self.executionIndex = -1  // Ensure execution starts at -1 for If statements
         self.type = "ifStatement"
     }
     
-    init(_ codeBlock: [Statement]?, expression: Expression) {
-        super.init(codeBlock)
+    init(_ codeBlock: [Statement]?, expression: Expression, id: UUID = UUID()) {
+        super.init(id: id, codeBlock)
         self.executionIndex = -1  // Ensure execution starts at -1 for If statements
         self.type = "ifStatement"
         self.expression = expression
     }
 
-    override init() {
-        super.init()
+    override init(id: UUID = UUID()) {
+        super.init(id: id)
         self.executionIndex = -1
         self.type = "ifStatement"
     }

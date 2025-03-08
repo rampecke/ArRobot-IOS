@@ -20,7 +20,7 @@ class MockModel: Model { //Used for Previews and not persisting
         ]
     }
     
-    override func saveProjects() {
+    override func saveProject(project: Project) {
         // Do nothing to prevent saving
     }
     

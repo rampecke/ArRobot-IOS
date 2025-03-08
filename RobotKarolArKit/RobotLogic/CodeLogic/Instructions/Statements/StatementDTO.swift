@@ -25,26 +25,26 @@ class StatementDTO: Codable {
     
     func returnStatement() -> Statement {
         switch type {
-        case "step": return Step()
-        case "lift": return Lift()
-        case "rightTurn": return RightTurn()
-        case "leftTurn": return LeftTurn()
-        case "placeGrass": return PlaceGrass()
-        case "placeStone": return PlaceStone()
-        case "placeWater": return PlaceWater()
+        case "step": return Step(id: id)
+        case "lift": return Lift(id: id)
+        case "rightTurn": return RightTurn(id: id)
+        case "leftTurn": return LeftTurn(id: id)
+        case "placeGrass": return PlaceGrass(id: id)
+        case "placeStone": return PlaceStone(id: id)
+        case "placeWater": return PlaceWater(id: id)
         case "codeBlock":
             let newCodeBlock = (codeBlock ?? []).map{$0.returnStatement()}
             return CodeBlock(newCodeBlock)
         case "ifStatement":
             let newCodeBlock = (codeBlock ?? []).map{$0.returnStatement()}
             let newExpression = (expression ?? ExpressionDTO(id: UUID(), type: "")).returnExpression()
-            return If(newCodeBlock, expression: newExpression)
+            return If(newCodeBlock, expression: newExpression, id: id)
         case "whileStatement":
             let newCodeBlock = (codeBlock ?? []).map{$0.returnStatement()}
             let newExpression = (expression ?? ExpressionDTO(id: UUID(), type: "")).returnExpression()
-            return While(newCodeBlock, expression: newExpression)
+            return While(newCodeBlock, expression: newExpression, id: id)
         default:
-            return Statement()
+            return Statement(id: id)
         }
     }
 }

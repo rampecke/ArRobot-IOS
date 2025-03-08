@@ -9,49 +9,96 @@ import Foundation
 
 @Observable
 class Model {
-    var projects: [Project] = [] {
-        didSet {
-            saveProjects() // Auto-save on changes (only changes on list it self)
-        }
-    }
+    var projects: [Project] = []
 
     init() {
         loadProjects()
     }
     
     func addNewProject() {
-        projects.append(Project())
+        let newProject = Project()
+        projects.append(newProject)
+        saveProject(project: newProject) // Save immediately
+    }
+    
+    func deleteProject(project: Project) {
+        projects.removeAll(){ $0.id == project.id }
+        deleteProject(project: project)
     }
 
     
     // MARK: - Persistence
-    private var fileURL: URL {
+    private func projectsDirectory() -> URL {
         let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        return path.appendingPathComponent("projects.json")
+        let projectsPath = path.appendingPathComponent("projects")
+
+        // Ensure the directory exists
+        if !FileManager.default.fileExists(atPath: projectsPath.path) {
+            do {
+                try FileManager.default.createDirectory(at: projectsPath, withIntermediateDirectories: true)
+            } catch {
+                print("Error creating projects directory: \(error.localizedDescription)")
+            }
+        }
+        return projectsPath
     }
 
-    func saveProjects() {
+    
+    private func fileURL(for project: Project) -> URL {
+        return projectsDirectory().appendingPathComponent("\(project.id).json") // Unique file per project
+    }
+
+    func saveProject(project: Project) {
         do {
-            let data = try JSONEncoder().encode(projects)
-            try data.write(to: fileURL)
+            let data = try JSONEncoder().encode(project)
+            try data.write(to: fileURL(for: project))
         } catch {
-            print("Error saving projects: \(error.localizedDescription)")
+            print("Error saving project \(project.id): \(error.localizedDescription)")
+        }
+    }
+    
+    func deleteProjectFile(project: Project) {
+        do {
+            try FileManager.default.removeItem(at: fileURL(for: project))
+        } catch {
+            print("Error deleting project \(project.id): \(error.localizedDescription)")
         }
     }
 
     func loadProjects() {
+        let path = projectsDirectory()
+        
         do {
-            let data = try Data(contentsOf: fileURL)
+            let fileManager = FileManager.default
+            let fileURLs = try fileManager.contentsOfDirectory(at: path, includingPropertiesForKeys: nil)
+            projects.removeAll() // Clear the current list before loading
 
-            if let rawString = String(data: data, encoding: .utf8) {
-                print("Raw file content: \n\(rawString)")
-            } else {
-                print("Unable to convert data to string.")
+            for url in fileURLs {
+                do {
+                    let rawData = try Data(contentsOf: url)
+                    
+                    do {
+                        let project = try JSONDecoder().decode(Project.self, from: rawData)
+                        projects.append(project) // Append only if decoding succeeds
+                    } catch let DecodingError.dataCorrupted(context) {
+                        print("Data corrupted: \(context)")
+                    } catch let DecodingError.keyNotFound(key, context) {
+                        print("Key '\(key)' not found: \(context.debugDescription)")
+                    } catch let DecodingError.typeMismatch(type, context) {
+                        print("Type mismatch for type \(type): \(context.debugDescription)")
+                    } catch let DecodingError.valueNotFound(type, context) {
+                        print("Value '\(type)' not found: \(context.debugDescription)")
+                    } catch {
+                        print("Unknown decoding error: \(error.localizedDescription)")
+                    }
+                } catch {
+                    print("Error loading project from \(url.lastPathComponent): \(error.localizedDescription)")
+                }
             }
-            projects = try JSONDecoder().decode([Project].self, from: data)
+            
         } catch {
-            print("Error loading projects: \(error.localizedDescription)")
-            projects = [] // Initialize empty if decoding fails
+            print("Error accessing project directory: \(error.localizedDescription)")
+            projects = []
         }
     }
 }

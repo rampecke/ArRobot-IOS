@@ -8,8 +8,8 @@
 import Foundation
 
 class LeftTurn: Statement {
-    override init() {
-        super.init()
+    override init(id: UUID = UUID()) {
+        super.init(id: id)
         self.type = "leftTurn"
     }
     

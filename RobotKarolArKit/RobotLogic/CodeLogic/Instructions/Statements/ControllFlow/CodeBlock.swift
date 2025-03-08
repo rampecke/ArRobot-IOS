@@ -12,15 +12,15 @@ class CodeBlock: Statement {
     var codeBlock: [Statement]
     var executionIndex = 0
     
-    init(_ codeBlock: [Statement]?) {
+    init(id: UUID = UUID(), _ codeBlock: [Statement]?) {
         self.codeBlock = codeBlock ?? []
-        super.init()
+        super.init(id: id)
         self.type = "codeBlock"
     }
     
-    override init() {
+    override init(id: UUID = UUID()) {
         self.codeBlock = []
-        super.init()
+        super.init(id: id)
         self.type = "codeBlock"
     }
 

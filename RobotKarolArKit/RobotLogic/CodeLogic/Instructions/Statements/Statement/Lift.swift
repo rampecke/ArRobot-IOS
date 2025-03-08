@@ -8,8 +8,8 @@
 import Foundation
 
 class Lift: Statement {
-    override init() {
-        super.init()
+    override init(id: UUID = UUID()) {
+        super.init(id: id)
         self.type = "lift"
     }
     

@@ -25,24 +25,24 @@ class ExpressionDTO: Codable {
     
     func returnExpression() -> Expression {
         switch type {
-        case "isEast": return IsEast()
-        case "isWest": return IsWest()
-        case "isNorth": return IsNorth()
-        case "isSouth": return IsSouth()
-        case "isBorder": return IsBorder()
-        case "isBlock": return IsBlock()
-        case "emptyExpression": return EmptyExpression()
+        case "isEast": return IsEast(id: id)
+        case "isWest": return IsWest(id: id)
+        case "isNorth": return IsNorth(id: id)
+        case "isSouth": return IsSouth(id: id)
+        case "isBorder": return IsBorder(id: id)
+        case "isBlock": return IsBlock(id: id)
+        case "emptyExpression": return EmptyExpression(id: id)
         case "and":
             let newLeft = left?.returnExpression() ?? EmptyExpression()
             let newRight = right?.returnExpression() ?? EmptyExpression()
-            return And(left: newLeft, right: newRight)
+            return And(left: newLeft, right: newRight, id: id)
         case "or":
             let newLeft = left?.returnExpression() ?? EmptyExpression()
             let newRight = right?.returnExpression() ?? EmptyExpression()
-            return Or(left: newLeft, right: newRight)
+            return Or(left: newLeft, right: newRight, id: id)
         case "not":
             let newContent = content?.returnExpression() ?? EmptyExpression()
-            return Not(content: newContent)
+            return Not(content: newContent, id: id)
         default:
             return Expression()
         }

@@ -12,17 +12,17 @@ class Or: Expression {
     var left: Expression
     var right: Expression
     
-    override init() {
+    override init(id: UUID = UUID()) {
         self.left = EmptyExpression()
         self.right = EmptyExpression()
-        super.init()
+        super.init(id: id)
         self.type = "or"
     }
     
-    init(left: Expression = EmptyExpression(), right: Expression = EmptyExpression()) {
+    init(left: Expression = EmptyExpression(), right: Expression = EmptyExpression(), id: UUID = UUID()) {
         self.left = left
         self.right = right
-        super.init()
+        super.init(id: id)
         self.type = "or"
     }
     

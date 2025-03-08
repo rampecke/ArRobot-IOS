@@ -23,8 +23,8 @@ struct CodeEditorView: View {
     
     @Environment(Model.self) var model: Model
     
-    init(codeBlock: CodeBlock = CodeBlock(), width: Int = 6, length: Int = 6) {
-        self.viewModel = CodeEditorViewModel(codeBlock: codeBlock, world: World(width: width, length: length))
+    init(project: Project = Project()) {
+        self.viewModel = CodeEditorViewModel(project: project)
     }
 
     
@@ -132,7 +132,8 @@ struct CodeEditorView: View {
                 }
             }
         }.onDisappear {
-            model.saveProjects()
+            guard let projectToSave = viewModel.project else { return }
+            model.saveProject(project: projectToSave)
         }
     }
 }

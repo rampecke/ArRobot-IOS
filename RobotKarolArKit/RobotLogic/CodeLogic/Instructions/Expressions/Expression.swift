@@ -12,6 +12,10 @@ import CoreTransferable
 class Expression: Instruction {
     var id: UUID = UUID()
     var type: String = "expression"
+    
+    init(id: UUID = UUID()) {
+        self.id = id
+    }
 
     func accept(visitor: Visitor) {
         // Base method (subclasses override this)

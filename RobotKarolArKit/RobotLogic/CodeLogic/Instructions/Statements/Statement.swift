@@ -10,8 +10,12 @@ import CoreTransferable
 
 @Observable
 class Statement: Instruction {
-    var id: UUID = UUID()
+    var id: UUID
     var type: String = "statement"
+    
+    init(id: UUID = UUID()) {
+        self.id = id
+    }
 
     func accept(visitor: Visitor) {
         // Base method (subclasses override this)
