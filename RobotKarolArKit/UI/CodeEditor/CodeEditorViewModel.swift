@@ -9,7 +9,6 @@ import Foundation
 
 @Observable
 class CodeEditorViewModel {
-    var codeBlock: CodeBlock = CodeBlock()
     var allStatements: [Statement] = [Step(), Lift(), RightTurn(), LeftTurn(), PlaceGrass(), PlaceStone(), PlaceWater()]
     var allControllFlow: [CodeBlock] = [If(), While()]
     var allExpressions: [Expression] = [IsEast(), IsWest(), IsNorth(), IsSouth(), IsBlock(), IsBorder(), And(), Or(), Not()]
@@ -25,16 +24,9 @@ class CodeEditorViewModel {
     var dragExpression = false
     var dragNewInstruction = false
     
-    var project: Project?
+    var project: Project
     
-    init(codeBlock: CodeBlock = CodeBlock(), world: World = World(width: 6, length: 6)) {
-        self.codeBlock = codeBlock
-        self.world = world
-        self.executionVisitor = ExecutionVisitor(world: world)
-    }
-    
-    init(project: Project) {
-        self.codeBlock = project.codeBlock
+    init(project: Project = Project()) {
         let newWorld = World(width: project.worldWidth, length: project.worldLength)
         self.world = newWorld
         self.executionVisitor = ExecutionVisitor(world: newWorld)
@@ -72,7 +64,7 @@ class CodeEditorViewModel {
             reset()
         }
         
-        codeBlock.addStatement(statement: statement)
+        project.codeBlock.addStatement(statement: statement)
     }
     
     func createNewStatement(statement: Statement) {
@@ -97,7 +89,7 @@ class CodeEditorViewModel {
         guard let newStatement = newInstructionVisitor.get() as? Statement else {
             return
         }
-        codeBlock.addStatementAtPosition(statement: newStatement, position: position)
+        project.codeBlock.addStatementAtPosition(statement: newStatement, position: position)
     }
     
     func addNewExpressionAtNextEmptyPosition(expression: Expression) {
@@ -113,7 +105,7 @@ class CodeEditorViewModel {
         }
         
         let addExpressionToEmptyVisitor = AddExpressionIntoEmptyVisitor(expressionToAdd: newExpression)
-        codeBlock.accept(visitor: addExpressionToEmptyVisitor)
+        project.codeBlock.accept(visitor: addExpressionToEmptyVisitor)
     }
     
     func next() {
@@ -124,7 +116,7 @@ class CodeEditorViewModel {
         if executionVisitor.endExecution || executionVisitor.finishedExecution {
             return
         } else {
-            codeBlock.accept(visitor: executionVisitor)
+            project.codeBlock.accept(visitor: executionVisitor)
         }
     }
     
@@ -158,14 +150,14 @@ class CodeEditorViewModel {
         executionRunning = false
         
         let resetVisitor = ResetCodeBlockVisitor()
-        codeBlock.accept(visitor: resetVisitor)
+        project.codeBlock.accept(visitor: resetVisitor)
         
         world.resetWorld()
         self.executionVisitor = ExecutionVisitor(world: world)
     }
     
     func resetCode() {
-        codeBlock.codeBlock = []
+        project.codeBlock.codeBlock = []
         
         reset()
     }
@@ -176,7 +168,7 @@ class CodeEditorViewModel {
         }
         
         let deleteStatementVisitor = DeleteStatementVisitor(deleteId: deleteId)
-        self.codeBlock.accept(visitor: deleteStatementVisitor)
+        project.codeBlock.accept(visitor: deleteStatementVisitor)
     }
     
     func deleteExpression(deleteId: UUID) {
@@ -185,7 +177,7 @@ class CodeEditorViewModel {
         }
         
         let deleteExpressionVisitor = DeleteExpressionVisitor(deleteId: deleteId)
-        self.codeBlock.accept(visitor: deleteExpressionVisitor)
+        project.codeBlock.accept(visitor: deleteExpressionVisitor)
     }
     
     //New Drag and Drop functions
@@ -207,7 +199,7 @@ class CodeEditorViewModel {
             guard let newStatement = newInstructionVisitor.get() as? Statement else { return }
             deleteStatementVisitor.setDeletedStatement(statement: newStatement)
         } else {
-            self.codeBlock.accept(visitor: deleteStatementVisitor)
+            project.codeBlock.accept(visitor: deleteStatementVisitor)
         }
         
         if addToEndOfTarget ?? false {
@@ -218,7 +210,7 @@ class CodeEditorViewModel {
             
             let addInstructionVisitor = AddStatementVisitor(targetId: targetStatement.id, statement: deleteStatementVisitor.getDeletedStatement())
             //TODO: Maybe add the codeblock the expression was dropped to the call -> Performance
-            self.codeBlock.accept(visitor: addInstructionVisitor)
+            project.codeBlock.accept(visitor: addInstructionVisitor)
         }
     }
     
@@ -240,12 +232,12 @@ class CodeEditorViewModel {
             deleteExpressionVisitor.setDeletedExpression(expression: newExpression)
         } else {
            //If it is not a new expression delete the old one
-            self.codeBlock.accept(visitor: deleteExpressionVisitor)
+            project.codeBlock.accept(visitor: deleteExpressionVisitor)
         }
         
         let addExpressionVisitor = AddExpressionVisitor(targetId: targetExpression.id, expression: deleteExpressionVisitor.getDeletedExpression())
         //TODO: Maybe add the codeblock the expression was dropped to the call -> Performance
-        self.codeBlock.accept(visitor: addExpressionVisitor)
+        project.codeBlock.accept(visitor: addExpressionVisitor)
     }
 }
 

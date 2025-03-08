@@ -63,5 +63,5 @@ struct CodeBlockView: View {
         viewModel.createNewStatement(statement: $0)
     }
     
-    return CodeBlockView(codeBlock: viewModel.codeBlock, viewModel: viewModel).padding(10)
+    return CodeBlockView(codeBlock: viewModel.project.codeBlock, viewModel: viewModel).padding(10)
 }

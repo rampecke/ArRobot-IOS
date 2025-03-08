@@ -39,7 +39,7 @@ struct CodeEditorView: View {
                         }, notInArView: true).frame(height: 30)
                     }.padding(.horizontal)
                     ScrollView {
-                        CodeBlockView(codeBlock: viewModel.codeBlock, viewModel: viewModel)
+                        CodeBlockView(codeBlock: viewModel.project.codeBlock, viewModel: viewModel)
                     }
                 }
             }, right: {
@@ -132,8 +132,7 @@ struct CodeEditorView: View {
                 }
             }
         }.onDisappear {
-            guard let projectToSave = viewModel.project else { return }
-            model.saveProject(project: projectToSave)
+            model.saveProject(project: viewModel.project)
         }
     }
 }
