@@ -9,9 +9,15 @@ import SwiftUI
 
 @main
 struct RobotKarolArKitApp: App {
+    @State var model: Model = Model()
+    
     var body: some Scene {
         WindowGroup {
-            CodeEditorView()
+            ProjectHomeScreen()
+                .environment(model)
+                .onOpenURL { url in
+                    model.importProjectFromFile(url: url)
+                }
         }
     }
 }

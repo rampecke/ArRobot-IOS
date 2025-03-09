@@ -28,7 +28,7 @@ struct ArViewControlBar: View {
             HStack{
                 Picker("ArPicker", selection: $viewModel.arType) {
                     ForEach(ARType.allCases , id: \.self) { type in
-                        Text("\(type.displayName)")
+                        Text(type.displayName)
                             .font(.system(size: 14, weight: .semibold))
                             .foregroundColor(Color("onContrast_color"))
                     }

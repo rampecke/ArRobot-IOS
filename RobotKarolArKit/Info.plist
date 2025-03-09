@@ -2,12 +2,30 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>roboArProject</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Owner</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.ramonaeckert.RobotKarolArKit.roboArProject</string>
+			</array>
+			<key>NSUbiquitousDocumentUserActivityType</key>
+			<string>com.ramonaeckert.RobotKarolArKit.roboArProject</string>
+		</dict>
+		<dict/>
+	</array>
 	<key>UTExportedTypeDeclarations</key>
 	<array>
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
-				<string>com.public.data</string>
+				<string>public.json</string>
 			</array>
 			<key>UTTypeDescription</key>
 			<string>Expression</string>
@@ -21,7 +39,7 @@
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
-				<string>com.public.data</string>
+				<string>public.json</string>
 			</array>
 			<key>UTTypeDescription</key>
 			<string>Statement</string>
@@ -35,7 +53,7 @@
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
-				<string>com.public.data</string>
+				<string>public.data</string>
 			</array>
 			<key>UTTypeDescription</key>
 			<string>NoDropArea</string>
@@ -45,6 +63,47 @@
 			<string>com.ramonaeckert.RobotKarolArKit.noDropArea</string>
 			<key>UTTypeTagSpecification</key>
 			<dict/>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.json</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>roboArProject</string>
+			<key>UTTypeIcons</key>
+			<dict/>
+			<key>UTTypeIdentifier</key>
+			<string>com.ramonaeckert.RobotKarolArKit.roboArProject</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>roboArProject</string>
+				</array>
+			</dict>
+		</dict>
+	</array>
+	<key>UTImportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.json</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>roboArProject</string>
+			<key>UTTypeIcons</key>
+			<dict/>
+			<key>UTTypeIdentifier</key>
+			<string>com.ramonaeckert.RobotKarolArKit.roboArProject</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>roboArProject</string>
+				</array>
+			</dict>
 		</dict>
 	</array>
 </dict>

@@ -17,9 +17,15 @@ struct CodeEditorView: View {
     
     let fraction = FractionHolder.usingUserDefaults(0.5, key: "myFraction")
     
-    @State var viewModel: CodeEditorViewModel = CodeEditorViewModel()
+    @State var viewModel: CodeEditorViewModel
     
     @State var bottomBarTargeted = false
+    
+    @Environment(Model.self) var model: Model
+    
+    init(project: Project = Project()) {
+        self.viewModel = CodeEditorViewModel(project: project)
+    }
 
     
     var body: some View {
@@ -33,7 +39,7 @@ struct CodeEditorView: View {
                         }, notInArView: true).frame(height: 30)
                     }.padding(.horizontal)
                     ScrollView {
-                        CodeBlockView(codeBlock: viewModel.codeBlock, viewModel: viewModel)
+                        CodeBlockView(codeBlock: viewModel.project.codeBlock, viewModel: viewModel)
                     }
                 }
             }, right: {
@@ -125,10 +131,12 @@ struct CodeEditorView: View {
                     bottomBarTargeted = inDropZone
                 }
             }
+        }.onDisappear {
+            model.saveProject(project: viewModel.project)
         }
     }
 }
 
 #Preview {
-    return CodeEditorView()
+    return CodeEditorView().environment(MockModel() as Model)
 }

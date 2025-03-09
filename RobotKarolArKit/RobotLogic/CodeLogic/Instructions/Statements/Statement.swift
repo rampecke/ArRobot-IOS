@@ -10,7 +10,12 @@ import CoreTransferable
 
 @Observable
 class Statement: Instruction {
-    var id: UUID = UUID()
+    var id: UUID
+    var type: String = "statement"
+    
+    init(id: UUID = UUID()) {
+        self.id = id
+    }
 
     func accept(visitor: Visitor) {
         // Base method (subclasses override this)
@@ -18,5 +23,9 @@ class Statement: Instruction {
 
     static var transferRepresentation: some TransferRepresentation {
         CodableRepresentation(for: Statement.self, contentType: .statement)
+    }
+    
+    func asStatementDTO() -> StatementDTO{
+        return StatementDTO(id: id, type: type)
     }
 }

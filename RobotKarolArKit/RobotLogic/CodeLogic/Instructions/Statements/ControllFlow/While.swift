@@ -11,14 +11,23 @@ import Foundation
 class While: CodeBlock {
     var expression: Expression = EmptyExpression()
     
-    override init(_ codeBlock: [Statement]?) {
-        super.init(codeBlock)
+    override init(id: UUID = UUID(), _ codeBlock: [Statement]?) {
+        super.init(id: id, codeBlock)
         self.executionIndex = -1  // Ensure execution starts at -1 for If statements
+        self.type = "whileStatement"
     }
 
-    override init() {
-        super.init()
+    override init(id: UUID = UUID()) {
+        super.init(id: id)
         self.executionIndex = -1
+        self.type = "whileStatement"
+    }
+    
+    init(_ codeBlock: [Statement]?, expression: Expression, id: UUID = UUID()) {
+        super.init(id: id, codeBlock)
+        self.executionIndex = -1  // Ensure execution starts at -1 for If statements
+        self.type = "whileStatement"
+        self.expression = expression
     }
     
     required init(from decoder: Decoder) throws {
@@ -36,6 +45,11 @@ class While: CodeBlock {
 
     private enum CodingKeys: String, CodingKey {
         case expression
+    }
+    
+    //Also persist codeBlock, expression and executionIndex
+    override func asStatementDTO() -> StatementDTO{
+        return StatementDTO(id: id, type: type, codeBlock: codeBlock.map{$0.asStatementDTO()}, executionIndex: executionIndex, expression: expression.asExpressionDTO())
     }
     
     override func accept(visitor: any Visitor) {

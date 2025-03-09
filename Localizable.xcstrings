@@ -1,15 +1,8 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "%@" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@"
-          }
-        }
-      }
+    "%@ >" : {
+
     },
     "and" : {
       "extractionState" : "manual",
@@ -66,6 +59,16 @@
         }
       }
     },
+    "Delete Project" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Projekt löschen"
+          }
+        }
+      }
+    },
     "emptyExpression_error_message" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -107,6 +110,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Alle ausführen"
+          }
+        }
+      }
+    },
+    "Export" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exportieren"
+          }
+        }
+      }
+    },
+    "Export %@" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exportiere %@"
           }
         }
       }
@@ -400,6 +423,16 @@
         }
       }
     },
+    "New Project..." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neues Projekt…"
+          }
+        }
+      }
+    },
     "Next step" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -632,6 +665,16 @@
         }
       }
     },
+    "Project Name" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Projekt Name"
+          }
+        }
+      }
+    },
     "Reset game" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -639,17 +682,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Spiel zurücksetzen"
-          }
-        }
-      }
-    },
-    "resetCode" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Code zurücksetzen"
           }
         }
       }
@@ -865,6 +897,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Repeats the code as long as the condition is still met"
+          }
+        }
+      }
+    },
+    "Worldsize: %lld x %lld" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dimension: %1$lld x %2$lld"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Worldsize: %1$lld x %2$lld"
           }
         }
       }

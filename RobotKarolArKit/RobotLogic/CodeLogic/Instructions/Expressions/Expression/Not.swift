@@ -11,9 +11,21 @@ import Foundation
 class Not: Expression {
     var content: Expression
     
-    override init() {
+    override init(id: UUID = UUID()) {
         self.content = EmptyExpression()
-        super.init()
+        super.init(id: id)
+        self.type = "not"
+    }
+    
+    init(content: Expression = EmptyExpression(), id: UUID = UUID()) {
+        self.content = content
+        super.init(id: id)
+        self.type = "not"
+    }
+    
+    //Also persist expressions
+    override func asExpressionDTO() -> ExpressionDTO {
+        return ExpressionDTO(id: id, type: type, content: content.asExpressionDTO())
     }
     
     required init(from decoder: Decoder) throws {

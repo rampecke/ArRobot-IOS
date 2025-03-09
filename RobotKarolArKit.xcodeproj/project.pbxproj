@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -63,6 +63,8 @@
 		A09390F12C1DCA38009DF760 /* CodeLineControllFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09390F02C1DCA38009DF760 /* CodeLineControllFlow.swift */; };
 		A09390F52C1DCD30009DF760 /* CodeBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09390F42C1DCD30009DF760 /* CodeBlockView.swift */; };
 		A0B36C662D7AE5AF005F33F0 /* AddExpressionIntoEmptyVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B36C652D7AE5AF005F33F0 /* AddExpressionIntoEmptyVisitor.swift */; };
+		A0B36C7F2D7B4423005F33F0 /* StatementDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B36C7E2D7B4423005F33F0 /* StatementDTO.swift */; };
+		A0B36C812D7B4CC7005F33F0 /* ExpressionDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B36C802D7B4CC7005F33F0 /* ExpressionDTO.swift */; };
 		A0B40CA42D71B7E800AEFD40 /* DeleteExpressionVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B40CA32D71B7E800AEFD40 /* DeleteExpressionVisitor.swift */; };
 		A0B40CA62D71BD0400AEFD40 /* AddExpressionVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B40CA52D71BD0400AEFD40 /* AddExpressionVisitor.swift */; };
 		A0B5A12F2D714CE800A02BA9 /* ExpressionPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5A12E2D714CE800A02BA9 /* ExpressionPiece.swift */; };
@@ -128,11 +130,18 @@
 		A09390F02C1DCA38009DF760 /* CodeLineControllFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeLineControllFlow.swift; sourceTree = "<group>"; };
 		A09390F42C1DCD30009DF760 /* CodeBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeBlockView.swift; sourceTree = "<group>"; };
 		A0B36C652D7AE5AF005F33F0 /* AddExpressionIntoEmptyVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpressionIntoEmptyVisitor.swift; sourceTree = "<group>"; };
+		A0B36C7E2D7B4423005F33F0 /* StatementDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatementDTO.swift; sourceTree = "<group>"; };
+		A0B36C802D7B4CC7005F33F0 /* ExpressionDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionDTO.swift; sourceTree = "<group>"; };
 		A0B40CA32D71B7E800AEFD40 /* DeleteExpressionVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteExpressionVisitor.swift; sourceTree = "<group>"; };
 		A0B40CA52D71BD0400AEFD40 /* AddExpressionVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpressionVisitor.swift; sourceTree = "<group>"; };
 		A0B5A12E2D714CE800A02BA9 /* ExpressionPiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionPiece.swift; sourceTree = "<group>"; };
 		A0B5A1302D714EBA00A02BA9 /* EmptyExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyExpression.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		A0B36C692D7AFDFE005F33F0 /* Model */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Model; sourceTree = "<group>"; };
+		A0B36C742D7B0381005F33F0 /* Project */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Project; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		A06BD7BC2BAE9F4E00863CA5 /* Frameworks */ = {
@@ -152,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				A01482F02D71145100AACE8D /* Expression.swift */,
+				A0B36C802D7B4CC7005F33F0 /* ExpressionDTO.swift */,
 				A02CAC132D759DED00E751DF /* Expression */,
 			);
 			path = Expressions;
@@ -161,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				A02CAC112D759BA300E751DF /* Statement.swift */,
+				A0B36C7E2D7B4423005F33F0 /* StatementDTO.swift */,
 				A02CAC142D759E2A00E751DF /* Statement */,
 				A02B6AAB2C1669E300CAFF82 /* ControllFlow */,
 			);
@@ -170,6 +181,7 @@
 		A02B6A992C13A64600CAFF82 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				A0B36C742D7B0381005F33F0 /* Project */,
 				A02B6ABA2C17357C00CAFF82 /* ARSimulator */,
 				A02B6A9A2C13A65C00CAFF82 /* CodeEditor */,
 			);
@@ -321,6 +333,7 @@
 				A02CAC162D75AF7100E751DF /* Info.plist */,
 				A02B6A992C13A64600CAFF82 /* UI */,
 				A06BD7D12BAEA3AD00863CA5 /* RobotLogic */,
+				A0B36C692D7AFDFE005F33F0 /* Model */,
 				A06BD7C22BAE9F4E00863CA5 /* RobotKarolArKitApp.swift */,
 				A06BD7C62BAE9F4F00863CA5 /* Assets.xcassets */,
 				A06BD7C82BAE9F4F00863CA5 /* RobotKarolArKit.entitlements */,
@@ -382,6 +395,10 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				A0B36C692D7AFDFE005F33F0 /* Model */,
+				A0B36C742D7B0381005F33F0 /* Project */,
 			);
 			name = RobotKarolArKit;
 			packageProductDependencies = (
@@ -472,6 +489,7 @@
 				A02CAC1E2D78C77200E751DF /* ConditionalModifierExtension.swift in Sources */,
 				A01482EE2D70DE6C00AACE8D /* AddStatementVisitor.swift in Sources */,
 				A09390EF2C1DBFBD009DF760 /* While.swift in Sources */,
+				A0B36C7F2D7B4423005F33F0 /* StatementDTO.swift in Sources */,
 				A02CAC222D79A13100E751DF /* ExecutionStatusLable.swift in Sources */,
 				A06BD7D42BAEA3ED00863CA5 /* World.swift in Sources */,
 				A01483052D71175F00AACE8D /* Not.swift in Sources */,
@@ -489,6 +507,7 @@
 				A02B6AAD2C166A0100CAFF82 /* CodeBlock.swift in Sources */,
 				A02B6A942C13A22000CAFF82 /* PlaceGrass.swift in Sources */,
 				A02CAC122D759BA300E751DF /* Statement.swift in Sources */,
+				A0B36C812D7B4CC7005F33F0 /* ExpressionDTO.swift in Sources */,
 				A01482F52D7114AE00AACE8D /* IsEast.swift in Sources */,
 				A02CAC1C2D78AB5300E751DF /* ResetCodeBlockVisitor.swift in Sources */,
 				A06BD7DB2BAF2C0A00863CA5 /* Robot.swift in Sources */,
@@ -653,7 +672,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ramonaeckert.RobotKarolArKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -693,7 +714,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ramonaeckert.RobotKarolArKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
