@@ -101,4 +101,31 @@ class Model {
             projects = []
         }
     }
+    
+    func importProjectFromFile(url: URL) {
+        // Request access to the file (for sandboxed files)
+        let didStartAccessing = url.startAccessingSecurityScopedResource()
+        
+        defer {
+            if didStartAccessing {
+                url.stopAccessingSecurityScopedResource()
+            }
+        }
+        
+        do {
+            let data = try Data(contentsOf: url)
+            let project = try JSONDecoder().decode(Project.self, from: data)
+
+            // Avoid duplicate projects by checking if `id` exists
+            if !projects.contains(where: { $0.id == project.id }) {
+                projects.append(project)
+                saveProject(project: project) // Save it to disk
+                print("Imported project: \(project.name)")
+            } else {
+                print("Project already exists: \(project.name)")
+            }
+        } catch {
+            print("Error importing project: \(error.localizedDescription)")
+        }
+    }
 }

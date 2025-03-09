@@ -73,7 +73,6 @@ struct ProjectElement: View {
                    item: project,
                    preview: SharePreview("Export \(project.name)")
                )
-                //ShareLink(item: project, preview: .init(project.name))
                 
                 Divider()
                 
@@ -86,7 +85,7 @@ struct ProjectElement: View {
                         Spacer()
                     }.frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
-            }.padding()
+            }.foregroundColor(.primary).padding()
         }
     }
 }

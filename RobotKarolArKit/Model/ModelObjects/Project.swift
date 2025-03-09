@@ -31,6 +31,9 @@ class Project: Identifiable, Codable, Transferable {
     //For Transferable -> Needed for Airdrop
     static var transferRepresentation: some TransferRepresentation {
         CodableRepresentation(contentType: .project)
+            .suggestedFileName { project in
+                return "ArRoboProject-\(project.name.replacingOccurrences(of: " ", with: "_"))" // Replace spaces to avoid issues
+            }
     }
 }
 

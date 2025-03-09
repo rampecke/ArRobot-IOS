@@ -1,17 +1,6 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "%@" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@"
-          }
-        }
-      }
-    },
     "%@ >" : {
 
     },
@@ -71,7 +60,14 @@
       }
     },
     "Delete Project" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Projekt löschen"
+          }
+        }
+      }
     },
     "emptyExpression_error_message" : {
       "extractionState" : "manual",
@@ -119,10 +115,24 @@
       }
     },
     "Export" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exportieren"
+          }
+        }
+      }
     },
     "Export %@" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exportiere %@"
+          }
+        }
+      }
     },
     "if" : {
       "extractionState" : "manual",
@@ -414,7 +424,14 @@
       }
     },
     "New Project..." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neues Projekt…"
+          }
+        }
+      }
     },
     "Next step" : {
       "extractionState" : "manual",
@@ -649,7 +666,14 @@
       }
     },
     "Project Name" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Projekt Name"
+          }
+        }
+      }
     },
     "Reset game" : {
       "extractionState" : "manual",
@@ -879,6 +903,12 @@
     },
     "Worldsize: %lld x %lld" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dimension: %1$lld x %2$lld"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "new",

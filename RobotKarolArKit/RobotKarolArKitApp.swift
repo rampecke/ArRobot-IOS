@@ -13,7 +13,11 @@ struct RobotKarolArKitApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ProjectHomeScreen().environment(model)
+            ProjectHomeScreen()
+                .environment(model)
+                .onOpenURL { url in
+                    model.importProjectFromFile(url: url)
+                }
         }
     }
 }
