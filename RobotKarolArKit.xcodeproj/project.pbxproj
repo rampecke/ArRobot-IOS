@@ -19,8 +19,6 @@
 		A01483032D71172A00AACE8D /* Or.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01483022D71172A00AACE8D /* Or.swift */; };
 		A01483052D71175F00AACE8D /* Not.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01483042D71175F00AACE8D /* Not.swift */; };
 		A01483072D71188D00AACE8D /* IsBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01483062D71188D00AACE8D /* IsBlock.swift */; };
-		A01483092D7138B000AACE8D /* ExpressionLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01483082D7138B000AACE8D /* ExpressionLine.swift */; };
-		A014830B2D71402200AACE8D /* InstructionColorNameHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A014830A2D71402100AACE8D /* InstructionColorNameHelper.swift */; };
 		A02B6A8C2C13A05500CAFF82 /* LeftTurn.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02B6A8B2C13A05500CAFF82 /* LeftTurn.swift */; };
 		A02B6A8E2C13A0CC00CAFF82 /* RightTurn.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02B6A8D2C13A0CC00CAFF82 /* RightTurn.swift */; };
 		A02B6A902C13A16200CAFF82 /* Lift.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02B6A8F2C13A16200CAFF82 /* Lift.swift */; };
@@ -28,14 +26,10 @@
 		A02B6A942C13A22000CAFF82 /* PlaceGrass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02B6A932C13A22000CAFF82 /* PlaceGrass.swift */; };
 		A02B6A962C13A26400CAFF82 /* PlaceStone.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02B6A952C13A26400CAFF82 /* PlaceStone.swift */; };
 		A02B6A982C13A2DE00CAFF82 /* PlaceWater.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02B6A972C13A2DE00CAFF82 /* PlaceWater.swift */; };
-		A02B6A9C2C13A6AF00CAFF82 /* CodeEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02B6A9B2C13A6AF00CAFF82 /* CodeEditorView.swift */; };
-		A02B6A9F2C14AFF800CAFF82 /* CodeLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02B6A9E2C14AFF800CAFF82 /* CodeLine.swift */; };
 		A02B6AA22C14BA0F00CAFF82 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = A02B6AA12C14BA0F00CAFF82 /* Localizable.xcstrings */; };
 		A02B6AA52C14BD3300CAFF82 /* NameVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02B6AA42C14BD3300CAFF82 /* NameVisitor.swift */; };
-		A02B6AA72C159EED00CAFF82 /* InstructionAddTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02B6AA62C159EED00CAFF82 /* InstructionAddTile.swift */; };
 		A02B6AAA2C1658AA00CAFF82 /* SplitView in Frameworks */ = {isa = PBXBuildFile; productRef = A02B6AA92C1658AA00CAFF82 /* SplitView */; };
 		A02B6AAD2C166A0100CAFF82 /* CodeBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02B6AAC2C166A0100CAFF82 /* CodeBlock.swift */; };
-		A02B6AB12C16704900CAFF82 /* CodeEditorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02B6AB02C16704900CAFF82 /* CodeEditorViewModel.swift */; };
 		A02B6AB32C16789D00CAFF82 /* NewInstructionVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02B6AB22C16789D00CAFF82 /* NewInstructionVisitor.swift */; };
 		A02B6AB72C17341A00CAFF82 /* ARKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A02B6AB62C17341A00CAFF82 /* ARKit.framework */; platformFilter = ios; };
 		A02B6AB92C17342500CAFF82 /* RealityKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A02B6AB82C17342500CAFF82 /* RealityKit.framework */; };
@@ -45,7 +39,6 @@
 		A02B6AE52C19130200CAFF82 /* ArViewControlBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02B6AE42C19130200CAFF82 /* ArViewControlBar.swift */; };
 		A02CAC122D759BA300E751DF /* Statement.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02CAC112D759BA300E751DF /* Statement.swift */; };
 		A02CAC1C2D78AB5300E751DF /* ResetCodeBlockVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02CAC1B2D78AB5300E751DF /* ResetCodeBlockVisitor.swift */; };
-		A02CAC1E2D78C77200E751DF /* ConditionalModifierExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02CAC1D2D78C77200E751DF /* ConditionalModifierExtension.swift */; };
 		A02CAC202D7916F800E751DF /* ControllbarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02CAC1F2D7916F800E751DF /* ControllbarButton.swift */; };
 		A02CAC222D79A13100E751DF /* ExecutionStatusLable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02CAC212D79A13100E751DF /* ExecutionStatusLable.swift */; };
 		A06BD7C32BAE9F4E00863CA5 /* RobotKarolArKitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06BD7C22BAE9F4E00863CA5 /* RobotKarolArKitApp.swift */; };
@@ -60,14 +53,11 @@
 		A06BD7E22BB4735E00863CA5 /* Visitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06BD7E12BB4735E00863CA5 /* Visitor.swift */; };
 		A09390ED2C1DB9A4009DF760 /* If.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09390EC2C1DB9A4009DF760 /* If.swift */; };
 		A09390EF2C1DBFBD009DF760 /* While.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09390EE2C1DBFBD009DF760 /* While.swift */; };
-		A09390F12C1DCA38009DF760 /* CodeLineControllFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09390F02C1DCA38009DF760 /* CodeLineControllFlow.swift */; };
-		A09390F52C1DCD30009DF760 /* CodeBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09390F42C1DCD30009DF760 /* CodeBlockView.swift */; };
 		A0B36C662D7AE5AF005F33F0 /* AddExpressionIntoEmptyVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B36C652D7AE5AF005F33F0 /* AddExpressionIntoEmptyVisitor.swift */; };
 		A0B36C7F2D7B4423005F33F0 /* StatementDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B36C7E2D7B4423005F33F0 /* StatementDTO.swift */; };
 		A0B36C812D7B4CC7005F33F0 /* ExpressionDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B36C802D7B4CC7005F33F0 /* ExpressionDTO.swift */; };
 		A0B40CA42D71B7E800AEFD40 /* DeleteExpressionVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B40CA32D71B7E800AEFD40 /* DeleteExpressionVisitor.swift */; };
 		A0B40CA62D71BD0400AEFD40 /* AddExpressionVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B40CA52D71BD0400AEFD40 /* AddExpressionVisitor.swift */; };
-		A0B5A12F2D714CE800A02BA9 /* ExpressionPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5A12E2D714CE800A02BA9 /* ExpressionPiece.swift */; };
 		A0B5A1312D714EBA00A02BA9 /* EmptyExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5A1302D714EBA00A02BA9 /* EmptyExpression.swift */; };
 /* End PBXBuildFile section */
 
@@ -84,8 +74,6 @@
 		A01483022D71172A00AACE8D /* Or.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Or.swift; sourceTree = "<group>"; };
 		A01483042D71175F00AACE8D /* Not.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Not.swift; sourceTree = "<group>"; };
 		A01483062D71188D00AACE8D /* IsBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsBlock.swift; sourceTree = "<group>"; };
-		A01483082D7138B000AACE8D /* ExpressionLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionLine.swift; sourceTree = "<group>"; };
-		A014830A2D71402100AACE8D /* InstructionColorNameHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionColorNameHelper.swift; sourceTree = "<group>"; };
 		A02B6A8B2C13A05500CAFF82 /* LeftTurn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftTurn.swift; sourceTree = "<group>"; };
 		A02B6A8D2C13A0CC00CAFF82 /* RightTurn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightTurn.swift; sourceTree = "<group>"; };
 		A02B6A8F2C13A16200CAFF82 /* Lift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lift.swift; sourceTree = "<group>"; };
@@ -93,13 +81,9 @@
 		A02B6A932C13A22000CAFF82 /* PlaceGrass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceGrass.swift; sourceTree = "<group>"; };
 		A02B6A952C13A26400CAFF82 /* PlaceStone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceStone.swift; sourceTree = "<group>"; };
 		A02B6A972C13A2DE00CAFF82 /* PlaceWater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceWater.swift; sourceTree = "<group>"; };
-		A02B6A9B2C13A6AF00CAFF82 /* CodeEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeEditorView.swift; sourceTree = "<group>"; };
-		A02B6A9E2C14AFF800CAFF82 /* CodeLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeLine.swift; sourceTree = "<group>"; };
 		A02B6AA12C14BA0F00CAFF82 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		A02B6AA42C14BD3300CAFF82 /* NameVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameVisitor.swift; sourceTree = "<group>"; };
-		A02B6AA62C159EED00CAFF82 /* InstructionAddTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionAddTile.swift; sourceTree = "<group>"; };
 		A02B6AAC2C166A0100CAFF82 /* CodeBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeBlock.swift; sourceTree = "<group>"; };
-		A02B6AB02C16704900CAFF82 /* CodeEditorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeEditorViewModel.swift; sourceTree = "<group>"; };
 		A02B6AB22C16789D00CAFF82 /* NewInstructionVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewInstructionVisitor.swift; sourceTree = "<group>"; };
 		A02B6AB62C17341A00CAFF82 /* ARKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ARKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS17.4.sdk/System/Library/Frameworks/ARKit.framework; sourceTree = DEVELOPER_DIR; };
 		A02B6AB82C17342500CAFF82 /* RealityKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealityKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS17.4.sdk/System/Library/Frameworks/RealityKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -110,7 +94,6 @@
 		A02CAC112D759BA300E751DF /* Statement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Statement.swift; sourceTree = "<group>"; };
 		A02CAC162D75AF7100E751DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		A02CAC1B2D78AB5300E751DF /* ResetCodeBlockVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetCodeBlockVisitor.swift; sourceTree = "<group>"; };
-		A02CAC1D2D78C77200E751DF /* ConditionalModifierExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionalModifierExtension.swift; sourceTree = "<group>"; };
 		A02CAC1F2D7916F800E751DF /* ControllbarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllbarButton.swift; sourceTree = "<group>"; };
 		A02CAC212D79A13100E751DF /* ExecutionStatusLable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExecutionStatusLable.swift; sourceTree = "<group>"; };
 		A06BD7BF2BAE9F4E00863CA5 /* RobotKarolArKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RobotKarolArKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -127,20 +110,18 @@
 		A06BD7E12BB4735E00863CA5 /* Visitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Visitor.swift; sourceTree = "<group>"; };
 		A09390EC2C1DB9A4009DF760 /* If.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = If.swift; sourceTree = "<group>"; };
 		A09390EE2C1DBFBD009DF760 /* While.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = While.swift; sourceTree = "<group>"; };
-		A09390F02C1DCA38009DF760 /* CodeLineControllFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeLineControllFlow.swift; sourceTree = "<group>"; };
-		A09390F42C1DCD30009DF760 /* CodeBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeBlockView.swift; sourceTree = "<group>"; };
 		A0B36C652D7AE5AF005F33F0 /* AddExpressionIntoEmptyVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpressionIntoEmptyVisitor.swift; sourceTree = "<group>"; };
 		A0B36C7E2D7B4423005F33F0 /* StatementDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatementDTO.swift; sourceTree = "<group>"; };
 		A0B36C802D7B4CC7005F33F0 /* ExpressionDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionDTO.swift; sourceTree = "<group>"; };
 		A0B40CA32D71B7E800AEFD40 /* DeleteExpressionVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteExpressionVisitor.swift; sourceTree = "<group>"; };
 		A0B40CA52D71BD0400AEFD40 /* AddExpressionVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpressionVisitor.swift; sourceTree = "<group>"; };
-		A0B5A12E2D714CE800A02BA9 /* ExpressionPiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionPiece.swift; sourceTree = "<group>"; };
 		A0B5A1302D714EBA00A02BA9 /* EmptyExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyExpression.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		A0B36C692D7AFDFE005F33F0 /* Model */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Model; sourceTree = "<group>"; };
 		A0B36C742D7B0381005F33F0 /* Project */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Project; sourceTree = "<group>"; };
+		A0B36CDF2D7DADE3005F33F0 /* Editor */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Editor; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,36 +162,11 @@
 		A02B6A992C13A64600CAFF82 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				A0B36CDF2D7DADE3005F33F0 /* Editor */,
 				A0B36C742D7B0381005F33F0 /* Project */,
 				A02B6ABA2C17357C00CAFF82 /* ARSimulator */,
-				A02B6A9A2C13A65C00CAFF82 /* CodeEditor */,
 			);
 			path = UI;
-			sourceTree = "<group>";
-		};
-		A02B6A9A2C13A65C00CAFF82 /* CodeEditor */ = {
-			isa = PBXGroup;
-			children = (
-				A02B6A9D2C14AFD700CAFF82 /* components */,
-				A02B6A9B2C13A6AF00CAFF82 /* CodeEditorView.swift */,
-				A02B6AB02C16704900CAFF82 /* CodeEditorViewModel.swift */,
-				A014830A2D71402100AACE8D /* InstructionColorNameHelper.swift */,
-				A02CAC1D2D78C77200E751DF /* ConditionalModifierExtension.swift */,
-			);
-			path = CodeEditor;
-			sourceTree = "<group>";
-		};
-		A02B6A9D2C14AFD700CAFF82 /* components */ = {
-			isa = PBXGroup;
-			children = (
-				A02B6A9E2C14AFF800CAFF82 /* CodeLine.swift */,
-				A02B6AA62C159EED00CAFF82 /* InstructionAddTile.swift */,
-				A09390F02C1DCA38009DF760 /* CodeLineControllFlow.swift */,
-				A09390F42C1DCD30009DF760 /* CodeBlockView.swift */,
-				A01483082D7138B000AACE8D /* ExpressionLine.swift */,
-				A0B5A12E2D714CE800A02BA9 /* ExpressionPiece.swift */,
-			);
-			path = components;
 			sourceTree = "<group>";
 		};
 		A02B6AA32C14BCE900CAFF82 /* Visitors */ = {
@@ -399,6 +355,7 @@
 			fileSystemSynchronizedGroups = (
 				A0B36C692D7AFDFE005F33F0 /* Model */,
 				A0B36C742D7B0381005F33F0 /* Project */,
+				A0B36CDF2D7DADE3005F33F0 /* Editor */,
 			);
 			name = RobotKarolArKit;
 			packageProductDependencies = (
@@ -463,14 +420,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A02B6A9F2C14AFF800CAFF82 /* CodeLine.swift in Sources */,
-				A0B5A12F2D714CE800A02BA9 /* ExpressionPiece.swift in Sources */,
 				A01482F12D71145100AACE8D /* Expression.swift in Sources */,
 				A01483032D71172A00AACE8D /* Or.swift in Sources */,
 				A02B6A902C13A16200CAFF82 /* Lift.swift in Sources */,
 				A01482F72D71155100AACE8D /* IsNorth.swift in Sources */,
 				A09390ED2C1DB9A4009DF760 /* If.swift in Sources */,
-				A014830B2D71402200AACE8D /* InstructionColorNameHelper.swift in Sources */,
 				A02B6AB32C16789D00CAFF82 /* NewInstructionVisitor.swift in Sources */,
 				A02B6AE22C18AC4800CAFF82 /* ExecutionVisitor.swift in Sources */,
 				A02B6ADC2C1750AD00CAFF82 /* NonArView.swift in Sources */,
@@ -483,10 +437,7 @@
 				A02B6A8C2C13A05500CAFF82 /* LeftTurn.swift in Sources */,
 				A0B36C662D7AE5AF005F33F0 /* AddExpressionIntoEmptyVisitor.swift in Sources */,
 				A02B6AD82C17382E00CAFF82 /* ARSimulator.swift in Sources */,
-				A01483092D7138B000AACE8D /* ExpressionLine.swift in Sources */,
 				A01483072D71188D00AACE8D /* IsBlock.swift in Sources */,
-				A09390F52C1DCD30009DF760 /* CodeBlockView.swift in Sources */,
-				A02CAC1E2D78C77200E751DF /* ConditionalModifierExtension.swift in Sources */,
 				A01482EE2D70DE6C00AACE8D /* AddStatementVisitor.swift in Sources */,
 				A09390EF2C1DBFBD009DF760 /* While.swift in Sources */,
 				A0B36C7F2D7B4423005F33F0 /* StatementDTO.swift in Sources */,
@@ -496,12 +447,9 @@
 				A01482FB2D71161300AACE8D /* IsWest.swift in Sources */,
 				A01483012D7116CD00AACE8D /* And.swift in Sources */,
 				A0B40CA42D71B7E800AEFD40 /* DeleteExpressionVisitor.swift in Sources */,
-				A02B6A9C2C13A6AF00CAFF82 /* CodeEditorView.swift in Sources */,
 				A01482F92D7115A800AACE8D /* IsSouth.swift in Sources */,
-				A02B6AA72C159EED00CAFF82 /* InstructionAddTile.swift in Sources */,
 				A06BD7D82BAEA5E700863CA5 /* Block.swift in Sources */,
 				A06BD7C32BAE9F4E00863CA5 /* RobotKarolArKitApp.swift in Sources */,
-				A09390F12C1DCA38009DF760 /* CodeLineControllFlow.swift in Sources */,
 				A06BD7E02BB472F000863CA5 /* Instruction.swift in Sources */,
 				A02B6AE52C19130200CAFF82 /* ArViewControlBar.swift in Sources */,
 				A02B6AAD2C166A0100CAFF82 /* CodeBlock.swift in Sources */,
@@ -515,7 +463,6 @@
 				A06BD7E22BB4735E00863CA5 /* Visitor.swift in Sources */,
 				A02B6A922C13A1C600CAFF82 /* Step.swift in Sources */,
 				A06BD7D62BAEA4B400863CA5 /* Tile.swift in Sources */,
-				A02B6AB12C16704900CAFF82 /* CodeEditorViewModel.swift in Sources */,
 				A01482EC2D70D74300AACE8D /* DeleteStatementVisitor.swift in Sources */,
 				A02B6AA52C14BD3300CAFF82 /* NameVisitor.swift in Sources */,
 				A01482FD2D71165D00AACE8D /* IsBorder.swift in Sources */,

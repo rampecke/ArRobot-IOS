@@ -12,6 +12,7 @@ class CodeEditorViewModel {
     var allStatements: [Statement] = [Step(), Lift(), RightTurn(), LeftTurn(), PlaceGrass(), PlaceStone(), PlaceWater()]
     var allControllFlow: [CodeBlock] = [If(), While()]
     var allExpressions: [Expression] = [IsEast(), IsWest(), IsNorth(), IsSouth(), IsBlock(), IsBorder(), And(), Or(), Not()]
+    var bottomBarTargeted = false
     
     var world = World(width: 6, length: 6)
     var executionVisitor: ExecutionVisitor

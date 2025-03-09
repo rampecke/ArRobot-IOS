@@ -2,7 +2,14 @@
   "sourceLanguage" : "en",
   "strings" : {
     "%@ >" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ >"
+          }
+        }
+      }
     },
     "and" : {
       "extractionState" : "manual",
@@ -133,6 +140,9 @@
           }
         }
       }
+    },
+    "Hello, World!" : {
+
     },
     "if" : {
       "extractionState" : "manual",
