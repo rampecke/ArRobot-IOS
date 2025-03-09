@@ -63,11 +63,20 @@ struct ProjectElement: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                 
                 Divider()
-                Group {
-                    Text("Length: \(project.worldLength)")
-                    Text("Width: \(project.worldWidth)")
-                }.padding(.horizontal, 10)
+                
+                Text("Worldsize: \(project.worldWidth) x \(project.worldLength)").padding(.horizontal, 10)
+                
                 Divider()
+                
+                ShareLink(
+                   "Export",
+                   item: project,
+                   preview: SharePreview("Export \(project.name)")
+               )
+                //ShareLink(item: project, preview: .init(project.name))
+                
+                Divider()
+                
                 Button(action: {
                     model.deleteProject(project: project)
                 }) {

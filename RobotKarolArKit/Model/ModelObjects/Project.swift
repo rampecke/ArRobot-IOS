@@ -6,9 +6,11 @@
 //
 
 import Foundation
+import CoreTransferable
+import UniformTypeIdentifiers
 
 @Observable
-class Project: Identifiable, Codable {
+class Project: Identifiable, Codable, Transferable {
     var id: UUID = UUID()
     var worldWidth: Int
     var worldLength: Int
@@ -25,4 +27,13 @@ class Project: Identifiable, Codable {
     func changeProjectName(_ newName: String) {
         self.name = newName
     }
+    
+    //For Transferable -> Needed for Airdrop
+    static var transferRepresentation: some TransferRepresentation {
+        CodableRepresentation(contentType: .project)
+    }
+}
+
+extension UTType {
+    static var project = UTType(exportedAs: "com.ramonaeckert.RobotKarolArKit.roboArProject")
 }

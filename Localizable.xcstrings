@@ -118,6 +118,12 @@
         }
       }
     },
+    "Export" : {
+
+    },
+    "Export %@" : {
+
+    },
     "if" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -355,9 +361,6 @@
           }
         }
       }
-    },
-    "Length: %lld" : {
-
     },
     "lift" : {
       "extractionState" : "manual",
@@ -874,8 +877,15 @@
         }
       }
     },
-    "Width: %lld" : {
-
+    "Worldsize: %lld x %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Worldsize: %1$lld x %2$lld"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"
