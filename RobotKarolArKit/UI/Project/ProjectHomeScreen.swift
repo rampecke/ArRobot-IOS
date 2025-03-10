@@ -31,6 +31,13 @@ struct ProjectHomeScreen: View {
                             ProjectElement(project: project).frame(height: 140).padding(.horizontal, 15)
                         }
                     }
+                    
+                    
+                    NavigationLink {
+                        ExerciseEditorView()
+                    } label: {
+                        Text("To ExerciseEditor")
+                    }
                 }.padding()
             }
         }

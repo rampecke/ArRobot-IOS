@@ -10,11 +10,22 @@ import RealityKit
 
 struct NonArView: View {
     @Bindable var viewModel: CodeEditorViewModel
+    var isInExerciseEditor: Bool
     
     var body: some View {
         ZStack{
             NonARViewContainer(world: viewModel.world).edgesIgnoringSafeArea(.all)
-            ArViewControlBar(viewModel: viewModel)
+            if isInExerciseEditor {
+                HStack {
+                    if let messageKey = viewModel.executionVisitor.executionMessage {
+                        ExecutionStatusLable(executionMessage: messageKey, lableType: .failed)
+                    } else if viewModel.executionVisitor.finishedExecution {
+                        ExecutionStatusLable(executionMessage: nil, lableType: .sucessfull)
+                    }
+                }.background(.clear)
+            } else {
+                ArViewControlBar(viewModel: viewModel)
+            }
         }
     }
 }

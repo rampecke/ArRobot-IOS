@@ -11,11 +11,11 @@ import SplitView
 struct ExerciseEditorView: View {
     let fraction = FractionHolder.usingUserDefaults(0.5, key: "exerciseEditorFraction")
     
-    @State var viewModel: CodeEditorViewModel
+    @State var viewModel: ExerciseEditorViewModel
     @Environment(Model.self) var model: Model
     
-    init(project: Project = Project()) {
-        self.viewModel = CodeEditorViewModel(project: project)
+    init(exercise: Exercise = Exercise()) {
+        self.viewModel = ExerciseEditorViewModel(exercise: exercise)
     }
 
     var body: some View {
@@ -33,7 +33,7 @@ struct ExerciseEditorView: View {
                     }
                 }
             }, right: {
-                NonArView(viewModel: viewModel)
+                NonArView(viewModel: viewModel, isInExerciseEditor: true)
             }).fraction(fraction)
                 .constraints(minPFraction: 0.4, minSFraction: 0.4, dragToHideP: true)
                 .styling(color: Color("card_border"))
@@ -41,12 +41,12 @@ struct ExerciseEditorView: View {
             Divider()
             
             InstructionAddBar(viewModel: viewModel)
-        }.onDisappear {
-            model.saveProject(project: viewModel.project)
         }
+        
+        //TODO: SAVE THE NEW Exercise on Buttonclick -> Maybe Navbar -> Copy the project codeBlock into the exercise
     }
 }
 
 #Preview {
-    ExerciseEditorView()
+    ExerciseEditorView().environment(MockModel() as Model)
 }

@@ -59,7 +59,7 @@ class CodeEditorViewModel {
         dragNewInstruction = false
     }
     
-    private func addStatement(statement: Statement) {
+    func addStatement(statement: Statement) {
         //Reset Execution when adding new code
         if executionRunning {
             reset()
@@ -147,6 +147,7 @@ class CodeEditorViewModel {
             }
         }
     }
+    
     func reset() {
         executionRunning = false
         

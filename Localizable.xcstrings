@@ -141,9 +141,6 @@
         }
       }
     },
-    "Hello, World!" : {
-
-    },
     "if" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -774,6 +771,9 @@
           }
         }
       }
+    },
+    "To ExerciseEditor" : {
+
     },
     "turnLeft" : {
       "extractionState" : "manual",

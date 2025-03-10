@@ -39,7 +39,7 @@ struct CodeEditorView: View {
                     if viewModel.arType == ARType.AR {
                         ARSimulator(viewModel: viewModel)
                     } else {
-                        NonArView(viewModel: viewModel)
+                        NonArView(viewModel: viewModel, isInExerciseEditor: false)
                     }
                 }
             }).fraction(fraction)
