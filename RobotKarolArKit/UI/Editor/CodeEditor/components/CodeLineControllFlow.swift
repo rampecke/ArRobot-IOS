@@ -25,19 +25,23 @@ struct CodeLineControllFlow: View {
                         .clipShape(
                             RoundedRectangle(cornerRadius: 6)
                         )
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 6)
-                                .stroke(viewModel.executionVisitor.lastExecuted.id == ifInstruction.expression.id ? InstructionColorNameHelper().getColor("warning_color") : .clear, lineWidth: 2)
-                        )
+                        .if(!(viewModel is ExerciseEditorViewModel)) { view in
+                            view.overlay(
+                                RoundedRectangle(cornerRadius: 6)
+                                    .stroke(viewModel.executionVisitor.lastExecuted.id == ifInstruction.expression.id ? InstructionColorNameHelper().getColor("warning_color") : .clear, lineWidth: 2)
+                            )
+                        }
                 } else if let whileInstruction = instruction as? While {
                     ExpressionLine(expression: whileInstruction.expression, viewModel: viewModel)
                         .clipShape(
                             RoundedRectangle(cornerRadius: 6)
                         )
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 6)
-                                .stroke(viewModel.executionVisitor.lastExecuted.id == whileInstruction.expression.id ? InstructionColorNameHelper().getColor("warning_color") : .clear, lineWidth: 2)
-                        )
+                        .if(!(viewModel is ExerciseEditorViewModel)) { view in
+                            view.overlay(
+                                RoundedRectangle(cornerRadius: 6)
+                                    .stroke(viewModel.executionVisitor.lastExecuted.id == whileInstruction.expression.id ? InstructionColorNameHelper().getColor("warning_color") : .clear, lineWidth: 2)
+                            )
+                        }
                 }
             }.if(viewModel.dragNewInstruction || viewModel.dragInstruction) { view in
                 view.dropDestination(for: Statement.self) { items, _ in

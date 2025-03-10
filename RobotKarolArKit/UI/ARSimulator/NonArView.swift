@@ -16,11 +16,12 @@ struct NonArView: View {
         ZStack{
             NonARViewContainer(world: viewModel.world).edgesIgnoringSafeArea(.all)
             if isInExerciseEditor {
-                HStack {
+                VStack {
+                    Spacer()
                     if let messageKey = viewModel.executionVisitor.executionMessage {
-                        ExecutionStatusLable(executionMessage: messageKey, lableType: .failed)
+                        ExecutionStatusLable(executionMessage: messageKey, lableType: .failed, longMessage: true)
                     } else if viewModel.executionVisitor.finishedExecution {
-                        ExecutionStatusLable(executionMessage: nil, lableType: .sucessfull)
+                        ExecutionStatusLable(executionMessage: nil, lableType: .sucessfull, longMessage: true)
                     }
                 }.background(.clear)
             } else {
