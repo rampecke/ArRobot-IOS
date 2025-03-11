@@ -9,12 +9,32 @@ import Foundation
 
 @Observable
 class ExerciseEditorViewModel: CodeEditorViewModel {
-    var exercise: Exercise
+    private var exercise: Exercise
+    var draftExercise: Exercise
     var queue = DispatchQueue(label: "com.ramonaeckert.executeTask")
     
     init(exercise: Exercise) {
         self.exercise = exercise
+        self.draftExercise = Exercise(worldWidth: exercise.worldWidth, worldLength: exercise.worldLength, exerciseName: exercise.exerciseName, exerciseDescription: exercise.exerciseDescription, exerciseDifficulty: exercise.exerciseDifficulty) //Copy the variables so we don't change them in the actuall exercise and do it onSave
+        
+        //TODO: GIVE THE PROJECT A COPY OF THE EXERCISE CODEBLOCK
         super.init(project: Project(worldWidth: exercise.worldWidth, worldLength: exercise.worldLength))
+    }
+    
+    func getExerciseToSave() -> Exercise {
+        moveDraftValuesToExercise()
+        return exercise
+    }
+    
+    private func moveDraftValuesToExercise() {
+        exercise.exerciseName = draftExercise.exerciseName
+        exercise.worldLength = draftExercise.worldLength
+        exercise.worldWidth = draftExercise.worldWidth
+        exercise.exerciseDescription = draftExercise.exerciseDescription
+        exercise.exerciseDifficulty = draftExercise.exerciseDifficulty
+        
+        //Copy codeblock from the Project editor
+        exercise.exampleSolution = project.codeBlock
     }
     
     func executeAllWithoutDispatcher() {

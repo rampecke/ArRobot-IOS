@@ -121,6 +121,27 @@
         }
       }
     },
+    "Exercise" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aufgabe"
+          }
+        }
+      }
+    },
+    "Exercises" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aufgaben"
+          }
+        }
+      }
+    },
     "Export" : {
       "localizations" : {
         "de" : {
@@ -430,7 +451,19 @@
         }
       }
     },
+    "New Exercise…" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neue Exercise…"
+          }
+        }
+      }
+    },
     "New Project..." : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -682,6 +715,16 @@
         }
       }
     },
+    "Projects" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Projekte"
+          }
+        }
+      }
+    },
     "Reset game" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -692,6 +735,9 @@
           }
         }
       }
+    },
+    "Save" : {
+
     },
     "Speed" : {
       "extractionState" : "manual",
@@ -771,9 +817,6 @@
           }
         }
       }
-    },
-    "To ExerciseEditor" : {
-
     },
     "turnLeft" : {
       "extractionState" : "manual",

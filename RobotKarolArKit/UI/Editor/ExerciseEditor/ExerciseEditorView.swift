@@ -10,9 +10,11 @@ import SplitView
 
 struct ExerciseEditorView: View {
     let fraction = FractionHolder.usingUserDefaults(0.5, key: "exerciseEditorFraction")
+    @Environment(\.dismiss) private var dismiss
     
     @State var viewModel: ExerciseEditorViewModel
     @Environment(Model.self) var model: Model
+    @State var isShowingPopover: Bool = false
     
     init(exercise: Exercise = Exercise()) {
         self.viewModel = ExerciseEditorViewModel(exercise: exercise)
@@ -41,6 +43,68 @@ struct ExerciseEditorView: View {
             Divider()
             
             InstructionAddBar(viewModel: viewModel)
+        }
+        .toolbar(.hidden, for: .tabBar)
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Button(action: {
+                    isShowingPopover = true
+                }) {
+                    Text("\(viewModel.draftExercise.exerciseName) >")
+                        .font(.headline)
+                        .foregroundColor(.blue)
+                        .popover(
+                            isPresented: $isShowingPopover
+                        ) {
+                            VStack(alignment: .leading, spacing: 10) {
+                                /*TextField("Exercise Name", text: $viewModel.exercise.exerciseName, onEditingChanged: { isBegin in
+                                    if !isBegin {
+                                        saveNewTitle()
+                                    }
+                                }, onCommit: {
+                                    saveNewTitle()
+                                }).padding(10)
+                                    .font(.system(size:20, design: .rounded))
+                                    .background(Color("card_background"))
+                                    .cornerRadius(5)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 5)
+                                        .stroke(Color("card_border"), lineWidth: 1)
+                                    )
+                                    .onAppear {
+                                        titleChangeString = project.name
+                                    }
+                                    .frame(maxWidth: .infinity, maxHeight: .infinity)*/
+                                
+                                Divider()
+                                
+                                Text("Worldsize: \(viewModel.draftExercise.worldWidth) x \(viewModel.draftExercise.worldLength)").padding(.horizontal, 10)
+                                
+                                Divider()
+                                
+                                //TODO: ExerciseDifficulty Change
+                                
+                                Divider()
+                            }.foregroundColor(.primary).padding()
+                        }
+                }
+            }
+            
+            // Save Button (Right Side)
+           ToolbarItem(placement: .navigationBarTrailing) {
+               Button("Save") {
+                   if !viewModel.executionVisitor.endExecution {
+                       model.addNewExercise(newExercise: viewModel.getExerciseToSave())
+                       dismiss()
+                   } else {
+                       //TODO: Show a error pop-up in view
+                       print("No valid exercise code")
+                   }
+               }
+               .font(.headline)
+               .foregroundColor(.blue)
+           }
         }
         
         //TODO: SAVE THE NEW Exercise on Buttonclick -> Maybe Navbar -> Copy the project codeBlock into the exercise
