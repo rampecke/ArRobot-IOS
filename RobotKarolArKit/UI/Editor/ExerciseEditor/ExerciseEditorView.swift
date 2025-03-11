@@ -58,24 +58,8 @@ struct ExerciseEditorView: View {
                             isPresented: $isShowingPopover
                         ) {
                             VStack(alignment: .leading, spacing: 10) {
-                                /*TextField("Exercise Name", text: $viewModel.exercise.exerciseName, onEditingChanged: { isBegin in
-                                    if !isBegin {
-                                        saveNewTitle()
-                                    }
-                                }, onCommit: {
-                                    saveNewTitle()
-                                }).padding(10)
-                                    .font(.system(size:20, design: .rounded))
-                                    .background(Color("card_background"))
-                                    .cornerRadius(5)
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 5)
-                                        .stroke(Color("card_border"), lineWidth: 1)
-                                    )
-                                    .onAppear {
-                                        titleChangeString = project.name
-                                    }
-                                    .frame(maxWidth: .infinity, maxHeight: .infinity)*/
+                                TextField("Exercise Name", text: $viewModel.draftExercise.exerciseName).textFieldStyle(ChangeNameTextFieldStyle())
+                                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                                 
                                 Divider()
                                 
@@ -106,8 +90,6 @@ struct ExerciseEditorView: View {
                .foregroundColor(.blue)
            }
         }
-        
-        //TODO: SAVE THE NEW Exercise on Buttonclick -> Maybe Navbar -> Copy the project codeBlock into the exercise
     }
 }
 
