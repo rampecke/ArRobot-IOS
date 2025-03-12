@@ -65,12 +65,33 @@ class World {
         }
     }
     
+    func stepWithoutAr() -> Bool {
+        if(nextTileExists()) {
+            robot.stepWithoutAr()
+            return true
+        } else {
+            return false
+        }
+    }
+    
     func place(block: BlockTyp) -> Bool {
         if(nextTileExists()) {
             let positionInFront = robot.positionInFront()
             let tile = tiles[positionInFront.0][positionInFront.1]
             
             tile.addBlock(block, tileWidth: tileWidth, tileHight: tileHeight, worldEntity: worldEntity, tilePosition: positionInFront)
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func placeWithoutAr(block: BlockTyp) -> Bool {
+        if(nextTileExists()) {
+            let positionInFront = robot.positionInFront()
+            let tile = tiles[positionInFront.0][positionInFront.1]
+            
+            tile.addBlockWithoutAR(block)
             return true
         } else {
             return false
@@ -94,13 +115,40 @@ class World {
         }
     }
     
+    func liftWithoutAR() -> Bool {
+        if(nextTileExists()) {
+            let positionInFront = robot.positionInFront()
+            let tile = tiles[positionInFront.0][positionInFront.1]
+            
+            let block = tile.removeBlockWithoutAr()
+
+            if(block == nil) {
+                return false
+            } else {
+                return true
+            }
+        } else {
+            return false;
+        }
+    }
+    
     func turnLeft() -> Bool {
         robot.turnLeft()
         return true
     }
     
+    func turnLeftWithoutAR() -> Bool {
+        robot.turnLeftWithoutAr()
+        return true
+    }
+    
     func turnRight() -> Bool {
         robot.turnRight()
+        return true
+    }
+    
+    func turnRightWithoutAr() -> Bool {
+        robot.turnRightWithoutAr()
         return true
     }
     
@@ -128,6 +176,23 @@ class World {
             return !tile.getBlocks().isEmpty
         } else {
             return false
+        }
+    }
+    
+    //MARK: - AR Functions
+    
+    func drawWorldState() {
+        //draw the robot at correct position
+        let roboPosition = robot.getPosition()
+        let tile = tiles[roboPosition.0][roboPosition.1]
+        robot.drawRobotAtPosition(tileWidth: self.tileWidth, tileHight: self.tileHeight, tilesOnMyPosition: tile.getBlocks().count)
+        
+        //draw all blocks
+        for i in 0..<length {
+            for j in 0..<width {
+                let tile = tiles[i][j]
+                tile.drawAllMyBlocks(tileWidth: self.tileWidth, tileHight: self.tileWidth, worldEntity: self.worldEntity, tilePosition: (i,j))
+            }
         }
     }
     
@@ -192,4 +257,20 @@ class World {
         anchor.addChild(self.worldEntity)
         arView.scene.addAnchor(anchor)
     }
+    
+    /*func changeWidth(newWidth: Int) {
+        guard newWidth > 0 else { return }
+        
+        self.width = newWidth
+        
+        resetWorld()
+    }
+    
+    func changeLength(newLength: Int) {
+        guard newLength > 0 else { return } // Ensure length is valid
+
+        self.length = newLength
+        
+        resetWorld()
+    }*/
 }

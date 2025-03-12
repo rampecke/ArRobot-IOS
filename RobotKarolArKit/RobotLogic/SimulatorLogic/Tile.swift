@@ -22,6 +22,11 @@ class Tile {
         blocks.append(newBlock)
     }
     
+    func addBlockWithoutAR(_ block: BlockTyp) {
+        let newBlock = Block(blockTyp: block, blockNumber: self.blocks.count-1)
+        blocks.append(newBlock)
+    }
+    
     func removeBlock(worldEntity: Entity) -> Block? {
         guard let block = blocks.popLast() else {
             return nil
@@ -29,5 +34,18 @@ class Tile {
         
         worldEntity.removeChild(block.blockEntity)
         return block
+    }
+    
+    func removeBlockWithoutAr() -> Block? {
+        guard let block = blocks.popLast() else {
+            return nil
+        }
+        return block
+    }
+    
+    func drawAllMyBlocks(tileWidth: Float, tileHight: Float, worldEntity: Entity, tilePosition: (Int, Int)) {
+        for block in self.blocks {
+            block.createArBlock(position: tilePosition, tileWidth: tileWidth, tileHight: tileHight, worldEntity: worldEntity)
+        }
     }
 }

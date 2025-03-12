@@ -44,6 +44,9 @@ struct ExerciseEditorView: View {
             
             InstructionAddBar(viewModel: viewModel)
         }
+        .onAppear {
+            viewModel.executeAllWithoutDispatcher()
+        }
         .toolbar(.hidden, for: .tabBar)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
@@ -63,7 +66,16 @@ struct ExerciseEditorView: View {
                                 
                                 Divider()
                                 
-                                Text("Worldsize: \(viewModel.draftExercise.worldWidth) x \(viewModel.draftExercise.worldLength)").padding(.horizontal, 10)
+                                /*Stepper("Width: \(viewModel.draftExercise.worldWidth)", value: $viewModel.draftExercise.worldWidth, in: 1...20, step: 1) { _ in
+                                    viewModel.changeWorldWidthAndRewDraw()
+                                }
+                                .padding(.horizontal, 10)
+
+                                // Stepper for worldLength
+                                Stepper("Length: \(viewModel.draftExercise.worldLength)", value: $viewModel.draftExercise.worldLength, in: 1...20, step: 1) { _ in
+                                    viewModel.changeWorldLengthAndRewDraw()
+                                }
+                                .padding(.horizontal, 10)*/
                                 
                                 Divider()
                                 
@@ -78,7 +90,7 @@ struct ExerciseEditorView: View {
             // Save Button (Right Side)
            ToolbarItem(placement: .navigationBarTrailing) {
                Button("Save") {
-                   if !viewModel.executionVisitor.endExecution {
+                   if viewModel.executionVisitor.finishedExecution {
                        model.addNewExercise(newExercise: viewModel.getExerciseToSave())
                        dismiss()
                    } else {
@@ -94,5 +106,7 @@ struct ExerciseEditorView: View {
 }
 
 #Preview {
-    ExerciseEditorView().environment(MockModel() as Model)
+    NavigationStack{
+        ExerciseEditorView().environment(MockModel() as Model)
+    }
 }

@@ -31,7 +31,6 @@ class Model {
     
     // MARK: - Exercise Management
     func addNewExercise(newExercise: Exercise) {
-        print("Was called")
         exerciseTemplates.append(newExercise)
         saveExercise(exercise: newExercise)
     }
