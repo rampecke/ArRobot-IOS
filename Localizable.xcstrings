@@ -403,6 +403,9 @@
         }
       }
     },
+    "Length: %lld" : {
+
+    },
     "lift" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -956,6 +959,9 @@
           }
         }
       }
+    },
+    "Width: %lld" : {
+
     },
     "Worldsize: %lld x %lld" : {
       "localizations" : {

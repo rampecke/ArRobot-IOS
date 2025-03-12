@@ -52,7 +52,6 @@ class ExerciseEditorViewModel: CodeEditorViewModel {
             
         while executionStartedRunning && !executionVisitor.endExecution && !executionVisitor.finishedExecution {
             
-            //TODO: INSTEAD OF DOING THIS ASYNCANDWAIT create a visitor without ArWorldChanges and then render all changes at once at the end async
             self.next()
             
             callCounter = callCounter + 1
@@ -82,20 +81,6 @@ class ExerciseEditorViewModel: CodeEditorViewModel {
         //Use the correct visitor
         self.executionVisitor = NoARExecutionVisitor(world: world)
     }
-    
-    
-    
-    /*func changeWorldLengthAndRewDraw() {
-        self.reset()
-        //self.world.changeLength(newLength: self.draftExercise.worldLength)
-        executeAllWithoutDispatcher()
-    }*/
-    
-    /*func changeWorldWidthAndRewDraw() {
-        self.reset()
-        //self.world.changeWidth(newWidth: self.draftExercise.worldWidth)
-        executeAllWithoutDispatcher()
-    }*/
     
     override func addStatementToPosition(statement: Statement, position: Int) {
         super.addStatementToPosition(statement: statement, position: position)

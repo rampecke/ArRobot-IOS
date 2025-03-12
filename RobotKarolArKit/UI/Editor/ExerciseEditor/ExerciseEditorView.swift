@@ -44,9 +44,6 @@ struct ExerciseEditorView: View {
             
             InstructionAddBar(viewModel: viewModel)
         }
-        .onAppear {
-            viewModel.executeAllWithoutDispatcher()
-        }
         .toolbar(.hidden, for: .tabBar)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
@@ -66,16 +63,16 @@ struct ExerciseEditorView: View {
                                 
                                 Divider()
                                 
-                                /*Stepper("Width: \(viewModel.draftExercise.worldWidth)", value: $viewModel.draftExercise.worldWidth, in: 1...20, step: 1) { _ in
-                                    viewModel.changeWorldWidthAndRewDraw()
+                                Stepper("Width: \(viewModel.draftExercise.worldWidth)", value: $viewModel.draftExercise.worldWidth, in: 1...20, step: 1) { _ in
+                                    //viewModel.changeWorldWidthAndRewDraw()
                                 }
                                 .padding(.horizontal, 10)
 
                                 // Stepper for worldLength
                                 Stepper("Length: \(viewModel.draftExercise.worldLength)", value: $viewModel.draftExercise.worldLength, in: 1...20, step: 1) { _ in
-                                    viewModel.changeWorldLengthAndRewDraw()
+                                    //viewModel.changeWorldLengthAndRewDraw()
                                 }
-                                .padding(.horizontal, 10)*/
+                                .padding(.horizontal, 10)
                                 
                                 Divider()
                                 

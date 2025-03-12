@@ -257,20 +257,4 @@ class World {
         anchor.addChild(self.worldEntity)
         arView.scene.addAnchor(anchor)
     }
-    
-    /*func changeWidth(newWidth: Int) {
-        guard newWidth > 0 else { return }
-        
-        self.width = newWidth
-        
-        resetWorld()
-    }
-    
-    func changeLength(newLength: Int) {
-        guard newLength > 0 else { return } // Ensure length is valid
-
-        self.length = newLength
-        
-        resetWorld()
-    }*/
 }

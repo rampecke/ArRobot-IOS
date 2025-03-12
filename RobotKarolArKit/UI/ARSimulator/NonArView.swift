@@ -14,7 +14,7 @@ struct NonArView: View {
     
     var body: some View {
         ZStack{
-            NonARViewContainer(world: viewModel.world).edgesIgnoringSafeArea(.all)
+            NonARViewContainer(viewModel: viewModel).edgesIgnoringSafeArea(.all)
             if isInExerciseEditor {
                 VStack {
                     Spacer()
@@ -32,10 +32,11 @@ struct NonArView: View {
 }
 
 struct NonARViewContainer: UIViewRepresentable {
-    var world: World
+    @Bindable var viewModel: CodeEditorViewModel
     
     func makeUIView(context: Context) -> ARView {
         let arView = ARView(frame: .zero, cameraMode: .nonAR, automaticallyConfigureSession: true)
+        let world = viewModel.world
         
         //Create Lighting
         let pointLight = PointLight()
@@ -68,6 +69,11 @@ struct NonARViewContainer: UIViewRepresentable {
         // Add Pan Gesture Recognizer for Rotation
         let panGesture = UIPanGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.handlePan(_:)))
         arView.addGestureRecognizer(panGesture)
+        
+        if let exerciseEditorViewModel = viewModel as? ExerciseEditorViewModel {
+            exerciseEditorViewModel.reset()
+            exerciseEditorViewModel.executeAllWithoutDispatcher()
+        }
         
         return arView
     }
