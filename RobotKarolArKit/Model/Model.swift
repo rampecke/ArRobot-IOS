@@ -30,7 +30,7 @@ class Model {
     }
     
     func addNewProjectWithExercise(exercise: Exercise) {
-        let newProject = Project(worldWidth: exercise.worldWidth, worldLength: exercise.worldLength, name: "\(exercise.exerciseName) Project", exercise: exercise)
+        let newProject = Project(worldWidth: exercise.worldWidth, worldLength: exercise.worldLength, name: "\(exercise.exerciseName) Project", exercise: exercise.getCopyExercise())
         projects.append(newProject)
         saveProject(project: newProject) // Save immediately
     }

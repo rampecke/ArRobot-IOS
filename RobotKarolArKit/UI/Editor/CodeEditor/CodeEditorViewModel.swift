@@ -217,7 +217,6 @@ class CodeEditorViewModel {
             
             targetCodeBlock.addStatement(statement: deleteStatementVisitor.getDeletedStatement())
         } else {
-            
             let addInstructionVisitor = AddStatementVisitor(targetId: targetStatement.id, statement: deleteStatementVisitor.getDeletedStatement())
             //TODO: Maybe add the codeblock the expression was dropped to the call -> Performance
             project.codeBlock.accept(visitor: addInstructionVisitor)

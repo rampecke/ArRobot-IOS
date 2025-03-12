@@ -43,9 +43,9 @@ class Tile {
         return block
     }
     
-    func drawAllMyBlocks(tileWidth: Float, tileHight: Float, worldEntity: Entity, tilePosition: (Int, Int)) {
+    func drawAllMyBlocks(tileWidth: Float, tileHight: Float, worldEntity: Entity, tilePosition: (Int, Int), isTransparent: Bool = false) {
         for block in self.blocks {
-            block.createArBlock(position: tilePosition, tileWidth: tileWidth, tileHight: tileHight, worldEntity: worldEntity)
+            block.createArBlock(position: tilePosition, tileWidth: tileWidth, tileHight: tileHight, worldEntity: worldEntity, isTransparent: isTransparent)
         }
     }
 }

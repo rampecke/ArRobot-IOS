@@ -39,6 +39,14 @@ class Exercise: Identifiable, Codable, Transferable { //Does not inheritate from
                 return "ArRoboExercise-\(exercise.exerciseName.replacingOccurrences(of: " ", with: "_"))" // Replace spaces to avoid issues
             }
     }
+    
+    func getCopyExercise() -> Exercise {
+        let codeBlockCopyVisitor = CopyCodeBlockVisitor()
+        self.exampleSolution.accept(visitor: codeBlockCopyVisitor)
+        let copyExercise = Exercise(exampleSolution: codeBlockCopyVisitor.returnCodeBlock(), worldWidth: self.worldWidth, worldLength: self.worldLength, exerciseName: self.exerciseName, exerciseDifficulty: self.exerciseDifficulty)
+        
+        return copyExercise
+    }
 }
 
 extension UTType {

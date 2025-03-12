@@ -20,8 +20,11 @@ class ExerciseEditorViewModel: CodeEditorViewModel {
         self.exercise = exercise
         self.draftExercise = Exercise(worldWidth: exercise.worldWidth, worldLength: exercise.worldLength, exerciseName: exercise.exerciseName, exerciseDescription: exercise.exerciseDescription, exerciseDifficulty: exercise.exerciseDifficulty) //Copy the variables so we don't change them in the actuall exercise and do it onSave
         
-        //TODO: GIVE THE PROJECT A COPY OF THE EXERCISESOLUTION CODEBLOCK instead of the real one (would change in the model without saving)
-        super.init(project: Project( codeBlock: exercise.exampleSolution, worldWidth: exercise.worldWidth, worldLength: exercise.worldLength))
+        //Give the project a copy of the codeBlock instead of the real one (would change in the model without saving)
+        let codeBlockCopyVisitor = CopyCodeBlockVisitor()
+        exercise.exampleSolution.accept(visitor: codeBlockCopyVisitor)
+        
+        super.init(project: Project( codeBlock: codeBlockCopyVisitor.returnCodeBlock(), worldWidth: exercise.worldWidth, worldLength: exercise.worldLength))
         
         //Overwrite the visitor to not perform any ar-actions
         self.executionVisitor = NoARExecutionVisitor(world: self.world)
