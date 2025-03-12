@@ -22,7 +22,7 @@ struct ExerciseElement: View {
     }
     
     var body: some View {
-        FolderRepresentation(isShowingPopover: $isShowingPopover, folderName: $exercise.exerciseName)
+        FolderRepresentation(isShowingPopover: $isShowingPopover, folderName: $exercise.exerciseName, colorString: exercise.exerciseDifficulty.colorName)
             .popover(
                 isPresented: $isShowingPopover
             ) {
@@ -68,5 +68,9 @@ struct ExerciseElement: View {
 }
 
 #Preview {
-    ExerciseElement(exercise: Exercise())
+    VStack {
+        ExerciseElement(exercise: Exercise()).frame(width: 180, height: 140)
+        ExerciseElement(exercise: Exercise(exerciseDifficulty: .medium)).frame(width: 180, height: 140)
+        ExerciseElement(exercise: Exercise(exerciseDifficulty: .hard)).frame(width: 180, height: 140)
+    }.environment(MockModel() as Model)
 }

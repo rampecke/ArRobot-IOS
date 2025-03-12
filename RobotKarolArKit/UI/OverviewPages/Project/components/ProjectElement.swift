@@ -21,7 +21,7 @@ struct ProjectElement: View {
     }
     
     var body: some View {
-        FolderRepresentation(isShowingPopover: $isShowingPopover, folderName: $project.name)
+        FolderRepresentation(isShowingPopover: $isShowingPopover, folderName: $project.name, colorString: "folder_color")
         .popover(
             isPresented: $isShowingPopover
         ) {

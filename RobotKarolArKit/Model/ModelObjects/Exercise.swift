@@ -47,4 +47,12 @@ extension UTType {
 
 enum ExerciseDifficulty: Codable {
     case easy, medium, hard
+    
+    var colorName: String {
+        switch self {
+        case .easy: return "folder_color_easy"
+        case .medium: return "folder_color_medium"
+        case .hard: return "folder_color_hard"
+        }
+    }
 }

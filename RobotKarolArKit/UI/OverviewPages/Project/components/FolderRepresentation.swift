@@ -10,6 +10,7 @@ import SwiftUI
 struct FolderRepresentation: View {
     @Binding var isShowingPopover: Bool
     @Binding var folderName: String
+    var colorString: String
     
     var body: some View {
         VStack (spacing: 10) {
@@ -21,7 +22,7 @@ struct FolderRepresentation: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(
                     RoundedRectangle(cornerRadius: 10)
-                        .fill(Color("folder_color"))
+                        .fill(Color(colorString))
                 )
             
             Button(action: {self.isShowingPopover = true}) {
@@ -34,5 +35,10 @@ struct FolderRepresentation: View {
 }
 
 #Preview {
-    FolderRepresentation(isShowingPopover: .constant(false), folderName: .constant("Untitled")).frame(width: 180, height: 140)
+    VStack {
+        FolderRepresentation(isShowingPopover: .constant(false), folderName: .constant("Untitled"), colorString: "folder_color").frame(width: 180, height: 140)
+        FolderRepresentation(isShowingPopover: .constant(false), folderName: .constant("Untitled"), colorString: "folder_color_hard").frame(width: 180, height: 140)
+        FolderRepresentation(isShowingPopover: .constant(false), folderName: .constant("Untitled"), colorString: "folder_color_medium").frame(width: 180, height: 140)
+        FolderRepresentation(isShowingPopover: .constant(false), folderName: .constant("Untitled"), colorString: "folder_color_easy").frame(width: 180, height: 140)
+    }
 }
