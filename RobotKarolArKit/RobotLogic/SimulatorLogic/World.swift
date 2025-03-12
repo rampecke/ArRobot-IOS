@@ -27,9 +27,9 @@ class World {
         self.robot = Robot(facingDirection: Direction.SOUTH, position: (0,0))
         
         var createTiles : [[Tile]]  = []
-        for _ in 0..<length {
+        for _ in 0..<width {
             var tilesRow: [Tile] = []
-            for _ in 0..<width {
+            for _ in 0..<length {
                 tilesRow.append(Tile())
             }
             createTiles.append(tilesRow)
@@ -43,9 +43,9 @@ class World {
     
     private func createTiles() -> [[Tile]] {
         var createTiles : [[Tile]]  = []
-        for _ in 0..<length {
+        for _ in 0..<width {
             var tilesRow: [Tile] = []
-            for _ in 0..<width {
+            for _ in 0..<length {
                 tilesRow.append(Tile())
             }
             createTiles.append(tilesRow)
@@ -156,6 +156,7 @@ class World {
         return robot.getFacingDirection() == direction
     }
     
+    
     func nextTileExists() -> Bool {
         switch robot.getFacingDirection() {
         case .NORTH:
@@ -188,8 +189,8 @@ class World {
         robot.drawRobotAtPosition(tileWidth: self.tileWidth, tileHight: self.tileHeight, tilesOnMyPosition: tile.getBlocks().count)
         
         //draw all blocks
-        for i in 0..<length {
-            for j in 0..<width {
+        for i in 0..<width {
+            for j in 0..<length {
                 let tile = tiles[i][j]
                 tile.drawAllMyBlocks(tileWidth: self.tileWidth, tileHight: self.tileWidth, worldEntity: self.worldEntity, tilePosition: (i,j))
             }
@@ -256,5 +257,17 @@ class World {
         worldEntity.position = [-(tileWidth * Float(width)/2), 0, -(tileWidth * Float(length)/2)]
         anchor.addChild(self.worldEntity)
         arView.scene.addAnchor(anchor)
+    }
+    
+    func setWidth(newWidth: Int, viewModel: ExerciseEditorViewModel) {
+        width = newWidth
+        viewModel.reset()
+        viewModel.executeAllWithoutDispatcher()
+    }
+    
+    func setLength(newLength: Int, viewModel: ExerciseEditorViewModel) {
+        length = newLength
+        viewModel.reset()
+        viewModel.executeAllWithoutDispatcher()
     }
 }
