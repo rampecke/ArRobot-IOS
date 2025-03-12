@@ -64,13 +64,13 @@ struct ExerciseEditorView: View {
                                 Divider()
                                 
                                 Stepper("Width: \(viewModel.draftExercise.worldWidth)", value: $viewModel.draftExercise.worldWidth, in: 1...20, step: 1) { _ in
-                                    viewModel.world.setWidth(newWidth: viewModel.draftExercise.worldWidth, viewModel: viewModel)
+                                    viewModel.setNewWithInWorld()
                                 }
                                 .padding(.horizontal, 10)
 
                                 // Stepper for worldLength
                                 Stepper("Length: \(viewModel.draftExercise.worldLength)", value: $viewModel.draftExercise.worldLength, in: 1...20, step: 1) { _ in
-                                    viewModel.world.setLength(newLength: viewModel.draftExercise.worldLength, viewModel: viewModel)
+                                    viewModel.setNewLengthInWorld()
                                 }
                                 .padding(.horizontal, 10)
                                 

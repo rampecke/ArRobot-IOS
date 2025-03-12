@@ -14,7 +14,7 @@ struct NonArView: View {
     
     var body: some View {
         ZStack{
-            NonARViewContainer(viewModel: viewModel).edgesIgnoringSafeArea(.all)
+            NonARViewContainer(viewModel: viewModel, cameraDistance: $viewModel.cameraDistance).edgesIgnoringSafeArea(.all)
             if isInExerciseEditor {
                 VStack {
                     Spacer()
@@ -33,6 +33,7 @@ struct NonArView: View {
 
 struct NonARViewContainer: UIViewRepresentable {
     @Bindable var viewModel: CodeEditorViewModel
+    @Binding var cameraDistance: Float
     
     func makeUIView(context: Context) -> ARView {
         let arView = ARView(frame: .zero, cameraMode: .nonAR, automaticallyConfigureSession: true)
@@ -73,24 +74,32 @@ struct NonARViewContainer: UIViewRepresentable {
         if let exerciseEditorViewModel = viewModel as? ExerciseEditorViewModel {
             exerciseEditorViewModel.reset()
             exerciseEditorViewModel.executeAllWithoutDispatcher()
+            
+            exerciseEditorViewModel.cameraAnchor = cameraAnchor
+            exerciseEditorViewModel.cameraDistance = cameraDistance
         }
         
         return arView
     }
     
     func updateUIView(_ uiView: ARView, context: Context) {
+        print("was updated")
     }
     
     func makeCoordinator() -> Coordinator {
-        return Coordinator()
+        return Coordinator(cameraDistance: $cameraDistance)
     }
     
     class Coordinator {
         var cameraAnchor: AnchorEntity?
         var worldAnchor: AnchorEntity?
-        var cameraDistance: Float = 1.0
+        @Binding var cameraDistance: Float
         private var currentYaw: Float = 0       // Horizontal rotation (Y-axis)
         private var currentPitch: Float = 0.5  // Vertical rotation (X-axis)
+        
+        init(cameraDistance: Binding<Float>) {
+            _cameraDistance = cameraDistance
+        }
 
         @objc func handlePan(_ gesture: UIPanGestureRecognizer) {
             guard let cameraAnchor = cameraAnchor else { return }

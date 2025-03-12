@@ -6,12 +6,15 @@
 //
 
 import Foundation
+import RealityFoundation
 
 @Observable
 class ExerciseEditorViewModel: CodeEditorViewModel {
     private var exercise: Exercise
     var draftExercise: Exercise
     var queue = DispatchQueue(label: "com.ramonaeckert.executeTask")
+    
+    var cameraAnchor = AnchorEntity()
     
     init(exercise: Exercise) {
         self.exercise = exercise
@@ -69,6 +72,20 @@ class ExerciseEditorViewModel: CodeEditorViewModel {
                 self.world.drawWorldState()
             }
         }
+    }
+    
+    func setNewWithInWorld() {
+        self.world.setWidth(newWidth: self.draftExercise.worldWidth, viewModel: self)
+        self.cameraDistance = world.tileWidth * Float(world.getLength()) + 0.1
+        cameraAnchor.position = [cameraAnchor.position.x, cameraAnchor.position.y, cameraDistance]
+        cameraAnchor.look(at: [0, 0, 0], from: cameraAnchor.position, relativeTo: nil)
+    }
+    
+    func setNewLengthInWorld() {
+        self.world.setLength(newLength: self.draftExercise.worldLength, viewModel: self)
+        self.cameraDistance = world.tileWidth * Float(world.getLength()) + 0.1
+        cameraAnchor.position = [cameraAnchor.position.x, cameraAnchor.position.y, cameraDistance]
+        cameraAnchor.look(at: [0, 0, 0], from: cameraAnchor.position, relativeTo: nil)
     }
     
     override func reset() {

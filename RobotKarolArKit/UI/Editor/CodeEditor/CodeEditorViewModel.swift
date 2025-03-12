@@ -27,6 +27,9 @@ class CodeEditorViewModel {
     
     var project: Project
     
+    //Makes DistanceChanges on the simulator possible
+    var cameraDistance: Float = 1.0
+    
     init(project: Project = Project()) {
         let newWorld = World(width: project.worldWidth, length: project.worldLength)
         self.world = newWorld
