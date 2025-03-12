@@ -20,6 +20,7 @@ struct ExerciseEditorView: View {
         self.viewModel = ExerciseEditorViewModel(exercise: exercise)
     }
 
+    // TODO: Exchange Exercise Description editor
     var body: some View {
         VStack{
             HSplit(left: {
@@ -31,7 +32,26 @@ struct ExerciseEditorView: View {
                         }, notInArView: true).frame(height: 30)
                     }.padding(.horizontal)
                     ScrollView {
-                        CodeBlockView(codeBlock: viewModel.project.codeBlock, viewModel: viewModel)
+                        VStack {
+                            Group {
+                                TextEditor(text: $viewModel.draftExercise.exerciseDescription)
+                                    .textEditorStyle(PlainTextEditorStyle())
+                                    .frame(maxWidth: .infinity, minHeight: 100, maxHeight: .infinity)
+                                    .overlay(
+                                        VStack {
+                                            if viewModel.draftExercise.exerciseDescription.isEmpty {
+                                                Text("Write down your exercise description...")
+                                                    .foregroundColor(.gray)
+                                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                                Spacer()
+                                            }
+                                        }.frame(maxWidth: .infinity, maxHeight: .infinity)
+                                            .padding(10)
+                                    )
+                                Divider()
+                            }.padding(.horizontal, 10)
+                            CodeBlockView(codeBlock: viewModel.project.codeBlock, viewModel: viewModel)
+                        }
                     }
                 }
             }, right: {
@@ -63,22 +83,38 @@ struct ExerciseEditorView: View {
                                 
                                 Divider()
                                 
-                                Stepper("Width: \(viewModel.draftExercise.worldWidth)", value: $viewModel.draftExercise.worldWidth, in: 1...20, step: 1) { _ in
+                                Stepper(value: $viewModel.draftExercise.worldWidth, in: 1...20, step: 1, label: {
+                                    HStack {
+                                        Text(LocalizedStringKey("Width:")).frame(width: 80, alignment: .leading)
+                                        Text("\(viewModel.draftExercise.worldWidth)")
+                                    }
+                                }) { _ in
                                     viewModel.setNewWithInWorld()
-                                }
-                                .padding(.horizontal, 10)
+                                }.padding(.horizontal, 10)
 
                                 // Stepper for worldLength
-                                Stepper("Length: \(viewModel.draftExercise.worldLength)", value: $viewModel.draftExercise.worldLength, in: 1...20, step: 1) { _ in
+                                Stepper(value: $viewModel.draftExercise.worldLength, in: 1...20, step: 1, label: {
+                                    HStack {
+                                        Text(LocalizedStringKey("Length:")).frame(width: 80, alignment: .leading)
+                                        Text("\(viewModel.draftExercise.worldLength)")
+                                    }
+                                }) { _ in
                                     viewModel.setNewLengthInWorld()
-                                }
-                                .padding(.horizontal, 10)
+                                }.padding(.horizontal, 10)
                                 
                                 Divider()
                                 
-                                //TODO: ExerciseDifficulty Change
-                                
-                                Divider()
+                                HStack {
+                                    Text("Difficulty:").frame(width: 80, alignment: .leading)
+                                    
+                                    Picker("Difficulty", selection: $viewModel.draftExercise.exerciseDifficulty) {
+                                        Text("Easy").tag(ExerciseDifficulty.easy)
+                                        Text("Medium").tag(ExerciseDifficulty.medium)
+                                        Text("Hard").tag(ExerciseDifficulty.hard)
+                                    }
+                                    .pickerStyle(.segmented)
+                                    .colorMultiply(viewModel.draftExercise.exerciseDifficulty == .easy ? .green : (viewModel.draftExercise.exerciseDifficulty == .medium ? .yellow : .red))
+                                }.padding(.horizontal, 10)
                             }.foregroundColor(.primary).padding()
                         }
                 }

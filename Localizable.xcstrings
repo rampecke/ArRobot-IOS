@@ -11,6 +11,9 @@
         }
       }
     },
+    "%lld" : {
+
+    },
     "and" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -76,6 +79,15 @@
         }
       }
     },
+    "Difficulty" : {
+
+    },
+    "Difficulty:" : {
+
+    },
+    "Easy" : {
+
+    },
     "emptyExpression_error_message" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -133,7 +145,14 @@
       }
     },
     "Exercise Name" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aufgaben Name"
+          }
+        }
+      }
     },
     "Exercises" : {
       "localizations" : {
@@ -164,6 +183,9 @@
           }
         }
       }
+    },
+    "Hard" : {
+
     },
     "if" : {
       "extractionState" : "manual",
@@ -403,8 +425,19 @@
         }
       }
     },
-    "Length: %lld" : {
+    "Length:" : {
 
+    },
+    "Length: %lld" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Länge: %lld"
+          }
+        }
+      }
     },
     "lift" : {
       "extractionState" : "manual",
@@ -457,6 +490,9 @@
         }
       }
     },
+    "Medium" : {
+
+    },
     "New Exercise…" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -469,7 +505,7 @@
       }
     },
     "New Project..." : {
-      "extractionState" : "stale",
+      "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -743,7 +779,14 @@
       }
     },
     "Save" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Speichern"
+          }
+        }
+      }
     },
     "Speed" : {
       "extractionState" : "manual",
@@ -960,8 +1003,19 @@
         }
       }
     },
-    "Width: %lld" : {
+    "Width:" : {
 
+    },
+    "Width: %lld" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Width: %lld"
+          }
+        }
+      }
     },
     "Worldsize: %lld x %lld" : {
       "localizations" : {
@@ -978,6 +1032,9 @@
           }
         }
       }
+    },
+    "Write down your exercise description..." : {
+
     }
   },
   "version" : "1.0"

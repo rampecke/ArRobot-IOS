@@ -83,7 +83,6 @@ struct NonARViewContainer: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: ARView, context: Context) {
-        print("was updated")
     }
     
     func makeCoordinator() -> Coordinator {
