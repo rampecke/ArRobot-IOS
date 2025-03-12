@@ -17,11 +17,14 @@ class Project: Identifiable, Codable, Transferable {
     var name: String
     var codeBlock: CodeBlock
     
-    init(codeBlock: CodeBlock = CodeBlock(), worldWidth: Int = 6, worldLength: Int = 6, name: String = "Untitled Project") {
+    var exercise: Exercise?
+    
+    init(codeBlock: CodeBlock = CodeBlock(), worldWidth: Int = 6, worldLength: Int = 6, name: String = "Untitled Project", exercise: Exercise? = nil) {
         self.codeBlock = codeBlock
         self.worldWidth = worldWidth
         self.worldLength = worldLength
         self.name = name
+        self.exercise = exercise
     }
     
     func changeProjectName(_ newName: String) {

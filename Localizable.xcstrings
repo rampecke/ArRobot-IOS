@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%@" : {
+
+    },
     "%@ >" : {
       "localizations" : {
         "de" : {
@@ -12,6 +15,9 @@
       }
     },
     "%lld" : {
+
+    },
+    ">" : {
 
     },
     "and" : {
@@ -57,6 +63,9 @@
           }
         }
       }
+    },
+    "Create project with exercise" : {
+
     },
     "Delete code" : {
       "extractionState" : "manual",

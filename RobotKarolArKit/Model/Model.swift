@@ -29,6 +29,12 @@ class Model {
         deleteProjectFile(project: project)
     }
     
+    func addNewProjectWithExercise(exercise: Exercise) {
+        let newProject = Project(worldWidth: exercise.worldWidth, worldLength: exercise.worldLength, name: "\(exercise.exerciseName) Project", exercise: exercise)
+        projects.append(newProject)
+        saveProject(project: newProject) // Save immediately
+    }
+    
     // MARK: - Exercise Management
     func addNewExercise(newExercise: Exercise) {
         exerciseTemplates.append(newExercise)

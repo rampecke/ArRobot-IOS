@@ -13,6 +13,7 @@ struct ExerciseElement: View {
     @State private var titleChangeString = ""
     
     @Environment(Model.self) var model: Model
+    @Environment(\.tabBarSelection) private var selectedTab
     
     func saveNewTitle() {
         if !titleChangeString.isEmpty {
@@ -45,6 +46,20 @@ struct ExerciseElement: View {
                     
                     Divider()
                     
+                    Button(action: {
+                        selectedTab?.wrappedValue = 0
+                        model.addNewProjectWithExercise(exercise: exercise)
+                        isShowingPopover = false
+                    }) {
+                        HStack (alignment: .center, spacing: 7) {
+                            Image(systemName: "plus.app")
+                            Text("Create project with exercise")
+                            Spacer()
+                        }.frame(maxWidth: .infinity, maxHeight: .infinity)
+                    }
+                    
+                    Divider()
+                    
                     ShareLink(
                         "Export",
                         item: exercise,
@@ -56,7 +71,7 @@ struct ExerciseElement: View {
                     Button(action: {
                         model.deleteExercise(exercise: exercise)
                     }) {
-                        HStack (alignment: .center, spacing: 10) {
+                        HStack (alignment: .center, spacing: 7) {
                             Image(systemName: "trash").foregroundColor(Color("warning_color"))
                             Text("Delete Project").foregroundColor(Color("warning_color"))
                             Spacer()

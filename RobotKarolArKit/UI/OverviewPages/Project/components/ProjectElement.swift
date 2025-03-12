@@ -20,8 +20,16 @@ struct ProjectElement: View {
         }
     }
     
+    func getFolderColorString() -> String {
+        guard let projectsColor = project.exercise?.exerciseDifficulty.colorName else {
+            return "folder_color"
+        }
+        
+        return projectsColor
+    }
+    
     var body: some View {
-        FolderRepresentation(isShowingPopover: $isShowingPopover, folderName: $project.name, colorString: "folder_color")
+        FolderRepresentation(isShowingPopover: $isShowingPopover, folderName: $project.name, colorString: getFolderColorString())
         .popover(
             isPresented: $isShowingPopover
         ) {

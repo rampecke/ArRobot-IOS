@@ -26,19 +26,25 @@ struct FolderRepresentation: View {
                 )
             
             Button(action: {self.isShowingPopover = true}) {
-                Text("\(folderName) >")
-                    .frame(maxWidth: .infinity)
-            }
+                HStack {
+                    Text("\(folderName)")
+                        .lineLimit(1)
+                        .truncationMode(.tail)
+                    Text(">")
+                        .lineLimit(1)
+                        .truncationMode(.tail)
+                }.frame(maxWidth: .infinity)
+            }.padding(.horizontal, 5)
             
         }.frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 
 #Preview {
-    VStack {
+    HStack {
         FolderRepresentation(isShowingPopover: .constant(false), folderName: .constant("Untitled"), colorString: "folder_color").frame(width: 180, height: 140)
         FolderRepresentation(isShowingPopover: .constant(false), folderName: .constant("Untitled"), colorString: "folder_color_hard").frame(width: 180, height: 140)
         FolderRepresentation(isShowingPopover: .constant(false), folderName: .constant("Untitled"), colorString: "folder_color_medium").frame(width: 180, height: 140)
-        FolderRepresentation(isShowingPopover: .constant(false), folderName: .constant("Untitled"), colorString: "folder_color_easy").frame(width: 180, height: 140)
+        FolderRepresentation(isShowingPopover: .constant(false), folderName: .constant("Untitled, but very long name"), colorString: "folder_color_easy").frame(width: 180, height: 140)
     }
 }
