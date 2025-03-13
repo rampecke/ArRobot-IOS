@@ -2,7 +2,14 @@
   "sourceLanguage" : "en",
   "strings" : {
     "%@" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@"
+          }
+        }
+      }
     },
     "%@ >" : {
       "localizations" : {
@@ -15,10 +22,24 @@
       }
     },
     "%lld" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld"
+          }
+        }
+      }
     },
     ">" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ">"
+          }
+        }
+      }
     },
     "and" : {
       "extractionState" : "manual",
@@ -65,7 +86,14 @@
       }
     },
     "Create project with exercise" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erstelle ein Projekt mit der Aufgabe"
+          }
+        }
+      }
     },
     "Delete code" : {
       "extractionState" : "manual",
@@ -89,13 +117,34 @@
       }
     },
     "Difficulty" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schwierigkeit"
+          }
+        }
+      }
     },
     "Difficulty:" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schwierigkeit:"
+          }
+        }
+      }
     },
     "Easy" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einfach"
+          }
+        }
+      }
     },
     "emptyExpression_error_message" : {
       "extractionState" : "manual",
@@ -142,23 +191,46 @@
         }
       }
     },
-    "Exercise" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aufgabe"
-          }
-        }
-      }
-    },
     "Exercise Name" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aufgaben Name"
+          }
+        }
+      }
+    },
+    "exercise_done" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geschafft!"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You did it!"
+          }
+        }
+      }
+    },
+    "exercise_not_done" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Das war nicht die Aufgabe. Probier es nochmal."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "That was not the exercise. Try again."
           }
         }
       }
@@ -194,7 +266,14 @@
       }
     },
     "Hard" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schwer"
+          }
+        }
+      }
     },
     "if" : {
       "extractionState" : "manual",
@@ -435,15 +514,11 @@
       }
     },
     "Length:" : {
-
-    },
-    "Length: %lld" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Länge: %lld"
+            "value" : "Länge:"
           }
         }
       }
@@ -500,9 +575,16 @@
       }
     },
     "Medium" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mittel"
+          }
+        }
+      }
     },
-    "New Exercise…" : {
+    "New Exercise..." : {
       "extractionState" : "manual",
       "localizations" : {
         "de" : {
@@ -1013,15 +1095,11 @@
       }
     },
     "Width:" : {
-
-    },
-    "Width: %lld" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Width: %lld"
+            "value" : "Weite:"
           }
         }
       }
@@ -1043,7 +1121,14 @@
       }
     },
     "Write down your exercise description..." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Füge eine Aufgabenbeschreibung hinzu…"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

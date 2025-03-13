@@ -9,8 +9,21 @@ import Foundation
 import RealityKit
 
 @Observable
-class Tile: Codable {
+class Tile: Codable, Equatable {
     private var blocks: [Block] = []
+    
+    static func == (lhs: Tile, rhs: Tile) -> Bool {
+        guard lhs.blocks.count == rhs.blocks.count else { return false }
+        
+        //TODO: ADD MAYBE BLOCKNUMBER AS Well
+        for (block1, block2) in zip(lhs.blocks, rhs.blocks) {
+            if block1.blockTyp != block2.blockTyp {
+                return false
+            }
+        }
+        
+        return true
+    }
     
     func getBlocks() -> [Block] {
         return self.blocks

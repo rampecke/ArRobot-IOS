@@ -48,6 +48,27 @@ class World {
         self.tiles
     }
     
+    func exerciseSuccess() -> Bool {
+        //If they have diffrent sizes they can't be the same
+        guard self.tiles.count == self.exerciseTiles.count else {
+            return false
+        }
+        guard self.tiles[0].count == self.exerciseTiles[0].count else {
+            return false
+        }
+        
+        //Check each tile
+        for i in 0..<width {
+            for j in 0..<length {
+                if self.tiles[i][j] != self.exerciseTiles[i][j] {
+                    return false
+                }
+            }
+        }
+        
+        return true
+    }
+    
     private func createTiles() -> [[Tile]] {
         var createTiles : [[Tile]]  = []
         for _ in 0..<width {
