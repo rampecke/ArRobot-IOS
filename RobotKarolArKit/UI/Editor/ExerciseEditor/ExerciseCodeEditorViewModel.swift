@@ -42,8 +42,9 @@ class ExerciseEditorViewModel: CodeEditorViewModel {
         exercise.exerciseDescription = draftExercise.exerciseDescription
         exercise.exerciseDifficulty = draftExercise.exerciseDifficulty
         
-        //Copy codeblock from the Project editor
+        //The codeblock is the copy from the Project editor
         exercise.exampleSolution = project.codeBlock
+        exercise.solutionTiles = self.world.getTiles()
     }
     
     func executeAllWithoutDispatcher() {

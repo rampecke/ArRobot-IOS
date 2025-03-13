@@ -21,7 +21,9 @@ class World {
     var worldEntity: Entity = Entity()
     var arWorldWasCreated: Bool = false
     
-    init(width: Int, length: Int) {
+    var exerciseTiles: [[Tile]]
+    
+    init(width: Int, length: Int, exerciseTiles: [[Tile]] = [[]]) {
         self.width = width
         self.length = length
         self.robot = Robot(facingDirection: Direction.SOUTH, position: (0,0))
@@ -35,10 +37,15 @@ class World {
             createTiles.append(tilesRow)
         }
         self.tiles = createTiles
+        self.exerciseTiles = exerciseTiles
     }
     
     func getLength() -> Int {
         self.length
+    }
+    
+    func getTiles() -> [[Tile]] {
+        self.tiles
     }
     
     private func createTiles() -> [[Tile]] {
@@ -197,6 +204,16 @@ class World {
         }
     }
     
+    func drawExerciseTiles() {
+        //draw all blocks
+        for i in 0..<exerciseTiles.count {
+            for j in 0..<exerciseTiles[0].count {
+                let tile = exerciseTiles[i][j]
+                tile.drawAllMyBlocks(tileWidth: self.tileWidth, tileHight: self.tileWidth, worldEntity: self.worldEntity, tilePosition: (i,j), isTransparent: true)
+            }
+        }
+    }
+    
     func resetWorld() {
         let anchor = worldEntity.anchor
         
@@ -246,6 +263,11 @@ class World {
         }
         
         robot.createArRobot(tileWidth: tileWidth, tileHeight: tileHeight, worldEntity: worldEntity)
+        
+        //If i have a exerciseTileMatrix i also want to render it
+        if !exerciseTiles.isEmpty {
+            drawExerciseTiles()
+        }
     }
     
     func anchorWorld(arView: ARView, anchor: AnchorEntity) {

@@ -9,7 +9,7 @@ import Foundation
 import RealityKit
 
 @Observable
-class Block {
+class Block: Codable {
     var blockTyp: BlockTyp
     var blockEntity: Entity = Entity()
     var blockNumber: Int
@@ -37,8 +37,26 @@ class Block {
         
         worldEntity.addChild(blockEntity)
     }
+    
+    //Decode and Encode
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.blockTyp = try container.decode(BlockTyp.self, forKey: .blockType)
+        self.blockNumber = try container.decode(Int.self, forKey: .blockNumber)
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(blockTyp, forKey: .blockType)
+        try container.encode(blockNumber, forKey: .blockNumber)
+        self.blockEntity = Entity()
+    }
+
+    private enum CodingKeys: String, CodingKey {
+        case blockType, blockNumber
+    }
 }
 
-enum BlockTyp {
+enum BlockTyp: Codable {
     case WATER, GRAS, STONE;
 }

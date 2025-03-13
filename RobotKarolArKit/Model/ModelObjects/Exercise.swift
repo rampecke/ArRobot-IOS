@@ -18,14 +18,16 @@ class Exercise: Identifiable, Codable, Transferable { //Does not inheritate from
     var exampleSolution: CodeBlock
     var exerciseDescription: String
     var exerciseDifficulty: ExerciseDifficulty
+    var solutionTiles: [[Tile]]
     
-    init(exampleSolution: CodeBlock = CodeBlock(), worldWidth: Int = 6, worldLength: Int = 6, exerciseName: String = "Untitled Exercise", exerciseDescription: String = "", exerciseDifficulty: ExerciseDifficulty = .easy) {
+    init(exampleSolution: CodeBlock = CodeBlock(), worldWidth: Int = 6, worldLength: Int = 6, exerciseName: String = "Untitled Exercise", exerciseDescription: String = "", exerciseDifficulty: ExerciseDifficulty = .easy, solutionTiles: [[Tile]] = [[]]) {
         self.exampleSolution = exampleSolution
         self.worldWidth = worldWidth
         self.worldLength = worldLength
         self.exerciseName = exerciseName
         self.exerciseDescription = exerciseDescription
         self.exerciseDifficulty = exerciseDifficulty
+        self.solutionTiles = solutionTiles
     }
     
     func changeExerciseName(_ newName: String) {
@@ -43,7 +45,7 @@ class Exercise: Identifiable, Codable, Transferable { //Does not inheritate from
     func getCopyExercise() -> Exercise {
         let codeBlockCopyVisitor = CopyCodeBlockVisitor()
         self.exampleSolution.accept(visitor: codeBlockCopyVisitor)
-        let copyExercise = Exercise(exampleSolution: codeBlockCopyVisitor.returnCodeBlock(), worldWidth: self.worldWidth, worldLength: self.worldLength, exerciseName: self.exerciseName, exerciseDifficulty: self.exerciseDifficulty)
+        let copyExercise = Exercise(exampleSolution: codeBlockCopyVisitor.returnCodeBlock(), worldWidth: self.worldWidth, worldLength: self.worldLength, exerciseName: self.exerciseName, exerciseDifficulty: self.exerciseDifficulty, solutionTiles: self.solutionTiles)
         
         return copyExercise
     }

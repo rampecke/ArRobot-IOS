@@ -31,7 +31,12 @@ class CodeEditorViewModel {
     var cameraDistance: Float = 1.0
     
     init(project: Project = Project()) {
-        let newWorld = World(width: project.worldWidth, length: project.worldLength)
+        let newWorld: World
+        if let exercise = project.exercise {
+            newWorld = World(width: project.worldWidth, length: project.worldLength, exerciseTiles: exercise.solutionTiles)
+        } else {
+            newWorld = World(width: project.worldWidth, length: project.worldLength)
+        }
         self.world = newWorld
         self.executionVisitor = ExecutionVisitor(world: newWorld)
         self.project = project

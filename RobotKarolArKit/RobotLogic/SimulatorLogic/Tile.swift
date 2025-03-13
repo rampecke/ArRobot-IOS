@@ -9,7 +9,7 @@ import Foundation
 import RealityKit
 
 @Observable
-class Tile {
+class Tile: Codable {
     private var blocks: [Block] = []
     
     func getBlocks() -> [Block] {
