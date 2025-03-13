@@ -182,7 +182,7 @@ class World {
     
     //MARK: - AR Functions
     
-    func drawWorldState() {
+    func drawWorldState(isTransparent: Bool = false) {
         //draw the robot at correct position
         let roboPosition = robot.getPosition()
         let tile = tiles[roboPosition.0][roboPosition.1]
@@ -192,7 +192,7 @@ class World {
         for i in 0..<width {
             for j in 0..<length {
                 let tile = tiles[i][j]
-                tile.drawAllMyBlocks(tileWidth: self.tileWidth, tileHight: self.tileWidth, worldEntity: self.worldEntity, tilePosition: (i,j))
+                tile.drawAllMyBlocks(tileWidth: self.tileWidth, tileHight: self.tileWidth, worldEntity: self.worldEntity, tilePosition: (i,j), isTransparent: isTransparent)
             }
         }
     }

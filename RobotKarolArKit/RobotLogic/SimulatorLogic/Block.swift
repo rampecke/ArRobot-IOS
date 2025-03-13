@@ -19,16 +19,16 @@ class Block {
         self.blockNumber = blockNumber
     }
     
-    func createArBlock(position: (Int, Int), tileWidth: Float, tileHight: Float, worldEntity: Entity) {
+    func createArBlock(position: (Int, Int), tileWidth: Float, tileHight: Float, worldEntity: Entity, isTransparent: Bool = false) {
         //TODO: USE REAL MODLES
         let blockMesh = MeshResource.generateBox(width: tileWidth, height: tileWidth, depth: tileWidth)
         let blockMaterial = switch blockTyp {
         case .WATER:
-            SimpleMaterial(color: .blue, isMetallic: false)
+            SimpleMaterial(color: .blue.withAlphaComponent(isTransparent ? 0.5 : 1.0), isMetallic: false)
         case .GRAS:
-            SimpleMaterial(color: .green, isMetallic: false)
+            SimpleMaterial(color: .green.withAlphaComponent(isTransparent ? 0.5 : 1.0), isMetallic: false)
         case .STONE:
-            SimpleMaterial(color: .gray, isMetallic: false)
+            SimpleMaterial(color: .gray.withAlphaComponent(isTransparent ? 0.5 : 1.0), isMetallic: false)
         }
         
         blockEntity = ModelEntity(mesh: blockMesh, materials: [blockMaterial])
