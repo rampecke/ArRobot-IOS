@@ -605,6 +605,9 @@
         }
       }
     },
+    "Move your device to find a surface" : {
+
+    },
     "Name" : {
       "localizations" : {
         "de" : {
@@ -715,6 +718,9 @@
           }
         }
       }
+    },
+    "Place Here" : {
+
     },
     "placeGrass" : {
       "extractionState" : "manual",
