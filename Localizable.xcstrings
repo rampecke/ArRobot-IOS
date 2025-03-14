@@ -95,6 +95,16 @@
         }
       }
     },
+    "Date" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Datum"
+          }
+        }
+      }
+    },
     "Delete code" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -595,6 +605,16 @@
         }
       }
     },
+    "Name" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Name"
+          }
+        }
+      }
+    },
     "New Exercise..." : {
       "extractionState" : "manual",
       "localizations" : {
@@ -890,6 +910,16 @@
         }
       }
     },
+    "Sorting" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sortieren"
+          }
+        }
+      }
+    },
     "Speed" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1067,6 +1097,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "It is not possible to turn right"
+          }
+        }
+      }
+    },
+    "Type" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Art"
           }
         }
       }

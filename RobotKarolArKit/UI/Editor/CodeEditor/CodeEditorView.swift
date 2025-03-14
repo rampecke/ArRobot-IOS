@@ -50,6 +50,7 @@ struct CodeEditorView: View {
             
             InstructionAddBar(viewModel: viewModel)
         }.onDisappear {
+            viewModel.project.lastEdited = Date()
             model.saveProject(project: viewModel.project)
             viewModel.reset() //Stop runing of code
         }.toolbar(.hidden, for: .tabBar)

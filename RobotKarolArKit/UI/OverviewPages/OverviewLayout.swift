@@ -13,6 +13,8 @@ struct OverviewLayout<Content: View>: View {
     
     var title: String
     
+    @Binding var sortingTag: SortingTags
+    
     
     var body: some View {
         ScrollView {
@@ -21,6 +23,18 @@ struct OverviewLayout<Content: View>: View {
                     Text(LocalizedStringKey(title)).font(.system(size: 30, weight: .semibold, design: .rounded))
                     Divider().padding(0)
                 }
+                HStack {
+                    Spacer()
+                    Picker("Sorting", selection: $sortingTag) {
+                        Text("Date").tag(SortingTags.date)
+                        Text("Name").tag(SortingTags.name)
+                        Text("Type").tag(SortingTags.kind)
+                    }
+                    .pickerStyle(.segmented)
+                    .frame(width: 150)
+                    Spacer()
+                }
+                
                 LazyVGrid(columns: columns, spacing: 30) {
                     content()
                 }.padding()
@@ -30,5 +44,10 @@ struct OverviewLayout<Content: View>: View {
 }
 
 #Preview {
-    OverviewLayout(content: {Text("Preview")}, title: "TestTitle")
+    @Previewable @State var kind: SortingTags = .date
+    return OverviewLayout(content: {Text("Preview")}, title: "TestTitle", sortingTag: $kind)
+}
+
+enum SortingTags: String {
+    case date, name, kind
 }

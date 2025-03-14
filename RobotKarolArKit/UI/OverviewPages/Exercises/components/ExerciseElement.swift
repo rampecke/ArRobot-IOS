@@ -23,7 +23,7 @@ struct ExerciseElement: View {
     }
     
     var body: some View {
-        FolderRepresentation(isShowingPopover: $isShowingPopover, folderName: $exercise.exerciseName, colorString: exercise.exerciseDifficulty.colorName)
+        FolderRepresentation(isShowingPopover: $isShowingPopover, folderName: $exercise.exerciseName, colorString: exercise.exerciseDifficulty.colorName, date: exercise.lastEdited)
             .popover(
                 isPresented: $isShowingPopover
             ) {
