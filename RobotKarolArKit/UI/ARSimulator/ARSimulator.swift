@@ -33,4 +33,8 @@ struct ARViewContainer: UIViewRepresentable {
     func updateUIView(_ uiView: ARView, context: Context) {
     }
     
+    static func dismantleUIView(_ uiView: ARView, coordinator: Coordinator) {
+       uiView.session.pause() // Stop AR session when the view is removed
+   }
+    
 }
