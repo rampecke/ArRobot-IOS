@@ -31,7 +31,18 @@ struct CodeEditorView: View {
                         }, notInArView: true).frame(height: 30)
                     }.padding(.horizontal)
                     ScrollView {
-                        CodeBlockView(codeBlock: viewModel.project.codeBlock, viewModel: viewModel)
+                        VStack {
+                            if let exercise = viewModel.project.exercise {
+                                if !exercise.exerciseDescription.isEmpty {
+                                    Group {
+                                        Text(exercise.exerciseDescription)
+                                            .frame(maxWidth: .infinity, alignment: .leading)
+                                        Divider()
+                                    }.padding(.horizontal, 10)
+                                }
+                            }
+                            CodeBlockView(codeBlock: viewModel.project.codeBlock, viewModel: viewModel)
+                        }
                     }
                 }
             }, right: {

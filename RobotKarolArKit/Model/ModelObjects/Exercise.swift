@@ -47,7 +47,7 @@ class Exercise: Identifiable, Codable, Transferable { //Does not inheritate from
     func getCopyExercise() -> Exercise {
         let codeBlockCopyVisitor = CopyCodeBlockVisitor()
         self.exampleSolution.accept(visitor: codeBlockCopyVisitor)
-        let copyExercise = Exercise(exampleSolution: codeBlockCopyVisitor.returnCodeBlock(), worldWidth: self.worldWidth, worldLength: self.worldLength, exerciseName: self.exerciseName, exerciseDifficulty: self.exerciseDifficulty, solutionTiles: self.solutionTiles)
+        let copyExercise = Exercise(exampleSolution: codeBlockCopyVisitor.returnCodeBlock(), worldWidth: self.worldWidth, worldLength: self.worldLength, exerciseName: self.exerciseName, exerciseDescription: self.exerciseDescription, exerciseDifficulty: self.exerciseDifficulty, solutionTiles: self.solutionTiles)
         
         return copyExercise
     }
