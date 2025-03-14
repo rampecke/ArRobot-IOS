@@ -108,6 +108,15 @@ class World {
             let tile = tiles[positionInFront.0][positionInFront.1]
             
             tile.addBlock(block, tileWidth: tileWidth, tileHight: tileHeight, worldEntity: worldEntity, tilePosition: positionInFront)
+            
+            //Remove Block from exercise if there is one
+            if exerciseTiles.count > positionInFront.0 && exerciseTiles[0].count > positionInFront.1 {
+                let exerciseTile = exerciseTiles[positionInFront.0][positionInFront.1]
+                let placedBlockPosition = tile.getBlocks().count - 1
+                if exerciseTile.getBlocks().count > placedBlockPosition {
+                    exerciseTile.getBlocks()[placedBlockPosition].removeArBlock(worldEntity: self.worldEntity)
+                }
+            }
             return true
         } else {
             return false
@@ -136,6 +145,15 @@ class World {
             if(block == nil) {
                 return false
             } else {
+                //If block was removed check if we need to add ExerciseBlock back
+                if exerciseTiles.count > positionInFront.0 && exerciseTiles[0].count > positionInFront.1 {
+                    let exerciseTile = exerciseTiles[positionInFront.0][positionInFront.1]
+                    let removedBlockPosition = tile.getBlocks().count
+                    if exerciseTile.getBlocks().count > removedBlockPosition {
+                        exerciseTile.getBlocks()[removedBlockPosition].createArBlock(position: positionInFront, tileWidth: self.tileWidth, tileHight: self.tileHeight, worldEntity: self.worldEntity, isTransparent: true)
+                    }
+                }
+                
                 return true
             }
         } else {
@@ -220,7 +238,7 @@ class World {
         for i in 0..<width {
             for j in 0..<length {
                 let tile = tiles[i][j]
-                tile.drawAllMyBlocks(tileWidth: self.tileWidth, tileHight: self.tileWidth, worldEntity: self.worldEntity, tilePosition: (i,j), isTransparent: isTransparent)
+                tile.drawAllMyBlocks(tileWidth: self.tileWidth, tileHight: self.tileHeight, worldEntity: self.worldEntity, tilePosition: (i,j), isTransparent: isTransparent)
             }
         }
     }
@@ -230,7 +248,7 @@ class World {
         for i in 0..<exerciseTiles.count {
             for j in 0..<exerciseTiles[0].count {
                 let tile = exerciseTiles[i][j]
-                tile.drawAllMyBlocks(tileWidth: self.tileWidth, tileHight: self.tileWidth, worldEntity: self.worldEntity, tilePosition: (i,j), isTransparent: true)
+                tile.drawAllMyBlocks(tileWidth: self.tileWidth, tileHight: self.tileHeight, worldEntity: self.worldEntity, tilePosition: (i,j), isTransparent: true)
             }
         }
     }

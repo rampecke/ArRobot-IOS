@@ -36,7 +36,7 @@ class Tile: Codable, Equatable {
     }
     
     func addBlockWithoutAR(_ block: BlockTyp) {
-        let newBlock = Block(blockTyp: block, blockNumber: self.blocks.count-1)
+        let newBlock = Block(blockTyp: block, blockNumber: self.blocks.count)
         blocks.append(newBlock)
     }
     

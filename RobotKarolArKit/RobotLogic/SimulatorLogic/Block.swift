@@ -38,6 +38,11 @@ class Block: Codable {
         worldEntity.addChild(blockEntity)
     }
     
+    func removeArBlock(worldEntity: Entity) {
+        worldEntity.removeChild(blockEntity)
+        blockEntity = Entity()
+    }
+    
     //Decode and Encode
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
