@@ -55,9 +55,10 @@ struct CodeEditorView: View {
             viewModel.reset() //Stop runing of code
         }.toolbar(.hidden, for: .tabBar)
         .navigationTitle(self.viewModel.project.name)
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
 #Preview {
-    return CodeEditorView().environment(MockModel() as Model)
+    return NavigationStack { CodeEditorView().environment(MockModel() as Model) }
 }
