@@ -19,10 +19,7 @@ struct OverviewLayout<Content: View>: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
-                Group {
-                    Text(LocalizedStringKey(title)).font(.system(size: 30, weight: .semibold, design: .rounded))
-                    Divider().padding(0)
-                }
+                Divider().padding(.bottom, 10)
                 HStack {
                     Spacer()
                     Picker("Sorting", selection: $sortingTag) {
@@ -39,13 +36,13 @@ struct OverviewLayout<Content: View>: View {
                     content()
                 }.padding()
             }.padding()
-        }
+        }.navigationTitle(title)
     }
 }
 
 #Preview {
     @Previewable @State var kind: SortingTags = .date
-    return OverviewLayout(content: {Text("Preview")}, title: "TestTitle", sortingTag: $kind)
+    return NavigationStack { OverviewLayout(content: {Text("Preview")}, title: "TestTitle", sortingTag: $kind) }
 }
 
 enum SortingTags: String {
