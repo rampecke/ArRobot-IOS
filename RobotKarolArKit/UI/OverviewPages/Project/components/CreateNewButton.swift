@@ -18,13 +18,14 @@ struct CreateNewButton: View {
             Image(systemName: "plus")
                 .font(.system(size: 24, weight: .bold))
                 .padding(20)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .frame(width: 180, height: 110)
                 .background(
                     RoundedRectangle(cornerRadius: 10)
                         .stroke(style: StrokeStyle(lineWidth: 2, dash: [5]))
                 )
             Text(LocalizedStringKey(lableText))
                 .frame(maxWidth: .infinity)
+            Spacer()
         }.frame(maxWidth: .infinity, maxHeight: .infinity)
     }
     
@@ -41,7 +42,7 @@ struct CreateNewButton: View {
 
 #Preview {
     VStack{
-        CreateNewButton(action: {}).frame(width: 180, height: 140)
+        CreateNewButton(action: {}).frame(width: 180, height: 180)
         CreateNewButton(action: {}, lableOnly: true, lableText: "New Exercise...").frame(width: 180, height: 140)
     }
 }

@@ -19,8 +19,9 @@ class Exercise: Identifiable, Codable, Transferable { //Does not inheritate from
     var exerciseDescription: String
     var exerciseDifficulty: ExerciseDifficulty
     var solutionTiles: [[Tile]]
+    var lastEdited: Date?
     
-    init(exampleSolution: CodeBlock = CodeBlock(), worldWidth: Int = 6, worldLength: Int = 6, exerciseName: String = "Untitled Exercise", exerciseDescription: String = "", exerciseDifficulty: ExerciseDifficulty = .easy, solutionTiles: [[Tile]] = [[]]) {
+    init(exampleSolution: CodeBlock = CodeBlock(), worldWidth: Int = 6, worldLength: Int = 6, exerciseName: String = "Untitled Exercise", exerciseDescription: String = "", exerciseDifficulty: ExerciseDifficulty = .easy, solutionTiles: [[Tile]] = [[]], lastEdited: Date? = nil) {
         self.exampleSolution = exampleSolution
         self.worldWidth = worldWidth
         self.worldLength = worldLength
@@ -28,6 +29,7 @@ class Exercise: Identifiable, Codable, Transferable { //Does not inheritate from
         self.exerciseDescription = exerciseDescription
         self.exerciseDifficulty = exerciseDifficulty
         self.solutionTiles = solutionTiles
+        self.lastEdited = lastEdited
     }
     
     func changeExerciseName(_ newName: String) {
@@ -55,7 +57,7 @@ extension UTType {
     static var exercise = UTType(exportedAs: "com.ramonaeckert.RobotKarolArKit.roboArExercise")
 }
 
-enum ExerciseDifficulty: Codable {
+enum ExerciseDifficulty: Codable, Comparable {
     case easy, medium, hard
     
     var colorName: String {
@@ -63,6 +65,15 @@ enum ExerciseDifficulty: Codable {
         case .easy: return "folder_color_easy"
         case .medium: return "folder_color_medium"
         case .hard: return "folder_color_hard"
+        }
+    }
+    
+    static func < (lhs: ExerciseDifficulty, rhs: ExerciseDifficulty) -> Bool {
+        switch (lhs, rhs) {
+        case (.easy, .medium), (.easy, .hard), (.medium, .hard):
+            return true
+        default:
+            return false
         }
     }
 }

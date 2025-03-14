@@ -24,6 +24,7 @@ struct TabBarWrapper: View {
                 Label("Exercises", systemImage: "list.clipboard")
             }.tag(1)
         }.environment(\.tabBarSelection, $selectedTab)
+        .environment(\.horizontalSizeClass, .compact)
     }
 }
 

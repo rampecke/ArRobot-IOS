@@ -9,28 +9,35 @@ import SwiftUI
 
 struct ProjectHomeScreen: View {
     @Environment(Model.self) var model: Model
+    @State var sortingTag: SortingTags = .date
     
-    let columns = [
-            GridItem(.flexible()),
-            GridItem(.flexible()),
-            GridItem(.flexible()),
-            GridItem(.flexible()),
-            GridItem(.flexible())
-        ]
+    func sort() {
+        switch sortingTag {
+        case .date: model.sortProjectsByLastUpdated()
+        case .name: model.sortProjectsByName()
+        case .kind: model.sortProjectsByExerciseDifficulty()
+        }
+    }
     
     var body: some View {
-        ScrollView {
-            LazyVGrid(columns: columns, spacing: 30) {
-                CreateNewButton(action: {model.addNewProject()}).frame(height: 140).padding(.horizontal, 15)
+        OverviewLayout(content: {
+            Group {
+                CreateNewButton(action: {model.addNewProject()}).frame(height: 180)
                 
                 ForEach(model.projects, id: \.id) { project in
                     NavigationLink {
                         CodeEditorView(project: project)
                     } label: {
-                        ProjectElement(project: project).frame(height: 140).padding(.horizontal, 15)
+                        ProjectElement(project: project).frame(height: 180)
                     }
                 }
-            }.padding()
+            }.onChange(of: sortingTag) {
+                sort()
+            }
+        }, title: "Projects", sortingTag: $sortingTag).onAppear {
+            sort()
+        }.onChange(of: model.projects.count) {
+            sort()
         }
     }
 }

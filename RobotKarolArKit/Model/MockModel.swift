@@ -14,14 +14,14 @@ class MockModel: Model { //Used for Previews and not persisting
         
         // Disable persistence
         projects = [
-            Project(codeBlock: CodeBlock([Step(), Lift()])),
-            Project(codeBlock: CodeBlock(), worldWidth: 10, worldLength: 10),
-            Project(codeBlock: CodeBlock(), worldWidth: 20, worldLength: 20)
+            Project(codeBlock: CodeBlock([Step(), Lift()]), lastEdited: Date()),
+            Project(codeBlock: CodeBlock(), worldWidth: 10, worldLength: 10, lastEdited: Date()),
+            Project(codeBlock: CodeBlock(), worldWidth: 20, worldLength: 20, lastEdited: Date())
         ]
         
         exerciseTemplates = [
-            Exercise(exampleSolution: CodeBlock([Step()]), worldWidth: 10, worldLength: 10, exerciseDescription: "Make two steps"),
-            Exercise()
+            Exercise(exampleSolution: CodeBlock([Step()]), worldWidth: 10, worldLength: 10, exerciseDescription: "Make two steps", lastEdited: Date()),
+            Exercise(lastEdited: Date())
         ]
     }
     

@@ -17,9 +17,65 @@ class Model {
         loadExercises()
     }
     
+    // MARK: - Sort Functions
+    func sortProjectsByLastUpdated() {
+        projects.sort { (p1: Project, p2: Project) in
+            (p1.lastEdited ?? Date.distantPast) > (p2.lastEdited ?? Date.distantPast)
+        }
+    }
+
+    func sortExercisesByLastUpdated() {
+        exerciseTemplates.sort { (e1: Exercise, e2: Exercise) in
+            (e1.lastEdited ?? Date.distantPast) > (e2.lastEdited ?? Date.distantPast)
+        }
+    }
+    
+    func sortProjectsByName() {
+        projects.sort {
+            $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending
+        }
+    }
+
+    func sortExercisesByName() {
+        exerciseTemplates.sort {
+            $0.exerciseName.localizedCaseInsensitiveCompare($1.exerciseName) == .orderedAscending
+        }
+    }
+    
+    func sortExercisesByDifficulty() {
+        exerciseTemplates.sort { (a: Exercise, b: Exercise) -> Bool in
+            if a.exerciseDifficulty == b.exerciseDifficulty {
+                return (a.lastEdited ?? Date.distantPast) > (b.lastEdited ?? Date.distantPast)
+            }
+            return a.exerciseDifficulty < b.exerciseDifficulty
+        }
+    }
+    
+    func sortProjectsByExerciseDifficulty() {
+        projects.sort { (a, b) in
+            // Sort projects with exercises first
+            if let exerciseA = a.exercise, let exerciseB = b.exercise {
+                // Both have exercises, compare by difficulty first, then by date
+                if exerciseA.exerciseDifficulty != exerciseB.exerciseDifficulty {
+                    return exerciseA.exerciseDifficulty < exerciseB.exerciseDifficulty
+                }
+                return (a.lastEdited ?? Date.distantPast) > (b.lastEdited ?? Date.distantPast)
+            } else if a.exercise != nil {
+                // `a` has exercise, `b` does not, `a` should come first
+                return true
+            } else if b.exercise != nil {
+                // `b` has exercise, `a` does not, `b` should come first
+                return false
+            } else {
+                // Neither has exercise, just sort by lastUpdated
+                return (a.lastEdited ?? Date.distantPast) > (b.lastEdited ?? Date.distantPast)
+            }
+        }
+    }
+    
     // MARK: - Project Management
     func addNewProject() {
-        let newProject = Project()
+        let newProject = Project(lastEdited: Date())
         projects.append(newProject)
         saveProject(project: newProject) // Save immediately
     }
@@ -30,13 +86,14 @@ class Model {
     }
     
     func addNewProjectWithExercise(exercise: Exercise) {
-        let newProject = Project(worldWidth: exercise.worldWidth, worldLength: exercise.worldLength, name: "\(exercise.exerciseName) Project", exercise: exercise.getCopyExercise())
+        let newProject = Project(worldWidth: exercise.worldWidth, worldLength: exercise.worldLength, name: "\(exercise.exerciseName) Project", exercise: exercise.getCopyExercise(), lastEdited: Date())
         projects.append(newProject)
         saveProject(project: newProject) // Save immediately
     }
     
     // MARK: - Exercise Management
     func addNewExercise(newExercise: Exercise) {
+        newExercise.lastEdited = Date()
         exerciseTemplates.append(newExercise)
         saveExercise(exercise: newExercise)
     }
