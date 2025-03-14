@@ -10,20 +10,34 @@ import RealityKit
 
 struct NonArView: View {
     @Bindable var viewModel: CodeEditorViewModel
+    var isInExerciseEditor: Bool
     
     var body: some View {
         ZStack{
-            NonARViewContainer(world: viewModel.world).edgesIgnoringSafeArea(.all)
-            ArViewControlBar(viewModel: viewModel)
+            NonARViewContainer(viewModel: viewModel, cameraDistance: $viewModel.cameraDistance).edgesIgnoringSafeArea(.all)
+            if isInExerciseEditor {
+                VStack {
+                    Spacer()
+                    if let messageKey = viewModel.executionVisitor.executionMessage {
+                        ExecutionStatusLable(executionMessage: messageKey, lableType: .failed, longMessage: true)
+                    } else if viewModel.executionVisitor.finishedExecution {
+                        ExecutionStatusLable(executionMessage: nil, lableType: .sucessfull, longMessage: true)
+                    }
+                }.background(.clear)
+            } else {
+                ArViewControlBar(viewModel: viewModel)
+            }
         }
     }
 }
 
 struct NonARViewContainer: UIViewRepresentable {
-    var world: World
+    @Bindable var viewModel: CodeEditorViewModel
+    @Binding var cameraDistance: Float
     
     func makeUIView(context: Context) -> ARView {
         let arView = ARView(frame: .zero, cameraMode: .nonAR, automaticallyConfigureSession: true)
+        let world = viewModel.world
         
         //Create Lighting
         let pointLight = PointLight()
@@ -57,6 +71,14 @@ struct NonARViewContainer: UIViewRepresentable {
         let panGesture = UIPanGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.handlePan(_:)))
         arView.addGestureRecognizer(panGesture)
         
+        if let exerciseEditorViewModel = viewModel as? ExerciseEditorViewModel {
+            exerciseEditorViewModel.reset()
+            exerciseEditorViewModel.executeAllWithoutDispatcher()
+            
+            exerciseEditorViewModel.cameraAnchor = cameraAnchor
+            exerciseEditorViewModel.cameraDistance = cameraDistance
+        }
+        
         return arView
     }
     
@@ -64,15 +86,19 @@ struct NonARViewContainer: UIViewRepresentable {
     }
     
     func makeCoordinator() -> Coordinator {
-        return Coordinator()
+        return Coordinator(cameraDistance: $cameraDistance)
     }
     
     class Coordinator {
         var cameraAnchor: AnchorEntity?
         var worldAnchor: AnchorEntity?
-        var cameraDistance: Float = 1.0
+        @Binding var cameraDistance: Float
         private var currentYaw: Float = 0       // Horizontal rotation (Y-axis)
         private var currentPitch: Float = 0.5  // Vertical rotation (X-axis)
+        
+        init(cameraDistance: Binding<Float>) {
+            _cameraDistance = cameraDistance
+        }
 
         @objc func handlePan(_ gesture: UIPanGestureRecognizer) {
             guard let cameraAnchor = cameraAnchor else { return }

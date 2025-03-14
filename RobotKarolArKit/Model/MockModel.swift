@@ -18,6 +18,11 @@ class MockModel: Model { //Used for Previews and not persisting
             Project(codeBlock: CodeBlock(), worldWidth: 10, worldLength: 10),
             Project(codeBlock: CodeBlock(), worldWidth: 20, worldLength: 20)
         ]
+        
+        exerciseTemplates = [
+            Exercise(exampleSolution: CodeBlock([Step()]), worldWidth: 10, worldLength: 10, exerciseDescription: "Make two steps"),
+            Exercise()
+        ]
     }
     
     override func saveProject(project: Project) {

@@ -61,7 +61,15 @@ struct ArViewControlBar: View {
             if let messageKey = viewModel.executionVisitor.executionMessage {
                 ExecutionStatusLable(executionMessage: messageKey, lableType: .failed)
             } else if viewModel.executionVisitor.finishedExecution {
-                ExecutionStatusLable(executionMessage: nil, lableType: .sucessfull)
+                if viewModel.project.exercise != nil { //Check if the exercise is done when it exists
+                    if viewModel.world.exerciseSuccess() {
+                        ExecutionStatusLable(executionMessage: "exercise_done", lableType: .sucessfull)
+                    } else {
+                        ExecutionStatusLable(executionMessage: "exercise_not_done", lableType: .failed)
+                    }
+                } else {
+                    ExecutionStatusLable(executionMessage: nil, lableType: .sucessfull)
+                }
             }
             
             Spacer()

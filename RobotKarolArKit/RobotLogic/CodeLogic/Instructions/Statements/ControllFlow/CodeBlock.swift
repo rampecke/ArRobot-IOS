@@ -102,7 +102,12 @@ class CodeBlock: Statement {
             
             if let codeBlockInstruction = instruction as? CodeBlock {
                 //Execute the next move on the CodeBlockInstruction on a new Visitor
-                let executionVisitor = ExecutionVisitor(world: world)
+                //Make sure to use the correct Visitor
+                let executionVisitor = if updateExecutionVisitor is NoARExecutionVisitor {
+                    NoARExecutionVisitor(world: world)
+                } else {
+                    ExecutionVisitor(world: world)
+                }
                 codeBlockInstruction.accept(visitor: executionVisitor)
                 
                 //Update the status of the execution to the caller visitor

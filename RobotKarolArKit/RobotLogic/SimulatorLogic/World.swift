@@ -21,31 +21,59 @@ class World {
     var worldEntity: Entity = Entity()
     var arWorldWasCreated: Bool = false
     
-    init(width: Int, length: Int) {
+    var exerciseTiles: [[Tile]]
+    
+    init(width: Int, length: Int, exerciseTiles: [[Tile]] = [[]]) {
         self.width = width
         self.length = length
         self.robot = Robot(facingDirection: Direction.SOUTH, position: (0,0))
         
         var createTiles : [[Tile]]  = []
-        for _ in 0..<length {
+        for _ in 0..<width {
             var tilesRow: [Tile] = []
-            for _ in 0..<width {
+            for _ in 0..<length {
                 tilesRow.append(Tile())
             }
             createTiles.append(tilesRow)
         }
         self.tiles = createTiles
+        self.exerciseTiles = exerciseTiles
     }
     
     func getLength() -> Int {
         self.length
     }
     
+    func getTiles() -> [[Tile]] {
+        self.tiles
+    }
+    
+    func exerciseSuccess() -> Bool {
+        //If they have diffrent sizes they can't be the same
+        guard self.tiles.count == self.exerciseTiles.count else {
+            return false
+        }
+        guard self.tiles[0].count == self.exerciseTiles[0].count else {
+            return false
+        }
+        
+        //Check each tile
+        for i in 0..<width {
+            for j in 0..<length {
+                if self.tiles[i][j] != self.exerciseTiles[i][j] {
+                    return false
+                }
+            }
+        }
+        
+        return true
+    }
+    
     private func createTiles() -> [[Tile]] {
         var createTiles : [[Tile]]  = []
-        for _ in 0..<length {
+        for _ in 0..<width {
             var tilesRow: [Tile] = []
-            for _ in 0..<width {
+            for _ in 0..<length {
                 tilesRow.append(Tile())
             }
             createTiles.append(tilesRow)
@@ -65,12 +93,42 @@ class World {
         }
     }
     
+    func stepWithoutAr() -> Bool {
+        if(nextTileExists()) {
+            robot.stepWithoutAr()
+            return true
+        } else {
+            return false
+        }
+    }
+    
     func place(block: BlockTyp) -> Bool {
         if(nextTileExists()) {
             let positionInFront = robot.positionInFront()
             let tile = tiles[positionInFront.0][positionInFront.1]
             
             tile.addBlock(block, tileWidth: tileWidth, tileHight: tileHeight, worldEntity: worldEntity, tilePosition: positionInFront)
+            
+            //Remove Block from exercise if there is one
+            if exerciseTiles.count > positionInFront.0 && exerciseTiles[0].count > positionInFront.1 {
+                let exerciseTile = exerciseTiles[positionInFront.0][positionInFront.1]
+                let placedBlockPosition = tile.getBlocks().count - 1
+                if exerciseTile.getBlocks().count > placedBlockPosition {
+                    exerciseTile.getBlocks()[placedBlockPosition].removeArBlock(worldEntity: self.worldEntity)
+                }
+            }
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func placeWithoutAr(block: BlockTyp) -> Bool {
+        if(nextTileExists()) {
+            let positionInFront = robot.positionInFront()
+            let tile = tiles[positionInFront.0][positionInFront.1]
+            
+            tile.addBlockWithoutAR(block)
             return true
         } else {
             return false
@@ -87,6 +145,32 @@ class World {
             if(block == nil) {
                 return false
             } else {
+                //If block was removed check if we need to add ExerciseBlock back
+                if exerciseTiles.count > positionInFront.0 && exerciseTiles[0].count > positionInFront.1 {
+                    let exerciseTile = exerciseTiles[positionInFront.0][positionInFront.1]
+                    let removedBlockPosition = tile.getBlocks().count
+                    if exerciseTile.getBlocks().count > removedBlockPosition {
+                        exerciseTile.getBlocks()[removedBlockPosition].createArBlock(position: positionInFront, tileWidth: self.tileWidth, tileHight: self.tileHeight, worldEntity: self.worldEntity, isTransparent: true)
+                    }
+                }
+                
+                return true
+            }
+        } else {
+            return false;
+        }
+    }
+    
+    func liftWithoutAR() -> Bool {
+        if(nextTileExists()) {
+            let positionInFront = robot.positionInFront()
+            let tile = tiles[positionInFront.0][positionInFront.1]
+            
+            let block = tile.removeBlockWithoutAr()
+
+            if(block == nil) {
+                return false
+            } else {
                 return true
             }
         } else {
@@ -99,14 +183,25 @@ class World {
         return true
     }
     
+    func turnLeftWithoutAR() -> Bool {
+        robot.turnLeftWithoutAr()
+        return true
+    }
+    
     func turnRight() -> Bool {
         robot.turnRight()
+        return true
+    }
+    
+    func turnRightWithoutAr() -> Bool {
+        robot.turnRightWithoutAr()
         return true
     }
     
     func checkRobotIsFacingDirection(direction: Direction) -> Bool {
         return robot.getFacingDirection() == direction
     }
+    
     
     func nextTileExists() -> Bool {
         switch robot.getFacingDirection() {
@@ -128,6 +223,33 @@ class World {
             return !tile.getBlocks().isEmpty
         } else {
             return false
+        }
+    }
+    
+    //MARK: - AR Functions
+    
+    func drawWorldState(isTransparent: Bool = false) {
+        //draw the robot at correct position
+        let roboPosition = robot.getPosition()
+        let tile = tiles[roboPosition.0][roboPosition.1]
+        robot.drawRobotAtPosition(tileWidth: self.tileWidth, tileHight: self.tileHeight, tilesOnMyPosition: tile.getBlocks().count)
+        
+        //draw all blocks
+        for i in 0..<width {
+            for j in 0..<length {
+                let tile = tiles[i][j]
+                tile.drawAllMyBlocks(tileWidth: self.tileWidth, tileHight: self.tileHeight, worldEntity: self.worldEntity, tilePosition: (i,j), isTransparent: isTransparent)
+            }
+        }
+    }
+    
+    func drawExerciseTiles() {
+        //draw all blocks
+        for i in 0..<exerciseTiles.count {
+            for j in 0..<exerciseTiles[0].count {
+                let tile = exerciseTiles[i][j]
+                tile.drawAllMyBlocks(tileWidth: self.tileWidth, tileHight: self.tileHeight, worldEntity: self.worldEntity, tilePosition: (i,j), isTransparent: true)
+            }
         }
     }
     
@@ -180,6 +302,11 @@ class World {
         }
         
         robot.createArRobot(tileWidth: tileWidth, tileHeight: tileHeight, worldEntity: worldEntity)
+        
+        //If i have a exerciseTileMatrix i also want to render it
+        if !exerciseTiles.isEmpty {
+            drawExerciseTiles()
+        }
     }
     
     func anchorWorld(arView: ARView, anchor: AnchorEntity) {
@@ -191,5 +318,17 @@ class World {
         worldEntity.position = [-(tileWidth * Float(width)/2), 0, -(tileWidth * Float(length)/2)]
         anchor.addChild(self.worldEntity)
         arView.scene.addAnchor(anchor)
+    }
+    
+    func setWidth(newWidth: Int, viewModel: ExerciseEditorViewModel) {
+        width = newWidth
+        viewModel.reset()
+        viewModel.executeAllWithoutDispatcher()
+    }
+    
+    func setLength(newLength: Int, viewModel: ExerciseEditorViewModel) {
+        length = newLength
+        viewModel.reset()
+        viewModel.executeAllWithoutDispatcher()
     }
 }

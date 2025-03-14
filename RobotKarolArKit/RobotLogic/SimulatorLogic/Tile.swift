@@ -9,8 +9,20 @@ import Foundation
 import RealityKit
 
 @Observable
-class Tile {
+class Tile: Codable, Equatable {
     private var blocks: [Block] = []
+    
+    static func == (lhs: Tile, rhs: Tile) -> Bool {
+        guard lhs.blocks.count == rhs.blocks.count else { return false }
+        
+        for (block1, block2) in zip(lhs.blocks, rhs.blocks) {
+            if block1.blockTyp != block2.blockTyp || block1.blockNumber != block2.blockNumber {
+                return false
+            }
+        }
+        
+        return true
+    }
     
     func getBlocks() -> [Block] {
         return self.blocks
@@ -22,6 +34,11 @@ class Tile {
         blocks.append(newBlock)
     }
     
+    func addBlockWithoutAR(_ block: BlockTyp) {
+        let newBlock = Block(blockTyp: block, blockNumber: self.blocks.count)
+        blocks.append(newBlock)
+    }
+    
     func removeBlock(worldEntity: Entity) -> Block? {
         guard let block = blocks.popLast() else {
             return nil
@@ -29,5 +46,18 @@ class Tile {
         
         worldEntity.removeChild(block.blockEntity)
         return block
+    }
+    
+    func removeBlockWithoutAr() -> Block? {
+        guard let block = blocks.popLast() else {
+            return nil
+        }
+        return block
+    }
+    
+    func drawAllMyBlocks(tileWidth: Float, tileHight: Float, worldEntity: Entity, tilePosition: (Int, Int), isTransparent: Bool = false) {
+        for block in self.blocks {
+            block.createArBlock(position: tilePosition, tileWidth: tileWidth, tileHight: tileHight, worldEntity: worldEntity, isTransparent: isTransparent)
+        }
     }
 }

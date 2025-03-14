@@ -1,8 +1,45 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%@" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@"
+          }
+        }
+      }
+    },
     "%@ >" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ >"
+          }
+        }
+      }
+    },
+    "%lld" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld"
+          }
+        }
+      }
+    },
+    ">" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ">"
+          }
+        }
+      }
     },
     "and" : {
       "extractionState" : "manual",
@@ -48,6 +85,16 @@
         }
       }
     },
+    "Create project with exercise" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erstelle ein Projekt mit der Aufgabe"
+          }
+        }
+      }
+    },
     "Delete code" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -65,6 +112,36 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Projekt löschen"
+          }
+        }
+      }
+    },
+    "Difficulty" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schwierigkeit"
+          }
+        }
+      }
+    },
+    "Difficulty:" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schwierigkeit:"
+          }
+        }
+      }
+    },
+    "Easy" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einfach"
           }
         }
       }
@@ -114,6 +191,60 @@
         }
       }
     },
+    "Exercise Name" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aufgaben Name"
+          }
+        }
+      }
+    },
+    "exercise_done" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geschafft!"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You did it!"
+          }
+        }
+      }
+    },
+    "exercise_not_done" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Das war nicht die Aufgabe. Probier es nochmal."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "That was not the exercise. Try again."
+          }
+        }
+      }
+    },
+    "Exercises" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aufgaben"
+          }
+        }
+      }
+    },
     "Export" : {
       "localizations" : {
         "de" : {
@@ -130,6 +261,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Exportiere %@"
+          }
+        }
+      }
+    },
+    "Hard" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schwer"
           }
         }
       }
@@ -372,6 +513,16 @@
         }
       }
     },
+    "Length:" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Länge:"
+          }
+        }
+      }
+    },
     "lift" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -423,7 +574,29 @@
         }
       }
     },
+    "Medium" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mittel"
+          }
+        }
+      }
+    },
+    "New Exercise..." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neue Exercise…"
+          }
+        }
+      }
+    },
     "New Project..." : {
+      "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -675,6 +848,16 @@
         }
       }
     },
+    "Projects" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Projekte"
+          }
+        }
+      }
+    },
     "Reset game" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -682,6 +865,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Spiel zurücksetzen"
+          }
+        }
+      }
+    },
+    "Save" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Speichern"
           }
         }
       }
@@ -901,6 +1094,16 @@
         }
       }
     },
+    "Width:" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Weite:"
+          }
+        }
+      }
+    },
     "Worldsize: %lld x %lld" : {
       "localizations" : {
         "de" : {
@@ -913,6 +1116,16 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "Worldsize: %1$lld x %2$lld"
+          }
+        }
+      }
+    },
+    "Write down your exercise description..." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Füge eine Aufgabenbeschreibung hinzu…"
           }
         }
       }

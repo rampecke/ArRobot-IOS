@@ -179,26 +179,54 @@ class ExecutionVisitor: Visitor {
     
     func visit(and: And) {
         let leftExpressionVisitor = ExecutionVisitor(world: self.world)
-        and.left.accept(visitor: leftExpressionVisitor)
+        
+        if !endExecution {
+            and.left.accept(visitor: leftExpressionVisitor)
+            
+            self.endExecution = leftExpressionVisitor.endExecution
+            self.executionMessage = leftExpressionVisitor.executionMessage
+        }
         
         let rightExpressionVisitor = ExecutionVisitor(world: self.world)
-        and.right.accept(visitor: rightExpressionVisitor)
+        if !endExecution {
+            and.right.accept(visitor: rightExpressionVisitor)
+            
+            self.endExecution = rightExpressionVisitor.endExecution
+            self.executionMessage = rightExpressionVisitor.executionMessage
+        }
         
-        finishedExecution = leftExpressionVisitor.finishedExecution && rightExpressionVisitor.finishedExecution
+        //We need || here because finishedExecution is the oposit
+        finishedExecution = leftExpressionVisitor.finishedExecution || rightExpressionVisitor.finishedExecution
     }
     
     func visit(or: Or) {
         let leftExpressionVisitor = ExecutionVisitor(world: self.world)
-        or.left.accept(visitor: leftExpressionVisitor)
+        if !endExecution {
+            or.left.accept(visitor: leftExpressionVisitor)
+            
+            self.endExecution = leftExpressionVisitor.endExecution
+            self.executionMessage = leftExpressionVisitor.executionMessage
+        }
         
         let rightExpressionVisitor = ExecutionVisitor(world: self.world)
-        or.right.accept(visitor: rightExpressionVisitor)
+        if !endExecution {
+            or.right.accept(visitor: rightExpressionVisitor)
+            
+            self.endExecution = rightExpressionVisitor.endExecution
+            self.executionMessage = rightExpressionVisitor.executionMessage
+        }
         
-        finishedExecution = leftExpressionVisitor.finishedExecution || rightExpressionVisitor.finishedExecution
+        //We need || here because finishedExecution is the oposit
+        finishedExecution = leftExpressionVisitor.finishedExecution && rightExpressionVisitor.finishedExecution
     }
     func visit(not: Not) {
         let contentExpressionVisitor = ExecutionVisitor(world: self.world)
-        not.content.accept(visitor: contentExpressionVisitor)
+        if !endExecution {
+            not.content.accept(visitor: contentExpressionVisitor)
+            
+            self.endExecution = contentExpressionVisitor.endExecution
+            self.executionMessage = contentExpressionVisitor.executionMessage
+        }
         
         finishedExecution = !contentExpressionVisitor.finishedExecution
     }

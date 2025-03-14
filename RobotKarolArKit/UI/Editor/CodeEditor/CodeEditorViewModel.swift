@@ -12,13 +12,14 @@ class CodeEditorViewModel {
     var allStatements: [Statement] = [Step(), Lift(), RightTurn(), LeftTurn(), PlaceGrass(), PlaceStone(), PlaceWater()]
     var allControllFlow: [CodeBlock] = [If(), While()]
     var allExpressions: [Expression] = [IsEast(), IsWest(), IsNorth(), IsSouth(), IsBlock(), IsBorder(), And(), Or(), Not()]
+    var bottomBarTargeted = false
     
     var world = World(width: 6, length: 6)
     var executionVisitor: ExecutionVisitor
     var executionSpeed: PlaySpeed = .normal
     var arType: ARType = ARType.AR
     
-    var executionRunning = false
+    var executionStartedRunning = false
     
     var dragInstruction = false
     var dragExpression = false
@@ -26,8 +27,16 @@ class CodeEditorViewModel {
     
     var project: Project
     
+    //Makes DistanceChanges on the simulator possible
+    var cameraDistance: Float = 1.0
+    
     init(project: Project = Project()) {
-        let newWorld = World(width: project.worldWidth, length: project.worldLength)
+        let newWorld: World
+        if let exercise = project.exercise {
+            newWorld = World(width: project.worldWidth, length: project.worldLength, exerciseTiles: exercise.solutionTiles)
+        } else {
+            newWorld = World(width: project.worldWidth, length: project.worldLength)
+        }
         self.world = newWorld
         self.executionVisitor = ExecutionVisitor(world: newWorld)
         self.project = project
@@ -58,9 +67,9 @@ class CodeEditorViewModel {
         dragNewInstruction = false
     }
     
-    private func addStatement(statement: Statement) {
+    func addStatement(statement: Statement) {
         //Reset Execution when adding new code
-        if executionRunning {
+        if executionStartedRunning {
             reset()
         }
         
@@ -79,7 +88,7 @@ class CodeEditorViewModel {
     
     func addStatementToPosition(statement: Statement, position: Int) {
         //Reset Execution when adding new code
-        if executionRunning {
+        if executionStartedRunning {
             reset()
         }
         
@@ -93,7 +102,7 @@ class CodeEditorViewModel {
     }
     
     func addNewExpressionAtNextEmptyPosition(expression: Expression) {
-        if executionRunning {
+        if executionStartedRunning {
             reset()
         }
         
@@ -109,8 +118,8 @@ class CodeEditorViewModel {
     }
     
     func next() {
-        if !executionRunning {
-            executionRunning = true
+        if !executionStartedRunning {
+            executionStartedRunning = true
         }
         
         if executionVisitor.endExecution || executionVisitor.finishedExecution {
@@ -121,20 +130,25 @@ class CodeEditorViewModel {
     }
     
     func executeAll() {
-        if !executionRunning {
-            executionRunning = true
+        if !executionStartedRunning {
+            executionStartedRunning = true
         }
         
         executeNextStep()
     }
 
-    private func executeNextStep() {
+    private func executeNextStep(callCounter: Int = 0, maxCalls: Int = 1000) {
+        if callCounter == maxCalls {
+            executionVisitor.endExecution = true
+            executionVisitor.executionMessage = "Reached executionlimit of \(maxCalls)"
+            return
+        }
         // Check the stopping conditions -> Make sure we don't call the dispatcher again
         guard !executionVisitor.endExecution && !executionVisitor.finishedExecution else {
             return
         }
         
-        if executionRunning { //make sure to only run when execution is still running
+        if executionStartedRunning { //make sure to only run when execution is still running
             // Execute the next step
             next()
             
@@ -142,12 +156,13 @@ class CodeEditorViewModel {
             let dispatchTime: DispatchTime = DispatchTime.now() + executionSpeed.timeInterval
             // Schedule the next step after executionTime second
             DispatchQueue.main.asyncAfter(deadline: dispatchTime) {
-                self.executeNextStep()
+                self.executeNextStep(callCounter: callCounter+1, maxCalls: maxCalls)
             }
         }
     }
+    
     func reset() {
-        executionRunning = false
+        executionStartedRunning = false
         
         let resetVisitor = ResetCodeBlockVisitor()
         project.codeBlock.accept(visitor: resetVisitor)
@@ -163,7 +178,7 @@ class CodeEditorViewModel {
     }
     
     func deleteInstruction(deleteId: UUID) {
-        if executionRunning {
+        if executionStartedRunning {
             reset()
         }
         
@@ -172,7 +187,7 @@ class CodeEditorViewModel {
     }
     
     func deleteExpression(deleteId: UUID) {
-        if executionRunning {
+        if executionStartedRunning {
             reset()
         }
         
@@ -183,7 +198,7 @@ class CodeEditorViewModel {
     //New Drag and Drop functions
     func handleStatementDrop (statement: Statement, targetStatement: Statement, addToEndOfTarget: Bool? = nil) {
         //Stop&Reset execution when adding new statement
-        if executionRunning {
+        if executionStartedRunning {
             reset()
         }
         
@@ -207,7 +222,6 @@ class CodeEditorViewModel {
             
             targetCodeBlock.addStatement(statement: deleteStatementVisitor.getDeletedStatement())
         } else {
-            
             let addInstructionVisitor = AddStatementVisitor(targetId: targetStatement.id, statement: deleteStatementVisitor.getDeletedStatement())
             //TODO: Maybe add the codeblock the expression was dropped to the call -> Performance
             project.codeBlock.accept(visitor: addInstructionVisitor)
@@ -216,7 +230,7 @@ class CodeEditorViewModel {
     
     func handleExpressionDrop (expression: Expression, targetExpression: Expression) {
         //Stop&Reset execution when adding new expression
-        if executionRunning {
+        if executionStartedRunning {
             reset()
         }
         

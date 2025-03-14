@@ -20,25 +20,16 @@ struct ProjectElement: View {
         }
     }
     
+    func getFolderColorString() -> String {
+        guard let projectsColor = project.exercise?.exerciseDifficulty.colorName else {
+            return "folder_color"
+        }
+        
+        return projectsColor
+    }
+    
     var body: some View {
-        VStack (spacing: 10) {
-            Image("projectIcon")
-                .resizable()
-                .scaledToFit()
-                .font(.system(size: 24, weight: .bold))
-                .padding(5)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(
-                    RoundedRectangle(cornerRadius: 10)
-                        .fill(Color("folder_color"))
-                )
-            
-            Button(action: {self.isShowingPopover = true}) {
-                Text("\(project.name) >")
-                    .frame(maxWidth: .infinity)
-            }
-            
-        }.frame(maxWidth: .infinity, maxHeight: .infinity)
+        FolderRepresentation(isShowingPopover: $isShowingPopover, folderName: $project.name, colorString: getFolderColorString())
         .popover(
             isPresented: $isShowingPopover
         ) {
@@ -49,14 +40,7 @@ struct ProjectElement: View {
                     }
                 }, onCommit: {
                     saveNewTitle()
-                }).padding(10)
-                    .font(.system(size:20, design: .rounded))
-                    .background(Color("card_background"))
-                    .cornerRadius(5)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 5)
-                        .stroke(Color("card_border"), lineWidth: 1)
-                    )
+                }).textFieldStyle(ChangeNameTextFieldStyle())
                     .onAppear {
                         titleChangeString = project.name
                     }

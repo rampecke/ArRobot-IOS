@@ -9,7 +9,7 @@ import Foundation
 import RealityKit
 
 @Observable
-class Block {
+class Block: Codable {
     var blockTyp: BlockTyp
     var blockEntity: Entity = Entity()
     var blockNumber: Int
@@ -19,16 +19,16 @@ class Block {
         self.blockNumber = blockNumber
     }
     
-    func createArBlock(position: (Int, Int), tileWidth: Float, tileHight: Float, worldEntity: Entity) {
+    func createArBlock(position: (Int, Int), tileWidth: Float, tileHight: Float, worldEntity: Entity, isTransparent: Bool = false) {
         //TODO: USE REAL MODLES
         let blockMesh = MeshResource.generateBox(width: tileWidth, height: tileWidth, depth: tileWidth)
         let blockMaterial = switch blockTyp {
         case .WATER:
-            SimpleMaterial(color: .blue, isMetallic: false)
+            SimpleMaterial(color: .blue.withAlphaComponent(isTransparent ? 0.35 : 1.0), isMetallic: false)
         case .GRAS:
-            SimpleMaterial(color: .green, isMetallic: false)
+            SimpleMaterial(color: .green.withAlphaComponent(isTransparent ? 0.35 : 1.0), isMetallic: false)
         case .STONE:
-            SimpleMaterial(color: .gray, isMetallic: false)
+            SimpleMaterial(color: .gray.withAlphaComponent(isTransparent ? 0.35 : 1.0), isMetallic: false)
         }
         
         blockEntity = ModelEntity(mesh: blockMesh, materials: [blockMaterial])
@@ -37,8 +37,31 @@ class Block {
         
         worldEntity.addChild(blockEntity)
     }
+    
+    func removeArBlock(worldEntity: Entity) {
+        worldEntity.removeChild(blockEntity)
+        blockEntity = Entity()
+    }
+    
+    //Decode and Encode
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.blockTyp = try container.decode(BlockTyp.self, forKey: .blockType)
+        self.blockNumber = try container.decode(Int.self, forKey: .blockNumber)
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(blockTyp, forKey: .blockType)
+        try container.encode(blockNumber, forKey: .blockNumber)
+        self.blockEntity = Entity()
+    }
+
+    private enum CodingKeys: String, CodingKey {
+        case blockType, blockNumber
+    }
 }
 
-enum BlockTyp {
+enum BlockTyp: Codable {
     case WATER, GRAS, STONE;
 }

@@ -18,7 +18,18 @@
 			<key>NSUbiquitousDocumentUserActivityType</key>
 			<string>com.ramonaeckert.RobotKarolArKit.roboArProject</string>
 		</dict>
-		<dict/>
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>roboArExercise</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Owner</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.ramonaeckert.RobotKarolArKit.roboArExercise</string>
+			</array>
+		</dict>
 	</array>
 	<key>UTExportedTypeDeclarations</key>
 	<array>
@@ -53,16 +64,21 @@
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
-				<string>public.data</string>
+				<string>public.json</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>NoDropArea</string>
+			<string>roboArExercise</string>
 			<key>UTTypeIcons</key>
 			<dict/>
 			<key>UTTypeIdentifier</key>
-			<string>com.ramonaeckert.RobotKarolArKit.noDropArea</string>
+			<string>com.ramonaeckert.RobotKarolArKit.roboArExercise</string>
 			<key>UTTypeTagSpecification</key>
-			<dict/>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>roboArExercise</string>
+				</array>
+			</dict>
 		</dict>
 		<dict>
 			<key>UTTypeConformsTo</key>
@@ -102,6 +118,25 @@
 				<key>public.filename-extension</key>
 				<array>
 					<string>roboArProject</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.json</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>roboArExercise</string>
+			<key>UTTypeIcons</key>
+			<dict/>
+			<key>UTTypeIdentifier</key>
+			<string>com.ramonaeckert.RobotKarolArKit.roboArExercise</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>roboArExercise</string>
 				</array>
 			</dict>
 		</dict>
