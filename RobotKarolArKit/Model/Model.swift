@@ -93,8 +93,12 @@ class Model {
     
     // MARK: - Exercise Management
     func addNewExercise(newExercise: Exercise) {
-        newExercise.lastEdited = Date()
-        exerciseTemplates.append(newExercise)
+        if let existingExercise = exerciseTemplates.first(where: { $0.id == newExercise.id}) {
+            existingExercise.lastEdited = Date()
+        } else {
+            newExercise.lastEdited = Date()
+            exerciseTemplates.append(newExercise)
+        }
         saveExercise(exercise: newExercise)
     }
 
