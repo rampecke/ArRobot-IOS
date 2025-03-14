@@ -15,9 +15,8 @@ class Tile: Codable, Equatable {
     static func == (lhs: Tile, rhs: Tile) -> Bool {
         guard lhs.blocks.count == rhs.blocks.count else { return false }
         
-        //TODO: ADD MAYBE BLOCKNUMBER AS Well
         for (block1, block2) in zip(lhs.blocks, rhs.blocks) {
-            if block1.blockTyp != block2.blockTyp {
+            if block1.blockTyp != block2.blockTyp || block1.blockNumber != block2.blockNumber {
                 return false
             }
         }
