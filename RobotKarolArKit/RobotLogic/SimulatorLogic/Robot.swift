@@ -119,7 +119,7 @@ class Robot {
     }
     
     func createArRobot(tileWidth: Float, tileHeight: Float, worldEntity: Entity) {
-        //Todo: Instead use a model
+        //TODO: Instead use a model
         let robotMesh = MeshResource.generateBox(width: robotWidth, height: robotHeight, depth: robotWidth)
         let robotMaterial = SimpleMaterial(color: .blue, isMetallic: false)
         robotEntity = ModelEntity(mesh: robotMesh, materials: [robotMaterial])

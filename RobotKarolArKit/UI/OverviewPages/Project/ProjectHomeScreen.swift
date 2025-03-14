@@ -10,17 +10,9 @@ import SwiftUI
 struct ProjectHomeScreen: View {
     @Environment(Model.self) var model: Model
     
-    let columns = [
-            GridItem(.flexible()),
-            GridItem(.flexible()),
-            GridItem(.flexible()),
-            GridItem(.flexible()),
-            GridItem(.flexible())
-        ]
-    
     var body: some View {
-        ScrollView {
-            LazyVGrid(columns: columns, spacing: 30) {
+        OverviewLayout(content: {
+            Group {
                 CreateNewButton(action: {model.addNewProject()}).frame(height: 140).padding(.horizontal, 15)
                 
                 ForEach(model.projects, id: \.id) { project in
@@ -30,8 +22,8 @@ struct ProjectHomeScreen: View {
                         ProjectElement(project: project).frame(height: 140).padding(.horizontal, 15)
                     }
                 }
-            }.padding()
-        }
+            }
+        }, title: "Projects")
     }
 }
 

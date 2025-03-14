@@ -201,6 +201,17 @@
         }
       }
     },
+    "Exercise Templates" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aufgaben Vorlagen"
+          }
+        }
+      }
+    },
     "exercise_done" : {
       "extractionState" : "manual",
       "localizations" : {
