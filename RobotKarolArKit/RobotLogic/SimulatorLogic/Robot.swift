@@ -44,15 +44,15 @@ class Robot {
         switch facingDirection {
         case .NORTH:
             facingDirection = Direction.WEST
-            rotationAngle = Float.pi / 2
+            rotationAngle = 3 * Float.pi / 2
         case .EAST:
             facingDirection = Direction.NORTH
+            rotationAngle = Float.pi
         case .SOUTH:
             facingDirection = Direction.EAST
-            rotationAngle = 3 * Float.pi / 2
+            rotationAngle = Float.pi / 2
         case .WEST:
             facingDirection = Direction.SOUTH
-            rotationAngle = Float.pi
         }
         
         robotEntity.transform.rotation = simd_quatf(angle: rotationAngle, axis: SIMD3<Float>(0, 1, 0))
@@ -76,15 +76,15 @@ class Robot {
         switch facingDirection {
         case .NORTH:
             facingDirection = Direction.EAST
-            rotationAngle = 3 * Float.pi / 2
+            rotationAngle = Float.pi / 2
         case .EAST:
             facingDirection = Direction.SOUTH
-            rotationAngle = Float.pi
         case .SOUTH:
             facingDirection = Direction.WEST
-            rotationAngle = Float.pi / 2
+            rotationAngle = 3 * Float.pi / 2
         case .WEST:
             facingDirection = Direction.NORTH
+            rotationAngle = Float.pi
         }
         
         robotEntity.transform.rotation = simd_quatf(angle: rotationAngle, axis: SIMD3<Float>(0, 1, 0))
@@ -126,9 +126,11 @@ class Robot {
         robotEntity = newRobotEntity
         robotEntity.scale *= 2.5
         robotEntity.position = [tileWidth*Float(position.0),tileHeight,tileWidth*Float(position.1)]
-        //The model is the wrong way so we need to initialy turn it around
-        robotEntity.transform.rotation = simd_quatf(angle: .pi, axis: SIMD3<Float>(0, 1, 0))
         worldEntity.addChild(robotEntity)
+        
+        if let animation = robotEntity.availableAnimations.first {
+            robotEntity.playAnimation(animation.repeat(), transitionDuration: 0.5)
+        }
     }
     
     func deleteRoboEntities() {

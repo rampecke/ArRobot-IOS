@@ -55,6 +55,7 @@
 		A09390EF2C1DBFBD009DF760 /* While.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09390EE2C1DBFBD009DF760 /* While.swift */; };
 		A0B0550F2D8E3F250067FE86 /* RobotVersion1.usdz in Resources */ = {isa = PBXBuildFile; fileRef = A0B0550E2D8E3F250067FE86 /* RobotVersion1.usdz */; };
 		A0B055112D8E3FE60067FE86 /* ArModelLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B055102D8E3FE60067FE86 /* ArModelLoader.swift */; };
+		A0B055252D8ED3010067FE86 /* RobotVersion7.usdz in Resources */ = {isa = PBXBuildFile; fileRef = A0B055242D8ED3010067FE86 /* RobotVersion7.usdz */; };
 		A0B36C662D7AE5AF005F33F0 /* AddExpressionIntoEmptyVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B36C652D7AE5AF005F33F0 /* AddExpressionIntoEmptyVisitor.swift */; };
 		A0B36C7F2D7B4423005F33F0 /* StatementDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B36C7E2D7B4423005F33F0 /* StatementDTO.swift */; };
 		A0B36C812D7B4CC7005F33F0 /* ExpressionDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B36C802D7B4CC7005F33F0 /* ExpressionDTO.swift */; };
@@ -118,6 +119,7 @@
 		A09390EE2C1DBFBD009DF760 /* While.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = While.swift; sourceTree = "<group>"; };
 		A0B0550E2D8E3F250067FE86 /* RobotVersion1.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = RobotVersion1.usdz; sourceTree = "<group>"; };
 		A0B055102D8E3FE60067FE86 /* ArModelLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArModelLoader.swift; sourceTree = "<group>"; };
+		A0B055242D8ED3010067FE86 /* RobotVersion7.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = RobotVersion7.usdz; sourceTree = "<group>"; };
 		A0B36C652D7AE5AF005F33F0 /* AddExpressionIntoEmptyVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpressionIntoEmptyVisitor.swift; sourceTree = "<group>"; };
 		A0B36C7E2D7B4423005F33F0 /* StatementDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatementDTO.swift; sourceTree = "<group>"; };
 		A0B36C802D7B4CC7005F33F0 /* ExpressionDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionDTO.swift; sourceTree = "<group>"; };
@@ -359,6 +361,7 @@
 			isa = PBXGroup;
 			children = (
 				A0B0550E2D8E3F250067FE86 /* RobotVersion1.usdz */,
+				A0B055242D8ED3010067FE86 /* RobotVersion7.usdz */,
 			);
 			path = ArResources;
 			sourceTree = "<group>";
@@ -442,6 +445,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A06BD7CB2BAE9F4F00863CA5 /* Preview Assets.xcassets in Resources */,
+				A0B055252D8ED3010067FE86 /* RobotVersion7.usdz in Resources */,
 				A06BD7C72BAE9F4F00863CA5 /* Assets.xcassets in Resources */,
 				A02B6AA22C14BA0F00CAFF82 /* Localizable.xcstrings in Resources */,
 				A0B0550F2D8E3F250067FE86 /* RobotVersion1.usdz in Resources */,

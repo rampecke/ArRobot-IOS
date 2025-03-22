@@ -11,30 +11,31 @@ import ARKit
 
 //Needed so we can preload the models and don't have to load the model for each block
 class ArModelLoader {
-    private var robotModel: ModelEntity?
+    private var robotModel: Entity?
     
     init() {
-        self.robotModel = loadModel(modelName: "RobotVersion1")
+        self.robotModel = loadModel(modelName: "RobotVersion7")
     }
     
-    private func loadModel(modelName: String) -> ModelEntity? {
-        guard let modelEntity = try? ModelEntity.loadModel(named: modelName) else {
+    private func loadModel(modelName: String) -> Entity? {
+        guard let entity = try? Entity.load(named: modelName) else {
             print("Failed to load model")
             return nil
         }
-        return modelEntity
+        
+        return entity
     }
     
-    func returnCopyOf(modelType: PreloadModelType) -> ModelEntity? {
-        guard let modelEntity = switch modelType {
+    func returnCopyOf(modelType: PreloadModelType) -> Entity? {
+        guard let entity = switch modelType {
         case .robot:
             robotModel?.clone(recursive: true)
         } else {
             print("Failed to load model")
             return nil
         }
-        
-        return modelEntity
+
+        return entity
     }
 }
 
