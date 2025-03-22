@@ -1117,6 +1117,9 @@
         }
       }
     },
+    "Use Simulator" : {
+
+    },
     "while" : {
       "extractionState" : "manual",
       "localizations" : {

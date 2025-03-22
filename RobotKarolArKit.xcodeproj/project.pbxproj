@@ -53,6 +53,8 @@
 		A06BD7E22BB4735E00863CA5 /* Visitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06BD7E12BB4735E00863CA5 /* Visitor.swift */; };
 		A09390ED2C1DB9A4009DF760 /* If.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09390EC2C1DB9A4009DF760 /* If.swift */; };
 		A09390EF2C1DBFBD009DF760 /* While.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09390EE2C1DBFBD009DF760 /* While.swift */; };
+		A0B0550F2D8E3F250067FE86 /* RobotVersion1.usdz in Resources */ = {isa = PBXBuildFile; fileRef = A0B0550E2D8E3F250067FE86 /* RobotVersion1.usdz */; };
+		A0B055112D8E3FE60067FE86 /* ArModelLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B055102D8E3FE60067FE86 /* ArModelLoader.swift */; };
 		A0B36C662D7AE5AF005F33F0 /* AddExpressionIntoEmptyVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B36C652D7AE5AF005F33F0 /* AddExpressionIntoEmptyVisitor.swift */; };
 		A0B36C7F2D7B4423005F33F0 /* StatementDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B36C7E2D7B4423005F33F0 /* StatementDTO.swift */; };
 		A0B36C812D7B4CC7005F33F0 /* ExpressionDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B36C802D7B4CC7005F33F0 /* ExpressionDTO.swift */; };
@@ -114,6 +116,8 @@
 		A06BD7E12BB4735E00863CA5 /* Visitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Visitor.swift; sourceTree = "<group>"; };
 		A09390EC2C1DB9A4009DF760 /* If.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = If.swift; sourceTree = "<group>"; };
 		A09390EE2C1DBFBD009DF760 /* While.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = While.swift; sourceTree = "<group>"; };
+		A0B0550E2D8E3F250067FE86 /* RobotVersion1.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = RobotVersion1.usdz; sourceTree = "<group>"; };
+		A0B055102D8E3FE60067FE86 /* ArModelLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArModelLoader.swift; sourceTree = "<group>"; };
 		A0B36C652D7AE5AF005F33F0 /* AddExpressionIntoEmptyVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpressionIntoEmptyVisitor.swift; sourceTree = "<group>"; };
 		A0B36C7E2D7B4423005F33F0 /* StatementDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatementDTO.swift; sourceTree = "<group>"; };
 		A0B36C802D7B4CC7005F33F0 /* ExpressionDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionDTO.swift; sourceTree = "<group>"; };
@@ -280,6 +284,7 @@
 		A06BD7B62BAE9F4E00863CA5 = {
 			isa = PBXGroup;
 			children = (
+				A0B0550D2D8E3E910067FE86 /* ArResources */,
 				A02B6AA12C14BA0F00CAFF82 /* Localizable.xcstrings */,
 				A06BD7C12BAE9F4E00863CA5 /* RobotKarolArKit */,
 				A06BD7C02BAE9F4E00863CA5 /* Products */,
@@ -335,6 +340,7 @@
 				A06BD7D72BAEA5E700863CA5 /* Block.swift */,
 				A06BD7DA2BAF2C0A00863CA5 /* Robot.swift */,
 				A06BD7DC2BAF36F600863CA5 /* Direction.swift */,
+				A0B055102D8E3FE60067FE86 /* ArModelLoader.swift */,
 			);
 			path = SimulatorLogic;
 			sourceTree = "<group>";
@@ -347,6 +353,14 @@
 				A02B6A892C139FE600CAFF82 /* Statements */,
 			);
 			path = Instructions;
+			sourceTree = "<group>";
+		};
+		A0B0550D2D8E3E910067FE86 /* ArResources */ = {
+			isa = PBXGroup;
+			children = (
+				A0B0550E2D8E3F250067FE86 /* RobotVersion1.usdz */,
+			);
+			path = ArResources;
 			sourceTree = "<group>";
 		};
 		A0B36D702D8049B2005F33F0 /* GeneralComponents */ = {
@@ -430,6 +444,7 @@
 				A06BD7CB2BAE9F4F00863CA5 /* Preview Assets.xcassets in Resources */,
 				A06BD7C72BAE9F4F00863CA5 /* Assets.xcassets in Resources */,
 				A02B6AA22C14BA0F00CAFF82 /* Localizable.xcstrings in Resources */,
+				A0B0550F2D8E3F250067FE86 /* RobotVersion1.usdz in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,6 +460,7 @@
 				A02B6A902C13A16200CAFF82 /* Lift.swift in Sources */,
 				A01482F72D71155100AACE8D /* IsNorth.swift in Sources */,
 				A09390ED2C1DB9A4009DF760 /* If.swift in Sources */,
+				A0B055112D8E3FE60067FE86 /* ArModelLoader.swift in Sources */,
 				A02B6AB32C16789D00CAFF82 /* NewInstructionVisitor.swift in Sources */,
 				A02B6AE22C18AC4800CAFF82 /* ExecutionVisitor.swift in Sources */,
 				A02B6ADC2C1750AD00CAFF82 /* NonArView.swift in Sources */,

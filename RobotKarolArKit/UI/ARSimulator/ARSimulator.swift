@@ -18,7 +18,7 @@ struct ARSimulator: View {
             ARViewContainer(world: viewModel.world, wasPlaced: $wasPlaced)
                 .edgesIgnoringSafeArea(.all)
 
-            if wasPlaced {
+            if wasPlaced || viewModel.arType == .NonAR {
                 ArViewControlBar(viewModel: viewModel)
             } else {
                 VStack {
@@ -31,16 +31,27 @@ struct ARSimulator: View {
                     
                     Spacer()
                     
-                    Button(action: {
-                        wasPlaced = true
-                    }) {
-                        Text("Place Here")
-                            .padding()
-                            .background(Color.blue)
-                            .foregroundColor(.white)
-                            .cornerRadius(10)
-                    }
-                    .padding(.bottom, 50)
+                    HStack {
+                        Button(action: {
+                            wasPlaced = true
+                        }) {
+                            Text("Place Here")
+                                .padding()
+                                .background(Color.blue)
+                                .foregroundColor(.white)
+                                .cornerRadius(10)
+                        }
+                        
+                        Button(action: {
+                            viewModel.arType = .NonAR
+                        }) {
+                            Text("Use Simulator")
+                                .padding()
+                                .background(Color.blue)
+                                .foregroundColor(.white)
+                                .cornerRadius(10)
+                        }
+                    }.padding(.bottom, 50)
                 }
             }
 
