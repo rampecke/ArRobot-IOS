@@ -25,6 +25,15 @@ struct TabBarWrapper: View {
             }.tag(1)
         }.environment(\.tabBarSelection, $selectedTab)
         .environment(\.horizontalSizeClass, .compact)
+        .onAppear {
+            //If this app is updated to iOS18 use .toolbarVisibility instead
+            let appearance = UITabBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            appearance.backgroundColor = UIColor.systemBackground
+            
+            UITabBar.appearance().standardAppearance = appearance
+            UITabBar.appearance().scrollEdgeAppearance = appearance
+        }
     }
 }
 
