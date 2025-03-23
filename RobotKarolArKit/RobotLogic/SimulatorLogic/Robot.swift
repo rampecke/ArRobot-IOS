@@ -124,7 +124,7 @@ class Robot {
         }
         
         robotEntity = newRobotEntity
-        robotEntity.scale *= 2.5
+        robotEntity.scale *= 3
         robotEntity.position = [tileWidth*Float(position.0),tileHeight,tileWidth*Float(position.1)]
         worldEntity.addChild(robotEntity)
         

@@ -7,6 +7,7 @@
 
 import Foundation
 import RealityKit
+import UIKit
 
 @Observable
 class Block: Codable {
@@ -20,20 +21,31 @@ class Block: Codable {
     }
     
     func createArBlock(position: (Int, Int), tileWidth: Float, tileHight: Float, worldEntity: Entity, isTransparent: Bool = false) {
-        //TODO: USE REAL MODLES
-        let blockMesh = MeshResource.generateBox(width: tileWidth, height: tileWidth, depth: tileWidth)
-        let blockMaterial = switch blockTyp {
-        case .WATER:
-            SimpleMaterial(color: .blue.withAlphaComponent(isTransparent ? 0.35 : 1.0), isMetallic: false)
-        case .GRAS:
-            SimpleMaterial(color: .green.withAlphaComponent(isTransparent ? 0.35 : 1.0), isMetallic: false)
-        case .STONE:
-            SimpleMaterial(color: .gray.withAlphaComponent(isTransparent ? 0.35 : 1.0), isMetallic: false)
+        //TODO: Move ModelLoader
+        let modelLoader = ArModelLoader()
+
+        if blockTyp == .GRAS {
+            guard let newGrasBlock = modelLoader.returnCopyOf(modelType: .grasBlock) else {
+                return
+            }
+            
+            blockEntity = newGrasBlock
+        } else if blockTyp == .WATER{
+            guard let newWaterBlock = modelLoader.returnCopyOf(modelType: .waterBlock) else {
+                return
+            }
+             
+            blockEntity = newWaterBlock
+        } else if blockTyp == .STONE {
+            guard let newStoneBlock = modelLoader.returnCopyOf(modelType: .stoneBlock) else {
+                return
+            }
+             
+            blockEntity = newStoneBlock
         }
         
-        blockEntity = ModelEntity(mesh: blockMesh, materials: [blockMaterial])
-        
-        blockEntity.position = [tileWidth*Float(position.0),tileWidth/2 + tileHight + Float(blockNumber) * tileWidth,tileWidth*Float(position.1)]
+        blockEntity.scale =  SIMD3<Float>(tileWidth/2, tileWidth/2, tileWidth/2)
+        blockEntity.position = [tileWidth*Float(position.0), tileHight + Float(blockNumber) * tileWidth,tileWidth*Float(position.1)]
         
         worldEntity.addChild(blockEntity)
     }
