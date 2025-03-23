@@ -21,38 +21,7 @@ struct ARSimulator: View {
             if wasPlaced || viewModel.arType == .NonAR {
                 ArViewControlBar(viewModel: viewModel)
             } else {
-                VStack {
-                    Text("Move your device to find a surface")
-                        .font(.headline)
-                        .padding()
-                        .background(Color.black.opacity(0.6))
-                        .cornerRadius(10)
-                        .foregroundColor(.white)
-                    
-                    Spacer()
-                    
-                    HStack {
-                        Button(action: {
-                            wasPlaced = true
-                        }) {
-                            Text("Place Here")
-                                .padding()
-                                .background(Color.blue)
-                                .foregroundColor(.white)
-                                .cornerRadius(10)
-                        }
-                        
-                        Button(action: {
-                            viewModel.arType = .NonAR
-                        }) {
-                            Text("Use Simulator")
-                                .padding()
-                                .background(Color.blue)
-                                .foregroundColor(.white)
-                                .cornerRadius(10)
-                        }
-                    }.padding(.bottom, 50)
-                }
+                ArPlacementMenu(wasPlaced: $wasPlaced, viewModel: viewModel)
             }
 
         }

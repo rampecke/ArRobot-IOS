@@ -606,7 +606,14 @@
       }
     },
     "Move your device to find a surface" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bewege dein Gerät um eine Oberfläche zu finden"
+          }
+        }
+      }
     },
     "Name" : {
       "localizations" : {
@@ -719,8 +726,16 @@
         }
       }
     },
-    "Place Here" : {
-
+    "Place board" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Platziere Bord"
+          }
+        }
+      }
     },
     "placeGrass" : {
       "extractionState" : "manual",
@@ -1117,8 +1132,16 @@
         }
       }
     },
-    "Use Simulator" : {
-
+    "Use simulator" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nutze Simulator"
+          }
+        }
+      }
     },
     "while" : {
       "extractionState" : "manual",

@@ -62,6 +62,7 @@
 		A0B055352D8F828A0067FE86 /* GrasBlockVersion4.usdz in Resources */ = {isa = PBXBuildFile; fileRef = A0B055342D8F828A0067FE86 /* GrasBlockVersion4.usdz */; };
 		A0B055392D8F86050067FE86 /* WaterBlockVersion1.usdz in Resources */ = {isa = PBXBuildFile; fileRef = A0B055382D8F86050067FE86 /* WaterBlockVersion1.usdz */; };
 		A0B0553B2D8F8B1A0067FE86 /* StoneBlockVersion1.usdz in Resources */ = {isa = PBXBuildFile; fileRef = A0B0553A2D8F8B1A0067FE86 /* StoneBlockVersion1.usdz */; };
+		A0B0558D2D90ABA80067FE86 /* ArPlacementMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B0558C2D90ABA80067FE86 /* ArPlacementMenu.swift */; };
 		A0B36C662D7AE5AF005F33F0 /* AddExpressionIntoEmptyVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B36C652D7AE5AF005F33F0 /* AddExpressionIntoEmptyVisitor.swift */; };
 		A0B36C7F2D7B4423005F33F0 /* StatementDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B36C7E2D7B4423005F33F0 /* StatementDTO.swift */; };
 		A0B36C812D7B4CC7005F33F0 /* ExpressionDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B36C802D7B4CC7005F33F0 /* ExpressionDTO.swift */; };
@@ -132,6 +133,7 @@
 		A0B055342D8F828A0067FE86 /* GrasBlockVersion4.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = GrasBlockVersion4.usdz; sourceTree = "<group>"; };
 		A0B055382D8F86050067FE86 /* WaterBlockVersion1.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = WaterBlockVersion1.usdz; sourceTree = "<group>"; };
 		A0B0553A2D8F8B1A0067FE86 /* StoneBlockVersion1.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = StoneBlockVersion1.usdz; sourceTree = "<group>"; };
+		A0B0558C2D90ABA80067FE86 /* ArPlacementMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArPlacementMenu.swift; sourceTree = "<group>"; };
 		A0B36C652D7AE5AF005F33F0 /* AddExpressionIntoEmptyVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpressionIntoEmptyVisitor.swift; sourceTree = "<group>"; };
 		A0B36C7E2D7B4423005F33F0 /* StatementDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatementDTO.swift; sourceTree = "<group>"; };
 		A0B36C802D7B4CC7005F33F0 /* ExpressionDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionDTO.swift; sourceTree = "<group>"; };
@@ -251,6 +253,7 @@
 				A02B6AE42C19130200CAFF82 /* ArViewControlBar.swift */,
 				A02CAC1F2D7916F800E751DF /* ControllbarButton.swift */,
 				A02CAC212D79A13100E751DF /* ExecutionStatusLable.swift */,
+				A0B0558C2D90ABA80067FE86 /* ArPlacementMenu.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -523,6 +526,7 @@
 				A02B6AAD2C166A0100CAFF82 /* CodeBlock.swift in Sources */,
 				A02B6A942C13A22000CAFF82 /* PlaceGrass.swift in Sources */,
 				A02CAC122D759BA300E751DF /* Statement.swift in Sources */,
+				A0B0558D2D90ABA80067FE86 /* ArPlacementMenu.swift in Sources */,
 				A0B36C812D7B4CC7005F33F0 /* ExpressionDTO.swift in Sources */,
 				A01482F52D7114AE00AACE8D /* IsEast.swift in Sources */,
 				A02CAC1C2D78AB5300E751DF /* ResetCodeBlockVisitor.swift in Sources */,

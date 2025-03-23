@@ -9,12 +9,15 @@ import SwiftUI
 
 struct ControllbarButton: View {
     var title: String
-    var icon: String
+    var icon: String?
     var action: () -> Void
     var notInArView: Bool = false
     
     private func isSystemIcon() -> Bool {
-        return UIImage(systemName: self.icon) != nil
+        guard let iconName = self.icon else {
+            return false
+        }
+        return UIImage(systemName: iconName) != nil
     }
     
     var body: some View {
@@ -24,13 +27,16 @@ struct ControllbarButton: View {
                     .font(.system(size: 14, weight: .semibold))
                     .foregroundColor(Color("onContrast_color"))
                     .padding(.leading, 8)
+                    .if(icon == nil) { view in
+                        view.padding(.trailing, 8)
+                    }
                 
-                if isSystemIcon() {
-                    Image(systemName: icon)
+                if isSystemIcon() && icon != nil {
+                    Image(systemName: icon ?? "")
                         .frame(width: 35, height: 20)
                         .foregroundColor(Color("onContrast_color"))
-                } else {
-                    Image(icon)
+                } else if icon != nil {
+                    Image(icon ?? "")
                         .frame(width: 35, height: 20)
                         .foregroundColor(Color("onContrast_color"))
                 }
