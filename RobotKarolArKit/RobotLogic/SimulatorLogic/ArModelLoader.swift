@@ -12,15 +12,15 @@ import ARKit
 //Needed so we can preload the models and don't have to load the model for each block
 class ArModelLoader {
     private var robotModel: Entity?
-    private var grasBlockModel: Entity?
-    private var waterBlockModel: Entity?
-    private var stoneBlockModel: Entity?
+    private var grasBlockModel: ModelEntity?
+    private var waterBlockModel: ModelEntity?
+    private var stoneBlockModel: ModelEntity?
     
     init() {
         self.robotModel = loadModel(modelName: "RobotVersion7")
-        self.grasBlockModel = loadModel(modelName: "GrasBlockVersion4")
-        self.waterBlockModel = loadModel(modelName: "WaterBlockVersion1")
-        self.stoneBlockModel = loadModel(modelName: "StoneBlockVersion1")
+        self.grasBlockModel = loadModelEntity(modelName: "GrasBlockVersion4")
+        self.waterBlockModel = loadModelEntity(modelName: "WaterBlockVersion1")
+        self.stoneBlockModel = loadModelEntity(modelName: "StoneBlockVersion1")
     }
     
     private func loadModel(modelName: String) -> Entity? {
@@ -30,6 +30,15 @@ class ArModelLoader {
         }
         
         return entity
+    }
+    
+    private func loadModelEntity(modelName: String) -> ModelEntity? {
+        guard let modelEntity = try? ModelEntity.loadModel(named: modelName) else {
+            print("Failed to load model")
+            return nil
+        }
+        
+        return modelEntity
     }
     
     func returnCopyOf(modelType: PreloadModelType) -> Entity? {

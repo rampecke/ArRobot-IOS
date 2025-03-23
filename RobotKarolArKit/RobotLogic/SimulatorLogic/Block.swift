@@ -44,6 +44,26 @@ class Block: Codable {
             blockEntity = newStoneBlock
         }
         
+        if isTransparent {
+            if #available(iOS 18.0, *) {
+                let opacityComponent = OpacityComponent(opacity: 0.5)
+                blockEntity.components.set(opacityComponent)
+            } else {
+                //Not a nice way, but there is no other option in realityKit before iOS18
+                if let modelEntity = blockEntity as? ModelEntity {
+                    var materials = modelEntity.model?.materials ?? []
+                    for (index, material) in materials.enumerated() {
+                        if var pbMaterial = material as? PhysicallyBasedMaterial {
+                            pbMaterial.blending = .transparent(opacity: .init(floatLiteral: 0.5))
+                            materials[index] = pbMaterial
+                        }
+                    }
+                    
+                    modelEntity.model?.materials = materials
+                }
+            }
+        }
+        
         blockEntity.scale =  SIMD3<Float>(tileWidth/2, tileWidth/2, tileWidth/2)
         blockEntity.position = [tileWidth*Float(position.0), tileHight + Float(blockNumber) * tileWidth,tileWidth*Float(position.1)]
         
