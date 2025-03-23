@@ -23,7 +23,7 @@ struct NonArView: View {
                     } else if viewModel.executionVisitor.finishedExecution {
                         ExecutionStatusLable(executionMessage: nil, lableType: .sucessfull, longMessage: true)
                     }
-                }.background(.clear)
+                }.padding().background(.clear)
             } else {
                 ArViewControlBar(viewModel: viewModel)
             }

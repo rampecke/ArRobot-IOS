@@ -14,7 +14,10 @@ class CodeEditorViewModel {
     var allExpressions: [Expression] = [IsEast(), IsWest(), IsNorth(), IsSouth(), IsBlock(), IsBorder(), And(), Or(), Not()]
     var bottomBarTargeted = false
     
-    var world = World(width: 6, length: 6)
+    //TODO: Maybe even to model
+    var arModelLoader: ArModelLoader
+    
+    var world: World
     var executionVisitor: ExecutionVisitor
     var executionSpeed: PlaySpeed = .normal
     var arType: ARType = ARType.AR
@@ -32,10 +35,12 @@ class CodeEditorViewModel {
     
     init(project: Project = Project()) {
         let newWorld: World
+        let loader = ArModelLoader()
+        self.arModelLoader = loader
         if let exercise = project.exercise {
-            newWorld = World(width: project.worldWidth, length: project.worldLength, exerciseTiles: exercise.solutionTiles)
+            newWorld = World(width: project.worldWidth, length: project.worldLength, exerciseTiles: exercise.solutionTiles, arModelLoader: loader)
         } else {
-            newWorld = World(width: project.worldWidth, length: project.worldLength)
+            newWorld = World(width: project.worldWidth, length: project.worldLength, arModelLoader: loader)
         }
         self.world = newWorld
         self.executionVisitor = ExecutionVisitor(world: newWorld)

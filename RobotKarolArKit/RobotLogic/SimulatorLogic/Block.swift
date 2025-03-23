@@ -14,10 +14,12 @@ class Block: Codable {
     var blockTyp: BlockTyp
     var blockEntity: Entity = Entity()
     var blockNumber: Int
+    var arModelLoader: ArModelLoader
     
-    init(blockTyp: BlockTyp, blockNumber: Int) {
+    init(blockTyp: BlockTyp, blockNumber: Int, arModelLoader: ArModelLoader) {
         self.blockTyp = blockTyp
         self.blockNumber = blockNumber
+        self.arModelLoader = arModelLoader
     }
     
     func createArBlock(position: (Int, Int), tileWidth: Float, tileHight: Float, worldEntity: Entity, isTransparent: Bool = false) {
@@ -80,6 +82,7 @@ class Block: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.blockTyp = try container.decode(BlockTyp.self, forKey: .blockType)
         self.blockNumber = try container.decode(Int.self, forKey: .blockNumber)
+        self.arModelLoader = ArModelLoader()
     }
 
     func encode(to encoder: Encoder) throws {

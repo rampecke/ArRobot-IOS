@@ -10,7 +10,29 @@ import RealityKit
 
 @Observable
 class Tile: Codable, Equatable {
-    private var blocks: [Block] = []
+    private var blocks: [Block]
+    var arModelLoader: ArModelLoader
+    
+    init(arModelLoader: ArModelLoader, blocks: [Block] = []) {
+        self.blocks = blocks
+        self.arModelLoader = arModelLoader
+    }
+    
+    //Decode and Encode
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.blocks = try container.decode([Block].self, forKey: .blocks)
+        self.arModelLoader = ArModelLoader()
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(blocks, forKey: .blocks)
+    }
+
+    private enum CodingKeys: String, CodingKey {
+        case blocks
+    }
     
     static func == (lhs: Tile, rhs: Tile) -> Bool {
         guard lhs.blocks.count == rhs.blocks.count else { return false }
@@ -29,13 +51,13 @@ class Tile: Codable, Equatable {
     }
     
     func addBlock(_ block: BlockTyp, tileWidth: Float, tileHight: Float, worldEntity: Entity, tilePosition: (Int, Int)) {
-        let newBlock = Block(blockTyp: block, blockNumber: self.blocks.count)
+        let newBlock = Block(blockTyp: block, blockNumber: self.blocks.count, arModelLoader: arModelLoader)
         newBlock.createArBlock(position: tilePosition, tileWidth: tileWidth, tileHight: tileHight, worldEntity: worldEntity)
         blocks.append(newBlock)
     }
     
     func addBlockWithoutAR(_ block: BlockTyp) {
-        let newBlock = Block(blockTyp: block, blockNumber: self.blocks.count)
+        let newBlock = Block(blockTyp: block, blockNumber: self.blocks.count, arModelLoader: arModelLoader)
         blocks.append(newBlock)
     }
     
