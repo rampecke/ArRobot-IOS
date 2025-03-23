@@ -63,6 +63,7 @@
 		A0B055392D8F86050067FE86 /* WaterBlockVersion1.usdz in Resources */ = {isa = PBXBuildFile; fileRef = A0B055382D8F86050067FE86 /* WaterBlockVersion1.usdz */; };
 		A0B0553B2D8F8B1A0067FE86 /* StoneBlockVersion1.usdz in Resources */ = {isa = PBXBuildFile; fileRef = A0B0553A2D8F8B1A0067FE86 /* StoneBlockVersion1.usdz */; };
 		A0B0558D2D90ABA80067FE86 /* ArPlacementMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B0558C2D90ABA80067FE86 /* ArPlacementMenu.swift */; };
+		A0B055C72D90B8C00067FE86 /* Placer.usdz in Resources */ = {isa = PBXBuildFile; fileRef = A0B055C62D90B8C00067FE86 /* Placer.usdz */; };
 		A0B36C662D7AE5AF005F33F0 /* AddExpressionIntoEmptyVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B36C652D7AE5AF005F33F0 /* AddExpressionIntoEmptyVisitor.swift */; };
 		A0B36C7F2D7B4423005F33F0 /* StatementDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B36C7E2D7B4423005F33F0 /* StatementDTO.swift */; };
 		A0B36C812D7B4CC7005F33F0 /* ExpressionDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B36C802D7B4CC7005F33F0 /* ExpressionDTO.swift */; };
@@ -134,6 +135,7 @@
 		A0B055382D8F86050067FE86 /* WaterBlockVersion1.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = WaterBlockVersion1.usdz; sourceTree = "<group>"; };
 		A0B0553A2D8F8B1A0067FE86 /* StoneBlockVersion1.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = StoneBlockVersion1.usdz; sourceTree = "<group>"; };
 		A0B0558C2D90ABA80067FE86 /* ArPlacementMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArPlacementMenu.swift; sourceTree = "<group>"; };
+		A0B055C62D90B8C00067FE86 /* Placer.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = Placer.usdz; sourceTree = "<group>"; };
 		A0B36C652D7AE5AF005F33F0 /* AddExpressionIntoEmptyVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpressionIntoEmptyVisitor.swift; sourceTree = "<group>"; };
 		A0B36C7E2D7B4423005F33F0 /* StatementDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatementDTO.swift; sourceTree = "<group>"; };
 		A0B36C802D7B4CC7005F33F0 /* ExpressionDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionDTO.swift; sourceTree = "<group>"; };
@@ -383,6 +385,7 @@
 				A0B055302D8F7F160067FE86 /* GrasBlockVersion3.usdz */,
 				A0B055342D8F828A0067FE86 /* GrasBlockVersion4.usdz */,
 				A0B0553A2D8F8B1A0067FE86 /* StoneBlockVersion1.usdz */,
+				A0B055C62D90B8C00067FE86 /* Placer.usdz */,
 			);
 			path = ArResources;
 			sourceTree = "<group>";
@@ -471,6 +474,7 @@
 				A0B055312D8F7F160067FE86 /* GrasBlockVersion3.usdz in Resources */,
 				A0B055392D8F86050067FE86 /* WaterBlockVersion1.usdz in Resources */,
 				A06BD7C72BAE9F4F00863CA5 /* Assets.xcassets in Resources */,
+				A0B055C72D90B8C00067FE86 /* Placer.usdz in Resources */,
 				A02B6AA22C14BA0F00CAFF82 /* Localizable.xcstrings in Resources */,
 				A0B0550F2D8E3F250067FE86 /* RobotVersion1.usdz in Resources */,
 				A0B055352D8F828A0067FE86 /* GrasBlockVersion4.usdz in Resources */,

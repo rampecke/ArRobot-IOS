@@ -88,9 +88,17 @@ struct ARViewContainer: UIViewRepresentable {
 
         func createPlacementIndicator() -> AnchorEntity {
             let anchor = AnchorEntity()
-            let box = ModelEntity(mesh: .generateBox(width: 0.05, height: 0.001, depth: 0.05), materials: [SimpleMaterial(color: .white, roughness: 0.5, isMetallic: false)])
-            box.generateCollisionShapes(recursive: true)
-            anchor.addChild(box)
+            
+            guard let placer = try? ModelEntity.loadModel(named: "Placer") else {
+                print("Failed to load model")
+                
+                let box = ModelEntity(mesh: .generateSphere(radius: 0.001), materials: [SimpleMaterial(color: .white, roughness: 0.5, isMetallic: false)])
+                anchor.addChild(box)
+                return anchor
+            }
+            
+            placer.scale *= 3
+            anchor.addChild(placer)
             return anchor
         }
 
