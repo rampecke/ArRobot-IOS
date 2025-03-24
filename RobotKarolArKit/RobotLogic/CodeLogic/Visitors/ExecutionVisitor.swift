@@ -13,6 +13,7 @@ class ExecutionVisitor: Visitor {
     var endExecution: Bool = false
     var executionMessage: String? = nil
     var finishedExecution = false
+    
     var lastExecuted: (any Instruction) = Step()
     
     init(world: World) {
