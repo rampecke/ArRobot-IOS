@@ -9,6 +9,7 @@ import SwiftUI
 
 struct InstructionAddBar: View {
     @Bindable var viewModel: CodeEditorViewModel
+    @State var selectedInstructionCategory: InstructionTypes = .Instruction
     
     let columns = [
             GridItem(.flexible()),
@@ -31,49 +32,105 @@ struct InstructionAddBar: View {
                         .cornerRadius(10)
                 }.frame(maxWidth: .infinity, maxHeight: .infinity)
             } else {
-                ScrollView {
-                    LazyVGrid(columns: columns, spacing: 10) {
-                        ForEach($viewModel.allStatements, id: \.id) { $instruction in
-                            InstructionAddTile(instruction: instruction).frame(height: 90).onTapGesture(perform: {
-                                viewModel.createNewStatement(statement: instruction)
-                            }).contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
-                                .draggable(instruction){
-                                    CodeLine(instruction: instruction, CodeLineType.CodeLine)
-                                        .onAppear {
-                                            viewModel.dragNewStatement()
-                                        }
-                                        .contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
-                                }
+                HStack {
+                    Picker("Add instruction", selection: $selectedInstructionCategory) {
+                        ForEach(InstructionTypes.allCases, id: \.self) { instructionCategory in
+                            Text(LocalizedStringKey(instructionCategory.rawValue))
+                                .font(.system(size: 14, weight: .semibold))
+                                .foregroundColor(Color("onContrast_color"))
+                                .tag(instructionCategory)
                         }
+                    }.pickerStyle(.segmented)
+                        .background(
+                            Color("onContrast_color").opacity(0.3)
+                        )
+                        .clipShape(
+                         .rect(
+                             topLeadingRadius: 10,
+                             bottomLeadingRadius: 10,
+                             bottomTrailingRadius: 10,
+                             topTrailingRadius: 10
+                         )
+                        )
+                        .frame(width: 400)
+                    
+                    Spacer()
+                    
+                    HStack (alignment: .bottom) {
+                        Spacer()
+                        ControllbarButton(title: "Delete code", icon: "delete.left", action: {
+                            viewModel.resetCode()
+                        }, notInArView: true).frame(height: 30)
+                    }
+                }.padding(.vertical, 6)
+                    .padding(.horizontal, 10)
+                    .background(
+                        Color("onContrast_color").opacity(0.1)
+                    )
+                
+                TabView {
+                    if selectedInstructionCategory == .Instruction {
+                        ForEach(Array($viewModel.allStatementsAsChunks.enumerated()), id: \.offset) { index, $chunk in
+                            HStack {
+                                ForEach($chunk, id: \.id) { $instruction in
+                                    VStack {
+                                        InstructionAddTile(instruction: instruction).frame(height: 90).onTapGesture(perform: {
+                                            viewModel.createNewStatement(statement: instruction)
+                                        }).contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
+                                            .draggable(instruction){
+                                                CodeLine(instruction: instruction, CodeLineType.CodeLine)
+                                                    .onAppear {
+                                                        viewModel.dragNewStatement()
+                                                    }
+                                                    .contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
+                                            }
+                                        Spacer()
+                                    }
+                                }
+                            }.padding(.top, 3)
+                        }
+                    } else if selectedInstructionCategory == .ControlFlow {
                         ForEach($viewModel.allControllFlow, id: \.id) { $instruction in
-                            InstructionAddTile(instruction: instruction).frame(height: 90).onTapGesture(perform: {
-                                viewModel.createNewStatement(statement: instruction)
-                            }).contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
-                                .draggable(instruction){
-                                    CodeLineControllFlow(instruction: instruction, viewModel: viewModel)
-                                        .onAppear {
-                                            viewModel.dragNewStatement()
-                                        }
-                                        .contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
-                                }
+                            VStack {
+                                InstructionAddTile(instruction: instruction).frame(height: 90).onTapGesture(perform: {
+                                    viewModel.createNewStatement(statement: instruction)
+                                }).contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
+                                    .draggable(instruction){
+                                        CodeLineControllFlow(instruction: instruction, viewModel: viewModel)
+                                            .onAppear {
+                                                viewModel.dragNewStatement()
+                                            }
+                                            .contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
+                                    }
+                                
+                                Spacer()
+                            }.padding(.top, 3)
                         }
+                    } else if selectedInstructionCategory == .Condition {
                         ForEach($viewModel.allExpressions, id: \.id) { $instruction in
-                            InstructionAddTile(instruction: instruction).frame(height: 90).onTapGesture(perform: {
-                                viewModel.addNewExpressionAtNextEmptyPosition(expression: instruction)
-                            }).contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
-                                .draggable(instruction){
-                                    ExpressionPiece(expression: instruction, viewModel: viewModel)
-                                        .onAppear {
-                                            viewModel.dragNewExpression()
-                                        }
-                                        .contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
-                                }
+                            VStack {
+                                InstructionAddTile(instruction: instruction).frame(height: 90).onTapGesture(perform: {
+                                    viewModel.addNewExpressionAtNextEmptyPosition(expression: instruction)
+                                }).contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
+                                    .draggable(instruction){
+                                        ExpressionPiece(expression: instruction, viewModel: viewModel)
+                                            .onAppear {
+                                                viewModel.dragNewExpression()
+                                            }
+                                            .contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
+                                    }
+                                Spacer()
+                            }.padding(.top, 3)
                         }
-                    }.padding(.horizontal, 10)
-                }
+                    }
+                }.tabViewStyle(.page)
+                    .indexViewStyle(.page(backgroundDisplayMode: .always))
+                    .frame(height: 136)
+                    .padding(.horizontal, 10)
             }
-        }.background(viewModel.bottomBarTargeted ? Color("contrast_color") : .clear) //needed because of dragArea
-        .frame(height: 150)
+        }
+        .background(viewModel.bottomBarTargeted ? Color("contrast_color") : .clear) //needed because of dragArea
+        .frame(height: 180)
         .if(viewModel.dragInstruction) { view in
             view.dropDestination(for: Statement.self) { items, _ in
                 guard let statement = items.first else { return false }
@@ -97,4 +154,10 @@ struct InstructionAddBar: View {
 
 #Preview {
     InstructionAddBar(viewModel: CodeEditorViewModel())
+}
+
+enum InstructionTypes: String, CaseIterable {
+    case Instruction = "Instructions"
+    case ControlFlow = "ControlFlows"
+    case Condition = "Conditions"
 }

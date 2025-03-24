@@ -23,26 +23,18 @@ struct CodeEditorView: View {
     var body: some View {
         VStack{
             HSplit(left: {
-                VStack{
-                    HStack (alignment: .bottom) {
-                        Spacer()
-                        ControllbarButton(title: "Delete code", icon: "delete.left", action: {
-                            viewModel.resetCode()
-                        }, notInArView: true).frame(height: 30)
-                    }.padding(.horizontal)
-                    ScrollView {
-                        VStack {
-                            if let exercise = viewModel.project.exercise {
-                                if !exercise.exerciseDescription.isEmpty {
-                                    Group {
-                                        Text(exercise.exerciseDescription)
-                                            .frame(maxWidth: .infinity, alignment: .leading)
-                                        Divider()
-                                    }.padding(.horizontal, 10)
-                                }
+                ScrollView {
+                    VStack {
+                        if let exercise = viewModel.project.exercise {
+                            if !exercise.exerciseDescription.isEmpty {
+                                Group {
+                                    Text(exercise.exerciseDescription)
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                    Divider()
+                                }.padding(.horizontal, 10)
                             }
-                            CodeBlockView(codeBlock: viewModel.project.codeBlock, viewModel: viewModel)
                         }
+                        CodeBlockView(codeBlock: viewModel.project.codeBlock, viewModel: viewModel)
                     }
                 }
             }, right: {
@@ -56,8 +48,6 @@ struct CodeEditorView: View {
             }).fraction(fraction)
                 .constraints(minPFraction: 0.4, minSFraction: 0.4, dragToHideP: true)
                 .styling(color: Color("card_border"))
-            
-            Divider()
             
             InstructionAddBar(viewModel: viewModel)
         }.onDisappear {
