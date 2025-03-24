@@ -89,7 +89,6 @@ class Block: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(blockTyp, forKey: .blockType)
         try container.encode(blockNumber, forKey: .blockNumber)
-        self.blockEntity = Entity()
     }
 
     private enum CodingKeys: String, CodingKey {

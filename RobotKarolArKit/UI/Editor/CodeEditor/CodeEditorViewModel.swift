@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import ARKit
+import RealityFoundation
 
 @Observable
 class CodeEditorViewModel {
@@ -32,6 +34,11 @@ class CodeEditorViewModel {
     
     //Makes DistanceChanges on the simulator possible
     var cameraDistance: Float = 1.0
+    
+    //Save WorldMap
+    var savedWorldMap: ARWorldMap?
+    var worldAnchor: AnchorEntity?
+    var wasPlaced: Bool = false
     
     init(project: Project = Project()) {
         let newWorld: World
