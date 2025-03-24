@@ -106,7 +106,7 @@ struct NonARViewContainer: UIViewRepresentable {
         
         // Zoom Limits
         private let minCameraDistance: Float = 0.2
-        private let maxCameraDistance: Float = 2.5
+        private let maxCameraDistance: Float = 3.5
         
         init(cameraDistance: Binding<Float>) {
             _cameraDistance = cameraDistance
@@ -140,7 +140,6 @@ struct NonARViewContainer: UIViewRepresentable {
         @objc func handlePinch(_ gesture: UIPinchGestureRecognizer) {
             guard let cameraAnchor = cameraAnchor else { return }
 
-            let zoomSpeed: Float = 0.1
             let newDistance = cameraDistance / Float(gesture.scale)  // Scale-based zooming
 
             // Clamp to avoid too much zoom in/out

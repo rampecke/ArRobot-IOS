@@ -47,6 +47,10 @@ class World {
         self.length
     }
     
+    func getWidth() -> Int {
+        self.width
+    }
+    
     func getTiles() -> [[Tile]] {
         self.tiles
     }
