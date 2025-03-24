@@ -605,6 +605,16 @@
         }
       }
     },
+    "Move your device to find a surface" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bewege dein Gerät um eine Oberfläche zu finden"
+          }
+        }
+      }
+    },
     "Name" : {
       "localizations" : {
         "de" : {
@@ -712,6 +722,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Checks if one of two expressions is true"
+          }
+        }
+      }
+    },
+    "Place board" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Platziere Bord"
           }
         }
       }
@@ -1107,6 +1128,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Art"
+          }
+        }
+      }
+    },
+    "Use simulator" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nutze Simulator"
           }
         }
       }

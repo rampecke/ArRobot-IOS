@@ -10,16 +10,16 @@ import RealityKit
 
 @Observable
 class Robot {
-    private var facingDirection: Direction
-    private var position: (Int, Int)
+    @ObservationIgnored private var facingDirection: Direction
+    @ObservationIgnored private var position: (Int, Int)
     
     private var robotEntity: Entity = Entity()
-    private let robotWidth: Float = 0.03
-    private let robotHeight: Float = 0.08
+    var arModelLoader: ArModelLoader
     
-    init(facingDirection: Direction, position: (Int, Int)) {
+    init(facingDirection: Direction, position: (Int, Int), arModelLoader: ArModelLoader) {
         self.facingDirection = facingDirection
         self.position = position
+        self.arModelLoader = arModelLoader
     }
     
     func getPosition() -> (Int, Int) {
@@ -34,7 +34,7 @@ class Robot {
         position = positionInFront()
         //Move ArEntity
         //TODO: move instead of new position
-        robotEntity.position = [tileWidth*Float(position.0),robotHeight/2 + tileHight + (tileWidth * Float(tilesInFront)),tileWidth*Float(position.1)]
+        robotEntity.position = [tileWidth*Float(position.0), tileHight + (tileWidth * Float(tilesInFront)),tileWidth*Float(position.1)]
     }
     
     func stepWithoutAr() {
@@ -119,21 +119,18 @@ class Robot {
     }
     
     func createArRobot(tileWidth: Float, tileHeight: Float, worldEntity: Entity) {
-        //TODO: Instead use a model
-        let robotMesh = MeshResource.generateBox(width: robotWidth, height: robotHeight, depth: robotWidth)
-        let robotMaterial = SimpleMaterial(color: .blue, isMetallic: false)
-        robotEntity = ModelEntity(mesh: robotMesh, materials: [robotMaterial])
+        guard let newRobotEntity = arModelLoader.returnCopyOf(modelType: .robot) else {
+            return
+        }
         
-        //Face
-        let robotFaceMesh = MeshResource.generateBox(width: robotWidth, height: robotHeight/2, depth: 0.001)
-        let robotFaceMaterial = SimpleMaterial(color: .yellow, isMetallic: false)
-        let robotFaceEntity = ModelEntity(mesh: robotFaceMesh, materials: [robotFaceMaterial])
-        
-        robotEntity.position = [tileWidth*Float(position.0),robotHeight/2 + tileHeight,tileWidth*Float(position.1)]
-        robotFaceEntity.position = [tileWidth*Float(position.0),(robotHeight/2)/2 + tileHeight ,tileWidth*Float(position.1) + robotWidth/2]
-        robotEntity.addChild(robotFaceEntity)
-        
+        robotEntity = newRobotEntity
+        robotEntity.scale *= 3
+        robotEntity.position = [tileWidth*Float(position.0),tileHeight,tileWidth*Float(position.1)]
         worldEntity.addChild(robotEntity)
+        
+        if let animation = robotEntity.availableAnimations.first {
+            robotEntity.playAnimation(animation.repeat(), transitionDuration: 0.5)
+        }
     }
     
     func deleteRoboEntities() {
@@ -141,7 +138,7 @@ class Robot {
     }
     
     func drawRobotAtPosition(tileWidth: Float, tileHight: Float, tilesOnMyPosition: Int) {
-        robotEntity.position = [tileWidth*Float(self.position.0),robotHeight/2 + tileHight + (tileWidth * Float(tilesOnMyPosition)),tileWidth*Float(self.position.1)]
+        robotEntity.position = [tileWidth*Float(self.position.0), tileHight + (tileWidth * Float(tilesOnMyPosition)),tileWidth*Float(self.position.1)]
         turnRoboInFacingDirection()
     }
     

@@ -21,18 +21,21 @@ class World {
     var worldEntity: Entity = Entity()
     var arWorldWasCreated: Bool = false
     
+    var arModelLoader: ArModelLoader
+    
     var exerciseTiles: [[Tile]]
     
-    init(width: Int, length: Int, exerciseTiles: [[Tile]] = [[]]) {
+    init(width: Int, length: Int, exerciseTiles: [[Tile]] = [[]], arModelLoader: ArModelLoader) {
         self.width = width
         self.length = length
-        self.robot = Robot(facingDirection: Direction.SOUTH, position: (0,0))
+        self.robot = Robot(facingDirection: Direction.SOUTH, position: (0,0), arModelLoader: arModelLoader)
+        self.arModelLoader = arModelLoader
         
         var createTiles : [[Tile]]  = []
         for _ in 0..<width {
             var tilesRow: [Tile] = []
             for _ in 0..<length {
-                tilesRow.append(Tile())
+                tilesRow.append(Tile(arModelLoader: arModelLoader))
             }
             createTiles.append(tilesRow)
         }
@@ -42,6 +45,10 @@ class World {
     
     func getLength() -> Int {
         self.length
+    }
+    
+    func getWidth() -> Int {
+        self.width
     }
     
     func getTiles() -> [[Tile]] {
@@ -74,7 +81,7 @@ class World {
         for _ in 0..<width {
             var tilesRow: [Tile] = []
             for _ in 0..<length {
-                tilesRow.append(Tile())
+                tilesRow.append(Tile(arModelLoader: arModelLoader))
             }
             createTiles.append(tilesRow)
         }
@@ -193,7 +200,7 @@ class World {
         return true
     }
     
-    func turnRightWithoutAr() -> Bool {
+    func turnRightWithoutAR() -> Bool {
         robot.turnRightWithoutAr()
         return true
     }
@@ -257,7 +264,7 @@ class World {
         let anchor = worldEntity.anchor
         
         //Reset Robot and Field
-        self.robot = Robot(facingDirection: Direction.SOUTH, position: (0,0))
+        self.robot = Robot(facingDirection: Direction.SOUTH, position: (0,0), arModelLoader: arModelLoader)
         self.tiles = createTiles()
         
         //Reset ArWorld

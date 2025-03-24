@@ -83,7 +83,7 @@ class CopyCodeBlockVisitor: Visitor {
     }
     
     func visit(whileInstruction: While) {
-        let whileInstructionCopy = If()
+        let whileInstructionCopy = While()
         
         let copyExpression = CopyCodeBlockVisitor()
         whileInstruction.expression.accept(visitor: copyExpression)

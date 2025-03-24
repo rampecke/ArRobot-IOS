@@ -12,7 +12,6 @@ import RealityFoundation
 class ExerciseEditorViewModel: CodeEditorViewModel {
     private var exercise: Exercise
     var draftExercise: Exercise
-    var queue = DispatchQueue(label: "com.ramonaeckert.executeTask")
     
     var cameraAnchor = AnchorEntity()
     
@@ -48,12 +47,10 @@ class ExerciseEditorViewModel: CodeEditorViewModel {
     }
     
     func executeAllWithoutDispatcher() {
-        queue.async {
-            self.executeNextWithoutDispatcher()
-        }
+        self.executeNextWithoutDispatcher()
     }
     
-    private func executeNextWithoutDispatcher(maxCalls: Int = 10000) {
+    private func executeNextWithoutDispatcher(maxCalls: Int = 1000) {
         executionStartedRunning = true
         var callCounter = 0
             
@@ -72,9 +69,7 @@ class ExerciseEditorViewModel: CodeEditorViewModel {
         
         //If execution ended for whatever reason draw the world
         if executionVisitor.endExecution || executionVisitor.finishedExecution || callCounter == maxCalls {
-            DispatchQueue.main.asyncAndWait {
-                self.world.drawWorldState()
-            }
+            self.world.drawWorldState()
         }
     }
     

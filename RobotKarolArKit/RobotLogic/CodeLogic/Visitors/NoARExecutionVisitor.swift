@@ -17,7 +17,7 @@ class NoARExecutionVisitor: ExecutionVisitor {
     }
     
     override func visit(rightTurn: RightTurn) {
-        endExecution = !world.turnRightWithoutAr()
+        endExecution = !world.turnRightWithoutAR()
         
         setExecutionMessage(for: "turnRight")
         

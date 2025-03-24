@@ -23,7 +23,7 @@ struct NonArView: View {
                     } else if viewModel.executionVisitor.finishedExecution {
                         ExecutionStatusLable(executionMessage: nil, lableType: .sucessfull, longMessage: true)
                     }
-                }.background(.clear)
+                }.padding().background(.clear)
             } else {
                 ArViewControlBar(viewModel: viewModel)
             }
@@ -71,6 +71,10 @@ struct NonARViewContainer: UIViewRepresentable {
         let panGesture = UIPanGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.handlePan(_:)))
         arView.addGestureRecognizer(panGesture)
         
+        //Add pinch Gesture for zooming in and out
+        let pinchGesture = UIPinchGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.handlePinch(_:)))
+        arView.addGestureRecognizer(pinchGesture)
+        
         if let exerciseEditorViewModel = viewModel as? ExerciseEditorViewModel {
             exerciseEditorViewModel.reset()
             exerciseEditorViewModel.executeAllWithoutDispatcher()
@@ -85,6 +89,10 @@ struct NonARViewContainer: UIViewRepresentable {
     func updateUIView(_ uiView: ARView, context: Context) {
     }
     
+    static func dismantleUIView(_ uiView: ARView, coordinator: Coordinator) {
+       uiView.session.pause() // Stop AR session when the view is removed
+   }
+    
     func makeCoordinator() -> Coordinator {
         return Coordinator(cameraDistance: $cameraDistance)
     }
@@ -95,6 +103,10 @@ struct NonARViewContainer: UIViewRepresentable {
         @Binding var cameraDistance: Float
         private var currentYaw: Float = 0       // Horizontal rotation (Y-axis)
         private var currentPitch: Float = 0.5  // Vertical rotation (X-axis)
+        
+        // Zoom Limits
+        private let minCameraDistance: Float = 0.2
+        private let maxCameraDistance: Float = 3.5
         
         init(cameraDistance: Binding<Float>) {
             _cameraDistance = cameraDistance
@@ -123,6 +135,24 @@ struct NonARViewContainer: UIViewRepresentable {
                 currentYaw = newYaw
                 currentPitch = clampedPitch
             }
+        }
+        
+        @objc func handlePinch(_ gesture: UIPinchGestureRecognizer) {
+            guard let cameraAnchor = cameraAnchor else { return }
+
+            let newDistance = cameraDistance / Float(gesture.scale)  // Scale-based zooming
+
+            // Clamp to avoid too much zoom in/out
+            cameraDistance = max(minCameraDistance, min(maxCameraDistance, newDistance))
+
+            let x = cameraDistance * cos(currentPitch) * sin(currentYaw)
+            let y = cameraDistance * sin(currentPitch)
+            let z = cameraDistance * cos(currentPitch) * cos(currentYaw)
+
+            cameraAnchor.position = [x, y, z]
+            cameraAnchor.look(at: [0, 0, 0], from: cameraAnchor.position, relativeTo: nil)
+
+            gesture.scale = 1.0  // Reset scale after applying zoom
         }
     }
     

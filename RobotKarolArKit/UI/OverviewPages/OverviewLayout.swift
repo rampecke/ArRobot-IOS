@@ -19,7 +19,7 @@ struct OverviewLayout<Content: View>: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
-                Divider().padding(.bottom, 10)
+                Divider().padding(.bottom, 5)
                 HStack {
                     Spacer()
                     Picker("Sorting", selection: $sortingTag) {
@@ -35,8 +35,9 @@ struct OverviewLayout<Content: View>: View {
                 LazyVGrid(columns: columns, spacing: 30) {
                     content()
                 }.padding()
-            }.padding()
-        }.navigationTitle(title)
+                
+            }
+        }.navigationTitle(LocalizedStringKey(title))
     }
 }
 
