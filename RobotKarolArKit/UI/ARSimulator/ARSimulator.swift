@@ -46,7 +46,6 @@ struct ARViewContainer: UIViewRepresentable {
         config.planeDetection = [.horizontal]
         if viewModel.savedWorldMap != nil {
             config.initialWorldMap = viewModel.savedWorldMap
-            print("was restored")
         }
         arView.session.run(config, options: [.resetTracking, .removeExistingAnchors])
 
@@ -108,8 +107,6 @@ struct ARViewContainer: UIViewRepresentable {
 
         func confirmPlacement() {
             if parent.viewModel.savedWorldMap != nil {
-                print("place world")
-                
                 guard let anchor = parent.viewModel.worldAnchor, let arView = arView else { return }
                 parent.world.anchorWorld(arView: arView, anchor: anchor)
                 confirmedAnchor = anchor
@@ -118,6 +115,7 @@ struct ARViewContainer: UIViewRepresentable {
                 
                 return
             }
+            
             guard let arView = arView, let placementIndicator = placementIndicator else { return }
             
             let anchor = AnchorEntity(world: placementIndicator.position)
