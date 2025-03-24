@@ -16,8 +16,6 @@ class CodeEditorViewModel {
     var allExpressions: [Expression] = [IsEast(), IsWest(), IsNorth(), IsSouth(), IsBlock(), IsBorder(), And(), Or(), Not()]
     var bottomBarTargeted = false
     
-    var allStatementsAsChunks : [[Statement]]
-    
     //TODO: Maybe even to model
     var arModelLoader: ArModelLoader
     
@@ -54,14 +52,6 @@ class CodeEditorViewModel {
         self.world = newWorld
         self.executionVisitor = ExecutionVisitor(world: newWorld)
         self.project = project
-        
-        //Set the stements
-        let chunkSize = 3
-        let statementList = [Step(), Lift(), RightTurn(), LeftTurn(), PlaceGrass(), PlaceStone(), PlaceWater()]
-        self.allStatements = statementList
-        self.allStatementsAsChunks = stride(from: 0, to: statementList.count, by: chunkSize).map {
-            Array(statementList[$0..<min($0 + chunkSize, statementList.count)])
-        }
     }
     
     //Whenever we start a drag we need to call one of these to make sure our dragging states are set correctly

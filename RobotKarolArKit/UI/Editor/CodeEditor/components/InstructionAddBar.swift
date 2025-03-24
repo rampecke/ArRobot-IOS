@@ -70,23 +70,19 @@ struct InstructionAddBar: View {
                 
                 TabView {
                     if selectedInstructionCategory == .Instruction {
-                        ForEach(Array($viewModel.allStatementsAsChunks.enumerated()), id: \.offset) { index, $chunk in
-                            HStack {
-                                ForEach($chunk, id: \.id) { $instruction in
-                                    VStack {
-                                        InstructionAddTile(instruction: instruction).frame(height: 90).onTapGesture(perform: {
-                                            viewModel.createNewStatement(statement: instruction)
-                                        }).contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
-                                            .draggable(instruction){
-                                                CodeLine(instruction: instruction, CodeLineType.CodeLine)
-                                                    .onAppear {
-                                                        viewModel.dragNewStatement()
-                                                    }
-                                                    .contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
+                        ForEach($viewModel.allStatements, id: \.id) { $instruction in
+                            VStack {
+                                InstructionAddTile(instruction: instruction).frame(height: 90).onTapGesture(perform: {
+                                    viewModel.createNewStatement(statement: instruction)
+                                }).contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
+                                    .draggable(instruction){
+                                        CodeLine(instruction: instruction, CodeLineType.CodeLine)
+                                            .onAppear {
+                                                viewModel.dragNewStatement()
                                             }
-                                        Spacer()
+                                            .contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
                                     }
-                                }
+                                Spacer()
                             }.padding(.top, 3)
                         }
                     } else if selectedInstructionCategory == .ControlFlow {
