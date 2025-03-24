@@ -196,7 +196,7 @@ class World {
         return true
     }
     
-    func turnRightWithoutAr() -> Bool {
+    func turnRightWithoutAR() -> Bool {
         robot.turnRightWithoutAr()
         return true
     }

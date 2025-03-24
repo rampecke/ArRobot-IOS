@@ -10,8 +10,8 @@ import RealityKit
 
 @Observable
 class Robot {
-    private var facingDirection: Direction
-    private var position: (Int, Int)
+    @ObservationIgnored private var facingDirection: Direction
+    @ObservationIgnored private var position: (Int, Int)
     
     private var robotEntity: Entity = Entity()
     var arModelLoader: ArModelLoader
