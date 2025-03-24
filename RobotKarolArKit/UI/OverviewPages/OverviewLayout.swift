@@ -35,8 +35,9 @@ struct OverviewLayout<Content: View>: View {
                 LazyVGrid(columns: columns, spacing: 30) {
                     content()
                 }.padding()
+                
             }
-        }.navigationTitle(title)
+        }.navigationTitle(LocalizedStringKey(title))
     }
 }
 
