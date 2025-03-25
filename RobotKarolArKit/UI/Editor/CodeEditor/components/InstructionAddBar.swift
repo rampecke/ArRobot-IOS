@@ -9,7 +9,10 @@ import SwiftUI
 
 struct InstructionAddBar: View {
     @Bindable var viewModel: CodeEditorViewModel
-    @State var selectedInstructionCategory: InstructionTypes = .Instruction
+    @State var selectionValue: Int = 0
+    
+    @State var selectedIndex = 0
+    @State var selectedStatement: [Statement] = []
     
     let columns = [
             GridItem(.flexible()),
@@ -33,24 +36,24 @@ struct InstructionAddBar: View {
                 }.frame(maxWidth: .infinity, maxHeight: .infinity)
             } else {
                 HStack {
-                    Picker("Add instruction", selection: $selectedInstructionCategory) {
-                        ForEach(InstructionTypes.allCases, id: \.self) { instructionCategory in
+                    Picker("Add instruction", selection: $selectionValue) {
+                        ForEach(Array(InstructionTypes.allCases.enumerated()), id: \.element) { index, instructionCategory in
                             Text(LocalizedStringKey(instructionCategory.rawValue))
                                 .font(.system(size: 14, weight: .semibold))
                                 .foregroundColor(Color("onContrast_color"))
-                                .tag(instructionCategory)
+                                .tag(index)
                         }
                     }.pickerStyle(.segmented)
                         .background(
                             Color("onContrast_color").opacity(0.3)
                         )
                         .clipShape(
-                         .rect(
-                             topLeadingRadius: 10,
-                             bottomLeadingRadius: 10,
-                             bottomTrailingRadius: 10,
-                             topTrailingRadius: 10
-                         )
+                            .rect(
+                                topLeadingRadius: 10,
+                                bottomLeadingRadius: 10,
+                                bottomTrailingRadius: 10,
+                                topTrailingRadius: 10
+                            )
                         )
                         .frame(width: 400)
                     
@@ -68,61 +71,73 @@ struct InstructionAddBar: View {
                         Color("onContrast_color").opacity(0.1)
                     )
                 
-                TabView {
-                    if selectedInstructionCategory == .Instruction {
-                        ForEach($viewModel.allStatements, id: \.id) { $instruction in
-                            VStack {
-                                InstructionAddTile(instruction: instruction).frame(height: 90).onTapGesture(perform: {
-                                    viewModel.createNewStatement(statement: instruction)
-                                }).contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
-                                    .draggable(instruction){
-                                        CodeLine(instruction: instruction, CodeLineType.CodeLine)
-                                            .onAppear {
-                                                viewModel.dragNewStatement()
+                Group{
+                    switch selectionValue {
+                    case 0:
+                        ScrollView {
+                            LazyVGrid(columns: columns){
+                                ForEach($viewModel.allStatements, id: \.id) { $instruction in
+                                    VStack {
+                                        InstructionAddTile(instruction: instruction).frame(height: 90).onTapGesture(perform: {
+                                            viewModel.createNewStatement(statement: instruction)
+                                        }).contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
+                                            .draggable(instruction){
+                                                CodeLine(instruction: instruction, CodeLineType.CodeLine)
+                                                    .onAppear {
+                                                        viewModel.dragNewStatement()
+                                                    }
+                                                    .contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
                                             }
-                                            .contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
-                                    }
-                                Spacer()
-                            }.padding(.top, 3)
+                                        Spacer()
+                                    }.padding(.top, 3)
+                                }
+                            }
                         }
-                    } else if selectedInstructionCategory == .ControlFlow {
-                        ForEach($viewModel.allControllFlow, id: \.id) { $instruction in
-                            VStack {
-                                InstructionAddTile(instruction: instruction).frame(height: 90).onTapGesture(perform: {
-                                    viewModel.createNewStatement(statement: instruction)
-                                }).contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
-                                    .draggable(instruction){
-                                        CodeLineControllFlow(instruction: instruction, viewModel: viewModel)
-                                            .onAppear {
-                                                viewModel.dragNewStatement()
+                    case 1:
+                        ScrollView {
+                            LazyVGrid(columns: columns){
+                                ForEach($viewModel.allControllFlow, id: \.id) { $instruction in
+                                    VStack {
+                                        InstructionAddTile(instruction: instruction).frame(height: 90).onTapGesture(perform: {
+                                            viewModel.createNewStatement(statement: instruction)
+                                        }).contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
+                                            .draggable(instruction){
+                                                CodeLineControllFlow(instruction: instruction, viewModel: viewModel)
+                                                    .onAppear {
+                                                        viewModel.dragNewStatement()
+                                                    }
+                                                    .contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
                                             }
-                                            .contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
-                                    }
-                                
-                                Spacer()
-                            }.padding(.top, 3)
+                                        
+                                        Spacer()
+                                    }.padding(.top, 3)
+                                }
+                            }
                         }
-                    } else if selectedInstructionCategory == .Condition {
-                        ForEach($viewModel.allExpressions, id: \.id) { $instruction in
-                            VStack {
-                                InstructionAddTile(instruction: instruction).frame(height: 90).onTapGesture(perform: {
-                                    viewModel.addNewExpressionAtNextEmptyPosition(expression: instruction)
-                                }).contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
-                                    .draggable(instruction){
-                                        ExpressionPiece(expression: instruction, viewModel: viewModel)
-                                            .onAppear {
-                                                viewModel.dragNewExpression()
+                    case 2:
+                        ScrollView {
+                            LazyVGrid(columns: columns){
+                                ForEach($viewModel.allExpressions, id: \.id) { $instruction in
+                                    VStack {
+                                        InstructionAddTile(instruction: instruction).frame(height: 90).onTapGesture(perform: {
+                                            viewModel.addNewExpressionAtNextEmptyPosition(expression: instruction)
+                                        }).contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
+                                            .draggable(instruction){
+                                                ExpressionPiece(expression: instruction, viewModel: viewModel)
+                                                    .onAppear {
+                                                        viewModel.dragNewExpression()
+                                                    }
+                                                    .contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
                                             }
-                                            .contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
-                                    }
-                                Spacer()
-                            }.padding(.top, 3)
+                                        Spacer()
+                                    }.padding(.top, 3)
+                                }
+                            }
                         }
+                    default:
+                        EmptyView()
                     }
-                }.tabViewStyle(.page)
-                    .indexViewStyle(.page(backgroundDisplayMode: .always))
-                    .frame(height: 136)
-                    .padding(.horizontal, 10)
+                }.frame(height: 136).padding(.horizontal, 10)
             }
         }
         .background(viewModel.bottomBarTargeted ? Color("contrast_color") : .clear) //needed because of dragArea
