@@ -52,7 +52,7 @@ struct CodeEditorView: View {
                     }
                 }
             }).fraction(fraction)
-                .constraints(minPFraction: 0.4, minSFraction: 0.4, dragToHideP: true)
+                .constraints(minPFraction: 0.3, minSFraction: 0.4)
                 .styling(color: Color("card_border"))
             
             if !hideAddBar {

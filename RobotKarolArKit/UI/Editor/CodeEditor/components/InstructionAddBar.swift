@@ -70,13 +70,10 @@ struct InstructionAddBar: View {
                         Color("onContrast_color").opacity(0.1)
                     )
                 
-                FracturedSwipTabs(selectionValue: $selectionValue, allStatements: viewModel.allStatements, allCodeBlocks: viewModel.allControllFlow, allExpression: viewModel.allExpressions, viewModel: viewModel).frame(height: 136).padding(.horizontal, 10)
-                
-                Spacer()
+                FracturedSwipTabs(selectionValue: $selectionValue, allStatements: viewModel.allStatements, allCodeBlocks: viewModel.allControllFlow, allExpression: viewModel.allExpressions, viewModel: viewModel).padding(.horizontal, 10)
             }
         }
         .background(viewModel.bottomBarTargeted ? Color("contrast_color") : .clear) //needed because of dragArea
-        .frame(height: 180)
         .if(viewModel.dragInstruction) { view in
             view.dropDestination(for: Statement.self) { items, _ in
                 guard let statement = items.first else { return false }

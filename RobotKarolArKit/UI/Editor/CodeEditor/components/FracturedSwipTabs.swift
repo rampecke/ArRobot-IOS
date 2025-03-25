@@ -12,6 +12,12 @@ struct FracturedSwipTabs: View {
     @State var allStatementsFractured: [[Statement]]
     @State var allConstrollFlowFractured: [[CodeBlock]]
     @State var allExpressionsFractured: [[Expression]]
+    
+    @State var statementChunkIndex: Int = 0
+    @State var controllFlowChunkIndex: Int = 0
+    @State var expressionChunkIndex: Int = 0
+    
+    
     @Bindable var viewModel: CodeEditorViewModel
     
     let columns = [
@@ -40,9 +46,9 @@ struct FracturedSwipTabs: View {
     var body: some View {
         switch selectionValue {
         case 0:
-            TabView {
-                ForEach(Array($allStatementsFractured.enumerated()), id: \.offset) { index, $chunks in
-                    VStack {
+            VStack(spacing: 0) {
+                TabView(selection: $statementChunkIndex) {
+                    ForEach(Array($allStatementsFractured.enumerated()), id: \.offset) { index, $chunks in
                         LazyVGrid(columns: columns){
                             ForEach($chunks, id: \.id) { $instruction in
                                 InstructionAddTile(instruction: instruction).frame(height: 90).onTapGesture(perform: {
@@ -56,15 +62,23 @@ struct FracturedSwipTabs: View {
                                             .contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
                                     }
                             }
-                        }
-                        Spacer()
-                    }.padding(.top, 3)
-                }
-            }.tabViewStyle(.page).indexViewStyle(.page(backgroundDisplayMode: .always))
+                        }.tag(index)
+                    }
+                }.tabViewStyle(PageTabViewStyle(indexDisplayMode: .never)).frame(height:90)
+                
+                HStack(spacing: 15) { //Needs less space then the default one from PageTabViewStyle
+                    ForEach(0..<allStatementsFractured.count, id: \.self) { index in
+                        Capsule()
+                            .fill(index == statementChunkIndex ? Color("onContrast_color").opacity(0.6) : Color("onContrast_color").opacity(0.3))
+                            .frame(width: index == statementChunkIndex ? 15 : 7, height: 7)
+                            .animation(.easeInOut(duration: 0.5), value: statementChunkIndex)
+                    }
+                }.padding(5).padding(.bottom, 5)
+            }
         case 1:
-            TabView {
-                ForEach(Array($allConstrollFlowFractured.enumerated()), id: \.offset) { index, $chunks in
-                    VStack{
+            VStack(spacing: 0) {
+                TabView(selection: $controllFlowChunkIndex) {
+                    ForEach(Array($allConstrollFlowFractured.enumerated()), id: \.offset) { index, $chunks in
                         LazyVGrid(columns: columns){
                             ForEach($chunks, id: \.id) { $instruction in
                                 InstructionAddTile(instruction: instruction).frame(height: 90).onTapGesture(perform: {
@@ -78,15 +92,23 @@ struct FracturedSwipTabs: View {
                                             .contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
                                     }
                             }
-                        }
-                        Spacer()
-                    }.padding(.top, 3)
-                }
-            }.tabViewStyle(.page).indexViewStyle(.page(backgroundDisplayMode: .always))
+                        }.tag(index)
+                    }
+                }.tabViewStyle(PageTabViewStyle(indexDisplayMode: .never)).frame(height:90)
+                
+                HStack(spacing: 15) {
+                    ForEach(0..<allConstrollFlowFractured.count, id: \.self) { index in
+                        Capsule()
+                            .fill(index == controllFlowChunkIndex ? Color("onContrast_color").opacity(0.6) : Color("onContrast_color").opacity(0.3))
+                            .frame(width: index == controllFlowChunkIndex ? 15 : 7, height: 7)
+                            .animation(.easeInOut(duration: 0.5), value: controllFlowChunkIndex)
+                    }
+                }.padding(5).padding(.bottom, 5)
+            }
         case 2:
-            TabView{
-                ForEach(Array($allExpressionsFractured.enumerated()), id: \.offset) { index, $chunks in
-                    VStack{
+            VStack(spacing: 0){
+                TabView(selection: $expressionChunkIndex) {
+                    ForEach(Array($allExpressionsFractured.enumerated()), id: \.offset) { index, $chunks in
                         LazyVGrid(columns: columns){
                             ForEach($chunks, id: \.id) { $instruction in
                                 InstructionAddTile(instruction: instruction).frame(height: 90).onTapGesture(perform: {
@@ -100,11 +122,19 @@ struct FracturedSwipTabs: View {
                                             .contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
                                     }
                             }
-                        }
-                        Spacer()
-                    }.padding(.top, 3)
-                }
-            }.tabViewStyle(.page).indexViewStyle(.page(backgroundDisplayMode: .always))
+                        }.tag(index)
+                    }
+                }.tabViewStyle(PageTabViewStyle(indexDisplayMode: .never)).frame(height:90)
+                
+                HStack(spacing: 15) {
+                    ForEach(0..<allExpressionsFractured.count, id: \.self) { index in
+                        Capsule()
+                            .fill(index == expressionChunkIndex ? Color("onContrast_color").opacity(0.6) : Color("onContrast_color").opacity(0.3))
+                            .frame(width: index == expressionChunkIndex ? 15 : 7, height: 7)
+                            .animation(.easeInOut(duration: 0.5), value: expressionChunkIndex)
+                    }
+                }.padding(5).padding(.bottom, 5)
+            }
         default:
             EmptyView()
         }
@@ -115,10 +145,10 @@ struct FracturedSwipTabs: View {
     @Previewable @State var viewModel: CodeEditorViewModel = CodeEditorViewModel()
     
     VStack{
-        FracturedSwipTabs(selectionValue: .constant(0), allStatements: viewModel.allStatements, allCodeBlocks: viewModel.allControllFlow, allExpression: viewModel.allExpressions, viewModel: viewModel).frame(height: 136).padding(.horizontal, 10)
+        FracturedSwipTabs(selectionValue: .constant(0), allStatements: viewModel.allStatements, allCodeBlocks: viewModel.allControllFlow, allExpression: viewModel.allExpressions, viewModel: viewModel)
         
-        FracturedSwipTabs(selectionValue: .constant(1), allStatements: viewModel.allStatements, allCodeBlocks: viewModel.allControllFlow, allExpression: viewModel.allExpressions, viewModel: viewModel).frame(height: 136).padding(.horizontal, 10)
+        FracturedSwipTabs(selectionValue: .constant(1), allStatements: viewModel.allStatements, allCodeBlocks: viewModel.allControllFlow, allExpression: viewModel.allExpressions, viewModel: viewModel)
         
-        FracturedSwipTabs(selectionValue: .constant(2), allStatements: viewModel.allStatements, allCodeBlocks: viewModel.allControllFlow, allExpression: viewModel.allExpressions, viewModel: viewModel).frame(height: 136).padding(.horizontal, 10)
-    }
+        FracturedSwipTabs(selectionValue: .constant(2), allStatements: viewModel.allStatements, allCodeBlocks: viewModel.allControllFlow, allExpression: viewModel.allExpressions, viewModel: viewModel)
+    }.padding(.horizontal, 10)
 }
