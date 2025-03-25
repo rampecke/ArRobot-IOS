@@ -11,8 +11,7 @@ struct InstructionAddBar: View {
     @Bindable var viewModel: CodeEditorViewModel
     @State var selectionValue: Int = 0
     
-    @State var selectedIndex = 0
-    @State var selectedStatement: [Statement] = []
+    var allStatementsFractured: [[Statement]] = [[Step(), Lift(), RightTurn()], [LeftTurn(), PlaceGrass(), PlaceStone()],[PlaceWater()]]
     
     let columns = [
             GridItem(.flexible()),
@@ -71,73 +70,9 @@ struct InstructionAddBar: View {
                         Color("onContrast_color").opacity(0.1)
                     )
                 
-                Group{
-                    switch selectionValue {
-                    case 0:
-                        ScrollView {
-                            LazyVGrid(columns: columns){
-                                ForEach($viewModel.allStatements, id: \.id) { $instruction in
-                                    VStack {
-                                        InstructionAddTile(instruction: instruction).frame(height: 90).onTapGesture(perform: {
-                                            viewModel.createNewStatement(statement: instruction)
-                                        }).contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
-                                            .draggable(instruction){
-                                                CodeLine(instruction: instruction, CodeLineType.CodeLine)
-                                                    .onAppear {
-                                                        viewModel.dragNewStatement()
-                                                    }
-                                                    .contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
-                                            }
-                                        Spacer()
-                                    }.padding(.top, 3)
-                                }
-                            }
-                        }
-                    case 1:
-                        ScrollView {
-                            LazyVGrid(columns: columns){
-                                ForEach($viewModel.allControllFlow, id: \.id) { $instruction in
-                                    VStack {
-                                        InstructionAddTile(instruction: instruction).frame(height: 90).onTapGesture(perform: {
-                                            viewModel.createNewStatement(statement: instruction)
-                                        }).contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
-                                            .draggable(instruction){
-                                                CodeLineControllFlow(instruction: instruction, viewModel: viewModel)
-                                                    .onAppear {
-                                                        viewModel.dragNewStatement()
-                                                    }
-                                                    .contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
-                                            }
-                                        
-                                        Spacer()
-                                    }.padding(.top, 3)
-                                }
-                            }
-                        }
-                    case 2:
-                        ScrollView {
-                            LazyVGrid(columns: columns){
-                                ForEach($viewModel.allExpressions, id: \.id) { $instruction in
-                                    VStack {
-                                        InstructionAddTile(instruction: instruction).frame(height: 90).onTapGesture(perform: {
-                                            viewModel.addNewExpressionAtNextEmptyPosition(expression: instruction)
-                                        }).contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
-                                            .draggable(instruction){
-                                                ExpressionPiece(expression: instruction, viewModel: viewModel)
-                                                    .onAppear {
-                                                        viewModel.dragNewExpression()
-                                                    }
-                                                    .contentShape(.dragPreview, RoundedRectangle(cornerRadius: 5))
-                                            }
-                                        Spacer()
-                                    }.padding(.top, 3)
-                                }
-                            }
-                        }
-                    default:
-                        EmptyView()
-                    }
-                }.frame(height: 136).padding(.horizontal, 10)
+                FracturedSwipTabs(selectionValue: $selectionValue, allStatements: viewModel.allStatements, allCodeBlocks: viewModel.allControllFlow, allExpression: viewModel.allExpressions, viewModel: viewModel).frame(height: 136).padding(.horizontal, 10)
+                
+                Spacer()
             }
         }
         .background(viewModel.bottomBarTargeted ? Color("contrast_color") : .clear) //needed because of dragArea
