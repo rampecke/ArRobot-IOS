@@ -36,9 +36,30 @@ class CodeEditorViewModel {
     var cameraDistance: Float = 1.0
     
     //Save WorldMap
-    var savedWorldMap: ARWorldMap?
     var worldAnchor: AnchorEntity?
     var wasPlaced: Bool = false
+    var worldMapData: Data?
+    
+    // Save ARWorldMap
+    func saveWorldMap(_ worldMap: ARWorldMap) {
+        do {
+            let data = try NSKeyedArchiver.archivedData(withRootObject: worldMap, requiringSecureCoding: true)
+            self.worldMapData = data
+        } catch {
+            print("Error saving ARWorldMap: \(error)")
+        }
+    }
+    
+    // Load ARWorldMap
+    func loadWorldMap() -> ARWorldMap? {
+        guard let data = worldMapData else { return nil }
+        do {
+            return try NSKeyedUnarchiver.unarchivedObject(ofClass: ARWorldMap.self, from: data)
+        } catch {
+            print("Error loading ARWorldMap: \(error)")
+            return nil
+        }
+    }
     
     init(project: Project = Project()) {
         let newWorld: World

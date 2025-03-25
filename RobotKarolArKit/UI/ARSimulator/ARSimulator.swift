@@ -33,7 +33,7 @@ struct ARViewContainer: UIViewRepresentable {
     @Bindable var viewModel: CodeEditorViewModel
     
     func makeCoordinator() -> Coordinator {
-        let newCoordinator = Coordinator(parent: self, wasPlaced: $wasPlaced)
+        let newCoordinator = Coordinator(viewModel: viewModel, wasPlaced: $wasPlaced)
         return newCoordinator
     }
 
@@ -44,8 +44,9 @@ struct ARViewContainer: UIViewRepresentable {
         
         let config = ARWorldTrackingConfiguration()
         config.planeDetection = [.horizontal]
-        if viewModel.savedWorldMap != nil {
-            config.initialWorldMap = viewModel.savedWorldMap
+        
+        if let map = viewModel.loadWorldMap() {
+            config.initialWorldMap = map
         }
         arView.session.run(config, options: [.resetTracking, .removeExistingAnchors])
 
@@ -61,14 +62,13 @@ struct ARViewContainer: UIViewRepresentable {
     }
 
     class Coordinator: NSObject, ARSessionDelegate {
-        var parent: ARViewContainer
         var arView: ARView?
         var placementIndicator: Entity?
-        var confirmedAnchor: AnchorEntity?
         @Binding var wasPlaced: Bool
+        var viewModel: CodeEditorViewModel
 
-        init(parent: ARViewContainer, wasPlaced: Binding<Bool>) {
-            self.parent = parent
+        init(viewModel: CodeEditorViewModel, wasPlaced: Binding<Bool>) {
+            self.viewModel = viewModel
             _wasPlaced = wasPlaced
         }
 
@@ -106,27 +106,21 @@ struct ARViewContainer: UIViewRepresentable {
         }
 
         func confirmPlacement() {
-            if parent.viewModel.savedWorldMap != nil {
-                guard let anchor = parent.viewModel.worldAnchor, let arView = arView else { return }
-                parent.world.anchorWorld(arView: arView, anchor: anchor)
-                confirmedAnchor = anchor
-                arView.scene.addAnchor(anchor)
-                parent.viewModel.worldAnchor = anchor
-                
+            if viewModel.worldMapData != nil {
+                guard let anchor = viewModel.worldAnchor, let arView = arView else { return }
+                viewModel.world.anchorWorld(arView: arView, anchor: anchor)
                 return
             }
             
             guard let arView = arView, let placementIndicator = placementIndicator else { return }
             
             let anchor = AnchorEntity(world: placementIndicator.position)
-            parent.world.anchorWorld(arView: arView, anchor: anchor)
-            confirmedAnchor = anchor
-            arView.scene.addAnchor(anchor)
-            parent.viewModel.worldAnchor = anchor
+            viewModel.world.anchorWorld(arView: arView, anchor: anchor)
+            viewModel.worldAnchor = anchor
             
             arView.session.getCurrentWorldMap { worldMap, error in
                 if let worldMap = worldMap {
-                    self.parent.viewModel.savedWorldMap = worldMap
+                    self.viewModel.saveWorldMap(worldMap)
                 } else if let error = error {
                     print("Failed to get ARWorldMap: \(error)")
                 }
