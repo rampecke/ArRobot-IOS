@@ -41,6 +41,16 @@
         }
       }
     },
+    "Add instruction" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Füge Anweisung hinzu"
+          }
+        }
+      }
+    },
     "and" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -81,6 +91,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ArPicker"
+          }
+        }
+      }
+    },
+    "Conditions" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bedingungen"
+          }
+        }
+      }
+    },
+    "ControlFlows" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kontrollfluss"
           }
         }
       }
@@ -326,6 +358,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "The robot will only execute the code, if a condition is fullfield"
+          }
+        }
+      }
+    },
+    "Instructions" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anweisungen"
           }
         }
       }

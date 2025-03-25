@@ -12,6 +12,7 @@ struct CodeEditorView: View {
     let fraction = FractionHolder.usingUserDefaults(0.5, key: "codeEditorFraction")
     
     @State var viewModel: CodeEditorViewModel
+    @State var hideAddBar: Bool = false
     
     @Environment(Model.self) var model: Model
     
@@ -23,26 +24,23 @@ struct CodeEditorView: View {
     var body: some View {
         VStack{
             HSplit(left: {
-                VStack{
-                    HStack (alignment: .bottom) {
-                        Spacer()
-                        ControllbarButton(title: "Delete code", icon: "delete.left", action: {
-                            viewModel.resetCode()
-                        }, notInArView: true).frame(height: 30)
-                    }.padding(.horizontal)
-                    ScrollView {
-                        VStack {
-                            if let exercise = viewModel.project.exercise {
-                                if !exercise.exerciseDescription.isEmpty {
-                                    Group {
-                                        Text(exercise.exerciseDescription)
-                                            .frame(maxWidth: .infinity, alignment: .leading)
-                                        Divider()
-                                    }.padding(.horizontal, 10)
-                                }
+                ScrollView {
+                    VStack {
+                        if let exercise = viewModel.project.exercise {
+                            if !exercise.exerciseDescription.isEmpty {
+                                Group {
+                                    Text(exercise.exerciseDescription)
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                    Divider()
+                                }.padding(.horizontal, 10)
                             }
-                            CodeBlockView(codeBlock: viewModel.project.codeBlock, viewModel: viewModel)
                         }
+                        CodeBlockView(codeBlock: viewModel.project.codeBlock, viewModel: viewModel)
+                    }.onDisappear {
+                        hideAddBar = true
+                    }
+                    .onAppear {
+                        hideAddBar = false
                     }
                 }
             }, right: {
@@ -54,12 +52,12 @@ struct CodeEditorView: View {
                     }
                 }
             }).fraction(fraction)
-                .constraints(minPFraction: 0.4, minSFraction: 0.4, dragToHideP: true)
+                .constraints(minPFraction: 0.3, minSFraction: 0.4)
                 .styling(color: Color("card_border"))
             
-            Divider()
-            
-            InstructionAddBar(viewModel: viewModel)
+            if !hideAddBar {
+                InstructionAddBar(viewModel: viewModel)
+            }
         }.onDisappear {
             viewModel.project.lastEdited = Date()
             model.saveProject(project: viewModel.project)
