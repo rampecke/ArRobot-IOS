@@ -12,6 +12,7 @@ struct CodeEditorView: View {
     let fraction = FractionHolder.usingUserDefaults(0.5, key: "codeEditorFraction")
     
     @State var viewModel: CodeEditorViewModel
+    @State var hideAddBar: Bool = false
     
     @Environment(Model.self) var model: Model
     
@@ -35,6 +36,11 @@ struct CodeEditorView: View {
                             }
                         }
                         CodeBlockView(codeBlock: viewModel.project.codeBlock, viewModel: viewModel)
+                    }.onDisappear {
+                        hideAddBar = true
+                    }
+                    .onAppear {
+                        hideAddBar = false
                     }
                 }
             }, right: {
@@ -49,7 +55,9 @@ struct CodeEditorView: View {
                 .constraints(minPFraction: 0.4, minSFraction: 0.4, dragToHideP: true)
                 .styling(color: Color("card_border"))
             
-            InstructionAddBar(viewModel: viewModel)
+            if !hideAddBar {
+                InstructionAddBar(viewModel: viewModel)
+            }
         }.onDisappear {
             viewModel.project.lastEdited = Date()
             model.saveProject(project: viewModel.project)
