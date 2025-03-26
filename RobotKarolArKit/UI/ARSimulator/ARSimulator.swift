@@ -12,15 +12,17 @@ import ARKit
 struct ARSimulator: View {
     @Bindable var viewModel: CodeEditorViewModel
     
+    @State var wasPlaced: Bool = false
+    
     var body: some View {
         ZStack{
-            ARViewContainer(world: viewModel.world, wasPlaced: $viewModel.wasPlaced, viewModel: viewModel)
+            ARViewContainer(world: viewModel.world, wasPlaced: $wasPlaced, viewModel: viewModel)
                 .edgesIgnoringSafeArea(.all)
 
-            if viewModel.wasPlaced || viewModel.arType == .NonAR {
+            if wasPlaced || viewModel.arType == .NonAR {
                 ArViewControlBar(viewModel: viewModel)
             } else {
-                ArPlacementMenu(wasPlaced: $viewModel.wasPlaced, viewModel: viewModel)
+                ArPlacementMenu(wasPlaced: $wasPlaced, viewModel: viewModel)
             }
 
         }
@@ -45,9 +47,9 @@ struct ARViewContainer: UIViewRepresentable {
         let config = ARWorldTrackingConfiguration()
         config.planeDetection = [.horizontal]
         
-        if let map = viewModel.loadWorldMap() {
-            config.initialWorldMap = map
-        }
+//        if let map = viewModel.loadWorldMap() {
+//            config.initialWorldMap = map
+//        }
         arView.session.run(config, options: [.resetTracking, .removeExistingAnchors])
 
         return arView
@@ -106,11 +108,11 @@ struct ARViewContainer: UIViewRepresentable {
         }
 
         func confirmPlacement() {
-            if viewModel.worldMapData != nil {
-                guard let anchor = viewModel.worldAnchor, let arView = arView else { return }
-                viewModel.world.anchorWorld(arView: arView, anchor: anchor)
-                return
-            }
+//            if viewModel.worldMapData != nil {
+//                guard let anchor = viewModel.worldAnchor, let arView = arView else { return }
+//                viewModel.world.anchorWorld(arView: arView, anchor: anchor)
+//                return
+//            }
             
             guard let arView = arView, let placementIndicator = placementIndicator else { return }
             
@@ -118,13 +120,13 @@ struct ARViewContainer: UIViewRepresentable {
             viewModel.world.anchorWorld(arView: arView, anchor: anchor)
             viewModel.worldAnchor = anchor
             
-            arView.session.getCurrentWorldMap { worldMap, error in
-                if let worldMap = worldMap {
-                    self.viewModel.saveWorldMap(worldMap)
-                } else if let error = error {
-                    print("Failed to get ARWorldMap: \(error)")
-                }
-            }
+//            arView.session.getCurrentWorldMap { worldMap, error in
+//                if let worldMap = worldMap {
+//                    self.viewModel.saveWorldMap(worldMap)
+//                } else if let error = error {
+//                    print("Failed to get ARWorldMap: \(error)")
+//                }
+//            }
 
             // Remove indicator after confirming
             self.placementIndicator?.removeFromParent()

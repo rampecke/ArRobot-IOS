@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>ITSAppUsesNonExemptEncryption</key>
-	<false/>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
@@ -15,10 +13,10 @@
 			<string>Owner</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>com.ramonaeckert.RobotKarolArKit.roboArProject</string>
+				<string>de.tum.cit.aet.robocraft.roboArProject</string>
 			</array>
 			<key>NSUbiquitousDocumentUserActivityType</key>
-			<string>com.ramonaeckert.RobotKarolArKit.roboArProject</string>
+			<string>de.tum.cit.aet.robocraft.roboArProject</string>
 		</dict>
 		<dict>
 			<key>CFBundleTypeName</key>
@@ -29,10 +27,12 @@
 			<string>Owner</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>com.ramonaeckert.RobotKarolArKit.roboArExercise</string>
+				<string>de.tum.cit.aet.robocraft.roboArExercise</string>
 			</array>
 		</dict>
 	</array>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>UTExportedTypeDeclarations</key>
 	<array>
 		<dict>
@@ -45,7 +45,7 @@
 			<key>UTTypeIcons</key>
 			<dict/>
 			<key>UTTypeIdentifier</key>
-			<string>com.ramonaeckert.RobotKarolArKit.expression</string>
+			<string>de.tum.cit.aet.robocraft.expression</string>
 			<key>UTTypeTagSpecification</key>
 			<dict/>
 		</dict>
@@ -59,7 +59,7 @@
 			<key>UTTypeIcons</key>
 			<dict/>
 			<key>UTTypeIdentifier</key>
-			<string>com.ramonaeckert.RobotKarolArKit.statement</string>
+			<string>de.tum.cit.aet.robocraft.statement</string>
 			<key>UTTypeTagSpecification</key>
 			<dict/>
 		</dict>
@@ -73,7 +73,7 @@
 			<key>UTTypeIcons</key>
 			<dict/>
 			<key>UTTypeIdentifier</key>
-			<string>com.ramonaeckert.RobotKarolArKit.roboArExercise</string>
+			<string>de.tum.cit.aet.robocraft.roboArExercise</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -92,7 +92,7 @@
 			<key>UTTypeIcons</key>
 			<dict/>
 			<key>UTTypeIdentifier</key>
-			<string>com.ramonaeckert.RobotKarolArKit.roboArProject</string>
+			<string>de.tum.cit.aet.robocraft.roboArProject</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -114,7 +114,7 @@
 			<key>UTTypeIcons</key>
 			<dict/>
 			<key>UTTypeIdentifier</key>
-			<string>com.ramonaeckert.RobotKarolArKit.roboArProject</string>
+			<string>de.tum.cit.aet.robocraft.roboArProject</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -133,7 +133,7 @@
 			<key>UTTypeIcons</key>
 			<dict/>
 			<key>UTTypeIdentifier</key>
-			<string>com.ramonaeckert.RobotKarolArKit.roboArExercise</string>
+			<string>de.tum.cit.aet.robocraft.roboArExercise</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>

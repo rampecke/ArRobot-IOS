@@ -33,23 +33,22 @@ struct ExerciseEditorView: View {
                     }.padding(.horizontal)
                     ScrollView {
                         VStack {
-                            Group {
+                            ZStack {
+                                VStack {
+                                    if viewModel.draftExercise.exerciseDescription.isEmpty {
+                                        Text("Write down your exercise description...")
+                                            .foregroundColor(.gray)
+                                            .frame(maxWidth: .infinity, alignment: .leading)
+                                        Spacer()
+                                    }
+                                }.frame(maxWidth: .infinity, maxHeight: .infinity)
+                                    .padding(10)
+                                
                                 TextEditor(text: $viewModel.draftExercise.exerciseDescription)
                                     .textEditorStyle(PlainTextEditorStyle())
                                     .frame(maxWidth: .infinity, minHeight: 100, maxHeight: .infinity)
-                                    .overlay(
-                                        VStack {
-                                            if viewModel.draftExercise.exerciseDescription.isEmpty {
-                                                Text("Write down your exercise description...")
-                                                    .foregroundColor(.gray)
-                                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                                Spacer()
-                                            }
-                                        }.frame(maxWidth: .infinity, maxHeight: .infinity)
-                                            .padding(10)
-                                    )
-                                Divider()
                             }.padding(.horizontal, 10)
+                            Divider()
                             CodeBlockView(codeBlock: viewModel.project.codeBlock, viewModel: viewModel)
                         }
                     }
@@ -57,7 +56,7 @@ struct ExerciseEditorView: View {
             }, right: {
                 NonArView(viewModel: viewModel, isInExerciseEditor: true)
             }).fraction(fraction)
-                .constraints(minPFraction: 0.4, minSFraction: 0.4, dragToHideP: true)
+                .constraints(minPFraction: 0.3, minSFraction: 0.4)
                 .styling(color: Color("card_border"))
             
             Divider()

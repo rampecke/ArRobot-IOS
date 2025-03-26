@@ -37,7 +37,7 @@ class CodeEditorViewModel {
     
     //Save WorldMap
     var worldAnchor: AnchorEntity?
-    var wasPlaced: Bool = false
+//    var wasPlaced: Bool = false
     var worldMapData: Data?
     
     // Save ARWorldMap
