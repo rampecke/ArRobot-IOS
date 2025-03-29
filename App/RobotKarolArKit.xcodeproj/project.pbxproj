@@ -64,6 +64,8 @@
 		A0B0553B2D8F8B1A0067FE86 /* StoneBlockVersion1.usdz in Resources */ = {isa = PBXBuildFile; fileRef = A0B0553A2D8F8B1A0067FE86 /* StoneBlockVersion1.usdz */; };
 		A0B0558D2D90ABA80067FE86 /* ArPlacementMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B0558C2D90ABA80067FE86 /* ArPlacementMenu.swift */; };
 		A0B055C72D90B8C00067FE86 /* Placer.usdz in Resources */ = {isa = PBXBuildFile; fileRef = A0B055C62D90B8C00067FE86 /* Placer.usdz */; };
+		A0B2BC6E2D9805EA00F74F22 /* JoinRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B2BC6D2D9805EA00F74F22 /* JoinRoomView.swift */; };
+		A0B2BC702D98093100F74F22 /* ChallengeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B2BC6F2D98093100F74F22 /* ChallengeViewModel.swift */; };
 		A0B36C662D7AE5AF005F33F0 /* AddExpressionIntoEmptyVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B36C652D7AE5AF005F33F0 /* AddExpressionIntoEmptyVisitor.swift */; };
 		A0B36C7F2D7B4423005F33F0 /* StatementDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B36C7E2D7B4423005F33F0 /* StatementDTO.swift */; };
 		A0B36C812D7B4CC7005F33F0 /* ExpressionDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B36C802D7B4CC7005F33F0 /* ExpressionDTO.swift */; };
@@ -136,6 +138,8 @@
 		A0B0553A2D8F8B1A0067FE86 /* StoneBlockVersion1.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = StoneBlockVersion1.usdz; sourceTree = "<group>"; };
 		A0B0558C2D90ABA80067FE86 /* ArPlacementMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArPlacementMenu.swift; sourceTree = "<group>"; };
 		A0B055C62D90B8C00067FE86 /* Placer.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = Placer.usdz; sourceTree = "<group>"; };
+		A0B2BC6D2D9805EA00F74F22 /* JoinRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinRoomView.swift; sourceTree = "<group>"; };
+		A0B2BC6F2D98093100F74F22 /* ChallengeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeViewModel.swift; sourceTree = "<group>"; };
 		A0B36C652D7AE5AF005F33F0 /* AddExpressionIntoEmptyVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpressionIntoEmptyVisitor.swift; sourceTree = "<group>"; };
 		A0B36C7E2D7B4423005F33F0 /* StatementDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatementDTO.swift; sourceTree = "<group>"; };
 		A0B36C802D7B4CC7005F33F0 /* ExpressionDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionDTO.swift; sourceTree = "<group>"; };
@@ -192,6 +196,7 @@
 		A02B6A992C13A64600CAFF82 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				A0B2BC672D97128A00F74F22 /* Challenge */,
 				A0B36D702D8049B2005F33F0 /* GeneralComponents */,
 				A0B36D5F2D7F301B005F33F0 /* OverviewPages */,
 				A0B36CDF2D7DADE3005F33F0 /* Editor */,
@@ -390,6 +395,15 @@
 			path = ArResources;
 			sourceTree = "<group>";
 		};
+		A0B2BC672D97128A00F74F22 /* Challenge */ = {
+			isa = PBXGroup;
+			children = (
+				A0B2BC6D2D9805EA00F74F22 /* JoinRoomView.swift */,
+				A0B2BC6F2D98093100F74F22 /* ChallengeViewModel.swift */,
+			);
+			path = Challenge;
+			sourceTree = "<group>";
+		};
 		A0B36D702D8049B2005F33F0 /* GeneralComponents */ = {
 			isa = PBXGroup;
 			children = (
@@ -499,11 +513,13 @@
 				A02B6AB32C16789D00CAFF82 /* NewInstructionVisitor.swift in Sources */,
 				A02B6AE22C18AC4800CAFF82 /* ExecutionVisitor.swift in Sources */,
 				A02B6ADC2C1750AD00CAFF82 /* NonArView.swift in Sources */,
+				A0B2BC702D98093100F74F22 /* ChallengeViewModel.swift in Sources */,
 				A02CAC202D7916F800E751DF /* ControllbarButton.swift in Sources */,
 				A0B36D592D7F1094005F33F0 /* TabBarWrapper.swift in Sources */,
 				A02B6A962C13A26400CAFF82 /* PlaceStone.swift in Sources */,
 				A06BD7DD2BAF36F600863CA5 /* Direction.swift in Sources */,
 				A0B5A1312D714EBA00A02BA9 /* EmptyExpression.swift in Sources */,
+				A0B2BC6E2D9805EA00F74F22 /* JoinRoomView.swift in Sources */,
 				A0B40CA62D71BD0400AEFD40 /* AddExpressionVisitor.swift in Sources */,
 				A02B6A982C13A2DE00CAFF82 /* PlaceWater.swift in Sources */,
 				A02B6A8C2C13A05500CAFF82 /* LeftTurn.swift in Sources */,
