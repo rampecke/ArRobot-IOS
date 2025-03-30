@@ -37,6 +37,7 @@ class ChallengeViewModel {
     
     func disconnectWebSocket() {
         print("🔴 Disconnecting WebSocket...")
+        room = nil
         stompClient?.disconnect()
     }
     
@@ -65,7 +66,6 @@ class ChallengeViewModel {
         URLSession.shared.dataTask(with: request) { data, response, error in
             DispatchQueue.main.async {
                 self.isLoading = false
-                
                 if let error = error {
                     self.errorMessage = "Error: \(error.localizedDescription)"
                     return
@@ -75,7 +75,6 @@ class ChallengeViewModel {
                     self.errorMessage = "No data received"
                     return
                 }
-
                 do {
                     if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
                        let code = json["code"] as? String,
@@ -90,7 +89,6 @@ class ChallengeViewModel {
                         }
 
                         self.room = Room(code: code, owner: isOwner, participants: participants)
-                        
                         self.connectToWebSocket()
                     } else if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
                               let message = json["message"] as? String {
@@ -124,7 +122,7 @@ extension ChallengeViewModel: SwiftStompDelegate {
     }
     
     func onMessageReceived(swiftStomp: SwiftStomp, message: Any?, messageId: String, destination: String, headers: [String : String]) {
-        print("Received message: \(String(describing: message))")
+        print("Received message: \(String(describing: message)), from destination: \(destination)")
         
         // Ensure message is a valid JSON string
         guard let messageString = message as? String,
@@ -147,7 +145,6 @@ extension ChallengeViewModel: SwiftStompDelegate {
                 
                 DispatchQueue.main.async {
                     self.room?.participants = participants
-                    print("✅ Updated participant list: \(participants)")
                 }
             } else {
                 print("⚠️ Unexpected JSON format")
@@ -158,7 +155,7 @@ extension ChallengeViewModel: SwiftStompDelegate {
     }
     
     func onReceipt(swiftStomp: SwiftStomp, receiptId: String) {
-        print("onReceipt")
+        print("onReceipt was called")
     }
     
     func onError(swiftStomp: SwiftStomp, briefDescription: String, fullDescription: String?, receiptId: String?, type: StompErrorType) {

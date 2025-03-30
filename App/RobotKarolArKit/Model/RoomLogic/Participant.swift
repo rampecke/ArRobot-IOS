@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Participant: Identifiable, Codable {
+struct Participant: Identifiable, Codable, Equatable {
     var id: String
     let name: String
     var score: Int

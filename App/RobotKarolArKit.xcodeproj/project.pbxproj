@@ -67,6 +67,7 @@
 		A0B2BC6E2D9805EA00F74F22 /* JoinRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B2BC6D2D9805EA00F74F22 /* JoinRoomView.swift */; };
 		A0B2BC702D98093100F74F22 /* ChallengeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B2BC6F2D98093100F74F22 /* ChallengeViewModel.swift */; };
 		A0B2BCF72D99614D00F74F22 /* SwiftStomp in Frameworks */ = {isa = PBXBuildFile; productRef = A0B2BCF62D99614D00F74F22 /* SwiftStomp */; };
+		A0B2BCF92D99987C00F74F22 /* RoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B2BCF82D99987C00F74F22 /* RoomView.swift */; };
 		A0B36C662D7AE5AF005F33F0 /* AddExpressionIntoEmptyVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B36C652D7AE5AF005F33F0 /* AddExpressionIntoEmptyVisitor.swift */; };
 		A0B36C7F2D7B4423005F33F0 /* StatementDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B36C7E2D7B4423005F33F0 /* StatementDTO.swift */; };
 		A0B36C812D7B4CC7005F33F0 /* ExpressionDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B36C802D7B4CC7005F33F0 /* ExpressionDTO.swift */; };
@@ -141,6 +142,7 @@
 		A0B055C62D90B8C00067FE86 /* Placer.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = Placer.usdz; sourceTree = "<group>"; };
 		A0B2BC6D2D9805EA00F74F22 /* JoinRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinRoomView.swift; sourceTree = "<group>"; };
 		A0B2BC6F2D98093100F74F22 /* ChallengeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeViewModel.swift; sourceTree = "<group>"; };
+		A0B2BCF82D99987C00F74F22 /* RoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomView.swift; sourceTree = "<group>"; };
 		A0B36C652D7AE5AF005F33F0 /* AddExpressionIntoEmptyVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpressionIntoEmptyVisitor.swift; sourceTree = "<group>"; };
 		A0B36C7E2D7B4423005F33F0 /* StatementDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatementDTO.swift; sourceTree = "<group>"; };
 		A0B36C802D7B4CC7005F33F0 /* ExpressionDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionDTO.swift; sourceTree = "<group>"; };
@@ -402,6 +404,7 @@
 			children = (
 				A0B2BC6D2D9805EA00F74F22 /* JoinRoomView.swift */,
 				A0B2BC6F2D98093100F74F22 /* ChallengeViewModel.swift */,
+				A0B2BCF82D99987C00F74F22 /* RoomView.swift */,
 			);
 			path = Challenge;
 			sourceTree = "<group>";
@@ -532,6 +535,7 @@
 				A0B36D762D8242DB005F33F0 /* CopyCodeBlockVisitor.swift in Sources */,
 				A02B6AD82C17382E00CAFF82 /* ARSimulator.swift in Sources */,
 				A01483072D71188D00AACE8D /* IsBlock.swift in Sources */,
+				A0B2BCF92D99987C00F74F22 /* RoomView.swift in Sources */,
 				A01482EE2D70DE6C00AACE8D /* AddStatementVisitor.swift in Sources */,
 				A09390EF2C1DBFBD009DF760 /* While.swift in Sources */,
 				A0B36C7F2D7B4423005F33F0 /* StatementDTO.swift in Sources */,

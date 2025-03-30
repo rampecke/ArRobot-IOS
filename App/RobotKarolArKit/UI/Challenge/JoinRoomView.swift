@@ -9,47 +9,54 @@ import SwiftUI
 
 struct JoinRoomView: View {
     @State var viewModel: ChallengeViewModel = ChallengeViewModel()
+    @State var roomExists: Bool = false
     
     var body: some View {
         VStack {
-            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())]) {
-                Button(action: {
-                    viewModel.createRoom()
-                }, label: {
-                    Text("Create Room")
-                })
-                
-                VStack {
-                    TextField(
-                        "Room Code",
-                        text: $viewModel.roomCode
-                    ).textFieldStyle(.roundedBorder)
-                    
-                    TextField(
-                        "User Name",
-                        text: $viewModel.userName
-                    ).textFieldStyle(.roundedBorder)
-                    
+            if viewModel.isLoading {
+                ProgressView()
+            } else {
+                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())]) {
                     Button(action: {
-                        viewModel.joinRoom()
+                        viewModel.createRoom()
                     }, label: {
-                        Text("Join Room")
+                        Text("Create Room")
                     })
-                }.frame(width: 150)
-            }
-            
-            if viewModel.room != nil {
-                Text("Room was created: \(viewModel.room?.code ?? "0") and has \(viewModel.room?.participants.count ?? 0)")
-                if let participants = viewModel.room?.participants {
-                    ForEach(participants, id: \.id) { participant in
-                        Text("Participant: \(participant.name) has Score: \(participant.score)")
-                    }
+                    
+                    VStack {
+                        TextField(
+                            "Room Code",
+                            text: $viewModel.roomCode
+                        ).textFieldStyle(.roundedBorder)
+                        
+                        TextField(
+                            "User Name",
+                            text: $viewModel.userName
+                        ).textFieldStyle(.roundedBorder)
+                        
+                        Button(action: {
+                            viewModel.joinRoom()
+                        }, label: {
+                            Text("Join Room")
+                        })
+                    }.frame(width: 150)
                 }
             }
             if viewModel.errorMessage != nil {
                 Text("\(viewModel.errorMessage ?? "No error")")
             }
         }.frame(maxWidth: .infinity, maxHeight: .infinity)
+            .navigationDestination(isPresented: $roomExists) {
+                RoomView(viewModel: viewModel)
+            }
+            .onChange(of: viewModel.room) {
+                if viewModel.room != nil {
+                    roomExists = true
+                }
+            }
+            .onAppear {
+                roomExists = false
+            }
     }
 }
 
