@@ -66,6 +66,7 @@
 		A0B055C72D90B8C00067FE86 /* Placer.usdz in Resources */ = {isa = PBXBuildFile; fileRef = A0B055C62D90B8C00067FE86 /* Placer.usdz */; };
 		A0B2BC6E2D9805EA00F74F22 /* JoinRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B2BC6D2D9805EA00F74F22 /* JoinRoomView.swift */; };
 		A0B2BC702D98093100F74F22 /* ChallengeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B2BC6F2D98093100F74F22 /* ChallengeViewModel.swift */; };
+		A0B2BCF72D99614D00F74F22 /* SwiftStomp in Frameworks */ = {isa = PBXBuildFile; productRef = A0B2BCF62D99614D00F74F22 /* SwiftStomp */; };
 		A0B36C662D7AE5AF005F33F0 /* AddExpressionIntoEmptyVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B36C652D7AE5AF005F33F0 /* AddExpressionIntoEmptyVisitor.swift */; };
 		A0B36C7F2D7B4423005F33F0 /* StatementDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B36C7E2D7B4423005F33F0 /* StatementDTO.swift */; };
 		A0B36C812D7B4CC7005F33F0 /* ExpressionDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B36C802D7B4CC7005F33F0 /* ExpressionDTO.swift */; };
@@ -165,6 +166,7 @@
 			files = (
 				A02B6AB92C17342500CAFF82 /* RealityKit.framework in Frameworks */,
 				A02B6AB72C17341A00CAFF82 /* ARKit.framework in Frameworks */,
+				A0B2BCF72D99614D00F74F22 /* SwiftStomp in Frameworks */,
 				A02B6AAA2C1658AA00CAFF82 /* SplitView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -435,6 +437,7 @@
 			name = RobotKarolArKit;
 			packageProductDependencies = (
 				A02B6AA92C1658AA00CAFF82 /* SplitView */,
+				A0B2BCF62D99614D00F74F22 /* SwiftStomp */,
 			);
 			productName = RobotKarolArKit;
 			productReference = A06BD7BF2BAE9F4E00863CA5 /* RobotKarolArKit.app */;
@@ -467,6 +470,7 @@
 			mainGroup = A06BD7B62BAE9F4E00863CA5;
 			packageReferences = (
 				A02B6AA82C1658AA00CAFF82 /* XCRemoteSwiftPackageReference "SplitView" */,
+				A0B2BCF52D99614D00F74F22 /* XCRemoteSwiftPackageReference "SwiftStomp" */,
 			);
 			productRefGroup = A06BD7C02BAE9F4E00863CA5 /* Products */;
 			projectDirPath = "";
@@ -806,6 +810,14 @@
 				minimumVersion = 3.5.2;
 			};
 		};
+		A0B2BCF52D99614D00F74F22 /* XCRemoteSwiftPackageReference "SwiftStomp" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Romixery/SwiftStomp";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -813,6 +825,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A02B6AA82C1658AA00CAFF82 /* XCRemoteSwiftPackageReference "SplitView" */;
 			productName = SplitView;
+		};
+		A0B2BCF62D99614D00F74F22 /* SwiftStomp */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A0B2BCF52D99614D00F74F22 /* XCRemoteSwiftPackageReference "SwiftStomp" */;
+			productName = SwiftStomp;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -15,7 +15,11 @@ import java.util.concurrent.ConcurrentHashMap;
 @RequestMapping("/rooms")
 public class RoomController {
     private final Map<String, Room> rooms = new ConcurrentHashMap<>();
+    private final SimpMessagingTemplate messagingTemplate;
 
+    public RoomController(SimpMessagingTemplate messagingTemplate) {
+        this.messagingTemplate = messagingTemplate;
+    }
     @PostMapping("/create")
     public ResponseEntity<Map<String, Object>> createRoom(@RequestBody Map<String, String> requestBody) {
         String owner = requestBody.get("owner");
@@ -82,6 +86,12 @@ public class RoomController {
                     .findFirst()
                     .ifPresent(participant -> participant.setName(userName));
         }
+
+        // Send message to all subscribed clients in this room
+        messagingTemplate.convertAndSend("/topic/room/" + code,
+                Map.of(
+                        "participants", room.getParticipants()
+                ));
 
         return ResponseEntity.ok(Map.of(
                 "code", room.getCode(),
