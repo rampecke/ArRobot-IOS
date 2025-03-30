@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
@@ -84,7 +85,10 @@ public class RoomController {
             room.getParticipants().stream()
                     .filter(participant -> participant.getId().equals(userId))
                     .findFirst()
-                    .ifPresent(participant -> participant.setName(userName));
+                    .ifPresent(participant -> {
+                        participant.setName(userName);
+                        participant.setIsActive(true);
+                    });
         }
 
         // Send message to all subscribed clients in this room
@@ -98,5 +102,36 @@ public class RoomController {
                 "isOwner", false,
                 "participants", room.getParticipants()
         ));
+    }
+
+    @PostMapping("/{code}/leave")
+    public ResponseEntity<Boolean> leaveRoom(@PathVariable String code, @RequestBody Map<String, String> requestBody) {
+        String userId = requestBody.get("userId");
+
+        Room room = rooms.get(code);
+        if (room == null) {
+            return ResponseEntity.badRequest().body(false);
+        }
+
+        boolean userFound = room.getParticipants().stream()
+                .anyMatch(participant -> participant.getId().equals(userId));
+
+        if (!userFound) {
+            return ResponseEntity.badRequest().body(false);
+        }
+
+        room.getParticipants().forEach(participant -> {
+            if (participant.getId().equals(userId)) {
+                participant.setIsActive(false);
+            }
+        });
+
+        // Send message to all subscribed clients in this room
+        messagingTemplate.convertAndSend("/topic/room/" + code,
+                Map.of(
+                        "participants", room.getParticipants()
+                ));
+
+        return ResponseEntity.ok(true);
     }
 }

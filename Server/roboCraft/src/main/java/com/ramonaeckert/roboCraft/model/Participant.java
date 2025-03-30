@@ -7,10 +7,13 @@ public class Participant {
     private String name;
     private int score;
 
+    private Boolean isActive;
+
     public Participant(String name, String userId) {
         this.name = name;
         this.score = 0;
         this.id = userId;
+        this.isActive = true;
     }
 
     public String getName() {
@@ -31,5 +34,13 @@ public class Participant {
 
     public String getId() {
         return id;
+    }
+
+    public Boolean getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(Boolean isActive) {
+        this.isActive = isActive;
     }
 }

@@ -778,16 +778,6 @@
         }
       }
     },
-    "Participant: %@ has Score: %lld" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Participant: %1$@ has Score: %2$lld"
-          }
-        }
-      }
-    },
     "Place board" : {
       "extractionState" : "manual",
       "localizations" : {

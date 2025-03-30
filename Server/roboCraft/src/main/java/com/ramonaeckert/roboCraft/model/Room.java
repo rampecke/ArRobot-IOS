@@ -25,6 +25,9 @@ public Room(String code, String owner) {
     public List<Participant> getParticipants() {
         return participants;
     }
+    public void setParticipant(List<Participant> participants) {
+        this.participants = participants;
+    }
 
     public void addParticipant(Participant participant) {
         this.participants.add(participant);

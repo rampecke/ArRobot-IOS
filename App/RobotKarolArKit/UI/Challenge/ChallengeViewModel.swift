@@ -84,8 +84,9 @@ class ChallengeViewModel {
                         let participants = participantsData.compactMap { dict -> Participant? in
                             guard let name = dict["name"] as? String,
                                   let score = dict["score"] as? Int,
-                                  let id = dict["id"] as? String else { return nil }
-                            return Participant(id: id, name: name, score: score)
+                                  let id = dict["id"] as? String,
+                                  let isActive = dict["isActive"] as? Bool else { return nil }
+                            return Participant(id: id, name: name, score: score, isActive: isActive)
                         }
 
                         self.room = Room(code: code, owner: isOwner, participants: participants)
@@ -112,6 +113,27 @@ class ChallengeViewModel {
     func joinRoom() {
         performRequest(endpoint: "\(roomCode)/join", method: "POST", body: ["userName": userName, "userId": userId])
     }
+    
+    func leaveRoom() {
+        guard let code = self.room?.code else {
+            return
+        }
+        
+        guard let url = URL(string: "\(self.urlPrefix)/\(code)/leave") else {
+            return
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        let body: [String: String] = ["userId": userId]
+        request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [])
+
+        let task = URLSession.shared.dataTask(with: request)
+        task.resume()
+    }
+    
 }
 
 // MARK: - STOMP Delegate Methods
@@ -139,8 +161,9 @@ extension ChallengeViewModel: SwiftStompDelegate {
                 let participants = participantsData.compactMap { dict -> Participant? in
                     guard let id = dict["id"] as? String,
                           let name = dict["name"] as? String,
-                          let score = dict["score"] as? Int else { return nil }
-                    return Participant(id: id, name: name, score: score)
+                          let score = dict["score"] as? Int,
+                          let isActive = dict["isActive"] as? Bool else { return nil }
+                    return Participant(id: id, name: name, score: score, isActive: isActive)
                 }
                 
                 DispatchQueue.main.async {

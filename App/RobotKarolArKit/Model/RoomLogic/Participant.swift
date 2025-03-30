@@ -9,6 +9,7 @@ import Foundation
 
 struct Participant: Identifiable, Codable, Equatable {
     var id: String
-    let name: String
+    var name: String
     var score: Int
+    var isActive: Bool
 }
