@@ -23,11 +23,6 @@ struct CodeEditorView: View {
         self.shouldSave = shouldSave
     }
     
-    func changeProject(project: Project) {
-        self.viewModel = CodeEditorViewModel(project: project)
-    }
-
-    
     var body: some View {
         VStack{
             HSplit(left: {

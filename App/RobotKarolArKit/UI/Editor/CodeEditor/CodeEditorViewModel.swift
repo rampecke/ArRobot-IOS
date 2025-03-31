@@ -75,6 +75,21 @@ class CodeEditorViewModel {
         self.project = project
     }
     
+    func changeExercise(project: Project) {
+        self.project = project
+        self.world.exerciseTiles = project.exercise?.solutionTiles ?? []
+        if let exercise = project.exercise {
+            self.world.setWidth(width: exercise.worldWidth)
+            self.world.setLength(length: exercise.worldLength)
+        } else {
+            self.world.setWidth(width: 6)
+            self.world.setLength(length: 6)
+        }
+        
+        self.world.resetWorld()
+        self.world.drawExerciseTiles()
+    }
+    
     //Whenever we start a drag we need to call one of these to make sure our dragging states are set correctly
     func dragNewStatement() {
         dragInstruction = false

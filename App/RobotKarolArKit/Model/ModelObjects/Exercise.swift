@@ -10,7 +10,11 @@ import UniformTypeIdentifiers
 import CoreTransferable
 
 @Observable
-class Exercise: Identifiable, Codable, Transferable { //Does not inheritate from Project -> We want to differentiate the transferable type
+class Exercise: Identifiable, Codable, Transferable, Equatable {
+    static func == (lhs: Exercise, rhs: Exercise) -> Bool {
+        return lhs.id == rhs.id
+    }
+    //Does not inheritate from Project -> We want to differentiate the transferable type
     var id: UUID = UUID()
     var worldWidth: Int
     var worldLength: Int

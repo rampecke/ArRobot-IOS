@@ -17,7 +17,7 @@ protocol Instruction: Identifiable, Transferable, Codable {
 }
 
 extension UTType {
-    static var statement = UTType(exportedAs: "com.ramonaeckert.RobotKarolArKit.statement")
-    static var expression = UTType(exportedAs: "com.ramonaeckert.RobotKarolArKit.expression")
+    static var statement = UTType(exportedAs: "de.tum.cit.aet.robocraft.statement")
+    static var expression = UTType(exportedAs: "de.tum.cit.aet.robocraft.expression")
 }
 

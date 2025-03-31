@@ -55,6 +55,14 @@ class World {
         self.tiles
     }
     
+    func setWidth(width: Int) {
+        self.width = width
+    }
+    
+    func setLength(length: Int) {
+        self.length = length
+    }
+    
     func exerciseSuccess() -> Bool {
         //If they have diffrent sizes they can't be the same
         guard self.tiles.count == self.exerciseTiles.count else {
