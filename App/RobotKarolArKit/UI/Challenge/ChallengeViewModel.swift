@@ -25,6 +25,8 @@ class ChallengeViewModel {
     private var stompClient: SwiftStomp?
     
     var currentExercise: Exercise?
+    var readyForNextExercise: Bool = true
+    var exerciseStarted: Bool = true
         
     // Function to connect to WebSocket via STOMP
     func connectToWebSocket() {
@@ -153,12 +155,12 @@ class ChallengeViewModel {
         
         // Convert Exercise to JSON String
         guard let exerciseData = try? JSONEncoder().encode(exercise) else {
-            print("❌ Failed to encode exercise")
+            print("Failed to encode exercise")
             return
         }
         
         guard let exerciseString = String(data: exerciseData, encoding: .utf8) else {
-            print("❌ Failed to convert exercise data to String")
+            print("Failed to convert exercise data to String")
             return
         }
         
@@ -181,12 +183,11 @@ extension ChallengeViewModel: SwiftStompDelegate {
     }
     
     func onMessageReceived(swiftStomp: SwiftStomp, message: Any?, messageId: String, destination: String, headers: [String : String]) {
-        print("Received message: \(String(describing: message)), from destination: \(destination)")
         
         // Ensure message is a valid JSON string
         guard let messageString = message as? String,
               let jsonData = messageString.data(using: .utf8) else {
-            print("❌ Invalid message format")
+            print("Invalid message format")
             return
         }
 
@@ -208,10 +209,12 @@ extension ChallengeViewModel: SwiftStompDelegate {
                         self.room?.participants = participants
                     }
                 } else {
-                    print("⚠️ Unexpected JSON format")
+                    print("Unexpected JSON format")
                 }
             } else if destination.contains("/topic/exercise/") {
                 // Handle exercise updates
+                self.exerciseStarted = false
+                self._readyForNextExercise = false
                 let exercise = try JSONDecoder().decode(Exercise.self, from: jsonData)
                 
                 DispatchQueue.main.async {
@@ -219,7 +222,7 @@ extension ChallengeViewModel: SwiftStompDelegate {
                 }
             }
         } catch {
-            print("❌ Failed to parse JSON: \(error)")
+            print("Failed to parse JSON: \(error)")
         }
     }
     

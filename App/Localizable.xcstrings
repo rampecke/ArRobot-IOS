@@ -41,6 +41,9 @@
         }
       }
     },
+    "A new exercise is about to start are you ready?" : {
+
+    },
     "Add instruction" : {
       "localizations" : {
         "de" : {
@@ -1063,6 +1066,9 @@
         }
       }
     },
+    "Read!" : {
+
+    },
     "Reset game" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1105,6 +1111,7 @@
       }
     },
     "Room was created: %@ and has %lld" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {

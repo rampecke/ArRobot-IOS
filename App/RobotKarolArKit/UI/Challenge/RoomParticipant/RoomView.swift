@@ -16,25 +16,41 @@ struct RoomView: View {
     
     var body: some View {
         RoomViewLayout(content: {
-            Group{
-                if viewModel.currentExercise != nil {
-                    self.codeEditor
-                } else if viewModel.room != nil {
-                    Text("Room was created: \(viewModel.room?.code ?? "0") and has \(viewModel.room?.participants.count ?? 0)")
-                    if let participants = viewModel.room?.participants {
-                        ForEach(participants, id: \.id) { participant in
-                            Text("Participant: \(participant.name) has Score: \(participant.score) and isActive: \(participant.isActive)")
+            ZStack{
+                self.codeEditor
+                    .blur(radius: viewModel.readyForNextExercise && viewModel.exerciseStarted ? 0 : 15)
+                
+                if !(viewModel.readyForNextExercise && viewModel.exerciseStarted) {
+                    Color.white.opacity(0.3) // Semi-transparent white overlay
+                                .ignoresSafeArea()
+                    
+                    VStack {
+                        Text("A new exercise is about to start are you ready?")
+                        
+                        Button(action: {
+                            //TODO: SEND OUT MESSAGE THAT I AM READY AND WAIT FOR THE START
+                            viewModel.readyForNextExercise = true
+                            viewModel.exerciseStarted = true
+                        }) {
+                            Text("Read!")
                         }
-                    }
+                    }.frame(width: 300)
+                        .padding()
+                        .background(Color("card_background"))
+                        .cornerRadius(5)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 5)
+                            .stroke(Color("card_border"), lineWidth: 1)
+                        )
+
                 }
             }
         }, viewModel: viewModel)
         .onChange(of: viewModel.currentExercise, {
-            print("Exercise changed")
             if let exercise = viewModel.currentExercise {
-                codeEditor.viewModel.changeExercise(project: Project(worldWidth: exercise.worldWidth, worldLength: exercise.worldLength, name: exercise.exerciseName, exercise: exercise))
-                print("Name of new Exercise: \(exercise.exerciseName)")
-                
+                DispatchQueue.main.async {
+                    codeEditor.viewModel.changeExercise(project: Project(worldWidth: exercise.worldWidth, worldLength: exercise.worldLength, name: exercise.exerciseName, exercise: exercise))
+                }
             }
         })
     }
