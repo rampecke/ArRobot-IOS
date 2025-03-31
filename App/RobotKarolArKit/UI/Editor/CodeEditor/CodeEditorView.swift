@@ -16,7 +16,14 @@ struct CodeEditorView: View {
     
     @Environment(Model.self) var model: Model
     
-    init(project: Project = Project()) {
+    var shouldSave: Bool
+    
+    init(project: Project = Project(), shouldSave: Bool = true) {
+        self.viewModel = CodeEditorViewModel(project: project)
+        self.shouldSave = shouldSave
+    }
+    
+    func changeProject(project: Project) {
         self.viewModel = CodeEditorViewModel(project: project)
     }
 
@@ -59,8 +66,10 @@ struct CodeEditorView: View {
                 InstructionAddBar(viewModel: viewModel)
             }
         }.onDisappear {
-            viewModel.project.lastEdited = Date()
-            model.saveProject(project: viewModel.project)
+            if shouldSave {
+                viewModel.project.lastEdited = Date()
+                model.saveProject(project: viewModel.project)
+            }
             viewModel.reset() //Stop runing of code
         }.toolbar(.hidden, for: .tabBar)
         .navigationTitle(self.viewModel.project.name)

@@ -15,6 +15,7 @@ class ChallengeViewModel {
     var errorMessage: String?
     
     private let urlPrefix = "http://192.168.178.132:8080/rooms"
+    //private let urlPrefix = "http://localhost:8080/rooms"
     
     private let userId: String = UserIdentifier.shared.id
     
@@ -22,6 +23,8 @@ class ChallengeViewModel {
     var userName: String = ""
     
     private var stompClient: SwiftStomp?
+    
+    var currentExercise: Exercise?
         
     // Function to connect to WebSocket via STOMP
     func connectToWebSocket() {
@@ -38,6 +41,7 @@ class ChallengeViewModel {
     func disconnectWebSocket() {
         print("🔴 Disconnecting WebSocket...")
         room = nil
+        currentExercise = nil
         stompClient?.disconnect()
     }
     
@@ -134,6 +138,39 @@ class ChallengeViewModel {
         task.resume()
     }
     
+    func sendExercise(exercise: Exercise) {
+        guard let code = self.room?.code else {
+            return
+        }
+        
+        guard let url = URL(string: "\(self.urlPrefix)/\(code)/exercise") else {
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        // Convert Exercise to JSON String
+        guard let exerciseData = try? JSONEncoder().encode(exercise) else {
+            print("❌ Failed to encode exercise")
+            return
+        }
+        
+        guard let exerciseString = String(data: exerciseData, encoding: .utf8) else {
+            print("❌ Failed to convert exercise data to String")
+            return
+        }
+        
+        let body: [String: String] = [
+            "userId": userId,
+            "exercise": exerciseString
+        ]
+        request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [])
+        
+        let task = URLSession.shared.dataTask(with: request)
+        task.resume()
+    }
 }
 
 // MARK: - STOMP Delegate Methods
@@ -154,23 +191,32 @@ extension ChallengeViewModel: SwiftStompDelegate {
         }
 
         do {
-            // Parse JSON into a dictionary
-            if let json = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any],
-               let participantsData = json["participants"] as? [[String: Any]] {
-                
-                let participants = participantsData.compactMap { dict -> Participant? in
-                    guard let id = dict["id"] as? String,
-                          let name = dict["name"] as? String,
-                          let score = dict["score"] as? Int,
-                          let isActive = dict["isActive"] as? Bool else { return nil }
-                    return Participant(id: id, name: name, score: score, isActive: isActive)
+            if destination.contains("/topic/room/") {
+                // Handle room updates
+                if let json = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any],
+                   let participantsData = json["participants"] as? [[String: Any]] {
+                    
+                    let participants = participantsData.compactMap { dict -> Participant? in
+                        guard let id = dict["id"] as? String,
+                              let name = dict["name"] as? String,
+                              let score = dict["score"] as? Int,
+                              let isActive = dict["isActive"] as? Bool else { return nil }
+                        return Participant(id: id, name: name, score: score, isActive: isActive)
+                    }
+                    
+                    DispatchQueue.main.async {
+                        self.room?.participants = participants
+                    }
+                } else {
+                    print("⚠️ Unexpected JSON format")
                 }
+            } else if destination.contains("/topic/exercise/") {
+                // Handle exercise updates
+                let exercise = try JSONDecoder().decode(Exercise.self, from: jsonData)
                 
                 DispatchQueue.main.async {
-                    self.room?.participants = participants
+                    self.currentExercise = exercise
                 }
-            } else {
-                print("⚠️ Unexpected JSON format")
             }
         } catch {
             print("❌ Failed to parse JSON: \(error)")
@@ -190,8 +236,10 @@ extension ChallengeViewModel: SwiftStompDelegate {
         
         guard let code = self.room?.code else {return}
         print("Subscribing to /topic/room/\(code)")
-        let destination = "/topic/room/\(code)"
-        stompClient?.subscribe(to: destination)
+        stompClient?.subscribe(to: "/topic/room/\(code)")
+        print("Subscribing to /topic/exercise/\(code)")
+        stompClient?.subscribe(to: "/topic/exercise/\(code)")
+        
     }
 }
 

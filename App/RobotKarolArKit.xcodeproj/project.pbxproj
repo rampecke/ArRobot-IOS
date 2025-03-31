@@ -64,10 +64,10 @@
 		A0B0553B2D8F8B1A0067FE86 /* StoneBlockVersion1.usdz in Resources */ = {isa = PBXBuildFile; fileRef = A0B0553A2D8F8B1A0067FE86 /* StoneBlockVersion1.usdz */; };
 		A0B0558D2D90ABA80067FE86 /* ArPlacementMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B0558C2D90ABA80067FE86 /* ArPlacementMenu.swift */; };
 		A0B055C72D90B8C00067FE86 /* Placer.usdz in Resources */ = {isa = PBXBuildFile; fileRef = A0B055C62D90B8C00067FE86 /* Placer.usdz */; };
-		A0B2BC6E2D9805EA00F74F22 /* JoinRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B2BC6D2D9805EA00F74F22 /* JoinRoomView.swift */; };
+		A0B2BC6E2D9805EA00F74F22 /* ChallengeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B2BC6D2D9805EA00F74F22 /* ChallengeView.swift */; };
 		A0B2BC702D98093100F74F22 /* ChallengeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B2BC6F2D98093100F74F22 /* ChallengeViewModel.swift */; };
 		A0B2BCF72D99614D00F74F22 /* SwiftStomp in Frameworks */ = {isa = PBXBuildFile; productRef = A0B2BCF62D99614D00F74F22 /* SwiftStomp */; };
-		A0B2BCF92D99987C00F74F22 /* RoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B2BCF82D99987C00F74F22 /* RoomView.swift */; };
+		A0B2BCFD2D9A94FD00F74F22 /* RoomViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B2BCFC2D9A94FD00F74F22 /* RoomViewLayout.swift */; };
 		A0B36C662D7AE5AF005F33F0 /* AddExpressionIntoEmptyVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B36C652D7AE5AF005F33F0 /* AddExpressionIntoEmptyVisitor.swift */; };
 		A0B36C7F2D7B4423005F33F0 /* StatementDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B36C7E2D7B4423005F33F0 /* StatementDTO.swift */; };
 		A0B36C812D7B4CC7005F33F0 /* ExpressionDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B36C802D7B4CC7005F33F0 /* ExpressionDTO.swift */; };
@@ -140,9 +140,9 @@
 		A0B0553A2D8F8B1A0067FE86 /* StoneBlockVersion1.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = StoneBlockVersion1.usdz; sourceTree = "<group>"; };
 		A0B0558C2D90ABA80067FE86 /* ArPlacementMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArPlacementMenu.swift; sourceTree = "<group>"; };
 		A0B055C62D90B8C00067FE86 /* Placer.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = Placer.usdz; sourceTree = "<group>"; };
-		A0B2BC6D2D9805EA00F74F22 /* JoinRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinRoomView.swift; sourceTree = "<group>"; };
+		A0B2BC6D2D9805EA00F74F22 /* ChallengeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeView.swift; sourceTree = "<group>"; };
 		A0B2BC6F2D98093100F74F22 /* ChallengeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeViewModel.swift; sourceTree = "<group>"; };
-		A0B2BCF82D99987C00F74F22 /* RoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomView.swift; sourceTree = "<group>"; };
+		A0B2BCFC2D9A94FD00F74F22 /* RoomViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomViewLayout.swift; sourceTree = "<group>"; };
 		A0B36C652D7AE5AF005F33F0 /* AddExpressionIntoEmptyVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpressionIntoEmptyVisitor.swift; sourceTree = "<group>"; };
 		A0B36C7E2D7B4423005F33F0 /* StatementDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatementDTO.swift; sourceTree = "<group>"; };
 		A0B36C802D7B4CC7005F33F0 /* ExpressionDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionDTO.swift; sourceTree = "<group>"; };
@@ -156,6 +156,8 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		A0B2BCFE2D9A9AD300F74F22 /* RoomOwner */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = RoomOwner; sourceTree = "<group>"; };
+		A0B2BCFF2D9A9AEA00F74F22 /* RoomParticipant */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = RoomParticipant; sourceTree = "<group>"; };
 		A0B36C692D7AFDFE005F33F0 /* Model */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Model; sourceTree = "<group>"; };
 		A0B36CDF2D7DADE3005F33F0 /* Editor */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Editor; sourceTree = "<group>"; };
 		A0B36D5F2D7F301B005F33F0 /* OverviewPages */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = OverviewPages; sourceTree = "<group>"; };
@@ -402,9 +404,11 @@
 		A0B2BC672D97128A00F74F22 /* Challenge */ = {
 			isa = PBXGroup;
 			children = (
-				A0B2BC6D2D9805EA00F74F22 /* JoinRoomView.swift */,
+				A0B2BCFF2D9A9AEA00F74F22 /* RoomParticipant */,
+				A0B2BCFE2D9A9AD300F74F22 /* RoomOwner */,
+				A0B2BC6D2D9805EA00F74F22 /* ChallengeView.swift */,
 				A0B2BC6F2D98093100F74F22 /* ChallengeViewModel.swift */,
-				A0B2BCF82D99987C00F74F22 /* RoomView.swift */,
+				A0B2BCFC2D9A94FD00F74F22 /* RoomViewLayout.swift */,
 			);
 			path = Challenge;
 			sourceTree = "<group>";
@@ -433,6 +437,8 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				A0B2BCFE2D9A9AD300F74F22 /* RoomOwner */,
+				A0B2BCFF2D9A9AEA00F74F22 /* RoomParticipant */,
 				A0B36C692D7AFDFE005F33F0 /* Model */,
 				A0B36CDF2D7DADE3005F33F0 /* Editor */,
 				A0B36D5F2D7F301B005F33F0 /* OverviewPages */,
@@ -526,7 +532,7 @@
 				A02B6A962C13A26400CAFF82 /* PlaceStone.swift in Sources */,
 				A06BD7DD2BAF36F600863CA5 /* Direction.swift in Sources */,
 				A0B5A1312D714EBA00A02BA9 /* EmptyExpression.swift in Sources */,
-				A0B2BC6E2D9805EA00F74F22 /* JoinRoomView.swift in Sources */,
+				A0B2BC6E2D9805EA00F74F22 /* ChallengeView.swift in Sources */,
 				A0B40CA62D71BD0400AEFD40 /* AddExpressionVisitor.swift in Sources */,
 				A02B6A982C13A2DE00CAFF82 /* PlaceWater.swift in Sources */,
 				A02B6A8C2C13A05500CAFF82 /* LeftTurn.swift in Sources */,
@@ -535,10 +541,10 @@
 				A0B36D762D8242DB005F33F0 /* CopyCodeBlockVisitor.swift in Sources */,
 				A02B6AD82C17382E00CAFF82 /* ARSimulator.swift in Sources */,
 				A01483072D71188D00AACE8D /* IsBlock.swift in Sources */,
-				A0B2BCF92D99987C00F74F22 /* RoomView.swift in Sources */,
 				A01482EE2D70DE6C00AACE8D /* AddStatementVisitor.swift in Sources */,
 				A09390EF2C1DBFBD009DF760 /* While.swift in Sources */,
 				A0B36C7F2D7B4423005F33F0 /* StatementDTO.swift in Sources */,
+				A0B2BCFD2D9A94FD00F74F22 /* RoomViewLayout.swift in Sources */,
 				A02CAC222D79A13100E751DF /* ExecutionStatusLable.swift in Sources */,
 				A06BD7D42BAEA3ED00863CA5 /* World.swift in Sources */,
 				A01483052D71175F00AACE8D /* Not.swift in Sources */,

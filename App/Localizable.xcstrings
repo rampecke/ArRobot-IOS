@@ -96,7 +96,14 @@
       }
     },
     "Challenge" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Herrausforderung"
+          }
+        }
+      }
     },
     "Conditions" : {
       "extractionState" : "manual",
@@ -105,6 +112,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bedingungen"
+          }
+        }
+      }
+    },
+    "Connected" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verbunden"
           }
         }
       }
@@ -120,6 +137,16 @@
         }
       }
     },
+    "Create" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erstellen"
+          }
+        }
+      }
+    },
     "Create project with exercise" : {
       "localizations" : {
         "de" : {
@@ -131,7 +158,14 @@
       }
     },
     "Create Room" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erstelle neuen Raum"
+          }
+        }
+      }
     },
     "Date" : {
       "localizations" : {
@@ -249,6 +283,16 @@
         }
       }
     },
+    "Exercise received %@" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aufgabe angekommen %@"
+          }
+        }
+      }
+    },
     "Exercise Templates" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -320,6 +364,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Exportiere %@"
+          }
+        }
+      }
+    },
+    "Go back and add a new exercise template!" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geh zurück und erstelle ein neues Template!"
           }
         }
       }
@@ -583,8 +637,25 @@
         }
       }
     },
+    "Join" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beitreten"
+          }
+        }
+      }
+    },
     "Join Room" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tritt einem Raum bei"
+          }
+        }
+      }
     },
     "Length:" : {
       "localizations" : {
@@ -643,6 +714,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "It is not possible to pick up a block here"
+          }
+        }
+      }
+    },
+    "Make sure you shared the correct code" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stelle sicher du hast den richtigen Code geteilt"
           }
         }
       }
@@ -706,6 +787,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nächster Schritt"
+          }
+        }
+      }
+    },
+    "No participants joined yet!" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keine Teilnehmer beigetreten bisher!"
           }
         }
       }
@@ -774,6 +865,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Checks if one of two expressions is true"
+          }
+        }
+      }
+    },
+    "Participants" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Teilnehmer"
           }
         }
       }
@@ -973,15 +1074,58 @@
         }
       }
     },
+    "Room" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Raum"
+          }
+        }
+      }
+    },
     "Room Code" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Raum Nummer"
+          }
+        }
+      }
+    },
+    "Room Info" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Raum Info"
+          }
+        }
+      }
     },
     "Room was created: %@ and has %lld" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Raum wurde erstellt: %1$@ und hat %2$lld"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Room was created: %1$@ and has %2$lld"
+          }
+        }
+      }
+    },
+    "RoomCode: %@" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Raum Code: %@"
           }
         }
       }
@@ -992,6 +1136,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Speichern"
+          }
+        }
+      }
+    },
+    "Score" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Punkte"
           }
         }
       }
@@ -1081,6 +1235,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Successful execution"
+          }
+        }
+      }
+    },
+    "There are no exercises available!" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keine Aufgaben verfügbar!"
           }
         }
       }
@@ -1209,7 +1373,14 @@
       }
     },
     "User Name" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nutzer Name"
+          }
+        }
+      }
     },
     "while" : {
       "extractionState" : "manual",

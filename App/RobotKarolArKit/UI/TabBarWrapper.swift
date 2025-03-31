@@ -25,9 +25,9 @@ struct TabBarWrapper: View {
             }.tag(1)
             
             NavigationStack {
-                JoinRoomView()
+                ChallengeView()
             }.tabItem {
-                Label("Challenge", systemImage: "list.clipboard")
+                Label("Challenge", systemImage: "medal")
             }.tag(2)
         }.environment(\.tabBarSelection, $selectedTab)
         .environment(\.horizontalSizeClass, .compact)

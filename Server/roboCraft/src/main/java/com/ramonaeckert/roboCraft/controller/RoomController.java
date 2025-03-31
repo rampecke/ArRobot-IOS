@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
@@ -126,11 +125,29 @@ public class RoomController {
             }
         });
 
-        // Send message to all subscribed clients in this room
+        // Send updated ParticipantList to all subscribed clients in this room
         messagingTemplate.convertAndSend("/topic/room/" + code,
                 Map.of(
                         "participants", room.getParticipants()
                 ));
+
+        return ResponseEntity.ok(true);
+    }
+
+    @PostMapping("/{code}/exercise")
+    public ResponseEntity<Boolean> sendExercise(@PathVariable String code, @RequestBody Map<String, String> requestBody) {
+        String userId = requestBody.get("userId");
+        String exerciseData = requestBody.get("exercise");
+
+        Room room = rooms.get(code);
+        if (room == null) {
+            return ResponseEntity.badRequest().body(false);
+        } else if (!room.getOwner().equals(userId)) {
+            return ResponseEntity.badRequest().body(false);
+        }
+
+        // Send exercise to all subscribed clients in this room
+        messagingTemplate.convertAndSend("/topic/exercise/" + code, exerciseData);
 
         return ResponseEntity.ok(true);
     }
