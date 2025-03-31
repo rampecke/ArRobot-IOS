@@ -11,17 +11,19 @@ import ARKit
 
 //Needed so we can preload the models and don't have to load the model for each block
 class ArModelLoader {
+    static let shared = ArModelLoader()
+    
     private var robotModel: Entity?
     private var grasBlockModel: ModelEntity?
     private var waterBlockModel: ModelEntity?
     private var stoneBlockModel: ModelEntity?
     
-    init() {
+    private init() {
         self.robotModel = loadModel(modelName: "RobotVersion7")
         self.grasBlockModel = loadModelEntity(modelName: "GrasBlockVersion4")
         self.waterBlockModel = loadModelEntity(modelName: "WaterBlockVersion1")
         self.stoneBlockModel = loadModelEntity(modelName: "StoneBlockVersion1")
-    }
+   }
     
     private func loadModel(modelName: String) -> Entity? {
         guard let entity = try? Entity.load(named: modelName) else {

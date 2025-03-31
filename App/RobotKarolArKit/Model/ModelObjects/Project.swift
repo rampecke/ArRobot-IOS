@@ -43,5 +43,5 @@ class Project: Identifiable, Codable, Transferable {
 }
 
 extension UTType {
-    static var project = UTType(exportedAs: "com.ramonaeckert.RobotKarolArKit.roboArProject")
+    static var project = UTType(exportedAs: "de.tum.cit.aet.robocraft.roboArProject")
 }

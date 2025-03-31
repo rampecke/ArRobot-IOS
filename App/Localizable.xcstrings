@@ -41,9 +41,6 @@
         }
       }
     },
-    "A new exercise is about to start are you ready?" : {
-
-    },
     "Add instruction" : {
       "localizations" : {
         "de" : {
@@ -87,6 +84,9 @@
           }
         }
       }
+    },
+    "Are you ready?" : {
+
     },
     "ArPicker" : {
       "localizations" : {
@@ -1255,6 +1255,9 @@
           }
         }
       }
+    },
+    "There is a new exercise. Let me load it for you." : {
+
     },
     "turnLeft" : {
       "extractionState" : "manual",

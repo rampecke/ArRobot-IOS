@@ -14,32 +14,27 @@ class Block: Codable {
     var blockTyp: BlockTyp
     var blockEntity: Entity = Entity()
     var blockNumber: Int
-    var arModelLoader: ArModelLoader
     
-    init(blockTyp: BlockTyp, blockNumber: Int, arModelLoader: ArModelLoader) {
+    init(blockTyp: BlockTyp, blockNumber: Int) {
         self.blockTyp = blockTyp
         self.blockNumber = blockNumber
-        self.arModelLoader = arModelLoader
     }
     
     func createArBlock(position: (Int, Int), tileWidth: Float, tileHight: Float, worldEntity: Entity, isTransparent: Bool = false) {
-        //TODO: Move ModelLoader
-        let modelLoader = ArModelLoader()
-
         if blockTyp == .GRAS {
-            guard let newGrasBlock = modelLoader.returnCopyOf(modelType: .grasBlock) else {
+            guard let newGrasBlock = ArModelLoader.shared.returnCopyOf(modelType: .grasBlock) else {
                 return
             }
             
             blockEntity = newGrasBlock
         } else if blockTyp == .WATER{
-            guard let newWaterBlock = modelLoader.returnCopyOf(modelType: .waterBlock) else {
+            guard let newWaterBlock = ArModelLoader.shared.returnCopyOf(modelType: .waterBlock) else {
                 return
             }
              
             blockEntity = newWaterBlock
         } else if blockTyp == .STONE {
-            guard let newStoneBlock = modelLoader.returnCopyOf(modelType: .stoneBlock) else {
+            guard let newStoneBlock = ArModelLoader.shared.returnCopyOf(modelType: .stoneBlock) else {
                 return
             }
              
@@ -82,7 +77,6 @@ class Block: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.blockTyp = try container.decode(BlockTyp.self, forKey: .blockType)
         self.blockNumber = try container.decode(Int.self, forKey: .blockNumber)
-        self.arModelLoader = ArModelLoader()
     }
 
     func encode(to encoder: Encoder) throws {

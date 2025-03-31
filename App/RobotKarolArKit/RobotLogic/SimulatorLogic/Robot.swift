@@ -14,12 +14,10 @@ class Robot {
     @ObservationIgnored private var position: (Int, Int)
     
     private var robotEntity: Entity = Entity()
-    var arModelLoader: ArModelLoader
     
-    init(facingDirection: Direction, position: (Int, Int), arModelLoader: ArModelLoader) {
+    init(facingDirection: Direction, position: (Int, Int)) {
         self.facingDirection = facingDirection
         self.position = position
-        self.arModelLoader = arModelLoader
     }
     
     func getPosition() -> (Int, Int) {
@@ -119,7 +117,7 @@ class Robot {
     }
     
     func createArRobot(tileWidth: Float, tileHeight: Float, worldEntity: Entity) {
-        guard let newRobotEntity = arModelLoader.returnCopyOf(modelType: .robot) else {
+        guard let newRobotEntity = ArModelLoader.shared.returnCopyOf(modelType: .robot) else {
             return
         }
         

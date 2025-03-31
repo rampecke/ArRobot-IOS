@@ -11,18 +11,15 @@ import RealityKit
 @Observable
 class Tile: Codable, Equatable {
     private var blocks: [Block]
-    var arModelLoader: ArModelLoader
     
-    init(arModelLoader: ArModelLoader, blocks: [Block] = []) {
+    init(blocks: [Block] = []) {
         self.blocks = blocks
-        self.arModelLoader = arModelLoader
     }
     
     //Decode and Encode
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.blocks = try container.decode([Block].self, forKey: .blocks)
-        self.arModelLoader = ArModelLoader()
     }
 
     func encode(to encoder: Encoder) throws {
@@ -51,13 +48,13 @@ class Tile: Codable, Equatable {
     }
     
     func addBlock(_ block: BlockTyp, tileWidth: Float, tileHight: Float, worldEntity: Entity, tilePosition: (Int, Int)) {
-        let newBlock = Block(blockTyp: block, blockNumber: self.blocks.count, arModelLoader: arModelLoader)
+        let newBlock = Block(blockTyp: block, blockNumber: self.blocks.count)
         newBlock.createArBlock(position: tilePosition, tileWidth: tileWidth, tileHight: tileHight, worldEntity: worldEntity)
         blocks.append(newBlock)
     }
     
     func addBlockWithoutAR(_ block: BlockTyp) {
-        let newBlock = Block(blockTyp: block, blockNumber: self.blocks.count, arModelLoader: arModelLoader)
+        let newBlock = Block(blockTyp: block, blockNumber: self.blocks.count)
         blocks.append(newBlock)
     }
     

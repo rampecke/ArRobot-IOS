@@ -21,21 +21,18 @@ class World {
     var worldEntity: Entity = Entity()
     var arWorldWasCreated: Bool = false
     
-    var arModelLoader: ArModelLoader
-    
     var exerciseTiles: [[Tile]]
     
-    init(width: Int, length: Int, exerciseTiles: [[Tile]] = [[]], arModelLoader: ArModelLoader) {
+    init(width: Int, length: Int, exerciseTiles: [[Tile]] = [[]]) {
         self.width = width
         self.length = length
-        self.robot = Robot(facingDirection: Direction.SOUTH, position: (0,0), arModelLoader: arModelLoader)
-        self.arModelLoader = arModelLoader
+        self.robot = Robot(facingDirection: Direction.SOUTH, position: (0,0))
         
         var createTiles : [[Tile]]  = []
         for _ in 0..<width {
             var tilesRow: [Tile] = []
             for _ in 0..<length {
-                tilesRow.append(Tile(arModelLoader: arModelLoader))
+                tilesRow.append(Tile())
             }
             createTiles.append(tilesRow)
         }
@@ -89,7 +86,7 @@ class World {
         for _ in 0..<width {
             var tilesRow: [Tile] = []
             for _ in 0..<length {
-                tilesRow.append(Tile(arModelLoader: arModelLoader))
+                tilesRow.append(Tile())
             }
             createTiles.append(tilesRow)
         }
@@ -272,7 +269,7 @@ class World {
         let anchor = worldEntity.anchor
         
         //Reset Robot and Field
-        self.robot = Robot(facingDirection: Direction.SOUTH, position: (0,0), arModelLoader: arModelLoader)
+        self.robot = Robot(facingDirection: Direction.SOUTH, position: (0,0))
         self.tiles = createTiles()
         
         //Reset ArWorld

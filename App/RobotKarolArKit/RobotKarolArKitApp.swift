@@ -10,6 +10,9 @@ import SwiftUI
 @main
 struct RobotKarolArKitApp: App {
     @State var model: Model = Model()
+    init() {
+        _ = ArModelLoader.shared // Ensures singleton is initialized
+    }
     
     var body: some Scene {
         WindowGroup {

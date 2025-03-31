@@ -25,14 +25,18 @@ struct RoomView: View {
                                 .ignoresSafeArea()
                     
                     VStack {
-                        Text("A new exercise is about to start are you ready?")
+                        Text(viewModel.exerciseDidLoad ? "Are you ready?" : "There is a new exercise. Let me load it for you.")
                         
-                        Button(action: {
-                            //TODO: SEND OUT MESSAGE THAT I AM READY AND WAIT FOR THE START
-                            viewModel.readyForNextExercise = true
-                            viewModel.exerciseStarted = true
-                        }) {
-                            Text("Read!")
+                        if viewModel.exerciseDidLoad {
+                            Button(action: {
+                                //TODO: SEND OUT MESSAGE THAT I AM READY AND WAIT FOR THE START
+                                viewModel.readyForNextExercise = true
+                                viewModel.exerciseStarted = true
+                            }) {
+                                Text("Read!")
+                            }
+                        } else {
+                            ProgressView()
                         }
                     }.frame(width: 300)
                         .padding()
@@ -50,6 +54,7 @@ struct RoomView: View {
             if let exercise = viewModel.currentExercise {
                 DispatchQueue.main.async {
                     codeEditor.viewModel.changeExercise(project: Project(worldWidth: exercise.worldWidth, worldLength: exercise.worldLength, name: exercise.exerciseName, exercise: exercise))
+                    viewModel.exerciseDidLoad = true
                 }
             }
         })

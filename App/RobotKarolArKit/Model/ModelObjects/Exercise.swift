@@ -58,7 +58,7 @@ class Exercise: Identifiable, Codable, Transferable, Equatable {
 }
 
 extension UTType {
-    static var exercise = UTType(exportedAs: "com.ramonaeckert.RobotKarolArKit.roboArExercise")
+    static var exercise = UTType(exportedAs: "de.tum.cit.aet.robocraft.roboArExercise")
 }
 
 enum ExerciseDifficulty: Codable, Comparable {

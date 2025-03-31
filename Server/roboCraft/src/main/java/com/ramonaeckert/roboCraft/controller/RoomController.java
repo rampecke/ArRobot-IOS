@@ -41,7 +41,7 @@ public class RoomController {
         }
 
         // Create new room
-        String uniqueCode = UUID.randomUUID().toString().substring(0, 8);
+        String uniqueCode = UUID.randomUUID().toString().substring(0, 4);
         Room room = new Room(uniqueCode, owner);
         rooms.put(uniqueCode, room);
 
