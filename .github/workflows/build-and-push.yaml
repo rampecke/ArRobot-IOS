@@ -26,8 +26,8 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
-          context: Server
-          file: Dockerfile
+          context: ./Server
+          file: ./Server/Dockerfile
           push: true
           tags: server:latest
           platforms: linux/amd64, linux/arm64
