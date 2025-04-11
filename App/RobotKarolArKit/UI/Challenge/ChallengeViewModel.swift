@@ -14,8 +14,8 @@ class ChallengeViewModel {
     var isLoading: Bool = false
     var errorMessage: String?
     
-    private let urlPrefix = "http://192.168.178.132:8080/rooms"
-    //private let urlPrefix = "http://localhost:8080/rooms"
+    //private let urlPrefix = "http://192.168.178.132:8080/rooms"
+    private let urlPrefix = "http://localhost:8080/rooms"
     
     private let userId: String = UserIdentifier.shared.id
     
@@ -28,6 +28,9 @@ class ChallengeViewModel {
     var readyForNextExercise: Bool = true
     var exerciseStarted: Bool = true
     var exerciseDidLoad: Bool = true
+    
+    var plannedExerciseList: [Exercise] = []
+    var pastExerciseList: [Exercise] = []
         
     // Function to connect to WebSocket via STOMP
     func connectToWebSocket() {
@@ -191,44 +194,44 @@ extension ChallengeViewModel: SwiftStompDelegate {
             return
         }
 
-        do {
-            if destination.contains("/topic/room/") {
-                // Handle room updates
-                if let json = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any],
-                   let participantsData = json["participants"] as? [[String: Any]] {
-                    
-                    let participants = participantsData.compactMap { dict -> Participant? in
-                        guard let id = dict["id"] as? String,
-                              let name = dict["name"] as? String,
-                              let score = dict["score"] as? Int,
-                              let isActive = dict["isActive"] as? Bool else { return nil }
-                        return Participant(id: id, name: name, score: score, isActive: isActive)
-                    }
-                    
-                    DispatchQueue.main.async {
+        if destination.contains("/topic/room/") {
+            // Handle room updates
+            DispatchQueue.main.async {
+                do {
+                    if let json = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any],
+                       let participantsData = json["participants"] as? [[String: Any]] {
+                        let participants = participantsData.compactMap { dict -> Participant? in
+                            guard let id = dict["id"] as? String,
+                                  let name = dict["name"] as? String,
+                                  let score = dict["score"] as? Int,
+                                  let isActive = dict["isActive"] as? Bool else { return nil }
+                            return Participant(id: id, name: name, score: score, isActive: isActive)
+                        }
                         self.room?.participants = participants
+                    } else {
+                        print("Unexpected JSON format")
                     }
-                } else {
-                    print("Unexpected JSON format")
-                }
-            } else if destination.contains("/topic/exercise/") {
-                self.exerciseStarted = false
-                self.readyForNextExercise = false
-                self.exerciseDidLoad = false
-                
-                DispatchQueue.main.async {
-                    do {
-                        let start = Date()
-                        let exercise = try JSONDecoder().decode(Exercise.self, from: jsonData)
-                        print("Time to decode: \(start.timeIntervalSinceNow)")
-                        self.currentExercise = exercise
-                    } catch {
-                        print("Failed to decode exercise")
-                    }
+                } catch {
+                    print("Failed to parse JSON: \(error)")
                 }
             }
-        } catch {
-            print("Failed to parse JSON: \(error)")
+        } else if destination.contains("/topic/exercise/") {
+            self.exerciseStarted = false
+            self.readyForNextExercise = false
+            self.exerciseDidLoad = false
+            
+            DispatchQueue.main.async {
+                do {
+                    let exercise = try JSONDecoder().decode(Exercise.self, from: jsonData)
+                    if self.currentExercise == exercise {
+                        self.exerciseDidLoad = true
+                    } else {
+                        self.currentExercise = exercise
+                    }
+                } catch {
+                    print("Failed to decode exercise")
+                }
+            }
         }
     }
     

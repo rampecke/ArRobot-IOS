@@ -27,7 +27,9 @@ struct NonArView: View {
             } else {
                 ArViewControlBar(viewModel: viewModel)
             }
-        }
+        }.onAppear(perform: {
+            viewModel.reset()
+        })
     }
 }
 

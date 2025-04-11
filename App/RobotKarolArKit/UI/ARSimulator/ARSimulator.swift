@@ -24,8 +24,9 @@ struct ARSimulator: View {
             } else {
                 ArPlacementMenu(wasPlaced: $wasPlaced, viewModel: viewModel)
             }
-
-        }
+        }.onAppear(perform: {
+            viewModel.reset()
+        })
     }
 }
 

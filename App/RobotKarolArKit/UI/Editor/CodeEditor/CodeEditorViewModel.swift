@@ -81,7 +81,7 @@ class CodeEditorViewModel {
             self.world.setLength(length: 6)
         }
         
-        self.world.resetWorld()
+        reset()
         self.world.drawExerciseTiles()
     }
     

@@ -9,37 +9,113 @@ import SwiftUI
 
 struct ExerciseSelection: View {
     @Bindable var viewModel: ChallengeViewModel
-    @Environment(Model.self) var model: Model
-    
-    let columns = Array(repeating: GridItem(.flexible()), count: 2)
     
     var body: some View {
         VStack {
-            if model.exerciseTemplates.isEmpty {
-                ContentUnavailableView(label: {
-                    Label("There are no exercises available!", systemImage: "list.clipboard")
-                }, description: {
-                    Text("Go back and add a new exercise template!")
-                })
-            } else {
-                ScrollView {
-                    LazyVGrid(columns: columns, spacing: 30) {
-                        ForEach(model.exerciseTemplates, id: \.id) { exercise in
-                            FolderRepresentation(isShowingPopover: .constant(false), folderName: .constant(exercise.exerciseName), colorString: exercise.exerciseDifficulty.colorName, date: exercise.lastEdited).onTapGesture(perform: {
-                                viewModel.sendExercise(exercise: exercise)
-                            })
+            VStack {
+                if viewModel.pastExerciseList.isEmpty && viewModel.currentExercise == nil && viewModel.plannedExerciseList.isEmpty {
+                    ContentUnavailableView(label: {
+                        Label("No Exercise Template selected yet!", systemImage: "list.clipboard")
+                    }, description: {
+                        Text("Please add a exercise to distribute")
+                    }).frame(minHeight: 100, idealHeight: 400)
+                } else {
+                    HStack{
+                        Text("ExerciseName")
+                            .frame(width: 100)
+                            .lineLimit(1)
+                            .truncationMode(.tail)
+                        Text("Difficulty")
+                            .frame(width: 100)
+                            .lineLimit(1)
+                            .truncationMode(.tail)
+                        Text("Status")
+                            .frame(width: 100)
+                            .lineLimit(1)
+                            .truncationMode(.tail)
+                    }
+                    
+                    Divider()
+                    
+                    ScrollView {
+                        if !viewModel.pastExerciseList.isEmpty {
+                            ForEach (viewModel.pastExerciseList, id: \.id) { exercise in
+                                HStack{
+                                    Text("\(exercise.exerciseName)")
+                                        .frame(width: 100)
+                                        .lineLimit(1)
+                                        .truncationMode(.tail)
+                                    Text("\(exercise.exerciseDifficulty)")
+                                        .frame(width: 100)
+                                        .lineLimit(1)
+                                        .truncationMode(.tail)
+                                    Text("Done")
+                                        .frame(width: 100)
+                                        .lineLimit(1)
+                                        .truncationMode(.tail)
+                                }
+                            }
                         }
-                    }.padding()
-                }.frame(maxWidth: .infinity, maxHeight: .infinity)
-            }
+                        
+                        if let currentExercise = viewModel.currentExercise {
+                            HStack{
+                                Text("\(currentExercise.exerciseName)")
+                                    .frame(width: 100)
+                                    .lineLimit(1)
+                                    .truncationMode(.tail)
+                                Text("\(currentExercise.exerciseDifficulty)")
+                                    .frame(width: 100)
+                                    .lineLimit(1)
+                                    .truncationMode(.tail)
+                                ProgressView()
+                                    .frame(width: 100)
+                            }
+                        }
+                        
+                        if !viewModel.plannedExerciseList.isEmpty {
+                            ForEach (viewModel.plannedExerciseList, id: \.id) { exercise in
+                                HStack{
+                                    Text("\(exercise.exerciseName)")
+                                        .frame(width: 100)
+                                        .lineLimit(1)
+                                        .truncationMode(.tail)
+                                    Text("\(exercise.exerciseDifficulty)")
+                                        .frame(width: 100)
+                                        .lineLimit(1)
+                                        .truncationMode(.tail)
+                                    Text("Planned")
+                                        .frame(width: 100)
+                                        .lineLimit(1)
+                                        .truncationMode(.tail)
+                                }
+                            }
+                        }
+                    }.frame(minHeight: 100, idealHeight: 400)
+                }
+            }.frame(width: 300)
+                .padding()
+                .background(Color("card_background"))
+                .cornerRadius(5)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 5)
+                    .stroke(Color("card_border"), lineWidth: 1)
+                )
             
-            if let exercise = viewModel.currentExercise {
-                Text("Exercise received \(exercise.exerciseName)")
-            }
+            Button(action: {
+                if let exercise = viewModel.currentExercise {
+                    viewModel.pastExerciseList.append(exercise)
+                }
+                if let exercise = viewModel.plannedExerciseList.first {
+                    viewModel.sendExercise(exercise: exercise)
+                    viewModel.plannedExerciseList.removeFirst()
+                }
+            }, label: {
+                Text("Send next exercise")
+            })
         }
     }
 }
 
 #Preview {
-    ExerciseSelection(viewModel: ChallengeViewModel()).environment(MockModel() as Model)
+    ExerciseSelection(viewModel: ChallengeViewModel())
 }

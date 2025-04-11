@@ -21,13 +21,13 @@ struct RoomView: View {
                     .blur(radius: viewModel.readyForNextExercise && viewModel.exerciseStarted ? 0 : 15)
                 
                 if !(viewModel.readyForNextExercise && viewModel.exerciseStarted) {
-                    Color.white.opacity(0.3) // Semi-transparent white overlay
+                    Color.white.opacity(0.5) // Semi-transparent white overlay
                                 .ignoresSafeArea()
                     
                     VStack {
-                        Text(viewModel.exerciseDidLoad ? "Are you ready?" : "There is a new exercise. Let me load it for you.")
-                        
                         if viewModel.exerciseDidLoad {
+                            Text("There is a new Exercise. Are you ready?")
+                            
                             Button(action: {
                                 //TODO: SEND OUT MESSAGE THAT I AM READY AND WAIT FOR THE START
                                 viewModel.readyForNextExercise = true
@@ -54,6 +54,11 @@ struct RoomView: View {
             if let exercise = viewModel.currentExercise {
                 DispatchQueue.main.async {
                     codeEditor.viewModel.changeExercise(project: Project(worldWidth: exercise.worldWidth, worldLength: exercise.worldLength, name: exercise.exerciseName, exercise: exercise))
+                    viewModel.exerciseDidLoad = true
+                }
+            } else {
+                DispatchQueue.main.async {
+                    codeEditor.viewModel.changeExercise(project: Project())
                     viewModel.exerciseDidLoad = true
                 }
             }

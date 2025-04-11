@@ -85,9 +85,6 @@
         }
       }
     },
-    "Are you ready?" : {
-
-    },
     "ArPicker" : {
       "localizations" : {
         "de" : {
@@ -221,6 +218,9 @@
         }
       }
     },
+    "Done" : {
+
+    },
     "Easy" : {
       "localizations" : {
         "de" : {
@@ -287,6 +287,7 @@
       }
     },
     "Exercise received %@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -340,6 +341,9 @@
           }
         }
       }
+    },
+    "ExerciseName" : {
+
     },
     "Exercises" : {
       "localizations" : {
@@ -794,6 +798,9 @@
         }
       }
     },
+    "No Exercise Template selected yet!" : {
+
+    },
     "No participants joined yet!" : {
       "localizations" : {
         "de" : {
@@ -1046,6 +1053,12 @@
         }
       }
     },
+    "Planned" : {
+
+    },
+    "Please add a exercise to distribute" : {
+
+    },
     "Project Name" : {
       "localizations" : {
         "de" : {
@@ -1157,6 +1170,9 @@
         }
       }
     },
+    "Send next exercise" : {
+
+    },
     "Sorting" : {
       "localizations" : {
         "de" : {
@@ -1177,6 +1193,9 @@
           }
         }
       }
+    },
+    "Status" : {
+
     },
     "step" : {
       "extractionState" : "manual",
@@ -1256,7 +1275,7 @@
         }
       }
     },
-    "There is a new exercise. Let me load it for you." : {
+    "There is a new Exercise. Are you ready?" : {
 
     },
     "turnLeft" : {

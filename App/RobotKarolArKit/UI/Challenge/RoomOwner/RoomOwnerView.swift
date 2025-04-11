@@ -11,6 +11,7 @@ import CoreImage.CIFilterBuiltins
 
 struct RoomOwnerView: View {
     @Bindable var viewModel: ChallengeViewModel
+    @Environment(Model.self) var model: Model
     
     @State var infoDisplay: Int = 0
     
@@ -74,8 +75,26 @@ struct RoomOwnerView: View {
                 }
                 
                 Spacer()
+                
+                if model.exerciseTemplates.isEmpty {
+                    ContentUnavailableView(label: {
+                        Label("There are no exercises available!", systemImage: "list.clipboard")
+                    }, description: {
+                        Text("Go back and add a new exercise template!")
+                    })
+                } else {
+                    ScrollView(.horizontal) {
+                        HStack {
+                            ForEach(model.exerciseTemplates, id: \.id) { exercise in
+                                FolderRepresentation(isShowingPopover: .constant(false), folderName: .constant(exercise.exerciseName), colorString: exercise.exerciseDifficulty.colorName, date: exercise.lastEdited).onTapGesture(perform: {
+                                    viewModel.plannedExerciseList.append(exercise)
+                                })
+                            }
+                        }.padding()
+                    }.frame(height: 180)
+                }
             }
-        }, viewModel: viewModel)
+        }, viewModel: viewModel).toolbar(.hidden, for: .tabBar)
     }
 }
 
