@@ -26,8 +26,8 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
-          context: ./Server
-          file: ./Server/Dockerfile
+          context: ./Server/roboCraft
+          file: ./Server/roboCraft/Dockerfile
           push: true
-          tags: server:latest
+          tags: ghcr.io/rampecke/roboCraft:latest
           platforms: linux/amd64, linux/arm64
