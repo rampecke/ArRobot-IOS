@@ -29,5 +29,5 @@ jobs:
           context: ./Server/roboCraft
           file: ./Server/roboCraft/Dockerfile
           push: true
-          tags: ghcr.io/rampecke/roboCraft:latest
+          tags: ghcr.io/rampecke/robocraft:latest
           platforms: linux/amd64, linux/arm64
