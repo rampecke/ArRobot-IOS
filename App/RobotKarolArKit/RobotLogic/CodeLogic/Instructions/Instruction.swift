@@ -1,0 +1,23 @@
+//
+//  Visitable.swift
+//  RobotKarolArKit
+//
+//  Created by Ramona Eckert on 27.03.24.
+//
+
+import Foundation
+import CoreTransferable
+import UniformTypeIdentifiers
+
+//Replaced Protocoll with normal class so it can work with Drag and Drop
+protocol Instruction: Identifiable, Transferable, Codable {
+    var id: UUID {get}
+    
+    func accept(visitor: Visitor)
+}
+
+extension UTType {
+    static var statement = UTType(exportedAs: "de.tum.cit.aet.robocraft.statement")
+    static var expression = UTType(exportedAs: "de.tum.cit.aet.robocraft.expression")
+}
+
