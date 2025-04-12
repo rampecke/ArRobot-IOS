@@ -12,4 +12,5 @@ struct Participant: Identifiable, Codable, Equatable {
     var name: String
     var score: Int
     var isActive: Bool
+    var isReady: Bool
 }

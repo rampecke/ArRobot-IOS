@@ -12,6 +12,7 @@ public class Room {
     private Instant lastOpened;
 
     private List<Exercise> exercises;
+    private Instant activeExerciseStartTime;
 
 
     public Room(String code, String owner) {
@@ -20,6 +21,15 @@ public class Room {
         this.participants = new CopyOnWriteArrayList<>();
         this.lastOpened = Instant.now();
         this.exercises = new ArrayList<Exercise>();
+        this.activeExerciseStartTime = null;
+    }
+
+    public void setActiveExerciseStartTime(Instant activeExerciseStartTime) {
+        this.activeExerciseStartTime = activeExerciseStartTime;
+    }
+
+    public Instant getActiveExerciseStartTime() {
+        return activeExerciseStartTime;
     }
 
     public String getCode() {
@@ -54,6 +64,12 @@ public class Room {
     }
 
     public void addNewExercise(String exerciseId) {
+        for (Exercise exercise : exercises) {
+            if (exercise.getId().equals(exerciseId)) {
+                return;
+            }
+        }
+
         for (Exercise exercise : exercises) {
             exercise.setStatus("past");
         }

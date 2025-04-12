@@ -41,6 +41,18 @@ class ChallengeViewModel {
     init() {
        self.fetchOwnedRooms()
     }
+    
+    func resetViewModel() {
+        self.room = nil
+        self.isLoading = false
+        self.errorMessage = nil
+        self.currentExercise = nil
+        self.readyForNextExercise = true
+        self.exerciseStarted = true
+        self.exerciseDidLoad = true
+        self.plannedExerciseList = []
+        self.pastExerciseList = []
+    }
         
     // Function to connect to WebSocket via STOMP
     func connectToWebSocket() {
@@ -345,6 +357,45 @@ class ChallengeViewModel {
 
         task.resume()
     }
+    
+    func markUserReady() {
+        guard let roomCode = self.room?.code else {
+            print("No roomCode")
+            return
+        }
+        
+        guard let url = URL(string: "\(urlPrefix)/\(roomCode)/ready") else {
+            print("Invalid URL")
+            return
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        let body: [String: String] = [
+            "userId": userId
+        ]
+        request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [])
+
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Request failed: \(error.localizedDescription)")
+                return
+            }
+
+            guard let httpResponse = response as? HTTPURLResponse else {
+                print("Invalid response")
+                return
+            }
+
+            if httpResponse.statusCode != 200 {
+                print("Failed to mark as ready. Status code: \(httpResponse.statusCode)")
+            }
+        }
+
+        task.resume()
+    }
 }
 
 // MARK: - STOMP Delegate Methods
@@ -379,8 +430,9 @@ extension ChallengeViewModel: SwiftStompDelegate {
                             guard let id = dict["id"] as? String,
                                   let name = dict["name"] as? String,
                                   let score = dict["score"] as? Int,
-                                  let isActive = dict["isActive"] as? Bool else { return nil }
-                            return Participant(id: id, name: name, score: score, isActive: isActive)
+                                  let isActive = dict["isActive"] as? Bool,
+                                  let isReady = dict["isReady"] as? Bool else { return nil }
+                            return Participant(id: id, name: name, score: score, isActive: isActive, isReady: isReady)
                         }
                         self.room?.participants = participants
                     } else {

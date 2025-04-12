@@ -23,9 +23,19 @@ struct ParticipantList: View {
                     Section(header: Text("Active Participants"), content: {
                         ForEach(viewModel.room?.participants.sorted(by: { $0.score > $1.score }).filter{$0.isActive == true} ?? [], id: \.id) { participant in
                             HStack {
-                                Text(participant.name)
-                                    .lineLimit(1)
-                                    .truncationMode(.tail)
+                                HStack(spacing: 6) {
+                                    Text(participant.name)
+                                        .lineLimit(1)
+                                        .truncationMode(.tail)
+
+                                    Text(participant.isReady ? "Ready" : "Not ready")
+                                        .font(.caption2)
+                                        .padding(.horizontal, 8)
+                                        .padding(.vertical, 4)
+                                        .background(participant.isReady ? Color.green.opacity(0.2) : Color.red.opacity(0.2))
+                                        .foregroundColor(participant.isReady ? .green : .red)
+                                        .clipShape(Capsule())
+                                }
                                 Spacer()
                                 Text("\(participant.score)")
                                     .lineLimit(1)
@@ -62,7 +72,7 @@ struct ParticipantList: View {
 
 #Preview {
     @Previewable @State var viewModel: ChallengeViewModel = ChallengeViewModel()
-    viewModel.room = Room(code: "1234", isOwner: true, participants: [Participant(id: "1", name: "Ramona", score: 5, isActive: true), Participant(id: "2", name: "Max", score: 7, isActive: false)])
+    viewModel.room = Room(code: "1234", isOwner: true, participants: [Participant(id: "1", name: "Ramona", score: 5, isActive: true, isReady: true), Participant(id: "2", name: "Max", score: 7, isActive: false, isReady: false)])
     
     return ParticipantList(viewModel: viewModel)
 }

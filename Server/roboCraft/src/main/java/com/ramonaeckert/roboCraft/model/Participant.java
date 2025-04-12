@@ -9,11 +9,14 @@ public class Participant {
 
     private Boolean isActive;
 
+    private Boolean isReady;
+
     public Participant(String name, String userId) {
         this.name = name;
         this.score = 0;
         this.id = userId;
         this.isActive = true;
+        this.isReady = true;
     }
 
     public String getName() {
@@ -42,5 +45,13 @@ public class Participant {
 
     public void setIsActive(Boolean isActive) {
         this.isActive = isActive;
+    }
+
+    public Boolean getIsReady() {
+        return isReady;
+    }
+
+    public void setIsReady(Boolean isReady) {
+        this.isReady = isReady;
     }
 }

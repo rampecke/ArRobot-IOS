@@ -110,7 +110,7 @@ struct RoomOwnerView: View {
 
 #Preview {
     @Previewable @State var viewModel: ChallengeViewModel = ChallengeViewModel()
-    viewModel.room = Room(code: "12341234", isOwner: true, participants: [Participant(id: "1", name: "Ramona", score: 5, isActive: true), Participant(id: "2", name: "Max", score: 7, isActive: false)])
+    viewModel.room = Room(code: "12341234", isOwner: true, participants: [Participant(id: "1", name: "Ramona", score: 5, isActive: true, isReady: true), Participant(id: "2", name: "Max", score: 7, isActive: false, isReady: false)])
     
     return RoomOwnerView(viewModel: viewModel).environment(MockModel() as Model)
 }

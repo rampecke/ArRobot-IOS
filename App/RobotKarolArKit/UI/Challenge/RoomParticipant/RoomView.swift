@@ -30,9 +30,8 @@ struct RoomView: View {
                                 Text("There is a new Exercise. Are you ready?")
                                 
                                 Button(action: {
-                                    //TODO: SEND OUT MESSAGE THAT I AM READY AND WAIT FOR THE START
                                     viewModel.readyForNextExercise = true
-                                    //viewModel.exerciseStarted = true
+                                    viewModel.markUserReady()
                                 }) {
                                     Text("Read!")
                                 }

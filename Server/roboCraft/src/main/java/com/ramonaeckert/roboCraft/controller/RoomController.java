@@ -208,6 +208,16 @@ public class RoomController {
         messagingTemplate.convertAndSend("/topic/exercise/" + code, exerciseData);
         room.addNewExercise(exerciseId);
 
+        //Update ready status of all participants
+        room.getParticipants().forEach(participant -> {
+            participant.setIsReady(false);
+        });
+        room.setActiveExerciseStartTime(null); //reset the start time
+        messagingTemplate.convertAndSend("/topic/room/" + code,
+            Map.of(
+                    "participants", room.getParticipants()
+            ));
+
         return ResponseEntity.ok(true);
     }
 
@@ -221,8 +231,42 @@ public class RoomController {
             return ResponseEntity.badRequest().build();
         }
 
+        if (room.getActiveExerciseStartTime() != null) {
+            return ResponseEntity.badRequest().build(); // already started
+        } else {
+            room.setActiveExerciseStartTime(Instant.now());
+        }
+
         messagingTemplate.convertAndSend("/topic/start/" + code, "start");
         return ResponseEntity.ok().build(); // returns HTTP 200 with no content
+    }
+
+    @PostMapping("/{code}/ready")
+    public ResponseEntity<Void> markUserReady(@PathVariable String code, @RequestBody Map<String, String> requestBody) {
+        String userId = requestBody.get("userId");
+        Room room = rooms.get(code);
+
+        if (room == null) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        Optional<Participant> participantOpt = room.getParticipants()
+                .stream()
+                .filter(p -> p.getId().equals(userId))
+                .findFirst();
+
+        if (participantOpt.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+
+        participantOpt.get().setIsReady(true);
+
+        messagingTemplate.convertAndSend("/topic/room/" + code,
+                Map.of(
+                        "participants", room.getParticipants()
+                ));
+
+        return ResponseEntity.ok().build();
     }
 
     @Scheduled(cron = "0 0 3 * * ?") // every day at 3 AM

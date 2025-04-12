@@ -842,6 +842,9 @@
         }
       }
     },
+    "Not ready" : {
+
+    },
     "not_description" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1097,6 +1100,9 @@
       }
     },
     "Read!" : {
+
+    },
+    "Ready" : {
 
     },
     "Reset game" : {

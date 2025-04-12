@@ -52,6 +52,7 @@ struct ChallengeView: View {
             }
             .onAppear {
                 roomExists = false
+                viewModel.resetViewModel()
             }
     }
 }
