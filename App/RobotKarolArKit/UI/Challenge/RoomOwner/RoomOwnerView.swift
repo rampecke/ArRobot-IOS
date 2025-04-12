@@ -99,8 +99,12 @@ struct RoomOwnerView: View {
                             }, notInArView: true).frame(height: 30)
                         }
                         
-                        ExerciseSelection(viewModel: viewModel).frame(maxWidth: .infinity, maxHeight: .infinity)
-                    }.frame(maxWidth: .infinity, maxHeight: .infinity).padding(.horizontal, 15)
+                        ExerciseSelection(viewModel: viewModel)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            .onAppear {
+                                viewModel.fetchPastExercises(exerciseTemplates: model.exerciseTemplates)
+                            }
+                    }.frame(maxWidth: .infinity, maxHeight: .infinity).padding(.horizontal, 15).padding(.vertical, 5)
                 }
                 
                 ExerciseAddBar(viewModel: viewModel)

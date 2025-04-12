@@ -1,5 +1,6 @@
 package com.ramonaeckert.roboCraft.controller;
 
+import com.ramonaeckert.roboCraft.model.Exercise;
 import com.ramonaeckert.roboCraft.model.Participant;
 import com.ramonaeckert.roboCraft.model.Room;
 import org.springframework.http.HttpStatus;
@@ -97,15 +98,14 @@ public class RoomController {
     }
 
     @GetMapping("/{code}/past-exercises")
-    public ResponseEntity<Map<String, Object>> getPastExercises(@PathVariable String code) {
+    public ResponseEntity<List<Exercise>> getPastExercises(@PathVariable String code) {
         Room room = rooms.get(code);
         if (room == null) {
-            return ResponseEntity.badRequest().body(Map.of("message", "Room not found"));
+            return ResponseEntity.badRequest().body(new ArrayList<Exercise>());
         }
 
-        return ResponseEntity.ok(Map.of(
-                "exercises", room.getExercises()
-        ));
+        // Return the list of exercises directly
+        return ResponseEntity.ok(room.getExercises());
     }
 
     @PostMapping("/{code}/join")
@@ -204,10 +204,9 @@ public class RoomController {
             return ResponseEntity.badRequest().body(false);
         }
 
-        room.addNewExercise(exerciseId);
-
         // Send exercise to all subscribed clients in this room
         messagingTemplate.convertAndSend("/topic/exercise/" + code, exerciseData);
+        room.addNewExercise(exerciseId);
 
         return ResponseEntity.ok(true);
     }

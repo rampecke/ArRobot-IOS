@@ -17,7 +17,7 @@ struct CreateRoomView: View {
                 LazyVGrid(columns: columns, spacing: 30) {
                     CreateNewButton(action: {
                         viewModel.createRoom()
-                    }, lableOnly: true, lableText: "Create Room...")
+                    }, lableText: "Create Room...")
                     
                     ForEach(viewModel.myFetchedRooms, id: \.id) { room in
                         Button(action: {

@@ -1,6 +1,7 @@
 package com.ramonaeckert.roboCraft.model;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -18,6 +19,7 @@ public class Room {
         this.owner = owner;
         this.participants = new CopyOnWriteArrayList<>();
         this.lastOpened = Instant.now();
+        this.exercises = new ArrayList<Exercise>();
     }
 
     public String getCode() {

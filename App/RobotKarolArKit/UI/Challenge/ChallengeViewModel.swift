@@ -99,6 +99,7 @@ class ChallengeViewModel {
                     let decoder = JSONDecoder()
                     let room = try decoder.decode(Room.self, from: data)
                     self.room = room  // Assign the decoded room to your property
+                    self.connectToWebSocket()
                 } catch {
                     self.errorMessage = "Error decoding room: \(error.localizedDescription)"
                     print("Error decoding room: \(error.localizedDescription)")
@@ -250,6 +251,72 @@ class ChallengeViewModel {
         let task = URLSession.shared.dataTask(with: request)
         task.resume()
     }
+    
+    func fetchPastExercises(exerciseTemplates: [Exercise]) {
+        guard let roomCode = self.room?.code else {
+            return
+        }
+        
+        guard let url = URL(string: "\(self.urlPrefix)/\(roomCode)/past-exercises") else {
+            return
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Error fetching exercises: \(error.localizedDescription)")
+                return
+            }
+
+            guard let data = data else {
+                print("No data received")
+                return
+            }
+
+            do {
+                // Parse the response JSON directly as an array of ExerciseDTO
+                let decoder = JSONDecoder()
+                let exercises = try decoder.decode([ExerciseDTO].self, from: data)
+
+                // Clear the existing lists
+                self.plannedExerciseList.removeAll()
+                self.pastExerciseList.removeAll()
+                self.currentExercise = nil
+
+                // Categorize exercises based on status
+                for exercise in exercises {
+                    // Convert exercise.id from String to UUID
+                    if let exerciseUUID = UUID(uuidString: exercise.id) {  // safely converting the String to UUID
+                        switch exercise.status.lowercased() {
+                        case "planned":
+                            if let template = exerciseTemplates.first(where: { $0.id == exerciseUUID }) {
+                                self.plannedExerciseList.append(template)
+                            }
+                        case "past":
+                            if let template = exerciseTemplates.first(where: { $0.id == exerciseUUID }) {
+                                self.pastExerciseList.append(template)
+                            }
+                        case "current":
+                            if let template = exerciseTemplates.first(where: { $0.id == exerciseUUID }) {
+                                self.currentExercise = template
+                            }
+                        default:
+                            break
+                        }
+                    }
+                }
+
+            } catch {
+                print("Error decoding exercises: \(error.localizedDescription)")
+            }
+        }
+
+        task.resume()
+    }
+
 }
 
 // MARK: - STOMP Delegate Methods

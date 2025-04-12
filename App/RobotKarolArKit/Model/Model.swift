@@ -20,21 +20,21 @@ class Model {
     // MARK: - Sort Functions
     //TODO: REMOVE DUPLICATED CODE
     func getExercisesSortedByLastUpdated() -> [Exercise] {
-        var copiedExercises = Array(exerciseTemplates)
+        let copiedExercises = Array(exerciseTemplates)
         return copiedExercises.sorted { (e1: Exercise, e2: Exercise) in
             (e1.lastEdited ?? Date.distantPast) > (e2.lastEdited ?? Date.distantPast)
         }
     }
     
     func getExerciseSortedByName() -> [Exercise] {
-        var copiedExercises = Array(exerciseTemplates)
+        let copiedExercises = Array(exerciseTemplates)
         return copiedExercises.sorted {
             $0.exerciseName.localizedCaseInsensitiveCompare($1.exerciseName) == .orderedAscending
         }
     }
     
     func getExercisesSortedByDifficulty() -> [Exercise] {
-        var copiedExercises = Array(exerciseTemplates)
+        let copiedExercises = Array(exerciseTemplates)
         return copiedExercises.sorted { (a: Exercise, b: Exercise) -> Bool in
             if a.exerciseDifficulty == b.exerciseDifficulty {
                 return (a.lastEdited ?? Date.distantPast) > (b.lastEdited ?? Date.distantPast)
