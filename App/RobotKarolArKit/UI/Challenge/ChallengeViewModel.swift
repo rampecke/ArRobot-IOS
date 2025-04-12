@@ -43,7 +43,6 @@ class ChallengeViewModel {
     }
     
     func resetViewModel() {
-        self.room = nil
         self.isLoading = false
         self.errorMessage = nil
         self.currentExercise = nil
@@ -146,7 +145,58 @@ class ChallengeViewModel {
         let body: [String: String] = ["userId": userId]
         request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [])
 
-        let task = URLSession.shared.dataTask(with: request)
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                self.errorMessage = "Error leaving rooms: \(error.localizedDescription)"
+                return
+            }
+        }
+        task.resume()
+    }
+    
+    func completeExercise() {
+        guard let code = self.room?.code else {
+            print("No room code")
+            return
+        }
+        
+        guard let url = URL(string: "\(self.urlPrefix)/\(code)/exercise/complete") else {
+            print("Invalid URL")
+            return
+        }
+        
+        guard let exerciseId = currentExercise?.id else {
+            print("No current exercises")
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let body: [String: String] = [
+            "userId": userId,
+            "exerciseId": exerciseId.uuidString
+        ]
+        
+        request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [])
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Request error: \(error.localizedDescription)")
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse else {
+                print("Invalid response")
+                return
+            }
+            
+            if httpResponse.statusCode != 200 {
+                print("Failed to submit exercise completion. Status code: \(httpResponse.statusCode)")
+            }
+        }
+        
         task.resume()
     }
     
@@ -350,8 +400,6 @@ class ChallengeViewModel {
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
                 print("Error sending start signal: \(error.localizedDescription)")
-            } else if let httpResponse = response as? HTTPURLResponse {
-                print("Start signal sent with status code: \(httpResponse.statusCode)")
             }
         }
 
@@ -409,8 +457,6 @@ extension ChallengeViewModel: SwiftStompDelegate {
         if destination.contains("/topic/start/") {
             print("Received message")
             self.exerciseStarted = true
-        } else {
-            print(destination)
         }
         
         // Ensure message is a valid JSON string
@@ -423,23 +469,17 @@ extension ChallengeViewModel: SwiftStompDelegate {
         if destination.contains("/topic/room/") {
             // Handle room updates
             DispatchQueue.main.async {
+                let decoder = JSONDecoder()
+
                 do {
-                    if let json = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any],
-                       let participantsData = json["participants"] as? [[String: Any]] {
-                        let participants = participantsData.compactMap { dict -> Participant? in
-                            guard let id = dict["id"] as? String,
-                                  let name = dict["name"] as? String,
-                                  let score = dict["score"] as? Int,
-                                  let isActive = dict["isActive"] as? Bool,
-                                  let isReady = dict["isReady"] as? Bool else { return nil }
-                            return Participant(id: id, name: name, score: score, isActive: isActive, isReady: isReady)
-                        }
+                    // Directly decode the participants array
+                    let jsonResponse = try decoder.decode([String: [Participant]].self, from: jsonData)
+                    
+                    if let participants = jsonResponse["participants"] {
                         self.room?.participants = participants
-                    } else {
-                        print("Unexpected JSON format")
                     }
                 } catch {
-                    print("Failed to parse JSON: \(error)")
+                    print("Decoding error: \(error.localizedDescription)")
                 }
             }
         } else if destination.contains("/topic/exercise/") {

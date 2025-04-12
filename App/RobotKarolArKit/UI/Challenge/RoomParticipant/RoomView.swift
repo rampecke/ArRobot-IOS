@@ -53,6 +53,11 @@ struct RoomView: View {
                 }
             }
         }, viewModel: viewModel)
+        .onChange(of: codeEditor.viewModel.executionVisitor.finishedExecution ) {
+            if codeEditor.viewModel.world.exerciseSuccess() {
+                viewModel.completeExercise()
+            }
+        }
         .onChange(of: viewModel.currentExercise, {
             if let exercise = viewModel.currentExercise {
                 DispatchQueue.main.async {

@@ -1,6 +1,8 @@
 package com.ramonaeckert.roboCraft.model;
 
-import java.util.UUID;
+import java.time.Instant;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Participant {
     private String id;
@@ -11,12 +13,32 @@ public class Participant {
 
     private Boolean isReady;
 
+    private Map<String, Instant> completedExercises;
+
     public Participant(String name, String userId) {
         this.name = name;
         this.score = 0;
         this.id = userId;
         this.isActive = true;
         this.isReady = true;
+        completedExercises = new HashMap<String, Instant>();
+    }
+
+    public Map<String, Instant> getCompletedExercises() {
+        return completedExercises;
+    }
+
+    public Boolean addCompletedExercise(String exerciseId) {
+        if (this.didCompleteExercise(exerciseId)) {
+            return false;
+        }
+
+        this.completedExercises.put(exerciseId, Instant.now());
+        return true;
+    }
+
+    public Boolean didCompleteExercise(String exerciseId) {
+        return this.completedExercises.containsKey(exerciseId);
     }
 
     public String getName() {

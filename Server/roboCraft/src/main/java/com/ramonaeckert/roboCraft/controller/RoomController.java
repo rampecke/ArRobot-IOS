@@ -161,6 +161,7 @@ public class RoomController {
     @PostMapping("/{code}/leave")
     public ResponseEntity<Boolean> leaveRoom(@PathVariable String code, @RequestBody Map<String, String> requestBody) {
         String userId = requestBody.get("userId");
+        System.out.println("User " + userId + " tries to room " + code);
 
         Room room = rooms.get(code);
         if (room == null) {
@@ -185,6 +186,8 @@ public class RoomController {
                 Map.of(
                         "participants", room.getParticipants()
                 ));
+
+        System.out.println("User " + userId + " left room " + code);
 
         return ResponseEntity.ok(true);
     }
@@ -217,6 +220,75 @@ public class RoomController {
             Map.of(
                     "participants", room.getParticipants()
             ));
+
+        return ResponseEntity.ok(true);
+    }
+
+    @PostMapping("/{code}/exercise/complete")
+    public ResponseEntity<Boolean> completeExercise(@PathVariable String code, @RequestBody Map<String, String> requestBody) {
+        String userId = requestBody.get("userId");
+        String exerciseId = requestBody.get("exerciseId");
+
+        Room room = rooms.get(code);
+        if (room == null) {
+            return ResponseEntity.badRequest().body(false);
+        }
+
+        // Check if the exercise is the current one
+        Optional<Exercise> currentExerciseOpt = room.getExercises()
+                .stream()
+                .filter(exercise -> exercise.getStatus().equals("current"))
+                .findFirst();
+
+        if (currentExerciseOpt.isEmpty()) {
+            return ResponseEntity.badRequest().body(false);
+        }
+
+        Optional<Participant> participantOpt = room.getParticipants()
+                .stream()
+                .filter(p -> p.getId().equals(userId))
+                .findFirst();
+
+        if (participantOpt.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(false);
+        }
+
+        Participant participant = participantOpt.get();
+        boolean success = participant.addCompletedExercise(exerciseId);
+
+        if (success) {
+            // Get the list of all participants
+            List<Participant> participants = room.getParticipants();
+
+            // Sort participants by their completion time for the given exercise
+            List<Participant> sortedParticipants = participants.stream()
+                    .filter(p -> p.getCompletedExercises().containsKey(exerciseId))  // Only consider those who completed the exercise
+                    .sorted(Comparator.comparing(p -> p.getCompletedExercises().get(exerciseId)))  // Sort by completion time
+                    .collect(Collectors.toList());
+
+            // Find out where the participant is in the sorted list
+            int position = sortedParticipants.indexOf(participant);
+
+            // Assign points based on position
+            int points;
+            if (position == 0) {
+                points = 5;  // Fastest
+            } else if (position == 1) {
+                points = 4;  // Second fastest
+            } else if (position == 2) {
+                points = 3;  // Third fastest
+            } else {
+                points = 2;  // All others
+            }
+
+            // Update participant score
+            participant.setScore(participant.getScore() + points);
+
+            messagingTemplate.convertAndSend("/topic/room/" + code,
+                    Map.of(
+                            "participants", room.getParticipants()
+                    ));
+        }
 
         return ResponseEntity.ok(true);
     }
