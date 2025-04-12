@@ -316,7 +316,35 @@ class ChallengeViewModel {
 
         task.resume()
     }
+    
+    func sendStartSignal() {
+        guard let roomCode = self.room?.code else {
+            print("No roomCode")
+            return
+        }
+        
+        guard let url = URL(string: "\(self.urlPrefix)/\(roomCode)/start") else {
+            print("Invalid URL")
+            return
+        }
 
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        let body: [String: String] = ["userId": userId]
+        request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [])
+
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Error sending start signal: \(error.localizedDescription)")
+            } else if let httpResponse = response as? HTTPURLResponse {
+                print("Start signal sent with status code: \(httpResponse.statusCode)")
+            }
+        }
+
+        task.resume()
+    }
 }
 
 // MARK: - STOMP Delegate Methods
@@ -327,6 +355,13 @@ extension ChallengeViewModel: SwiftStompDelegate {
     }
     
     func onMessageReceived(swiftStomp: SwiftStomp, message: Any?, messageId: String, destination: String, headers: [String : String]) {
+        if destination.contains("/topic/start/") {
+            print("Received message")
+            self.exerciseStarted = true
+        } else {
+            print(destination)
+        }
+        
         // Ensure message is a valid JSON string
         guard let messageString = message as? String,
               let jsonData = messageString.data(using: .utf8) else {
@@ -391,6 +426,8 @@ extension ChallengeViewModel: SwiftStompDelegate {
         stompClient?.subscribe(to: "/topic/room/\(code)")
         print("Subscribing to /topic/exercise/\(code)")
         stompClient?.subscribe(to: "/topic/exercise/\(code)")
+        print("Subscribing to /topic/start/\(code)")
+        stompClient?.subscribe(to: "/topic/start/\(code)")
         
     }
 }

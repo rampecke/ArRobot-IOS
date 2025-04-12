@@ -70,7 +70,7 @@ struct RoomOwnerView: View {
                             }
                         }.frame(maxWidth: .infinity, maxHeight: .infinity)
                         
-                    }.frame(maxWidth: .infinity, maxHeight: .infinity).padding(.horizontal, 15)
+                    }.frame(maxWidth: .infinity, maxHeight: .infinity).padding(.horizontal, 15).padding(.vertical, 5)
                     
                     VStack { //right
                         HStack {
@@ -89,13 +89,7 @@ struct RoomOwnerView: View {
                             Spacer()
                             
                             ControllbarButton(title: "Start next exercise", icon: "play", action: {
-                                if let exercise = viewModel.currentExercise {
-                                    viewModel.pastExerciseList.append(exercise)
-                                }
-                                if let exercise = viewModel.plannedExerciseList.first {
-                                    viewModel.sendExercise(exercise: exercise)
-                                    viewModel.plannedExerciseList.removeFirst()
-                                }
+                                viewModel.sendStartSignal()
                             }, notInArView: true).frame(height: 30)
                         }
                         

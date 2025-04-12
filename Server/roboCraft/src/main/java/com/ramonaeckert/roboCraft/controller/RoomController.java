@@ -211,6 +211,20 @@ public class RoomController {
         return ResponseEntity.ok(true);
     }
 
+    @PostMapping("/{code}/start")
+    public ResponseEntity<Void> sendStartSignal(@PathVariable String code, @RequestBody Map<String, String> requestBody) {
+        String userId = requestBody.get("userId");
+        Room room = rooms.get(code);
+        if (room == null) {
+            return ResponseEntity.badRequest().build();
+        } else if (!room.getOwner().equals(userId)) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        messagingTemplate.convertAndSend("/topic/start/" + code, "start");
+        return ResponseEntity.ok().build(); // returns HTTP 200 with no content
+    }
+
     @Scheduled(cron = "0 0 3 * * ?") // every day at 3 AM
     public void cleanUpOldRooms() {
         Instant oneWeekAgo = Instant.now().minusSeconds(7 * 24 * 60 * 60); // 7 days in seconds
