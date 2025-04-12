@@ -36,64 +36,76 @@ struct RoomOwnerView: View {
     var body: some View {
         RoomViewLayout(content: {
             VStack {
-                LazyVGrid(columns: [
-                    GridItem(.flexible()),
-                    GridItem(.flexible()),
-                ]) {
-                    VStack(alignment: .center) {
-                        HStack {
-                            Spacer()
-                            Picker("Room", selection: $infoDisplay) {
-                                Text("Participants").tag(0)
-                                Text("Room Info").tag(1)
+                HStack {
+                    HStack {
+                        Spacer()
+                        Picker("Room", selection: $infoDisplay) {
+                            Text("Participants").tag(0)
+                            Text("Room Info").tag(1)
+                        }
+                        .pickerStyle(.segmented)
+                        .frame(width: 300)
+                        Spacer()
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding()
+
+                    HStack {
+                        ControllbarButton(title: "Send next exercise", icon: "paperplane", action: {
+                            if !viewModel.plannedExerciseList.isEmpty {
+                                if let exercise = viewModel.currentExercise {
+                                    viewModel.pastExerciseList.append(exercise)
+                                }
+                                if let exercise = viewModel.plannedExerciseList.first {
+                                    viewModel.sendExercise(exercise: exercise)
+                                    viewModel.plannedExerciseList.removeFirst()
+                                }
                             }
-                            .pickerStyle(.segmented)
-                            .frame(width: 300)
-                            Spacer()
-                        }.padding()
+                        }, notInArView: true).frame(height: 30)
                         
+                        Spacer()
+                        
+                        ControllbarButton(title: "Start next exercise", icon: "play", action: {
+                            if let exercise = viewModel.currentExercise {
+                                viewModel.pastExerciseList.append(exercise)
+                            }
+                            if let exercise = viewModel.plannedExerciseList.first {
+                                viewModel.sendExercise(exercise: exercise)
+                                viewModel.plannedExerciseList.removeFirst()
+                            }
+                        }, notInArView: true).frame(height: 30)
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                }
+                
+                HStack {
+                    Group {
                         if infoDisplay == 0 {
                             ParticipantList(viewModel: viewModel)
                         } else {
-                            if let roomCode = viewModel.room?.code, let qrCodeImage = generateQRCode(from: roomCode) {
-                                Image(uiImage: qrCodeImage)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 200, height: 200)
+                            VStack {
+                                if let roomCode = viewModel.room?.code, let qrCodeImage = generateQRCode(from: roomCode) {
+                                    Image(uiImage: qrCodeImage)
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 300, height: 300)
+                                        .padding()
+                                }
+    
+                                // Display the room code as text
+                                Text("RoomCode: \(viewModel.room?.code ?? "N/A")")
+                                    .font(.title)
                                     .padding()
                             }
-                            
-                            // Display the room code as text
-                            Text("RoomCode: \(viewModel.room?.code ?? "N/A")")
-                                .font(.title)
-                                .padding()
                         }
-                        Spacer()
-                    }
+                    }.padding().frame(maxWidth: .infinity, maxHeight: .infinity)
                     
-                    ExerciseSelection(viewModel: viewModel)
+                    ExerciseSelection(viewModel: viewModel).padding().frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
                 
-                Spacer()
-                
-                if model.exerciseTemplates.isEmpty {
-                    ContentUnavailableView(label: {
-                        Label("There are no exercises available!", systemImage: "list.clipboard")
-                    }, description: {
-                        Text("Go back and add a new exercise template!")
-                    })
-                } else {
-                    ScrollView(.horizontal) {
-                        HStack {
-                            ForEach(model.exerciseTemplates, id: \.id) { exercise in
-                                FolderRepresentation(isShowingPopover: .constant(false), folderName: .constant(exercise.exerciseName), colorString: exercise.exerciseDifficulty.colorName, date: exercise.lastEdited).onTapGesture(perform: {
-                                    viewModel.plannedExerciseList.append(exercise)
-                                })
-                            }
-                        }.padding()
-                    }.frame(height: 180)
-                }
-            }
+                ExerciseAddBar(viewModel: viewModel)
+            }.background(Color("card_background"))
         }, viewModel: viewModel).toolbar(.hidden, for: .tabBar)
     }
 }

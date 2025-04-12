@@ -41,6 +41,9 @@
         }
       }
     },
+    "Active Participants" : {
+
+    },
     "Add instruction" : {
       "localizations" : {
         "de" : {
@@ -117,6 +120,7 @@
       }
     },
     "Connected" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -166,6 +170,9 @@
           }
         }
       }
+    },
+    "Current Exercise" : {
+
     },
     "Date" : {
       "localizations" : {
@@ -217,9 +224,6 @@
           }
         }
       }
-    },
-    "Done" : {
-
     },
     "Easy" : {
       "localizations" : {
@@ -342,9 +346,6 @@
         }
       }
     },
-    "ExerciseName" : {
-
-    },
     "Exercises" : {
       "localizations" : {
         "de" : {
@@ -428,6 +429,9 @@
           }
         }
       }
+    },
+    "Inactive Participants" : {
+
     },
     "Instructions" : {
       "extractionState" : "manual",
@@ -889,6 +893,9 @@
         }
       }
     },
+    "Past Exercises" : {
+
+    },
     "Place board" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1053,7 +1060,7 @@
         }
       }
     },
-    "Planned" : {
+    "Planned Exercises" : {
 
     },
     "Please add a exercise to distribute" : {
@@ -1161,6 +1168,7 @@
       }
     },
     "Score" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1169,9 +1177,6 @@
           }
         }
       }
-    },
-    "Send next exercise" : {
-
     },
     "Sorting" : {
       "localizations" : {
@@ -1193,9 +1198,6 @@
           }
         }
       }
-    },
-    "Status" : {
-
     },
     "step" : {
       "extractionState" : "manual",

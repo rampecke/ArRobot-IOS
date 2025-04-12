@@ -17,48 +17,41 @@ struct ParticipantList: View {
                     Label("No participants joined yet!", systemImage: "person.3")
                 }, description: {
                     Text("Make sure you shared the correct code")
-                }).frame(minHeight: 100, idealHeight: 400)
+                })
             } else {
-                HStack {
-                    Text("Name")
-                        .font(.headline)
-                        .frame(width: 100)
-                        .lineLimit(1)
-                        .truncationMode(.tail)
-                    Text("Score")
-                        .font(.headline)
-                        .frame(width: 100)
-                        .lineLimit(1)
-                        .truncationMode(.tail)
-                    Text("Connected")
-                        .font(.headline)
-                        .frame(width: 100)
-                        .lineLimit(1)
-                        .truncationMode(.tail)
-                }
-                
-                Divider()
-                
-                ScrollView {
-                    ForEach(viewModel.room?.participants.sorted(by: { $0.score > $1.score }) ?? [], id: \.id) { participant in
-                        HStack {
-                            Text(participant.name)
-                                .frame(width: 100)
-                                .lineLimit(1)
-                                .truncationMode(.tail)
-                            Text("\(participant.score)")
-                                .frame(width: 100)
-                                .lineLimit(1)
-                                .truncationMode(.tail)
-                            Image(systemName: participant.isActive ? "checkmark.circle.fill" : "xmark.circle.fill")
-                                .foregroundColor(participant.isActive ? .green : .red).frame(width: 100)
+                List {
+                    Section(header: Text("Active Participants"), content: {
+                        ForEach(viewModel.room?.participants.sorted(by: { $0.score > $1.score }).filter{$0.isActive == true} ?? [], id: \.id) { participant in
+                            HStack {
+                                Text(participant.name)
+                                    .lineLimit(1)
+                                    .truncationMode(.tail)
+                                Spacer()
+                                Text("\(participant.score)")
+                                    .lineLimit(1)
+                                    .truncationMode(.tail)
+                            }
                         }
-                    }
-                }.frame(minHeight: 100, idealHeight: 400)
+                    })
+                    
+                    Section(header: Text("Inactive Participants"), content: {
+                        ForEach(viewModel.room?.participants.sorted(by: { $0.score > $1.score }).filter {$0.isActive == false} ?? [], id: \.id) { participant in
+                            HStack {
+                                Text(participant.name)
+                                    .lineLimit(1)
+                                    .truncationMode(.tail)
+                                Spacer()
+                                Text("\(participant.score)")
+                                    .lineLimit(1)
+                                    .truncationMode(.tail)
+                            }
+                        }
+                    })
+                }.listStyle(.plain)
             }
-        }.frame(width: 300)
+        }
         .padding()
-        .background(Color("card_background"))
+        .background(.contrast)
         .cornerRadius(5)
         .overlay(
             RoundedRectangle(cornerRadius: 5)

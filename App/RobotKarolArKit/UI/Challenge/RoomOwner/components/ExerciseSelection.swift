@@ -19,103 +19,76 @@ struct ExerciseSelection: View {
                     }, description: {
                         Text("Please add a exercise to distribute")
                     }).frame(minHeight: 100, idealHeight: 400)
-                } else {
-                    HStack{
-                        Text("ExerciseName")
-                            .frame(width: 100)
-                            .lineLimit(1)
-                            .truncationMode(.tail)
-                        Text("Difficulty")
-                            .frame(width: 100)
-                            .lineLimit(1)
-                            .truncationMode(.tail)
-                        Text("Status")
-                            .frame(width: 100)
-                            .lineLimit(1)
-                            .truncationMode(.tail)
-                    }
-                    
-                    Divider()
-                    
-                    ScrollView {
+                } else { 
+                    List() {
                         if !viewModel.pastExerciseList.isEmpty {
-                            ForEach (viewModel.pastExerciseList, id: \.id) { exercise in
-                                HStack{
-                                    Text("\(exercise.exerciseName)")
-                                        .frame(width: 100)
-                                        .lineLimit(1)
-                                        .truncationMode(.tail)
-                                    Text("\(exercise.exerciseDifficulty)")
-                                        .frame(width: 100)
-                                        .lineLimit(1)
-                                        .truncationMode(.tail)
-                                    Text("Done")
-                                        .frame(width: 100)
-                                        .lineLimit(1)
-                                        .truncationMode(.tail)
+                            Section(header: Text("Past Exercises"), content: {
+                                ForEach (viewModel.pastExerciseList, id: \.id) { exercise in
+                                    HStack{
+                                        Text("\(exercise.exerciseName)")
+                                            .lineLimit(1)
+                                            .truncationMode(.tail)
+                                        Spacer()
+                                        Text("\(exercise.exerciseDifficulty)")
+                                            .lineLimit(1)
+                                            .truncationMode(.tail)
+                                    }
                                 }
-                            }
+                            })
                         }
                         
                         if let currentExercise = viewModel.currentExercise {
-                            HStack{
-                                Text("\(currentExercise.exerciseName)")
-                                    .frame(width: 100)
-                                    .lineLimit(1)
-                                    .truncationMode(.tail)
-                                Text("\(currentExercise.exerciseDifficulty)")
-                                    .frame(width: 100)
-                                    .lineLimit(1)
-                                    .truncationMode(.tail)
-                                ProgressView()
-                                    .frame(width: 100)
-                            }
-                        }
-                        
-                        if !viewModel.plannedExerciseList.isEmpty {
-                            ForEach (viewModel.plannedExerciseList, id: \.id) { exercise in
+                            Section(header: Text("Current Exercise"), content: {
                                 HStack{
-                                    Text("\(exercise.exerciseName)")
-                                        .frame(width: 100)
+                                    Text("\(currentExercise.exerciseName)")
                                         .lineLimit(1)
                                         .truncationMode(.tail)
-                                    Text("\(exercise.exerciseDifficulty)")
-                                        .frame(width: 100)
-                                        .lineLimit(1)
-                                        .truncationMode(.tail)
-                                    Text("Planned")
-                                        .frame(width: 100)
+                                    Spacer()
+                                    Text("\(currentExercise.exerciseDifficulty)")
                                         .lineLimit(1)
                                         .truncationMode(.tail)
                                 }
-                            }
+                            })
                         }
-                    }.frame(minHeight: 100, idealHeight: 400)
+                        
+                        if !viewModel.plannedExerciseList.isEmpty {
+                            Section(header: Text("Planned Exercises"), content: {
+                                ForEach (viewModel.plannedExerciseList, id: \.id) { exercise in
+                                    HStack{
+                                        Text("\(exercise.exerciseName)")
+                                            .lineLimit(1)
+                                            .truncationMode(.tail)
+                                        Spacer()
+                                        Text("\(exercise.exerciseDifficulty)")
+                                            .lineLimit(1)
+                                            .truncationMode(.tail)
+                                    }
+                                }.onMove { indices, newOffset in
+                                    viewModel.plannedExerciseList.move(fromOffsets: indices, toOffset: newOffset)
+                                }
+                                .onDelete { indexSet in
+                                    viewModel.plannedExerciseList.remove(atOffsets: indexSet)
+                                }
+                            })
+                        }
+                    }.listStyle(.plain)
                 }
-            }.frame(width: 300)
-                .padding()
-                .background(Color("card_background"))
-                .cornerRadius(5)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 5)
-                    .stroke(Color("card_border"), lineWidth: 1)
-                )
-            
-            Button(action: {
-                if let exercise = viewModel.currentExercise {
-                    viewModel.pastExerciseList.append(exercise)
-                }
-                if let exercise = viewModel.plannedExerciseList.first {
-                    viewModel.sendExercise(exercise: exercise)
-                    viewModel.plannedExerciseList.removeFirst()
-                }
-            }, label: {
-                Text("Send next exercise")
-            })
+            }
+            .padding()
+            .background(.contrast)
+            .cornerRadius(5)
+            .overlay(
+                RoundedRectangle(cornerRadius: 5)
+                .stroke(Color("card_border"), lineWidth: 1)
+            )
         }
     }
 }
 
 #Preview {
-    ExerciseSelection(viewModel: ChallengeViewModel())
+    @Previewable @State var viewModel: ChallengeViewModel = ChallengeViewModel()
+    var model: MockModel = MockModel()
+    viewModel.pastExerciseList.append(model.exerciseTemplates[0])
+    
+    return ExerciseSelection(viewModel: viewModel)
 }

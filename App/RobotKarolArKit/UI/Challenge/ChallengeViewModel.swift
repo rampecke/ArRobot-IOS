@@ -14,8 +14,12 @@ class ChallengeViewModel {
     var isLoading: Bool = false
     var errorMessage: String?
     
-    //private let urlPrefix = "http://192.168.178.132:8080/rooms"
-    private let urlPrefix = "http://localhost:8080/rooms"
+    private let baseUrl = "robocraft.aet.cit.tum.de"
+    //private let baseURL = "192.168.178.132:8080"
+
+    private var urlPrefix: String {
+        return "http://\(baseUrl)/rooms"
+    }
     
     private let userId: String = UserIdentifier.shared.id
     
@@ -34,7 +38,7 @@ class ChallengeViewModel {
         
     // Function to connect to WebSocket via STOMP
     func connectToWebSocket() {
-        let webSocketURL = "ws://192.168.178.132:8080/ws"
+        let webSocketURL = "ws://\(self.baseUrl)/ws"
         let url = URL(string: webSocketURL)!
         stompClient = SwiftStomp(host: url)
         stompClient?.delegate = self

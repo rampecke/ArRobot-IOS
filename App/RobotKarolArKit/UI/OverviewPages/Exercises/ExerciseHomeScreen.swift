@@ -23,7 +23,7 @@ struct ExerciseHomeScreen: View {
         OverviewLayout(content: {
             Group {
                 NavigationLink {
-                    ExerciseEditorView() //Exercise is not jet created
+                    ExerciseEditorView() //Exercise is not yet created
                 } label: {
                     CreateNewButton(action: {}, lableOnly: true, lableText: "New Exercise...").frame(height: 180).padding(.horizontal, 15)
                 }
