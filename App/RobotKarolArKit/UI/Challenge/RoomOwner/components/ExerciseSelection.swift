@@ -39,14 +39,20 @@ struct ExerciseSelection: View {
                         
                         if let currentExercise = viewModel.currentExercise {
                             Section(header: Text("Current Exercise"), content: {
-                                HStack{
-                                    Text("\(currentExercise.exerciseName)")
-                                        .lineLimit(1)
-                                        .truncationMode(.tail)
-                                    Spacer()
-                                    Text("\(currentExercise.exerciseDifficulty)")
-                                        .lineLimit(1)
-                                        .truncationMode(.tail)
+                                VStack {
+                                    HStack{
+                                        Text("\(currentExercise.exerciseName)")
+                                            .lineLimit(1)
+                                            .truncationMode(.tail)
+                                        Spacer()
+                                        Text("\(currentExercise.exerciseDifficulty)")
+                                            .lineLimit(1)
+                                            .truncationMode(.tail)
+                                    }
+                                    
+                                    ControllbarButton(title: "Finish exercise", icon: "flag.pattern.checkered", action: {
+                                        viewModel.stopCurrentExercise()
+                                    }, notInArView: true).frame(height: 30)
                                 }
                             })
                         }

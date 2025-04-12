@@ -200,6 +200,46 @@ class ChallengeViewModel {
         task.resume()
     }
     
+    func stopCurrentExercise() {
+        guard let code = self.room?.code else {
+            print("No room code")
+            return
+        }
+        
+        guard let url = URL(string: "\(self.urlPrefix)/\(code)/stop-current-exercise") else {
+            print("Invalid URL")
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let body: [String: String] = [
+            "userId": userId
+        ]
+        
+        request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [])
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Request error: \(error.localizedDescription)")
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse else {
+                print("Invalid response")
+                return
+            }
+            
+            if httpResponse.statusCode != 200 {
+                print("Failed to submit exercise completion. Status code: \(httpResponse.statusCode)")
+            }
+        }
+        
+        task.resume()
+    }
+    
     func fetchOwnedRooms() {
         guard let url = URL(string: "\(self.urlPrefix)/owned-rooms/\(self.userId)") else {
             print("Invalid URL")
@@ -497,6 +537,15 @@ extension ChallengeViewModel: SwiftStompDelegate {
                     }
                 } catch {
                     print("Failed to decode exercise")
+                    
+                    //In that case we stop the currentExercise
+                    if let current = self.currentExercise {
+                        self.pastExerciseList.append(current)
+                    }
+                    self.currentExercise = nil
+                    self.exerciseStarted = true
+                    self.readyForNextExercise = true
+                    self.exerciseDidLoad = true
                 }
             }
         }

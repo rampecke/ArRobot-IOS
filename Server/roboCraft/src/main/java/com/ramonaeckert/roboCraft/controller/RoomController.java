@@ -224,6 +224,39 @@ public class RoomController {
         return ResponseEntity.ok(true);
     }
 
+    @PostMapping("/{code}/stop-current-exercise")
+    public ResponseEntity<Boolean> stopCurrentExercise(@PathVariable String code, @RequestBody Map<String, String> requestBody) {
+        String userId = requestBody.get("userId");
+
+        Room room = rooms.get(code);
+        if (room == null) {
+            return ResponseEntity.badRequest().body(false);
+        } else if (!room.getOwner().equals(userId)) {
+            return ResponseEntity.badRequest().body(false);
+        }
+
+        // Stop the current exercise
+        room.getExercises().forEach(exercise -> {
+            if (exercise.getStatus().equals("current")) {
+                exercise.setStatus("past");
+            }
+        });
+
+        messagingTemplate.convertAndSend("/topic/exercise/" + code, "void:null");
+
+        //Update ready status of all participants
+        room.getParticipants().forEach(participant -> {
+            participant.setIsReady(true);
+        });
+        room.setActiveExerciseStartTime(null); //reset the start time
+        messagingTemplate.convertAndSend("/topic/room/" + code,
+                Map.of(
+                        "participants", room.getParticipants()
+                ));
+
+        return ResponseEntity.ok(true);
+    }
+
     @PostMapping("/{code}/exercise/complete")
     public ResponseEntity<Boolean> completeExercise(@PathVariable String code, @RequestBody Map<String, String> requestBody) {
         String userId = requestBody.get("userId");
