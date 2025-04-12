@@ -62,7 +62,7 @@ struct ParticipantList: View {
 
 #Preview {
     @Previewable @State var viewModel: ChallengeViewModel = ChallengeViewModel()
-    viewModel.room = Room(code: "1234", owner: true, participants: [Participant(id: "1", name: "Ramona", score: 5, isActive: true), Participant(id: "2", name: "Max", score: 7, isActive: false)])
+    viewModel.room = Room(code: "1234", isOwner: true, participants: [Participant(id: "1", name: "Ramona", score: 5, isActive: true), Participant(id: "2", name: "Max", score: 7, isActive: false)])
     
     return ParticipantList(viewModel: viewModel)
 }

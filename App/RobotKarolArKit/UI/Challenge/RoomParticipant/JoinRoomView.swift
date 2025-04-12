@@ -27,7 +27,7 @@ struct JoinRoomView: View {
             }, label: {
                 Text("Join Room")
             })
-        }.frame(width: 300)
+        }.frame(width: 300).navigationTitle(LocalizedStringKey("Join a room"))
     }
 }
 

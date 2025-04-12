@@ -151,6 +151,9 @@
         }
       }
     },
+    "Create new room" : {
+
+    },
     "Create project with exercise" : {
       "localizations" : {
         "de" : {
@@ -162,6 +165,7 @@
       }
     },
     "Create Room" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -657,6 +661,9 @@
           }
         }
       }
+    },
+    "Join a room" : {
+
     },
     "Join Room" : {
       "localizations" : {
