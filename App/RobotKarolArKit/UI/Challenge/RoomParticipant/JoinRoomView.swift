@@ -37,6 +37,11 @@ struct JoinRoomView: View {
                     "Room Code",
                     text: $viewModel.roomCode
                 ).textFieldStyle(.roundedBorder)
+                Button(action: {
+                    viewModel.codeDetected = true
+                }, label: {
+                    Text("Try code")
+                })
             }
         }.frame(width: 300).navigationTitle(LocalizedStringKey("Join a room"))
     }

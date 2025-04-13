@@ -1396,6 +1396,9 @@
         }
       }
     },
+    "Try code" : {
+
+    },
     "turnLeft" : {
       "extractionState" : "manual",
       "localizations" : {
