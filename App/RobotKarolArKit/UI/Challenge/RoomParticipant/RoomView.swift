@@ -33,7 +33,7 @@ struct RoomView: View {
                                     viewModel.readyForNextExercise = true
                                     viewModel.markUserReady()
                                 }) {
-                                    Text("Read!")
+                                    Text("Ready!")
                                 }
                             } else {
                                 Text("Amazing! Waiting for the rest to get ready. Exercise will start soon.")

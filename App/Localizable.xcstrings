@@ -130,7 +130,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Prüfe ob beide Ausdrücke stimmen"
+            "value" : "Prüft, ob beide Ausdrücke stimmen"
           }
         },
         "en" : {
@@ -290,7 +290,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Es ist nicht erlaubt eine leere Bedingung zu haben"
+            "value" : "Es ist nicht erlaubt, eine leere Bedingung zu haben"
           }
         },
         "en" : {
@@ -430,7 +430,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Geh zurück und erstelle ein neues Template!"
+            "value" : "Gehe zurück und erstelle ein neues Template!"
           }
         }
       }
@@ -523,7 +523,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Prüfe ob ein Block vor uns liegt"
+            "value" : "Prüft, ob ein Block vor uns liegt"
           }
         },
         "en" : {
@@ -557,7 +557,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Prüfe ob ein Rand vor uns ist"
+            "value" : "Prüft, ob ein Rand vor uns ist"
           }
         },
         "en" : {
@@ -591,7 +591,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Prüft ob der Roboter nach Osten schaut"
+            "value" : "Prüft, ob der Roboter nach Osten schaut"
           }
         },
         "en" : {
@@ -625,7 +625,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Prüft ob der Roboter nach Norden schaut"
+            "value" : "Prüft, ob der Roboter nach Norden schaut"
           }
         },
         "en" : {
@@ -659,7 +659,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Prüft ob der Roboter nach Süden schaut"
+            "value" : "Prüft, ob der Roboter nach Süden schaut"
           }
         },
         "en" : {
@@ -693,7 +693,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Prüft ob der Roboter nach Westen schaut"
+            "value" : "Prüft, ob der Roboter nach Westen schaut"
           }
         },
         "en" : {
@@ -801,7 +801,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Stelle sicher du hast den richtigen Code geteilt"
+            "value" : "Stelle sicher, dass du den richtigen Code geteilt hast"
           }
         }
       }
@@ -821,7 +821,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bewege dein Gerät um eine Oberfläche zu finden"
+            "value" : "Bewege dein Gerät, um eine Oberfläche zu finden"
           }
         }
       }
@@ -885,7 +885,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Keine Aufgaben Vorlage ausgewählt bisher!"
+            "value" : "Noch keine Aufgaben Vorlage ausgewählt!"
           }
         }
       }
@@ -895,7 +895,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Keine Teilnehmer beigetreten bisher!"
+            "value" : "Noch keine Teilnehmer beigetreten!"
           }
         }
       }
@@ -933,7 +933,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Gegeteil des Ausdrucks"
+            "value" : "Gegenteil des Ausdrucks"
           }
         },
         "en" : {
@@ -967,7 +967,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Prüft ob mindestens einer der beiden Ausdrücke stimmt"
+            "value" : "Prüft, ob mindestens einer der beiden Ausdrücke stimmt"
           }
         },
         "en" : {
@@ -1015,7 +1015,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Plaziere Grasblock"
+            "value" : "Platziere Grasblock"
           }
         },
         "en" : {
@@ -1177,7 +1177,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bitte wähle eine Aufgabe zum verteilen aus"
+            "value" : "Bitte wähle eine Aufgabe zum Verteilen aus"
           }
         }
       }
@@ -1202,22 +1202,22 @@
         }
       }
     },
-    "Read!" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bereit!"
-          }
-        }
-      }
-    },
     "Ready" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bereit"
+          }
+        }
+      }
+    },
+    "Ready!" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bereit!"
           }
         }
       }
@@ -1268,7 +1268,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Raum Code: %@"
+            "value" : "Raum Nummer: %@"
           }
         }
       }
@@ -1485,13 +1485,13 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Es ist nicht möglich, sich hier nach links zu drehen - Ausführung fehlgeschlagen"
+            "value" : "Es ist nicht möglich, sich hier nach links zu drehen"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "It is not possible to turn left - Execution failed"
+            "value" : "It is not possible to turn left"
           }
         }
       }
@@ -1601,7 +1601,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wiederholt den Code solange die Bedingung noch zutrifft"
+            "value" : "Wiederholt den Code, solange die Bedingung noch zutrifft"
           }
         },
         "en" : {
@@ -1617,7 +1617,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Weite:"
+            "value" : "Breite:"
           }
         }
       }
