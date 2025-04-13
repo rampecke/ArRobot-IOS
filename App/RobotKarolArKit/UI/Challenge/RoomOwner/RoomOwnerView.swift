@@ -88,9 +88,15 @@ struct RoomOwnerView: View {
                             
                             Spacer()
                             
-                            ControllbarButton(title: "Start next exercise", icon: "play", action: {
-                                viewModel.sendStartSignal()
-                            }, notInArView: true).frame(height: 30)
+                            if viewModel.exerciseStarted && viewModel.currentExercise != nil {
+                                ControllbarButton(title: "Finish exercise", icon: "flag", action: {
+                                    viewModel.stopCurrentExercise()
+                                }, notInArView: true).frame(height: 30)
+                            } else if !viewModel.exerciseStarted && viewModel.currentExercise != nil {
+                                ControllbarButton(title: "Start next exercise", icon: "play", action: {
+                                    viewModel.sendStartSignal()
+                                }, notInArView: true).frame(height: 30)
+                            }
                         }
                         
                         ExerciseSelection(viewModel: viewModel)

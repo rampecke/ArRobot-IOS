@@ -24,6 +24,7 @@ class ChallengeViewModel {
     private let userId: String = UserIdentifier.shared.id
     
     var roomCode: String = ""
+    var codeDetected: Bool = false
     var userName: String = ""
     
     private var stompClient: SwiftStomp?

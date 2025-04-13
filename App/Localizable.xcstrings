@@ -31,6 +31,19 @@
         }
       }
     },
+    "%lld more" : {
+
+    },
+    "%lld.%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld.%2$@"
+          }
+        }
+      }
+    },
     ">" : {
       "localizations" : {
         "de" : {
@@ -60,6 +73,9 @@
           }
         }
       }
+    },
+    "Add your name" : {
+
     },
     "Amazing! Waiting for the rest to get ready. Exercise will start soon." : {
       "localizations" : {
@@ -1245,6 +1261,9 @@
           }
         }
       }
+    },
+    "Scan diffrent code" : {
+
     },
     "Send next exercise" : {
       "extractionState" : "manual",
