@@ -42,7 +42,14 @@
       }
     },
     "Active Participants" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktive Teilnehmer"
+          }
+        }
+      }
     },
     "Add instruction" : {
       "localizations" : {
@@ -55,7 +62,14 @@
       }
     },
     "Amazing! Waiting for the rest to get ready. Exercise will start soon." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Super! Wir warten noch bis der Rest bereit ist. Bald gehts los."
+          }
+        }
+      }
     },
     "and" : {
       "extractionState" : "manual",
@@ -122,17 +136,6 @@
         }
       }
     },
-    "Connected" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Verbunden"
-          }
-        }
-      }
-    },
     "ControlFlows" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -155,7 +158,14 @@
       }
     },
     "Create new room" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erstelle neuen Raum"
+          }
+        }
+      }
     },
     "Create project with exercise" : {
       "localizations" : {
@@ -167,19 +177,15 @@
         }
       }
     },
-    "Create Room" : {
-      "extractionState" : "stale",
+    "Current Exercise" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Erstelle neuen Raum"
+            "value" : "Aktuelle Aufgabe"
           }
         }
       }
-    },
-    "Current Exercise" : {
-
     },
     "Date" : {
       "localizations" : {
@@ -297,17 +303,6 @@
         }
       }
     },
-    "Exercise received %@" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aufgabe angekommen %@"
-          }
-        }
-      }
-    },
     "Exercise Templates" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -383,6 +378,17 @@
         }
       }
     },
+    "Finish exercise" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beende die Aufgabe"
+          }
+        }
+      }
+    },
     "Go back and add a new exercise template!" : {
       "localizations" : {
         "de" : {
@@ -438,7 +444,14 @@
       }
     },
     "Inactive Participants" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inaktive Teilnehmer"
+          }
+        }
+      }
     },
     "Instructions" : {
       "extractionState" : "manual",
@@ -666,7 +679,14 @@
       }
     },
     "Join a room" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tritt einem Raum bei"
+          }
+        }
+      }
     },
     "Join Room" : {
       "localizations" : {
@@ -785,7 +805,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Neue Exercise…"
+            "value" : "Neue Aufgabe…"
           }
         }
       }
@@ -797,6 +817,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Neues Projekt…"
+          }
+        }
+      }
+    },
+    "New Room..." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neuer Raum…"
           }
         }
       }
@@ -813,7 +844,14 @@
       }
     },
     "No Exercise Template selected yet!" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keine Aufgaben Vorlage ausgewählt bisher!"
+          }
+        }
+      }
     },
     "No participants joined yet!" : {
       "localizations" : {
@@ -843,7 +881,14 @@
       }
     },
     "Not ready" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nicht bereit"
+          }
+        }
+      }
     },
     "not_description" : {
       "extractionState" : "manual",
@@ -907,7 +952,14 @@
       }
     },
     "Past Exercises" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vergangene Aufgaben"
+          }
+        }
+      }
     },
     "Place board" : {
       "extractionState" : "manual",
@@ -1074,10 +1126,24 @@
       }
     },
     "Planned Exercises" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geplante Aufgaben"
+          }
+        }
+      }
     },
     "Please add a exercise to distribute" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bitte wähle eine Aufgabe zum verteilen aus"
+          }
+        }
+      }
     },
     "Project Name" : {
       "localizations" : {
@@ -1100,10 +1166,24 @@
       }
     },
     "Read!" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bereit!"
+          }
+        }
+      }
     },
     "Ready" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bereit"
+          }
+        }
+      }
     },
     "Reset game" : {
       "extractionState" : "manual",
@@ -1146,23 +1226,6 @@
         }
       }
     },
-    "Room was created: %@ and has %lld" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Raum wurde erstellt: %1$@ und hat %2$lld"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Room was created: %1$@ and has %2$lld"
-          }
-        }
-      }
-    },
     "RoomCode: %@" : {
       "localizations" : {
         "de" : {
@@ -1183,13 +1246,13 @@
         }
       }
     },
-    "Score" : {
-      "extractionState" : "stale",
+    "Send next exercise" : {
+      "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Punkte"
+            "value" : "Sende nächste Aufgabe"
           }
         }
       }
@@ -1211,6 +1274,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tempo"
+          }
+        }
+      }
+    },
+    "Start next exercise" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Starte nächste Aufgabe"
           }
         }
       }
@@ -1294,7 +1368,14 @@
       }
     },
     "There is a new Exercise. Are you ready?" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Es gibt eine neue Aufgabe. Bist du bereit?"
+          }
+        }
+      }
     },
     "turnLeft" : {
       "extractionState" : "manual",

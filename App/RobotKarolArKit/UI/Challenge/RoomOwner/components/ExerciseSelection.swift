@@ -50,7 +50,7 @@ struct ExerciseSelection: View {
                                             .truncationMode(.tail)
                                     }
                                     
-                                    ControllbarButton(title: "Finish exercise", icon: "flag.pattern.checkered", action: {
+                                    ControllbarButton(title: "Finish exercise", icon: "flag", action: {
                                         viewModel.stopCurrentExercise()
                                     }, notInArView: true).frame(height: 30)
                                 }
