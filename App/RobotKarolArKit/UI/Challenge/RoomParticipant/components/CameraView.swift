@@ -14,6 +14,8 @@ struct CameraView: UIViewRepresentable {
     // Camera Session
     @Binding var session: AVCaptureSession
     
+    @Binding var rotation: UIDeviceOrientation
+    
     func makeUIView(context: Context) -> UIView {
         let view = UIViewType(frame: CGRect(origin: .zero, size: frameSize))
         view.backgroundColor = .clear
@@ -29,6 +31,10 @@ struct CameraView: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: UIViewType, context: Context) {
-        
+        if rotation == .landscapeLeft {
+            uiView.transform = CGAffineTransform(rotationAngle: -.pi / 2)
+        } else if rotation == .landscapeRight{
+            uiView.transform = CGAffineTransform(rotationAngle: .pi)
+        }
     }
 }

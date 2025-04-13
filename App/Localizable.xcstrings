@@ -32,10 +32,23 @@
       }
     },
     "%lld more" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld mehr"
+          }
+        }
+      }
     },
     "%lld.%@" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$lld.%2$@"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -75,7 +88,14 @@
       }
     },
     "Add your name" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gib deinen Namen ein"
+          }
+        }
+      }
     },
     "Amazing! Waiting for the rest to get ready. Exercise will start soon." : {
       "localizations" : {
@@ -136,7 +156,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Herrausforderung"
+            "value" : "Herausforderung"
           }
         }
       }
@@ -704,7 +724,8 @@
         }
       }
     },
-    "Join Room" : {
+    "Join room" : {
+      "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1262,8 +1283,26 @@
         }
       }
     },
-    "Scan diffrent code" : {
-
+    "Scan different code" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scanne einen neuen Code"
+          }
+        }
+      }
+    },
+    "Scan your room code" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scanne die Raum Nummer"
+          }
+        }
+      }
     },
     "Send next exercise" : {
       "extractionState" : "manual",
@@ -1272,6 +1311,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sende nächste Aufgabe"
+          }
+        }
+      }
+    },
+    "Sorry there was no room with code: %@" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Leider gab es keinen Raum mit der Nummer: %@"
           }
         }
       }
@@ -1395,9 +1444,6 @@
           }
         }
       }
-    },
-    "Try code" : {
-
     },
     "turnLeft" : {
       "extractionState" : "manual",

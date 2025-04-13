@@ -16,12 +16,23 @@ struct QRScanner: View {
     @Binding var scannedCode: String
     @Binding var codeDetected: Bool
     
+    @State var rotation: UIDeviceOrientation = UIDevice.current.orientation
+    
+    var size: Double = 300
+    
     var body: some View {
         VStack(alignment: .center) {
-            CameraView(frameSize: CGSize(width: 400, height: 400), session: $session)
-        }.frame(width: 400, height: 400)
+            CameraView(frameSize: CGSize(width: size, height: size), session: $session, rotation: $rotation)
+        }.frame(width: size, height: size)
+        .cornerRadius(20)
+        .overlay(
+            RoundedRectangle(cornerRadius: 20)
+                .stroke(Color.gray.opacity(0.5), lineWidth: 1)
+        )
         .padding(15)
-        .rotationEffect(.degrees(270))
+        .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
+            rotation = UIDevice.current.orientation
+        }
         .onChange(of: qrDelegate.scannedCode) { _, newValue in
             if let code = newValue {
                 scannedCode = code
