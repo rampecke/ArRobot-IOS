@@ -26,14 +26,17 @@ struct RoomView: View {
                     
                     VStack {
                         if viewModel.exerciseDidLoad {
-                            Text("There is a new Exercise. Are you ready?")
-                            
-                            Button(action: {
-                                //TODO: SEND OUT MESSAGE THAT I AM READY AND WAIT FOR THE START
-                                viewModel.readyForNextExercise = true
-                                viewModel.exerciseStarted = true
-                            }) {
-                                Text("Read!")
+                            if !viewModel.readyForNextExercise {
+                                Text("There is a new Exercise. Are you ready?")
+                                
+                                Button(action: {
+                                    viewModel.readyForNextExercise = true
+                                    viewModel.markUserReady()
+                                }) {
+                                    Text("Read!")
+                                }
+                            } else {
+                                Text("Amazing! Waiting for the rest to get ready. Exercise will start soon.")
                             }
                         } else {
                             ProgressView()
@@ -50,6 +53,11 @@ struct RoomView: View {
                 }
             }
         }, viewModel: viewModel)
+        .onChange(of: codeEditor.viewModel.executionVisitor.finishedExecution ) {
+            if codeEditor.viewModel.world.exerciseSuccess() {
+                viewModel.completeExercise()
+            }
+        }
         .onChange(of: viewModel.currentExercise, {
             if let exercise = viewModel.currentExercise {
                 DispatchQueue.main.async {

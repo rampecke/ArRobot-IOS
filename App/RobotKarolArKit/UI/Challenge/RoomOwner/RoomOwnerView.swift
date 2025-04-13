@@ -36,11 +36,8 @@ struct RoomOwnerView: View {
     var body: some View {
         RoomViewLayout(content: {
             VStack {
-                LazyVGrid(columns: [
-                    GridItem(.flexible()),
-                    GridItem(.flexible()),
-                ]) {
-                    VStack(alignment: .center) {
+                HStack {
+                    VStack { //left
                         HStack {
                             Spacer()
                             Picker("Room", selection: $infoDisplay) {
@@ -50,57 +47,70 @@ struct RoomOwnerView: View {
                             .pickerStyle(.segmented)
                             .frame(width: 300)
                             Spacer()
-                        }.padding()
-                        
-                        if infoDisplay == 0 {
-                            ParticipantList(viewModel: viewModel)
-                        } else {
-                            if let roomCode = viewModel.room?.code, let qrCodeImage = generateQRCode(from: roomCode) {
-                                Image(uiImage: qrCodeImage)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 200, height: 200)
-                                    .padding()
-                            }
-                            
-                            // Display the room code as text
-                            Text("RoomCode: \(viewModel.room?.code ?? "N/A")")
-                                .font(.title)
-                                .padding()
                         }
-                        Spacer()
-                    }
-                    
-                    ExerciseSelection(viewModel: viewModel)
-                }
-                
-                Spacer()
-                
-                if model.exerciseTemplates.isEmpty {
-                    ContentUnavailableView(label: {
-                        Label("There are no exercises available!", systemImage: "list.clipboard")
-                    }, description: {
-                        Text("Go back and add a new exercise template!")
-                    })
-                } else {
-                    ScrollView(.horizontal) {
-                        HStack {
-                            ForEach(model.exerciseTemplates, id: \.id) { exercise in
-                                FolderRepresentation(isShowingPopover: .constant(false), folderName: .constant(exercise.exerciseName), colorString: exercise.exerciseDifficulty.colorName, date: exercise.lastEdited).onTapGesture(perform: {
-                                    viewModel.plannedExerciseList.append(exercise)
-                                })
+                        
+                        Group {
+                            if infoDisplay == 0 {
+                                ParticipantList(viewModel: viewModel)
+                            } else {
+                                VStack {
+                                    if let roomCode = viewModel.room?.code, let qrCodeImage = generateQRCode(from: roomCode) {
+                                        Image(uiImage: qrCodeImage)
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(width: 300, height: 300)
+                                            .padding()
+                                    }
+        
+                                    // Display the room code as text
+                                    Text("RoomCode: \(viewModel.room?.code ?? "N/A")")
+                                        .font(.title)
+                                        .padding()
+                                }
                             }
-                        }.padding()
-                    }.frame(height: 180)
+                        }.frame(maxWidth: .infinity, maxHeight: .infinity)
+                        
+                    }.frame(maxWidth: .infinity, maxHeight: .infinity).padding(.horizontal, 15).padding(.vertical, 5)
+                    
+                    VStack { //right
+                        HStack {
+                            ControllbarButton(title: "Send next exercise", icon: "paperplane", action: {
+                                if !viewModel.plannedExerciseList.isEmpty {
+                                    if let exercise = viewModel.currentExercise {
+                                        viewModel.pastExerciseList.append(exercise)
+                                    }
+                                    if let exercise = viewModel.plannedExerciseList.first {
+                                        viewModel.sendExercise(exercise: exercise)
+                                        viewModel.plannedExerciseList.removeFirst()
+                                    }
+                                }
+                            }, notInArView: true).frame(height: 30)
+                            
+                            Spacer()
+                            
+                            ControllbarButton(title: "Start next exercise", icon: "play", action: {
+                                viewModel.sendStartSignal()
+                            }, notInArView: true).frame(height: 30)
+                        }
+                        
+                        ExerciseSelection(viewModel: viewModel)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            .onAppear {
+                                viewModel.fetchPastExercises(exerciseTemplates: model.exerciseTemplates)
+                            }
+                    }.frame(maxWidth: .infinity, maxHeight: .infinity).padding(.horizontal, 15).padding(.vertical, 5)
                 }
-            }
-        }, viewModel: viewModel).toolbar(.hidden, for: .tabBar)
+                
+                ExerciseAddBar(viewModel: viewModel)
+            }.background(Color("card_background")).toolbar(.hidden, for: .tabBar).ignoresSafeArea(edges: .bottom)
+                .navigationBarTitleDisplayMode(.inline)
+        }, viewModel: viewModel)
     }
 }
 
 #Preview {
     @Previewable @State var viewModel: ChallengeViewModel = ChallengeViewModel()
-    viewModel.room = Room(code: "12341234", owner: true, participants: [Participant(id: "1", name: "Ramona", score: 5, isActive: true), Participant(id: "2", name: "Max", score: 7, isActive: false)])
+    viewModel.room = Room(code: "12341234", isOwner: true, participants: [Participant(id: "1", name: "Ramona", score: 5, isActive: true, isReady: true), Participant(id: "2", name: "Max", score: 7, isActive: false, isReady: false)])
     
     return RoomOwnerView(viewModel: viewModel).environment(MockModel() as Model)
 }

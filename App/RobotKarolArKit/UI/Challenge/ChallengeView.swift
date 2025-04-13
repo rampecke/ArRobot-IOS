@@ -38,9 +38,8 @@ struct ChallengeView: View {
             }.frame(maxWidth: .infinity, maxHeight: .infinity)
             
         }.frame(maxWidth: .infinity, maxHeight: .infinity)
-            .navigationTitle(LocalizedStringKey("Challenge"))
             .navigationDestination(isPresented: $roomExists) {
-                if viewModel.room?.owner ?? false {
+                if viewModel.room?.isOwner ?? false {
                     RoomOwnerView(viewModel: viewModel)
                 } else {
                     RoomView(viewModel: viewModel)
@@ -53,6 +52,7 @@ struct ChallengeView: View {
             }
             .onAppear {
                 roomExists = false
+                viewModel.resetViewModel()
             }
     }
 }

@@ -1,15 +1,18 @@
 package com.ramonaeckert.roboCraft.controller;
 
+import com.ramonaeckert.roboCraft.model.Exercise;
 import com.ramonaeckert.roboCraft.model.Participant;
 import com.ramonaeckert.roboCraft.model.Room;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
+import java.time.Instant;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/rooms")
@@ -24,20 +27,15 @@ public class RoomController {
     public ResponseEntity<Map<String, Object>> createRoom(@RequestBody Map<String, String> requestBody) {
         String owner = requestBody.get("owner");
 
-        // Check if the owner already has a room
-        Optional<Room> existingRoom = rooms.values().stream()
-                .filter(room -> room.getOwner().equals(owner))
-                .findFirst();
+        // Check if the owner already has too rooms
+        List<Room> existingRoom = rooms.values().stream()
+                .filter(room -> room.getOwner().equals(owner)).toList();
 
-        if (existingRoom.isPresent()) {
+        //Each owner can only have 10 rooms at once
+        if (existingRoom.size() >= 10) {
             // Return the existing room
-            System.out.println("Room already exists for " + owner + ". Returning existing room.");
-            Room room = existingRoom.get();
-            return ResponseEntity.ok(Map.of(
-                    "code", room.getCode(),
-                    "isOwner", true,
-                    "participants", room.getParticipants()
-            ));
+            System.out.println("Owner: " + owner + "already has 10 rooms");
+            return ResponseEntity.badRequest().body(Map.of("message", "You cannot create more than 10 rooms"));
         }
 
         // Create new room
@@ -54,9 +52,60 @@ public class RoomController {
         ));
     }
 
+    @GetMapping("/owned-rooms/{userId}")
+    public ResponseEntity<List<Map<String, Object>>> getOwnedRooms(@PathVariable String userId) {
+        // Get all rooms owned by the user by checking the owner field
+        List<Map<String, Object>> ownedRooms = rooms.values().stream()
+                .filter(room -> room.getOwner().equals(userId))  // Filter by owner
+                .map(room -> Map.of(
+                        "code", room.getCode(),
+                        "isOwner", true,
+                        "participants", room.getParticipants()
+                ))
+                .collect(Collectors.toList());  // Collect results into a list
+
+        // Return the list of rooms as a JSON response
+        return ResponseEntity.ok(ownedRooms);
+    }
+
+    @DeleteMapping("/delete/{roomCode}")
+    public ResponseEntity<Boolean> deleteRoom(@RequestBody Map<String, String> requestBody, @PathVariable String roomCode) {
+        String userId = requestBody.get("userId");
+
+        // Find the room with the provided roomCode
+        Room room = rooms.get(roomCode);
+
+        // Check if the room exists
+        if (room == null) {
+            return ResponseEntity.status(404).body(false);
+        }
+
+        // Check if the user is the owner of the room
+        if (!room.getOwner().equals(userId)) {
+            return ResponseEntity.status(403).body(false);
+        }
+
+        // Delete the room
+        rooms.remove(roomCode);
+
+        // Return a success message
+        return ResponseEntity.ok(true);
+    }
+
     @GetMapping("/{code}")
     public ResponseEntity<Boolean> roomExists(@PathVariable String code) {
         return ResponseEntity.ok(rooms.containsKey(code));
+    }
+
+    @GetMapping("/{code}/past-exercises")
+    public ResponseEntity<List<Exercise>> getPastExercises(@PathVariable String code) {
+        Room room = rooms.get(code);
+        if (room == null) {
+            return ResponseEntity.badRequest().body(new ArrayList<Exercise>());
+        }
+
+        // Return the list of exercises directly
+        return ResponseEntity.ok(room.getExercises());
     }
 
     @PostMapping("/{code}/join")
@@ -70,7 +119,13 @@ public class RoomController {
         }
 
         if (room.getOwner().equals(userId)) {
-            return ResponseEntity.badRequest().body(Map.of("message", "You cannot join your own room"));
+            room.updateLastOpened();
+
+            return ResponseEntity.ok(Map.of(
+                    "code", room.getCode(),
+                    "isOwner", true,
+                    "participants", room.getParticipants()
+            ));
         }
 
         // Check if the participant with the same userId already exists
@@ -106,6 +161,7 @@ public class RoomController {
     @PostMapping("/{code}/leave")
     public ResponseEntity<Boolean> leaveRoom(@PathVariable String code, @RequestBody Map<String, String> requestBody) {
         String userId = requestBody.get("userId");
+        System.out.println("User " + userId + " tries to room " + code);
 
         Room room = rooms.get(code);
         if (room == null) {
@@ -131,6 +187,8 @@ public class RoomController {
                         "participants", room.getParticipants()
                 ));
 
+        System.out.println("User " + userId + " left room " + code);
+
         return ResponseEntity.ok(true);
     }
 
@@ -138,6 +196,37 @@ public class RoomController {
     public ResponseEntity<Boolean> sendExercise(@PathVariable String code, @RequestBody Map<String, String> requestBody) {
         String userId = requestBody.get("userId");
         String exerciseData = requestBody.get("exercise");
+        String exerciseId = requestBody.get("exerciseId");
+
+        Room room = rooms.get(code);
+        if (room == null) {
+            return ResponseEntity.badRequest().body(false);
+        } else if (!room.getOwner().equals(userId)) {
+            return ResponseEntity.badRequest().body(false);
+        } else if (exerciseId == null) {
+            return ResponseEntity.badRequest().body(false);
+        }
+
+        // Send exercise to all subscribed clients in this room
+        messagingTemplate.convertAndSend("/topic/exercise/" + code, exerciseData);
+        room.addNewExercise(exerciseId);
+
+        //Update ready status of all participants
+        room.getParticipants().forEach(participant -> {
+            participant.setIsReady(false);
+        });
+        room.setActiveExerciseStartTime(null); //reset the start time
+        messagingTemplate.convertAndSend("/topic/room/" + code,
+            Map.of(
+                    "participants", room.getParticipants()
+            ));
+
+        return ResponseEntity.ok(true);
+    }
+
+    @PostMapping("/{code}/stop-current-exercise")
+    public ResponseEntity<Boolean> stopCurrentExercise(@PathVariable String code, @RequestBody Map<String, String> requestBody) {
+        String userId = requestBody.get("userId");
 
         Room room = rooms.get(code);
         if (room == null) {
@@ -146,9 +235,156 @@ public class RoomController {
             return ResponseEntity.badRequest().body(false);
         }
 
-        // Send exercise to all subscribed clients in this room
-        messagingTemplate.convertAndSend("/topic/exercise/" + code, exerciseData);
+        // Stop the current exercise
+        room.getExercises().forEach(exercise -> {
+            if (exercise.getStatus().equals("current")) {
+                exercise.setStatus("past");
+            }
+        });
+
+        messagingTemplate.convertAndSend("/topic/exercise/" + code, "void:null");
+
+        //Update ready status of all participants
+        room.getParticipants().forEach(participant -> {
+            participant.setIsReady(true);
+        });
+        room.setActiveExerciseStartTime(null); //reset the start time
+        messagingTemplate.convertAndSend("/topic/room/" + code,
+                Map.of(
+                        "participants", room.getParticipants()
+                ));
 
         return ResponseEntity.ok(true);
+    }
+
+    @PostMapping("/{code}/exercise/complete")
+    public ResponseEntity<Boolean> completeExercise(@PathVariable String code, @RequestBody Map<String, String> requestBody) {
+        String userId = requestBody.get("userId");
+        String exerciseId = requestBody.get("exerciseId");
+
+        Room room = rooms.get(code);
+        if (room == null) {
+            return ResponseEntity.badRequest().body(false);
+        }
+
+        // Check if the exercise is the current one
+        Optional<Exercise> currentExerciseOpt = room.getExercises()
+                .stream()
+                .filter(exercise -> exercise.getStatus().equals("current"))
+                .findFirst();
+
+        if (currentExerciseOpt.isEmpty()) {
+            return ResponseEntity.badRequest().body(false);
+        }
+
+        Optional<Participant> participantOpt = room.getParticipants()
+                .stream()
+                .filter(p -> p.getId().equals(userId))
+                .findFirst();
+
+        if (participantOpt.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(false);
+        }
+
+        Participant participant = participantOpt.get();
+        boolean success = participant.addCompletedExercise(exerciseId);
+
+        if (success) {
+            // Get the list of all participants
+            List<Participant> participants = room.getParticipants();
+
+            // Sort participants by their completion time for the given exercise
+            List<Participant> sortedParticipants = participants.stream()
+                    .filter(p -> p.getCompletedExercises().containsKey(exerciseId))  // Only consider those who completed the exercise
+                    .sorted(Comparator.comparing(p -> p.getCompletedExercises().get(exerciseId)))  // Sort by completion time
+                    .collect(Collectors.toList());
+
+            // Find out where the participant is in the sorted list
+            int position = sortedParticipants.indexOf(participant);
+
+            // Assign points based on position
+            int points;
+            if (position == 0) {
+                points = 5;  // Fastest
+            } else if (position == 1) {
+                points = 4;  // Second fastest
+            } else if (position == 2) {
+                points = 3;  // Third fastest
+            } else {
+                points = 2;  // All others
+            }
+
+            // Update participant score
+            participant.setScore(participant.getScore() + points);
+
+            messagingTemplate.convertAndSend("/topic/room/" + code,
+                    Map.of(
+                            "participants", room.getParticipants()
+                    ));
+        }
+
+        return ResponseEntity.ok(true);
+    }
+
+    @PostMapping("/{code}/start")
+    public ResponseEntity<Void> sendStartSignal(@PathVariable String code, @RequestBody Map<String, String> requestBody) {
+        String userId = requestBody.get("userId");
+        Room room = rooms.get(code);
+        if (room == null) {
+            return ResponseEntity.badRequest().build();
+        } else if (!room.getOwner().equals(userId)) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        if (room.getActiveExerciseStartTime() != null) {
+            return ResponseEntity.badRequest().build(); // already started
+        } else {
+            room.setActiveExerciseStartTime(Instant.now());
+        }
+
+        messagingTemplate.convertAndSend("/topic/start/" + code, "start");
+        return ResponseEntity.ok().build(); // returns HTTP 200 with no content
+    }
+
+    @PostMapping("/{code}/ready")
+    public ResponseEntity<Void> markUserReady(@PathVariable String code, @RequestBody Map<String, String> requestBody) {
+        String userId = requestBody.get("userId");
+        Room room = rooms.get(code);
+
+        if (room == null) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        Optional<Participant> participantOpt = room.getParticipants()
+                .stream()
+                .filter(p -> p.getId().equals(userId))
+                .findFirst();
+
+        if (participantOpt.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+
+        participantOpt.get().setIsReady(true);
+
+        messagingTemplate.convertAndSend("/topic/room/" + code,
+                Map.of(
+                        "participants", room.getParticipants()
+                ));
+
+        return ResponseEntity.ok().build();
+    }
+
+    @Scheduled(cron = "0 0 3 * * ?") // every day at 3 AM
+    public void cleanUpOldRooms() {
+        Instant oneWeekAgo = Instant.now().minusSeconds(7 * 24 * 60 * 60); // 7 days in seconds
+
+        rooms.entrySet().removeIf(entry -> {
+            Room room = entry.getValue();
+            boolean isOld = room.getLastOpened().isBefore(oneWeekAgo);
+            if (isOld) {
+                System.out.println("Deleting old room: " + room.getCode());
+            }
+            return isOld;
+        });
     }
 }

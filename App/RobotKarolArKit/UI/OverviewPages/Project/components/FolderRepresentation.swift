@@ -12,6 +12,7 @@ struct FolderRepresentation: View {
     @Binding var folderName: String
     var colorString: String
     var date: Date?
+    var withOutArrow: Bool = false
     
     var body: some View {
         VStack (spacing: 10) {
@@ -32,9 +33,12 @@ struct FolderRepresentation: View {
                         Text("\(folderName)")
                             .lineLimit(1)
                             .truncationMode(.tail)
-                        Text(">")
-                            .lineLimit(1)
-                            .truncationMode(.tail)
+                            .foregroundColor(withOutArrow ? .primary : .blue)
+                        if !withOutArrow {
+                            Text(">")
+                                .lineLimit(1)
+                                .truncationMode(.tail)
+                        }
                     }.frame(maxWidth: .infinity)
                     
                     if let date = date {
@@ -42,6 +46,7 @@ struct FolderRepresentation: View {
                     }
                 }.frame(maxWidth: .infinity)
             }.padding(.horizontal, 5)
+            .disabled(withOutArrow)
             
             Spacer()
         }.frame(maxWidth: .infinity, maxHeight: .infinity)

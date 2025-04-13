@@ -1,5 +1,7 @@
 package com.ramonaeckert.roboCraft.model;
 
+import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -7,11 +9,27 @@ public class Room {
     private String code;
     private String owner;
     private List<Participant> participants;
+    private Instant lastOpened;
 
-public Room(String code, String owner) {
+    private List<Exercise> exercises;
+    private Instant activeExerciseStartTime;
+
+
+    public Room(String code, String owner) {
         this.code = code;
         this.owner = owner;
         this.participants = new CopyOnWriteArrayList<>();
+        this.lastOpened = Instant.now();
+        this.exercises = new ArrayList<Exercise>();
+        this.activeExerciseStartTime = null;
+    }
+
+    public void setActiveExerciseStartTime(Instant activeExerciseStartTime) {
+        this.activeExerciseStartTime = activeExerciseStartTime;
+    }
+
+    public Instant getActiveExerciseStartTime() {
+        return activeExerciseStartTime;
     }
 
     public String getCode() {
@@ -31,5 +49,31 @@ public Room(String code, String owner) {
 
     public void addParticipant(Participant participant) {
         this.participants.add(participant);
+    }
+
+    public Instant getLastOpened() {
+        return lastOpened;
+    }
+
+    public void updateLastOpened() {
+        this.lastOpened = Instant.now();
+    }
+
+    public List<Exercise> getExercises() {
+        return exercises;
+    }
+
+    public void addNewExercise(String exerciseId) {
+        for (Exercise exercise : exercises) {
+            if (exercise.getId().equals(exerciseId)) {
+                return;
+            }
+        }
+
+        for (Exercise exercise : exercises) {
+            exercise.setStatus("past");
+        }
+
+        exercises.add(new Exercise(exerciseId, "current"));
     }
 }
