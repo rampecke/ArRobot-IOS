@@ -14,8 +14,8 @@ class ChallengeViewModel {
     var isLoading: Bool = false
     var errorMessage: String?
     
-    //private let baseUrl = "robocraft.aet.cit.tum.de"
-    private let baseUrl = "192.168.178.132:8080"
+    private let baseUrl = "robocraft.aet.cit.tum.de"
+    //private let baseUrl = "192.168.178.132:8080"
 
     private var urlPrefix: String {
         return "http://\(baseUrl)/rooms"
