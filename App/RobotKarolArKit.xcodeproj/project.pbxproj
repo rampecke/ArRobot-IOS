@@ -704,7 +704,7 @@
 				CODE_SIGN_ENTITLEMENTS = RobotKarolArKit/RobotKarolArKit.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"RobotKarolArKit/Preview Content\"";
 				DEVELOPMENT_TEAM = T7PP2KY2B6;
@@ -751,7 +751,7 @@
 				CODE_SIGN_ENTITLEMENTS = RobotKarolArKit/RobotKarolArKit.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"RobotKarolArKit/Preview Content\"";
 				DEVELOPMENT_TEAM = T7PP2KY2B6;

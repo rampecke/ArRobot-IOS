@@ -24,6 +24,7 @@ class ChallengeViewModel {
     private let userId: String = UserIdentifier.shared.id
     
     var roomCode: String = ""
+    var codeDetected: Bool = false
     var userName: String = ""
     
     private var stompClient: SwiftStomp?
@@ -37,6 +38,8 @@ class ChallengeViewModel {
     var pastExerciseList: [Exercise] = []
     
     var myFetchedRooms: [Room] = []
+    
+    var roomExists: Bool? = nil
     
     init() {
        self.fetchOwnedRooms()
@@ -127,6 +130,34 @@ class ChallengeViewModel {
     // Join Room function using performRequest
     func joinRoom(roomCode: String? = nil) {
         performRequest(endpoint: "\(roomCode ?? self.roomCode)/join", method: "POST", body: ["userName": userName, "userId": userId])
+    }
+    
+    func checkIfRoomExists() {
+        self.roomExists = nil
+        guard let url = URL(string: "\(self.urlPrefix)/\(roomCode)") else {
+            roomExists = false
+            return
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            guard error == nil,
+                  let data = data,
+                  let httpResponse = response as? HTTPURLResponse,
+                  httpResponse.statusCode == 200 else {
+                self.roomExists = false
+                return
+            }
+
+            do {
+                let roomExists = try JSONDecoder().decode(Bool.self, from: data)
+                self.roomExists = roomExists
+            } catch {
+                print("Decoding error: \(error)")
+            }
+        }.resume()
     }
     
     func leaveRoom() {
