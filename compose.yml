@@ -1,0 +1,7 @@
+services:
+  robocraft-server:
+    build:
+      context: ./Server/robocraft
+    ports:
+      - "8080:8080" # Adjust the ports as needed
+    container_name: robocraft-server

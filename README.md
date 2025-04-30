@@ -8,10 +8,10 @@ Students can **freely explore** programming concepts in AR, **create and share t
 
 ## 🚀 Features
 
-- **Free Exploration**: Write and execute code to control a virtual robot in an AR space  
-- **Custom Exercise Editor**: Design your own programming tasks  
-- **Exercise Sharing**: Distribute custom exercises via QR codes or links  
-- **Challenge Mode**: Compete with others by completing instructor-defined exercises  
+- **Free Exploration**: Write and execute code to control a virtual robot in an AR space
+- **Custom Exercise Editor**: Design your own programming tasks
+- **Exercise Sharing**: Distribute custom exercises via QR codes or links
+- **Challenge Mode**: Compete with others by completing instructor-defined exercises
 - **Gamified Learning**: Earn points based on task completion, speed, and solution efficiency
 
 ---
@@ -32,30 +32,34 @@ This structure ensures a clean separation of concerns, making the project easier
 
 ### App Prerequisites
 
-- macOS with [Xcode](https://developer.apple.com/xcode/) installed  
-- iOS device that supports ARKit (e.g., iPhone 8 or newer)  
+- macOS with [Xcode](https://developer.apple.com/xcode/) installed
+- iOS device that supports ARKit (e.g., iPhone 8 or newer)
 - Basic familiarity with Swift and iOS development
 
 ---
 
-### 🔧 Running the Server with Docker Compose
+### 🔧 Running the Server with Docker Compose for development
 
-To start the backend server for **Challenge Mode** using Docker Compose:
+To start the backend server for the **Challenge Mode** using Docker Compose:
 
 1. Make sure [Docker](https://www.docker.com/products/docker-desktop) and [Docker Compose](https://docs.docker.com/compose/) are installed.
-2. Navigate to the root of the repository (where the `compose.yml` file is located).
-3. Run:
+2. Clone the repository
+3. Navigate to the root of the just cloned repository (where the `compose.yml` file is located).
+4. Run:
 
 ```bash
-docker compose up --build
+docker compose up --build -d
 ```
 
 This will:
+
 - Build the Spring Boot server
-- Start the backend service (default port: 8080)
+- Start the backend service (default port: 8080) in detached mode
 
 To stop the services:
+
 ```bash
-docker-compose down
+docker compose down
 ```
->💡 Free exploration and custom exercises work without the server. The server is only required for Challenge Mode.
+
+> 💡 Free exploration and custom exercises work without the server. The server is only required for Challenge Mode.
